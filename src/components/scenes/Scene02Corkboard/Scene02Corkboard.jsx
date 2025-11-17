@@ -110,10 +110,10 @@ export default function Scene02Corkboard() {
   }, [pinDefinitions]);
 
   return (
-    <section className="relative w-full overflow-visible bg-white py-16 cursor-default">
+    <section className="relative w-full bg-white py-16 cursor-default">
       <div
         ref={containerRef}
-        className="relative mx-auto flex w-full max-w-6xl flex-wrap items-center justify-center gap-12 px-6"
+        className="relative mx-auto flex w-full max-w-6xl flex-wrap items-center justify-center gap-12 px-6 overflow-visible"
       >
         <svg className="pointer-events-none absolute inset-0 z-30 h-full w-full">
           {connections.map((connection) => {
