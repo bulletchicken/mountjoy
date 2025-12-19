@@ -95,15 +95,13 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
   const textY = size.h * 0.18;
   const textLineHeight = size.h * 0.06;
   const textFontSize = Math.max(16, size.h * 0.023);
-  const headingX = size.w * 0.475;
-  const headingY = size.h * 0.4875;
+  const headingX = size.w * 0.45;
   const headingFontSize = Math.max(64, Math.min(size.h * 0.1, 96));
+  const headingYOffset = Math.max(headingFontSize * 0.9, size.h * 0.12);
+  const headingY = size.h - headingYOffset;
 
   return (
-    <section
-      className="relative w-full overflow-hidden"
-      style={{ minHeight: "450vh", paddingTop: "21vh" }}
-    >
+    <section className="relative w-full overflow-hidden min-h-screen pt-[21vh]:">
       <motion.div
         className="absolute inset-0 -z-10"
         style={{ backgroundColor }}
@@ -113,7 +111,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
         className="sticky top-0 h-screen w-full overflow-hidden bg-white"
       >
         {/* Revealed layer (behind) */}
-        <div className="absolute inset-0 flex items-center justify-center bg-red-500">
+        <div className="absolute inset-0 flex items-end justify-center bg-red-500 pb-[8vh]">
           <div className="text-center text-black">
             <h2
               className="text-7xl font-black tracking-tight"
@@ -121,7 +119,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
             >
               EVIDENCE LOG
             </h2>
-            <p
+            {/* <p
               className="mt-4 text-xl opacity-80"
               style={{
                 fontFamily: "Times New Roman, Times, serif",
@@ -129,7 +127,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
               }}
             >
               Musée du Louvre, Paris, France
-            </p>
+            </p> */}
           </div>
         </div>
 
