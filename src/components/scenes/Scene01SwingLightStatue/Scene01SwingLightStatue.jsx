@@ -101,7 +101,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
   const headingY = size.h - headingYOffset;
 
   return (
-    <section className="relative w-full overflow-hidden min-h-screen pt-[21vh]:">
+    <section className="relative w-full overflow-hidden min-h-screen pt-[25vh]">
       <motion.div
         className="absolute inset-0 -z-10"
         style={{ backgroundColor }}
