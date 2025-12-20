@@ -24,7 +24,7 @@ export default function Scene02CautionTape() {
     ));
 
   return (
-    <div ref={containerRef} className="w-full min-h-screen relative">
+    <div ref={containerRef} className="w-full min-h-screen relative mt-100">
       {/* First Caution Tape */}
       <motion.div
         style={{ x: tape1X }}
