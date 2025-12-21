@@ -101,7 +101,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
   const headingY = size.h - headingYOffset;
 
   return (
-    <section className="relative w-full h-screen overflow-hidden min-h-screen pt-90 z-20">
+    <section className="relative w-full min-h-screen overflow-hidden z-20">
       <motion.div
         className="absolute inset-0 -z-10"
         style={{ backgroundColor }}
@@ -111,7 +111,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
         className="sticky top-0 h-screen w-full overflow-hidden bg-white"
       >
         {/* Revealed layer (behind) */}
-        <div className="absolute inset-0 flex items-end justify-center bg-red-500 pb-[46.5vh]">
+        <div className="absolute inset-0 flex items-end justify-center bg-white pb-[46.5vh]">
           <div className="text-center text-black">
             <h2
               className="text-7xl font-black tracking-tight"

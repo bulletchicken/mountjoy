@@ -25,7 +25,7 @@ export default function Page({ backgroundColor, scrollYProgress }) {
 
       {/* Case number and location */}
       <motion.div
-        className="fixed bottom-20 left-0 right-0 z-50"
+        className="fixed bottom-30 left-0 right-0 z-50"
         style={{ opacity: textOpacity }}
       >
         <div className="mx-auto flex w-full max-w-5xl flex-col gap-2 px-8 font-mono text-sm uppercase tracking-wider text-black md:px-12 2xl:px-16">
