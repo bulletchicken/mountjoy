@@ -18,13 +18,15 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
     if (!hostRef.current) return;
     const el = hostRef.current;
 
-    const ro = new ResizeObserver(() => {
-      const r = el.getBoundingClientRect();
-      setSize({
-        // keep exact measured size to avoid subpixel gaps at edges
-        w: Math.max(1, r.width),
-        h: Math.max(1, r.height),
-      });
+    const ro = new ResizeObserver((entries) => {
+      const entry = entries[0];
+      if (!entry) return;
+      const { width, height } = entry.contentRect;
+      const nextW = Math.max(1, width);
+      const nextH = Math.max(1, height);
+      setSize((prev) =>
+        prev.w === nextW && prev.h === nextH ? prev : { w: nextW, h: nextH },
+      );
     });
 
     ro.observe(el);
@@ -90,17 +92,30 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
 
   const swingDeg = 24;
   const swingDur = "2.4s";
-  const rotValues = `${swingDeg} ${beam.pivotX} ${beam.pivotY}; ${-swingDeg} ${beam.pivotX} ${beam.pivotY}; ${swingDeg} ${beam.pivotX} ${beam.pivotY}`;
-  const vbPad = 0;
-  const viewBox = `0 0 ${size.w + vbPad * 2} ${size.h + vbPad * 2}`;
-  const textX = size.w * 0.08;
-  const textY = size.h * 0.18;
-  const textLineHeight = size.h * 0.06;
-  const textFontSize = Math.max(16, size.h * 0.023);
-  const headingX = size.w * 0.45;
-  const headingFontSize = Math.max(64, Math.min(size.h * 0.1, 96));
-  const headingYOffset = Math.max(headingFontSize * 0.9, size.h * 0.5);
-  const headingY = size.h - headingYOffset;
+  const layout = useMemo(() => {
+    const vbPad = 0;
+    const viewBox = `0 0 ${size.w + vbPad * 2} ${size.h + vbPad * 2}`;
+    const textX = size.w * 0.08;
+    const textY = size.h * 0.18;
+    const textLineHeight = size.h * 0.06;
+    const textFontSize = Math.max(16, size.h * 0.023);
+    const headingX = size.w * 0.45;
+    const headingFontSize = Math.max(64, Math.min(size.h * 0.1, 96));
+    const headingYOffset = Math.max(headingFontSize * 0.9, size.h * 0.5);
+    const headingY = size.h - headingYOffset;
+    const rotValues = `${swingDeg} ${beam.pivotX} ${beam.pivotY}; ${-swingDeg} ${beam.pivotX} ${beam.pivotY}; ${swingDeg} ${beam.pivotX} ${beam.pivotY}`;
+    return {
+      viewBox,
+      textX,
+      textY,
+      textLineHeight,
+      textFontSize,
+      headingX,
+      headingFontSize,
+      headingY,
+      rotValues,
+    };
+  }, [beam.pivotX, beam.pivotY, size.h, size.w]);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],
@@ -137,7 +152,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
           <div className="text-center text-black">
             <h2
               className="text-7xl font-black tracking-tight"
-              style={{ fontSize: headingFontSize }}
+              style={{ fontSize: layout.headingFontSize }}
             >
               EVIDENCE LOG
             </h2>
@@ -158,7 +173,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
           className="pointer-events-none absolute inset-0 z-40"
           width="100%"
           height="100%"
-          viewBox={viewBox}
+          viewBox={layout.viewBox}
           preserveAspectRatio="xMidYMid meet"
           shapeRendering="geometricPrecision"
         >
@@ -170,7 +185,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
                   type="rotate"
                   dur={swingDur}
                   repeatCount="indefinite"
-                  values={rotValues}
+                  values={layout.rotValues}
                   keyTimes="0; 0.5; 1"
                   calcMode="spline"
                   keySplines="0.42 0 0.58 1; 0.42 0 0.58 1"
@@ -187,7 +202,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
               type="rotate"
               dur={swingDur}
               repeatCount="indefinite"
-              values={rotValues}
+              values={layout.rotValues}
               keyTimes="0; 0.5; 1"
               calcMode="spline"
               keySplines="0.42 0 0.58 1; 0.42 0 0.58 1"
@@ -218,11 +233,11 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
           />
           <g mask="url(#beamMask)">
             <text
-              x={headingX}
-              y={headingY}
+              x={layout.headingX}
+              y={layout.headingY}
               textAnchor="middle"
               dominantBaseline="middle"
-              fontSize={headingFontSize}
+              fontSize={layout.headingFontSize}
               fill="#111827"
               fontFamily="Inter, system-ui, sans-serif"
               fontWeight="900"

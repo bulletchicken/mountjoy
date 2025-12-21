@@ -37,14 +37,14 @@ export default function CautionTape() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full h-[70vh] overflow-hidden pointer-events-none -mt-25"
+      className="relative w-full h-screen overflow-hidden pointer-events-none -mt-25"
     >
       {/* Clip layer so huge/rotated absolute elements never create horizontal scroll */}
       <div className="inset-0 overflow-hidden">
         {/* First Caution Tape */}
         <motion.div
           style={{ x: tape1X, willChange: "transform" }}
-          className="absolute origin-top-left w-[300vw] bg-white min-h-[5vh] py-8 flex items-center justify-start text-center overflow-hidden text-3xl border-4 border-black rotate-[6deg] z-30"
+          className="absolute origin-top-left w-[300vw] bg-white min-h-[5vh] py-8 flex items-center justify-start text-center overflow-hidden text-3xl 2xl:min-h-[9vh] 2xl:py-12 2xl:text-5xl border-4 border-black rotate-[6deg] z-30"
         >
           <div className="flex">
             <TapeContent />
@@ -54,7 +54,7 @@ export default function CautionTape() {
         {/* Second Caution Tape */}
         <motion.div
           style={{ x: tape2X, willChange: "transform" }}
-          className="absolute top-[30%] -left-30 w-[200vw] bg-white min-h-[5vh] py-8 flex items-center justify-start text-center overflow-hidden text-3xl border-4 border-black rotate-40 2xl:-left-60 z-10"
+          className="absolute top-[30%] -left-30 w-[200vw] bg-white min-h-[5vh] py-8 flex items-center justify-start text-center overflow-hidden text-3xl 2xl:min-h-[9vh] 2xl:py-12 2xl:text-5xl border-4 border-black rotate-40 2xl:-left-60 z-10"
         >
           <div className="flex">
             <TapeContent />
@@ -64,7 +64,7 @@ export default function CautionTape() {
         {/* Third Caution Tape */}
         <motion.div
           style={{ x: tape3X, willChange: "transform" }}
-          className="absolute top-[30%] left-0 w-[350vw] bg-white min-h-[5vh] py-8 flex items-center justify-start text-center overflow-hidden text-3xl border-4 border-black rotate-[-2deg] z-0"
+          className="absolute top-[30%] xl:top-[5%] 2xl:top-[-40%] left-0 w-[350vw] bg-white min-h-[5vh] py-8 flex items-center justify-start text-center overflow-hidden text-3xl 2xl:min-h-[9vh] 2xl:py-12 2xl:text-5xl border-4 border-black rotate-[-2deg] xl:rotate-[-8deg] 2xl:rotate-[-10deg] z-0"
         >
           <div className="flex">
             <TapeContent count={48} />

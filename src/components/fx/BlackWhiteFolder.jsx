@@ -7,7 +7,9 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
     label,
     children,
     paperRotation = "0deg",
+    paperOffsetX = 0,
     folderRotation = "0deg",
+    tabSide = "right",
     isOpen: controlledOpen,
     onOpen,
     onClose,
@@ -37,14 +39,32 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
 
   const positionClass = isOpen ? "relative z-40" : "relative cursor-pointer";
 
-  const sizeClass = "h-[54vmin] min-h-[400px] w-[64vmin] max-w-[480px]";
-
   const stackRotation = paperRotation;
-  const hoverLiftClass = !isOpen && isHovered ? "-translate-y-3" : "";
-  const paperZClass = isOpen ? "z-30" : "z-0";
+  const hoverLiftClass = isHovered ? "-translate-y-3" : "";
+  const paperZClass = "z-20";
+  const isFlipped = tabSide === "left";
+  const paperStackPosition = isFlipped
+    ? "absolute right-6 -left-10 -top-12 h-[110%] transition-transform duration-300 ease-out"
+    : "absolute left-6 -right-10 -top-12 h-[110%] transition-transform duration-300 ease-out";
+  const paperOnePosition = isFlipped ? "right-4 left-10" : "left-4 right-10";
+  const paperTwoPosition = isFlipped ? "right-10 left-4" : "left-10 right-4";
+  const paperOneRotation = isFlipped ? "rotate-[2deg]" : "rotate-[-2deg]";
+  const paperTwoRotation = isFlipped ? "rotate-[-1.5deg]" : "rotate-[1.5deg]";
 
   const tabMarkup = (
-    <div className="relative mb-5 h-50 w-15 rounded-r-[15px] border-t-[3px] border-r-[3px] border-b-[3px] border-black bg-white">
+    <div
+      className={`relative mb-5 h-50 w-15 border-[3px] border-black bg-white ${
+        isFlipped
+          ? "rounded-l-[15px] border-r-0"
+          : "rounded-r-[15px] border-l-0"
+      } ${
+        isOpen
+          ? isFlipped
+            ? "-mr-[2px] border-r-[2px] border-r-white z-10"
+            : "-ml-[2px] border-l-[2px] border-l-white z-10"
+          : "z-10"
+      }`}
+    >
       <div className="absolute inset-0 flex items-center justify-center font-mono text-2xl uppercase">
         <span className="[writing-mode:vertical-rl] scale-x-90">{label}</span>
       </div>
@@ -52,18 +72,22 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
   );
 
   const paperStack = (
-    <div
-      className={`absolute left-6 -right-10 -top-5 h-[95%] transition-transform duration-300 ease-out ${paperZClass}`}
-    >
+    <div className={`${paperStackPosition} ${paperZClass}`}>
       <div
         className="relative h-full"
-        style={{ transform: `rotate(${stackRotation})` }}
+        style={{
+          transform: `translateX(${paperOffsetX}px) rotate(${stackRotation})`,
+        }}
       >
         <div
           className={`relative h-full transition-transform duration-200 ease-out ${hoverLiftClass}`}
         >
-          <div className="absolute left-4 right-10 top-2 h-[98%] rotate-[-2deg] rounded-[10px] border-2 border-black bg-neutral-100"></div>
-          <div className="absolute left-10 right-4 top-0 h-[98%] rotate-[1.5deg] rounded-[10px] border-2 border-black bg-white">
+          <div
+            className={`absolute top-2 h-[98%] rounded-[10px] border-2 border-black bg-neutral-100 ${paperOnePosition} ${paperOneRotation}`}
+          ></div>
+          <div
+            className={`absolute top-0 h-[98%] rounded-[10px] border-2 border-black bg-white ${paperTwoPosition} ${paperTwoRotation}`}
+          >
             {isOpen ? (
               <div className="report h-full w-full p-4">{children}</div>
             ) : null}
@@ -76,7 +100,7 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
   return (
     <div
       ref={ref}
-      className={`${positionClass} ${sizeClass}`}
+      className={`${positionClass} h-[58vmin] min-h-[420px] w-[72vmin] max-w-[560px] sm:h-[60vmin] sm:min-h-[440px] sm:w-[74vmin] sm:max-w-[580px] md:h-[64vmin] md:min-h-[480px] md:w-[78vmin] md:max-w-[610px] lg:h-[66vmin] lg:min-h-[500px] lg:w-[80vmin] lg:max-w-[620px] xl:h-[70vmin] xl:min-h-[520px] xl:w-[82vmin] xl:max-w-[640px]`}
       role="button"
       tabIndex={0}
       aria-expanded={isOpen}
@@ -96,37 +120,54 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
           className="relative h-full w-full overflow-visible"
           style={{ transform: `rotate(${folderRotation})` }}
         >
-          <div className="relative flex h-full items-end">
+          <div
+            className={`relative flex h-full items-end ${
+              isFlipped ? "flex-row-reverse" : ""
+            }`}
+          >
             <div className="relative h-full w-full overflow-visible">
               {isOpen ? (
-                <div className="absolute -left-full top-0 h-full w-full rounded-tl-[16px] rounded-bl-[16px] border-[3px] border-r-0 border-black bg-white">
+                <div
+                  className={`absolute top-0 h-full w-full border-[3px] border-black bg-white ${
+                    isFlipped
+                      ? "left-full rounded-tr-[16px] rounded-br-[16px] border-l-0"
+                      : "-left-full rounded-tl-[16px] rounded-bl-[16px] border-r-0"
+                  }`}
+                >
                   <div className="absolute bottom-8 left-8 right-8 border-t-2 border-black pt-3 font-mono text-xs uppercase tracking-[0.35em] text-black"></div>
                 </div>
               ) : null}
               <div
+                data-folder-panel
                 className={`relative h-full w-full border-[3px] border-black bg-white ${
                   isOpen
-                    ? "z-10 rounded-tr-[16px] rounded-br-[16px] border-l-0"
-                    : "z-20 rounded-tl-[16px] rounded-tr-[16px] rounded-bl-[16px] rounded-br-[16px]"
+                    ? isFlipped
+                      ? "z-10 rounded-tl-[16px] rounded-bl-[16px] border-r-0"
+                      : "z-10 rounded-tr-[16px] rounded-br-[16px] border-l-0"
+                    : "z-30 rounded-tl-[16px] rounded-tr-[16px] rounded-bl-[16px] rounded-br-[16px]"
                 }`}
               >
                 <div className="absolute bottom-8 left-8 right-8 border-t-2 border-black pt-3 font-mono text-xs uppercase tracking-[0.35em] text-black"></div>
               </div>
               {isOpen ? (
-                <div className="absolute left-0 top-0 h-full w-[3px] bg-black"></div>
+                <div
+                  className={`absolute top-0 h-full w-[3px] bg-black ${
+                    isFlipped ? "right-0" : "left-0"
+                  }`}
+                ></div>
               ) : null}
               {paperStack}
               {isOpen ? (
                 <button
                   type="button"
-                  className="absolute right-4 top-4 z-40 flex h-8 w-8 items-center justify-center border-2 border-black bg-white font-mono text-xs uppercase"
+                  className="absolute bottom-6 left-1/2 z-40 -translate-x-1/2 rounded-full border-2 border-black bg-white px-6 py-2 font-mono text-xs uppercase tracking-[0.25em]"
                   aria-label="Close folder"
                   onClick={(event) => {
                     event.stopPropagation();
                     handleClose();
                   }}
                 >
-                  X
+                  Close
                 </button>
               ) : null}
             </div>
