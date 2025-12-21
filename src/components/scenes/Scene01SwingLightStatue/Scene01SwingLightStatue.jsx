@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import Image from "next/image";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useLayoutEffect, useMemo, useRef, useState } from "react";
 
 const serifTypeStyles = {
@@ -10,6 +11,7 @@ const serifTypeStyles = {
 
 export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
   const hostRef = useRef(null);
+  const containerRef = useRef(null);
   const [size, setSize] = useState({ w: 1200, h: 800 });
 
   useLayoutEffect(() => {
@@ -99,9 +101,17 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
   const headingFontSize = Math.max(64, Math.min(size.h * 0.1, 96));
   const headingYOffset = Math.max(headingFontSize * 0.9, size.h * 0.5);
   const headingY = size.h - headingYOffset;
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+  const statueY = useTransform(scrollYProgress, [0, 1], ["15%", "-15%"]);
 
   return (
-    <section className="relative w-full min-h-screen overflow-hidden z-20">
+    <section
+      ref={containerRef}
+      className="relative w-full min-h-screen overflow-hidden z-20"
+    >
       <motion.div
         className="absolute inset-0 -z-10"
         style={{ backgroundColor }}
@@ -112,6 +122,18 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       >
         {/* Revealed layer (behind) */}
         <div className="absolute inset-0 flex items-end justify-center bg-white pb-[46.5vh]">
+          <motion.div
+            style={{ y: statueY }}
+            className="pointer-events-none absolute bottom-0 left-1/2 w-[50%] max-w-[460px] -translate-x-1/2"
+          >
+            <Image
+              src="/statue.png"
+              alt="Statue"
+              width={1600}
+              height={2400}
+              className="h-auto w-full"
+            />
+          </motion.div>
           <div className="text-center text-black">
             <h2
               className="text-7xl font-black tracking-tight"
