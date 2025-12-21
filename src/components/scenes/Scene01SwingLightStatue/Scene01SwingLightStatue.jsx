@@ -97,11 +97,11 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
   const textFontSize = Math.max(16, size.h * 0.023);
   const headingX = size.w * 0.45;
   const headingFontSize = Math.max(64, Math.min(size.h * 0.1, 96));
-  const headingYOffset = Math.max(headingFontSize * 0.9, size.h * 0.12);
+  const headingYOffset = Math.max(headingFontSize * 0.9, size.h * 0.5);
   const headingY = size.h - headingYOffset;
 
   return (
-    <section className="relative w-full overflow-hidden min-h-screen pt-100">
+    <section className="relative w-full h-screen overflow-hidden min-h-screen pt-90 z-20">
       <motion.div
         className="absolute inset-0 -z-10"
         style={{ backgroundColor }}
@@ -111,7 +111,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
         className="sticky top-0 h-screen w-full overflow-hidden bg-white"
       >
         {/* Revealed layer (behind) */}
-        <div className="absolute inset-0 flex items-end justify-center bg-red-500 pb-[8vh]">
+        <div className="absolute inset-0 flex items-end justify-center bg-red-500 pb-[46.5vh]">
           <div className="text-center text-black">
             <h2
               className="text-7xl font-black tracking-tight"
@@ -238,6 +238,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
         {/* Blur overlays with radial masks: edge vignette + focus around title */}
         <div className="pointer-events-none absolute inset-0 z-50 [backdrop-filter:blur(10px)] [mask-image:radial-gradient(ellipse_at_center,transparent_18%,black)]" />
       </div>
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-4 bg-white border-y-4 border-black" />
     </section>
   );
 }

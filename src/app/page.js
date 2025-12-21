@@ -3,10 +3,11 @@
 import Navbar from "@/components/navbar";
 import Mugshot from "@/components/scenes/Scene00Mugshot/Scene00Mugshot.jsx";
 import SwingLight from "@/components/scenes/Scene01SwingLightStatue/Scene01SwingLightStatue.jsx";
-import CautionTape from "@/components/scenes/Scene02CautionTape/Scene02CautionTape.jsx";
+import CautionTape from "@/components/fx/CautionTape.jsx";
 import FlickEffect from "@/components/effects/FlickEffect.jsx";
+import Corkboard from "@/components/scenes/Scene02Corkboard/Scene02Corkboard.jsx";
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useScroll, useTransform } from "framer-motion";
 
 export default function Home() {
   const containerRef = useRef(null);
@@ -23,13 +24,6 @@ export default function Home() {
     ["rgb(255,255,255)", "rgb(0,0,0)"],
   );
 
-  // text color fades from black to white
-  const textColor = useTransform(
-    scrollYProgress,
-    [0, 0.7],
-    ["rgb(0, 0, 0)", "rgb(255, 255, 255)"],
-  );
-
   // FLICK effect - appears instantly when lights go out, then fades
   const flickOpacity = useTransform(
     scrollYProgress,
@@ -39,26 +33,19 @@ export default function Home() {
 
   return (
     <div className="relative">
-      <Navbar textColor={textColor} />
+      <Navbar />
       <div ref={containerRef}>
-        <div className="h-screen w-full">
-          <Mugshot
-            backgroundColor={backgroundColor}
-            scrollYProgress={scrollYProgress}
-          />
-        </div>
-        <div className="h-screen w-full">
-          <SwingLight backgroundColor={backgroundColor} />
-        </div>
+        <Mugshot
+          backgroundColor={backgroundColor}
+          scrollYProgress={scrollYProgress}
+        />
+        <SwingLight backgroundColor={backgroundColor} />
       </div>
-      <div className="top-[100vh] left-0 w-full h-screen z-50 pointer-events-none">
-        <CautionTape backgroundColor={backgroundColor} />
-      </div>
+      <CautionTape backgroundColor={backgroundColor} />
 
       {/* FLICK effect */}
       <FlickEffect opacity={flickOpacity} />
-
-      <div className="h-screen w-full">Scene03</div>
+      <Corkboard />
     </div>
   );
 }

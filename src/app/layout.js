@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
-      wheelMultiplier: 1,
+      wheelMultiplier: 0.5,
       smoothTouch: false,
       touchMultiplier: 2,
       infinite: false,
