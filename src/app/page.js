@@ -7,7 +7,7 @@ import CautionTape from "@/components/fx/CautionTape.jsx";
 import Corkboard from "@/components/scenes/Scene02Corkboard/Scene02Corkboard.jsx";
 import Computer from "@/components/scenes/Scene03Computer/Scene03Computer.jsx";
 import { useRef } from "react";
-import { useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function Home() {
   const containerRef = useRef(null);
@@ -32,7 +32,12 @@ export default function Home() {
   );
 
   return (
-    <div className="relative">
+    <motion.div
+      className="relative"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1, ease: "easeOut" }}
+    >
       <Navbar />
       <div ref={containerRef}>
         <Mugshot
@@ -45,6 +50,6 @@ export default function Home() {
 
       <Corkboard />
       <Computer />
-    </div>
+    </motion.div>
   );
 }
