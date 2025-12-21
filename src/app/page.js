@@ -5,7 +5,7 @@ import Mugshot from "@/components/scenes/Scene00Mugshot/Scene00Mugshot.jsx";
 import SwingLight from "@/components/scenes/Scene01SwingLightStatue/Scene01SwingLightStatue.jsx";
 import CautionTape from "@/components/fx/CautionTape.jsx";
 import Corkboard from "@/components/scenes/Scene02Corkboard/Scene02Corkboard.jsx";
-import Computer from "@/components/scenes/Scene03Computer/Scene03Computer.jsx";
+import Files from "@/components/scenes/Scene03Files/Scene03Files.jsx";
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
@@ -49,7 +49,7 @@ export default function Home() {
       <CautionTape backgroundColor={backgroundColor} />
 
       <Corkboard />
-      <Computer />
+      <Files />
     </motion.div>
   );
 }

@@ -124,7 +124,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
         <div className="absolute inset-0 flex items-end justify-center bg-white pb-[46.5vh]">
           <motion.div
             style={{ y: statueY }}
-            className="pointer-events-none absolute bottom-0 left-1/2 w-[50%] max-w-[460px] -translate-x-1/2"
+            className="pointer-events-none absolute bottom-0 left-[60%] w-[38%] max-w-[360px] -translate-x-1/2"
           >
             <Image
               src="/statue.png"
@@ -257,9 +257,17 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
             </text>
           </g> */}
         </svg>
-        {/* Blur overlays with radial masks: edge vignette + focus around title */}
-        <div className="pointer-events-none absolute inset-0 z-50 [backdrop-filter:blur(10px)] [mask-image:radial-gradient(ellipse_at_center,transparent_18%,black)]" />
-      </div>
+          {/* Blur overlays with radial masks: edge vignette + focus around title */}
+          <div className="pointer-events-none absolute inset-0 z-50 [backdrop-filter:blur(10px)] [mask-image:radial-gradient(ellipse_at_center,transparent_18%,black)]" />
+          <div className="pointer-events-none absolute left-[10%] top-[60%] z-50 max-w-[420px] font-mono mix-blend-difference text-white">
+            <p className="text-[1.05rem] leading-[1.2] tracking-[0.02em]">
+              MLH&apos;s Top 50 hacker with 25 hackathons and 15 wins.
+            </p>
+            <p className="mt-3 text-[1.05rem] leading-[1.2] tracking-[0.02em]">
+              Loves teddy bears and my grandma.
+            </p>
+          </div>
+        </div>
       <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-4 bg-white border-y-4 border-black" />
     </section>
   );

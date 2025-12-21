@@ -5,9 +5,38 @@ import Polaroid from "@/components/fx/Polaroid.jsx";
 
 export default function Scene02Corkboard() {
   const items = [
-    { caption: "Case 014", className: "-rotate-6" },
-    { caption: "Witness", className: "rotate-3" },
-    { caption: "Evidence", className: "-rotate-2" },
+    {
+      caption: "Quanto",
+      className: "-rotate-6",
+      src: "/quanto_logo.png",
+      alt: "Quanto logo",
+      cornerLabel: "intern",
+      cornerPosition: "left",
+    },
+    {
+      caption: "Shopify",
+      className: "rotate-3",
+      src: "/shopify_logo.png",
+      alt: "Shopify logo",
+      cornerLabel: "2023",
+      cornerPosition: "right",
+    },
+    {
+      caption: "Waterloo",
+      className: "-rotate-2",
+      src: "/uwaterloo_logo.png",
+      alt: "University of Waterloo logo",
+      cornerLabel: "alumni",
+      cornerPosition: "left",
+    },
+    {
+      caption: "HTN",
+      className: "rotate-2",
+      src: "/htn_logo.png",
+      alt: "Hack the North logo",
+      cornerLabel: "mentor",
+      cornerPosition: "right",
+    },
   ];
   const containerRef = useRef(null);
   const cardRefs = useRef([]);
@@ -84,7 +113,14 @@ export default function Scene02Corkboard() {
               }}
               className="relative z-10"
             >
-              <Polaroid caption={item.caption} className={item.className} />
+              <Polaroid
+                caption={item.caption}
+                className={item.className}
+                src={item.src}
+                alt={item.alt}
+                cornerLabel={item.cornerLabel}
+                cornerPosition={item.cornerPosition}
+              />
             </div>
           ))}
         </div>
