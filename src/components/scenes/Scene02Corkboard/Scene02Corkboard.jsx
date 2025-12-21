@@ -10,32 +10,24 @@ export default function Scene02Corkboard() {
       className: "-rotate-6",
       src: "/quanto_logo.png",
       alt: "Quanto logo",
-      cornerLabel: "intern",
-      cornerPosition: "left",
     },
     {
       caption: "Shopify",
       className: "rotate-3",
       src: "/shopify_logo.png",
       alt: "Shopify logo",
-      cornerLabel: "2023",
-      cornerPosition: "right",
     },
     {
       caption: "Waterloo",
       className: "-rotate-2",
       src: "/uwaterloo_logo.png",
       alt: "University of Waterloo logo",
-      cornerLabel: "alumni",
-      cornerPosition: "left",
     },
     {
       caption: "HTN",
       className: "rotate-2",
       src: "/htn_logo.png",
       alt: "Hack the North logo",
-      cornerLabel: "mentor",
-      cornerPosition: "right",
     },
   ];
   const containerRef = useRef(null);
@@ -118,8 +110,6 @@ export default function Scene02Corkboard() {
                 className={item.className}
                 src={item.src}
                 alt={item.alt}
-                cornerLabel={item.cornerLabel}
-                cornerPosition={item.cornerPosition}
               />
             </div>
           ))}

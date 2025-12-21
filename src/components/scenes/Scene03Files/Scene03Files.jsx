@@ -8,14 +8,16 @@ export default function Scene03Files() {
     <section className="relative flex h-screen w-full items-center justify-center bg-white">
       <div className="flex flex-col items-center gap-60">
         <div className="flex flex-wrap items-center justify-center gap-60">
-          <div className="-rotate-2">
-            <BlackWhiteFolder label="TED" />
-          </div>
+          <BlackWhiteFolder
+            label="TED"
+            folderRotation="-2deg"
+            paperRotation="2deg"
+          />
           <div className="rotate-2">
             <DitherShader
               src="/ted.avif"
               colorMode="grayscale"
-              threshold={0.7}
+              threshold={0.5}
               gridSize={1}
               objectFit="contain"
               className="h-[50vmin] w-[50vmin]"
@@ -30,9 +32,11 @@ export default function Scene03Files() {
             objectFit="contain"
             className="h-[60vmin] w-[60vmin]"
           />
-          <div className="rotate-2">
-            <BlackWhiteFolder label="UWSummit" />
-          </div>
+          <BlackWhiteFolder
+            label="UWSummit"
+            folderRotation="2deg"
+            paperRotation="-2deg"
+          />
         </div>
       </div>
     </section>

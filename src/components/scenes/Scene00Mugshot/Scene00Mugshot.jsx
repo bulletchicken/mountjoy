@@ -15,7 +15,7 @@ export default function Page({ backgroundColor, scrollYProgress }) {
       {/* <div className="pointer-events-none absolute inset-0 z-20 [backdrop-filter:blur(10px)] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" /> */}
 
       <motion.div
-        className="fixed left-1/2 top-[10vh] z-10 w-screen -translate-x-1/2"
+        className="pointer-events-none fixed left-1/2 top-[10vh] z-10 w-screen -translate-x-1/2"
         style={{ opacity: photoOpacity }}
       >
         <div className="mx-auto flex w-full justify-center overflow-visible">
@@ -25,7 +25,7 @@ export default function Page({ backgroundColor, scrollYProgress }) {
 
       {/* Case number and location */}
       <motion.div
-        className="fixed bottom-30 left-0 right-0 z-50"
+        className="pointer-events-none fixed bottom-30 left-0 right-0 z-50"
         style={{ opacity: textOpacity }}
       >
         <div className="mx-auto flex w-full max-w-5xl flex-col gap-2 px-8 font-mono text-sm uppercase tracking-wider text-black md:px-12 2xl:px-16">
