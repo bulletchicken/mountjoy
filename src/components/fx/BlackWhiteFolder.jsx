@@ -1,57 +1,41 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { forwardRef, useState } from "react";
 
-export default function BlackWhiteFolder({
-  label,
-  children,
-  paperRotation = "0deg",
-  folderRotation = "0deg",
-}) {
-  const [isOpen, setIsOpen] = useState(false);
+const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
+  {
+    label,
+    children,
+    paperRotation = "0deg",
+    folderRotation = "0deg",
+    isOpen: controlledOpen,
+    onOpen,
+    onClose,
+  },
+  ref,
+) {
+  const [internalOpen, setInternalOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  const [offset, setOffset] = useState({ x: 0, y: 0 });
-  const wrapperRef = useRef(null);
-
-  const updateOffset = (open = false) => {
-    if (!wrapperRef.current) {
-      return;
-    }
-    const rect = wrapperRef.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    const targetX = window.innerWidth / 2;
-    const targetY = window.innerHeight / 2;
-    const extraX = open ? rect.width / 2 : 0;
-    setOffset({
-      x: Math.round(targetX - centerX + extraX),
-      y: Math.round(targetY - centerY),
-    });
-  };
+  const isOpen = controlledOpen ?? internalOpen;
 
   const handleOpen = () => {
     if (isOpen) {
       return;
     }
-    updateOffset(true);
-    setIsOpen(true);
+    onOpen?.();
+    if (controlledOpen === undefined) {
+      setInternalOpen(true);
+    }
   };
 
   const handleClose = () => {
-    setIsOpen(false);
+    onClose?.();
+    if (controlledOpen === undefined) {
+      setInternalOpen(false);
+    }
   };
 
-  useEffect(() => {
-    if (!isOpen) {
-      return;
-    }
-    updateOffset(true);
-    const handleResize = () => updateOffset(true);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [isOpen]);
-
-  const positionClass = isOpen ? "relative z-50" : "relative cursor-pointer";
+  const positionClass = isOpen ? "relative z-40" : "relative cursor-pointer";
 
   const sizeClass = "h-[54vmin] min-h-[400px] w-[64vmin] max-w-[480px]";
 
@@ -69,7 +53,7 @@ export default function BlackWhiteFolder({
 
   const paperStack = (
     <div
-      className={`absolute left-6 right-6 -top-14 h-[92%] transition-transform duration-300 ease-out ${paperZClass}`}
+      className={`absolute left-6 -right-10 -top-5 h-[95%] transition-transform duration-300 ease-out ${paperZClass}`}
     >
       <div
         className="relative h-full"
@@ -91,18 +75,12 @@ export default function BlackWhiteFolder({
 
   return (
     <div
-      ref={wrapperRef}
-      className={`${positionClass} ${sizeClass} transition-transform duration-700 ease-in-out`}
+      ref={ref}
+      className={`${positionClass} ${sizeClass}`}
       role="button"
       tabIndex={0}
       aria-expanded={isOpen}
       aria-label={`${label || "Case file"} folder`}
-      style={{
-        transform: isOpen
-          ? `translate(${offset.x}px, ${offset.y}px)`
-          : "translate(0px, 0px)",
-        willChange: "transform",
-      }}
       onPointerEnter={() => setIsHovered(true)}
       onPointerLeave={() => setIsHovered(false)}
       onClick={handleOpen}
@@ -158,4 +136,8 @@ export default function BlackWhiteFolder({
       </div>
     </div>
   );
-}
+});
+
+BlackWhiteFolder.displayName = "BlackWhiteFolder";
+
+export default BlackWhiteFolder;
