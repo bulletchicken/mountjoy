@@ -43,8 +43,6 @@ export default function Home() {
       </div>
       <CautionTape backgroundColor={backgroundColor} />
 
-      {/* FLICK effect */}
-      <FlickEffect opacity={flickOpacity} />
       <Corkboard />
     </div>
   );
