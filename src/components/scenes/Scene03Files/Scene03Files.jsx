@@ -109,7 +109,7 @@ function FolderPair({
 
 export default function Scene03Files() {
   return (
-    <section className="relative flex w-full items-center justify-center bg-white overflow-hidden py-20">
+    <section className="relative flex w-full items-center justify-center bg-white overflow-hidden py-40">
       <div className="flex flex-col items-center gap-24 sm:gap-36 lg:gap-48 xl:gap-60">
         <FolderPair
           centerOffsetX={-400}
@@ -142,32 +142,36 @@ export default function Scene03Files() {
             paperRotation: "-2deg",
           }}
           media={
-            <div className="pizza-spin pizza-hit">
-              <DitherShader
-                src="/pizza.png"
-                colorMode="grayscale"
-                gridSize={1}
-                objectFit="contain"
-                className="h-[58vmin] w-[58vmin] sm:h-[64vmin] sm:w-[64vmin] md:h-[68vmin] md:w-[68vmin] lg:h-[70vmin] lg:w-[70vmin] xl:h-[74vmin] xl:w-[74vmin]"
-              />
+            <div className="pizza-wrap">
+              <div className="pizza-spin">
+                <DitherShader
+                  src="/pizza.png"
+                  colorMode="grayscale"
+                  gridSize={1}
+                  objectFit="contain"
+                  className="h-[58vmin] w-[58vmin] sm:h-[64vmin] sm:w-[64vmin] md:h-[68vmin] md:w-[68vmin] lg:h-[70vmin] lg:w-[70vmin] xl:h-[74vmin] xl:w-[74vmin]"
+                />
+              </div>
             </div>
           }
         />
       </div>
       <style jsx>{`
-        .pizza-spin {
-          animation: pizza-spin 12s linear infinite;
-          animation-play-state: paused;
-          transform-origin: center;
-        }
-        .pizza-spin:hover {
-          animation-play-state: running;
-        }
-        .pizza-hit {
+        .pizza-wrap {
+          position: relative;
           display: inline-flex;
           align-items: center;
           justify-content: center;
           clip-path: circle(35% at 50% 50%);
+        }
+        .pizza-spin {
+          animation: pizza-spin 12s linear infinite;
+          animation-play-state: paused;
+          transform-origin: center;
+          pointer-events: none;
+        }
+        .pizza-wrap:hover .pizza-spin {
+          animation-play-state: running;
         }
         @keyframes pizza-spin {
           from {

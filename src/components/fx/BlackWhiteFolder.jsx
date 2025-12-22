@@ -37,10 +37,14 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
     }
   };
 
-  const positionClass = isOpen ? "relative z-40" : "relative cursor-pointer";
+  const positionClass = isOpen
+    ? "relative z-40"
+    : "relative cursor-pointer";
 
   const stackRotation = paperRotation;
   const hoverLiftClass = isHovered ? "-translate-y-3" : "";
+  const hoverScaleClass = !isOpen && isHovered ? "scale-[1.02]" : "";
+  const hoverPaperTwist = !isOpen && isHovered ? "rotate(2deg)" : "rotate(0deg)";
   const paperZClass = "z-20";
   const isFlipped = tabSide === "left";
   const paperStackPosition = isFlipped
@@ -74,9 +78,9 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
   const paperStack = (
     <div className={`${paperStackPosition} ${paperZClass}`}>
       <div
-        className="relative h-full"
+        className="relative h-full transition-transform duration-300 ease-out"
         style={{
-          transform: `translateX(${paperOffsetX}px) rotate(${stackRotation})`,
+          transform: `translateX(${paperOffsetX}px) rotate(${stackRotation}) ${hoverPaperTwist}`,
         }}
       >
         <div
@@ -100,7 +104,7 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
   return (
     <div
       ref={ref}
-      className={`${positionClass} h-[58vmin] min-h-[420px] w-[72vmin] max-w-[560px] sm:h-[60vmin] sm:min-h-[440px] sm:w-[74vmin] sm:max-w-[580px] md:h-[64vmin] md:min-h-[480px] md:w-[78vmin] md:max-w-[610px] lg:h-[66vmin] lg:min-h-[500px] lg:w-[80vmin] lg:max-w-[620px] xl:h-[70vmin] xl:min-h-[520px] xl:w-[82vmin] xl:max-w-[640px]`}
+      className={`${positionClass} h-[58vmin] min-h-[420px] w-[72vmin] max-w-[560px] sm:h-[60vmin] sm:min-h-[440px] sm:w-[74vmin] sm:max-w-[580px] md:h-[64vmin] md:min-h-[480px] md:w-[78vmin] md:max-w-[610px] lg:h-[66vmin] lg:min-h-[500px] lg:w-[80vmin] lg:max-w-[620px] xl:h-[70vmin] xl:min-h-[520px] xl:w-[82vmin] xl:max-w-[640px] transition-transform duration-300 ease-out ${hoverScaleClass}`}
       role="button"
       tabIndex={0}
       aria-expanded={isOpen}

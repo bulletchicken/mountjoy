@@ -9,6 +9,35 @@ const serifTypeStyles = {
   fontWeight: 100,
 };
 
+const MONA_ASPECT = 725 / 980;
+const LAYER_ANCHORS = {
+  mona: {
+    className:
+      "absolute left-1/2 top-1/2 w-[14%] max-w-[180px] -translate-x-1/2 -translate-y-1/2",
+    svg: {
+      x: 0.5,
+      y: 0.5,
+      width: 0.14,
+      maxWidth: 180,
+      aspectRatio: MONA_ASPECT,
+      alignX: 0,
+      alignY: -0.9,
+    },
+  },
+  statue: {
+    className:
+      "absolute bottom-0 left-[60%] w-[38%] max-w-[360px] -translate-x-1/2",
+    svg: {
+      x: 0.6,
+      y: 1,
+      width: 0.3,
+      maxWidth: 300,
+      alignX: -0.4,
+      alignY: -1.2,
+    },
+  },
+};
+
 export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
   const hostRef = useRef(null);
   const containerRef = useRef(null);
@@ -121,6 +150,122 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
     offset: ["start end", "end start"],
   });
   const statueY = useTransform(scrollYProgress, [0, 1], ["15%", "-15%"]);
+  const monaY = useTransform(scrollYProgress, [0, 1], ["-30%", "30%"]);
+  const underLayerItems = [
+    {
+      key: "mona-sketch",
+      src: "/mona_lisa.png",
+      alt: "Mona Lisa sketch",
+      width: 1275,
+      height: 1390,
+      anchor: "mona",
+      motionY: monaY,
+    },
+    {
+      key: "statue",
+      src: "/statue.png",
+      alt: "Statue",
+      width: 1600,
+      height: 2400,
+      anchor: "statue",
+      motionY: statueY,
+    },
+  ];
+  const topLayerItems = [
+    {
+      key: "mona-real",
+      src: "/real_mona_lisa.jpg",
+      alt: "Mona Lisa",
+      width: 600,
+      height: 780,
+      anchor: "mona",
+      motionY: monaY,
+      mask: "beam",
+      scale: 0.8,
+    },
+  ];
+  const renderLayerItems = (items) =>
+    items.map((item) => {
+      const anchor = LAYER_ANCHORS[item.anchor];
+      const rect = resolveAnchorRect(item);
+      const style = rect
+        ? {
+            left: rect.x,
+            top: rect.y,
+            width: rect.width,
+            height: rect.height,
+            y: item.motionY,
+          }
+        : { y: item.motionY };
+      const baseClass = rect
+        ? "pointer-events-none absolute"
+        : `pointer-events-none ${anchor?.className || ""}`;
+      const objectFit = item.objectFit || "contain";
+      return (
+        <motion.div
+          key={item.key}
+          style={style}
+          className={`${baseClass} ${item.className || ""}`}
+        >
+          <div className="relative h-full w-full">
+            <Image
+              src={item.src}
+              alt={item.alt}
+              fill
+              sizes={rect ? `${Math.round(rect.width)}px` : "100vw"}
+              className={`${
+                objectFit === "cover" ? "object-cover" : "object-contain"
+              } ${item.imageClassName || ""}`}
+            />
+          </div>
+        </motion.div>
+      );
+    });
+  const resolveAnchorRect = (item) => {
+    const anchor = LAYER_ANCHORS[item.anchor];
+    if (!anchor?.svg) {
+      return null;
+    }
+    const { x, y, width, maxWidth, alignX = 0, alignY = 0 } = anchor.svg;
+    const widthPx = Math.min(size.w * width, maxWidth ?? Infinity);
+    const aspectRatio = anchor.svg.aspectRatio ?? item.width / item.height;
+    const heightPx = widthPx / aspectRatio;
+    const scale = item.scale ?? 1;
+    const scaledWidth = widthPx * scale;
+    const scaledHeight = heightPx * scale;
+    const offsetX = (widthPx - scaledWidth) / 2;
+    const offsetY = (heightPx - scaledHeight) / 2;
+    return {
+      x: size.w * x + widthPx * alignX + offsetX + (item.offsetX || 0),
+      y: size.h * y + heightPx * alignY + offsetY + (item.offsetY || 0),
+      width: scaledWidth,
+      height: scaledHeight,
+    };
+  };
+  const maskedTopItems = topLayerItems.filter((item) => item.mask === "beam");
+  const unmaskedTopItems = topLayerItems.filter((item) => item.mask !== "beam");
+  const renderMaskedLayerItems = (items) =>
+    items.map((item) => {
+      const rect = resolveAnchorRect(item);
+      if (!rect) {
+        return null;
+      }
+      const motionStyle = item.motionY ? { y: item.motionY } : undefined;
+      const preserveAspectRatio =
+        item.objectFit === "cover" ? "xMidYMid slice" : "xMidYMid meet";
+      return (
+        <motion.g key={item.key} style={motionStyle}>
+          <image
+            href={item.src}
+            x={rect.x}
+            y={rect.y}
+            width={rect.width}
+            height={rect.height}
+            preserveAspectRatio={preserveAspectRatio}
+          />
+        </motion.g>
+      );
+    });
 
   return (
     <section
@@ -136,26 +281,17 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
         className="sticky top-0 h-screen w-full overflow-hidden bg-white"
       >
         {/* Revealed layer (behind) */}
-        <div className="absolute inset-0 flex items-end justify-center bg-white pb-[46.5vh]">
-          <motion.div
-            style={{ y: statueY }}
-            className="pointer-events-none absolute bottom-0 left-[60%] w-[38%] max-w-[360px] -translate-x-1/2"
-          >
-            <Image
-              src="/statue.png"
-              alt="Statue"
-              width={1600}
-              height={2400}
-              className="h-auto w-full"
-            />
-          </motion.div>
-          <div className="text-center text-black">
-            <h2
+        <div className="absolute inset-0 bg-white">
+          <div className="absolute inset-0">
+            {renderLayerItems(underLayerItems)}
+          </div>
+          <div className="absolute inset-0 flex items-end justify-center pb-[46.5vh] text-black">
+            {/* <h2
               className="text-7xl font-black tracking-tight"
               style={{ fontSize: layout.headingFontSize }}
             >
               EVIDENCE LOG
-            </h2>
+            </h2>*/}
             {/* <p
               className="mt-4 text-xl opacity-80"
               style={{
@@ -231,7 +367,12 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
             strokeWidth={beam.topBarStroke}
             strokeLinecap="round"
           />
-          <g mask="url(#beamMask)">
+          {maskedTopItems.length ? (
+            <g mask="url(#beamMask)">
+              {renderMaskedLayerItems(maskedTopItems)}
+            </g>
+          ) : null}
+          {/* <g mask="url(#beamMask)">
             <text
               x={layout.headingX}
               y={layout.headingY}
@@ -246,7 +387,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
             >
               {"ABOUT\u00A0\u00A0\u00A0\u00A0ME "}
             </text>
-          </g>
+          </g>*/}
           {/* <g mask="url(#beamMask)">
             <text
               x={textX}
@@ -272,17 +413,25 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
             </text>
           </g> */}
         </svg>
-          {/* Blur overlays with radial masks: edge vignette + focus around title */}
-          <div className="pointer-events-none absolute inset-0 z-50 [backdrop-filter:blur(10px)] [mask-image:radial-gradient(ellipse_at_center,transparent_18%,black)]" />
-          <div className="pointer-events-none absolute left-[10%] top-[60%] z-50 max-w-[420px] font-mono mix-blend-difference text-white">
-            <p className="text-[1.05rem] leading-[1.2] tracking-[0.02em]">
-              MLH&apos;s Top 50 hacker with 25 hackathons and 15 wins.
-            </p>
-            <p className="mt-3 text-[1.05rem] leading-[1.2] tracking-[0.02em]">
-              Loves teddy bears and my grandma.
-            </p>
+        {unmaskedTopItems.length ? (
+          <div className="pointer-events-none absolute inset-0 z-[45]">
+            {renderLayerItems(unmaskedTopItems)}
           </div>
-        </div>
+        ) : null}
+        {/* Blur overlays with radial masks: edge vignette + focus around title */}
+        <div className="pointer-events-none absolute inset-0 z-50 [backdrop-filter:blur(10px)] [mask-image:radial-gradient(ellipse_at_center,transparent_18%,black)]" />
+        <motion.div
+          style={{ y: statueY }}
+          className="pointer-events-none absolute left-[20%] top-[45%] z-50 max-w-[420px] font-mono mix-blend-difference text-white"
+        >
+          <p className="text-[1.05rem] leading-[1.2] tracking-[0.02em]">
+            MLH&apos;s Top 50 hacker with 25 hackathons and 15 wins.
+          </p>
+          <p className="mt-3 text-[1.05rem] leading-[1.2] tracking-[0.02em]">
+            Loves teddy bears and my grandma.
+          </p>
+        </motion.div>
+      </div>
       <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-4 bg-white border-y-4 border-black" />
     </section>
   );

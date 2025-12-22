@@ -1,6 +1,7 @@
 "use client";
 
 import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
 import Mugshot from "@/components/scenes/Scene00Mugshot/Scene00Mugshot.jsx";
 import SwingLight from "@/components/scenes/Scene01SwingLightStatue/Scene01SwingLightStatue.jsx";
 import CautionTape from "@/components/fx/CautionTape.jsx";
@@ -50,6 +51,7 @@ export default function Home() {
 
       <Corkboard />
       <Files />
+      <Footer />
     </motion.div>
   );
 }

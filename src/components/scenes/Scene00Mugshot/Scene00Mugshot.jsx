@@ -28,11 +28,11 @@ export default function Page({ backgroundColor, scrollYProgress }) {
         className="pointer-events-none fixed bottom-30 left-0 right-0 z-50"
         style={{ opacity: textOpacity }}
       >
-        <div className="mx-auto flex w-full max-w-5xl flex-col gap-2 px-8 font-mono text-sm uppercase tracking-wider text-black md:px-12 2xl:px-16">
+        {/* <div className="mx-auto flex w-full max-w-5xl flex-col gap-2 px-8 font-mono text-sm uppercase tracking-wider text-black md:px-12 2xl:px-16">
           <div>Case Number: 20060621</div>
           <div>Toronto, Canada</div>
           <div>University of Waterloo</div>
-        </div>
+        </div>*/}
       </motion.div>
     </motion.div>
   );
