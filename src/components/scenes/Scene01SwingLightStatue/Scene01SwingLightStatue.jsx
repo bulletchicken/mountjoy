@@ -422,7 +422,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
         <div className="pointer-events-none absolute inset-0 z-50 [backdrop-filter:blur(10px)] [mask-image:radial-gradient(ellipse_at_center,transparent_18%,black)]" />
         <motion.div
           style={{ y: statueY }}
-          className="pointer-events-none absolute left-[20%] top-[45%] z-50 max-w-[420px] font-mono mix-blend-difference text-white"
+          className="pointer-events-none absolute left-[20%] top-[40%] z-50 max-w-[420px] font-mono mix-blend-difference text-white"
         >
           <p className="text-[1.05rem] leading-[1.2] tracking-[0.02em]">
             MLH&apos;s Top 50 hacker with 25 hackathons and 15 wins.

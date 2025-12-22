@@ -14,6 +14,7 @@ export default function Scene02Corkboard() {
         height: 2048,
         className: "",
         maxWidth: "max-w-[420px]",
+        imageClassName: "drop-shadow-[0_1px_2px_rgba(0,0,0,1)]",
         pins: [{ id: "waterloo-top", x: 0.5, y: 0.12 }],
       },
       {
@@ -24,7 +25,6 @@ export default function Scene02Corkboard() {
         height: 2360,
         className: "-rotate-4",
         maxWidth: "max-w-[200px]",
-        pins: [{ id: "alice-top", x: 0.5, y: 0.08 }],
       },
       {
         id: "shopify",
@@ -34,6 +34,7 @@ export default function Scene02Corkboard() {
         height: 2360,
         className: "",
         maxWidth: "max-w-[420px]",
+        imageClassName: "drop-shadow-[0_1px_2px_rgba(0,0,0,1)]",
         pins: [{ id: "shopify-top", x: 0.5, y: 0.1 }],
       },
     ],
@@ -64,7 +65,7 @@ export default function Scene02Corkboard() {
           return;
         }
         const rect = el.getBoundingClientRect();
-        item.pins.forEach((pin) => {
+        (item.pins ?? []).forEach((pin) => {
           nextPins[pin.id] = {
             x: rect.left - containerRect.left + rect.width * pin.x,
             y: rect.top - containerRect.top + rect.height * pin.y,
@@ -143,7 +144,7 @@ export default function Scene02Corkboard() {
               alt={item.alt}
               width={item.width}
               height={item.height}
-              className="h-auto w-full"
+              className={`h-auto w-full ${item.imageClassName || ""}`}
             />
           </div>
         ))}

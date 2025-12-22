@@ -14,7 +14,7 @@ export default function TitlePhoto({ className = "" }) {
 
   return (
     <DitherShader
-      src="/title_photo.jpg"
+      src="/title_photo.png"
       colorMode="grayscale"
       gridSize={1}
       objectFit="cover"
