@@ -29,7 +29,10 @@ export default function CautionTape() {
 
   const TapeContent = ({ count = 20 }) =>
     Array.from({ length: count }, (_, i) => (
-      <span key={i} className="whitespace-nowrap px-4 font-black">
+      <span
+        key={i}
+        className="inline-block whitespace-nowrap px-4 font-black origin-center scale-y-200"
+      >
         CRIME SCENE DO NOT CROSS
       </span>
     ));

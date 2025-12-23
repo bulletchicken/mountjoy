@@ -7,32 +7,60 @@ export default function Polaroid({
   alt,
   caption,
   sizeClass = "w-56",
-  imageClass = "w-36 h-36",
+  imageClass = "w-36 h-44",
   className = "",
 }) {
   return (
-    <div
-      className={`relative flex flex-col items-center rounded-[0.2rem] border-2 border-black bg-white px-4 pt-4 pb-8 ${sizeClass} ${className}`}
+    <figure
+      className={[
+        "relative isolate select-none",
+        "border border-black bg-white",
+        "px-4 pt-4 pb-14",
+        sizeClass,
+        className,
+      ].join(" ")}
     >
+      {/* inner photo well */}
       <div
-        className={`relative z-10 mx-auto flex items-center justify-center overflow-hidden rounded-[0.15rem] border-2 border-black bg-white ${imageClass}`}
+        className={[
+          "relative mx-auto overflow-hidden",
+          "border border-black bg-white",
+          imageClass,
+        ].join(" ")}
       >
-        {src ? (
-          <Image
-            src={src}
-            alt={alt}
-            fill
-            className="object-contain object-center p-2"
-          />
-        ) : (
-          <div className="h-full w-full bg-white" />
-        )}
-      </div>
-      {caption ? (
-        <div className="relative z-10 mt-4 text-center text-[0.95rem] font-mono uppercase tracking-[0.2em] text-black">
-          {caption}
+        <div className="relative h-full w-full overflow-hidden border border-black bg-white">
+          {src ? (
+            <Image
+              src={src}
+              alt={alt}
+              fill
+              className="object-cover object-center"
+              sizes="(max-width: 768px) 224px, 256px"
+              priority={false}
+            />
+          ) : (
+            <div className="h-full w-full bg-white" />
+          )}
         </div>
+      </div>
+
+      {/* caption strip */}
+      {caption ? (
+        <figcaption
+          className={[
+            "mt-5 text-center",
+            // handwritten-ish + slightly imperfect spacing
+            "font-mono text-[0.92rem] uppercase tracking-[0.28em]",
+            // tiny ink wobble effect using subtle text rendering choices
+            "text-black",
+          ].join(" ")}
+        >
+          {caption}
+        </figcaption>
       ) : null}
-    </div>
+
+      {/* little “print” imperfections: micro specks (still no shadows) */}
+      <div className="pointer-events-none absolute inset-0 rounded-[0.45rem] border border-black/10" />
+    </figure>
   );
 }
