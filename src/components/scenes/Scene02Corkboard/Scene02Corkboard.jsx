@@ -205,7 +205,7 @@ export default function Scene02Corkboard() {
             className="absolute left-[65%] top-60 w-[min(70vw,420px)] max-w-none z-10 transition-transform duration-200 hover:scale-[1.02]"
           >
             <div className="relative w-full">
-              <div className="absolute left-0 top-0 -rotate-8 z-0">
+              <div className="absolute left-2 top-16 -rotate-8 z-0">
                 <Polaroid
                   src="/the_cat.jpg"
                   alt="Polaroid cat"
@@ -233,9 +233,12 @@ export default function Scene02Corkboard() {
             </div>
           </div>
         </div>
-        <div className="relative w-full">
+        <div className="relative w-full h-full">
           <div className="relative mx-auto flex w-full max-w-3xl flex-wrap items-center justify-center gap-10">
-            <div ref={shopifyRef} className="relative w-full max-w-[220px]">
+            <div
+              ref={shopifyRef}
+              className="absolute left-[10%] -top-5 w-full max-w-[220px]"
+            >
               <Image
                 src="/shopify_sticky.png"
                 alt="Shopify sticker"
@@ -244,7 +247,7 @@ export default function Scene02Corkboard() {
                 className="h-auto w-full drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
               />
             </div>
-            <div className="relative w-[280px] shrink-0 -rotate-3">
+            <div className="absolute left-[30%] -top-5 w-[280px] shrink-0 -rotate-3">
               <Image
                 src="/shopee_sticker.png"
                 alt="Shopee sticker"
@@ -255,7 +258,7 @@ export default function Scene02Corkboard() {
             </div>
             <div
               ref={quantoRef}
-              className="relative w-[200px] shrink-0 -rotate-10 scale-[1.2]"
+              className="absolute left-[60%] top-20 w-[200px] shrink-0 -rotate-10 scale-[1.1]"
             >
               <Image
                 src="/quanto_sticky.png"
