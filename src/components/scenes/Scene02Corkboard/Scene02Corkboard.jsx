@@ -233,8 +233,8 @@ export default function Scene02Corkboard() {
             </div>
           </div>
         </div>
-        <div className="relative w-full h-full">
-          <div className="relative mx-auto flex w-full max-w-3xl flex-wrap items-center justify-center gap-10">
+        <div className="relative w-full min-h-[320px]">
+          <div className="relative mx-auto flex w-full max-w-3xl flex-wrap items-center justify-center gap-10 min-h-[320px]">
             <div
               ref={shopifyRef}
               className="absolute left-[10%] -top-5 w-full max-w-[220px]"
