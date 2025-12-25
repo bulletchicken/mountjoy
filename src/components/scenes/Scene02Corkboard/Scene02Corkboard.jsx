@@ -237,7 +237,7 @@ export default function Scene02Corkboard() {
           <div className="relative mx-auto flex w-full max-w-3xl flex-wrap items-center justify-center gap-10 min-h-[320px]">
             <div
               ref={shopifyRef}
-              className="absolute left-[10%] -top-5 w-full max-w-[220px]"
+              className="absolute left-[10%] -top-5 w-full max-w-[220px] transition-transform duration-200 hover:scale-[1.02]"
             >
               <Image
                 src="/shopify_sticky.png"
@@ -258,7 +258,7 @@ export default function Scene02Corkboard() {
             </div>
             <div
               ref={quantoRef}
-              className="absolute left-[60%] top-20 w-[200px] shrink-0 -rotate-10 scale-[1.1]"
+              className="absolute left-[60%] top-20 w-[200px] shrink-0 -rotate-10 scale-[1.1] transition-transform duration-200 hover:scale-[1.13]"
             >
               <Image
                 src="/quanto_sticky.png"
