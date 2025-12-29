@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import BlackWhiteFolder from "@/components/fx/BlackWhiteFolder.jsx";
 import { DitherShader } from "@/components/ui/dither-shader";
+import Secret from "@/components/scenes/Scene03Files/Secret";
 
 function FolderPair({
   folderProps,
@@ -155,6 +156,7 @@ export default function Scene03Files() {
             </div>
           }
         />
+        <Secret />
       </div>
       <style jsx>{`
         .pizza-wrap {
