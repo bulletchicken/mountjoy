@@ -160,6 +160,19 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       height: 1390,
       anchor: "mona",
       motionY: monaY,
+      scaleSm: 1.4,
+    },
+    {
+      key: "spray-paint",
+      src: "/spray_paint.png",
+      alt: "Spray paint",
+      width: 1462,
+      height: 1796,
+      anchor: "statue",
+      motionY: statueY,
+      offsetX: -340,
+      offsetXSm: -200,
+      scaleSm: 0.9,
     },
     {
       key: "statue",
@@ -169,6 +182,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       height: 2400,
       anchor: "statue",
       motionY: statueY,
+      scaleSm: 0.9,
     },
   ];
   const topLayerItems = [
@@ -226,18 +240,24 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
     if (!anchor?.svg) {
       return null;
     }
+    const isSm = size.w < 640;
+    const scaleOverride =
+      isSm && item.scaleSm != null ? item.scaleSm : item.scale ?? 1;
+    const itemOffsetX =
+      isSm && item.offsetXSm != null ? item.offsetXSm : item.offsetX || 0;
+    const itemOffsetY =
+      isSm && item.offsetYSm != null ? item.offsetYSm : item.offsetY || 0;
     const { x, y, width, maxWidth, alignX = 0, alignY = 0 } = anchor.svg;
     const widthPx = Math.min(size.w * width, maxWidth ?? Infinity);
     const aspectRatio = anchor.svg.aspectRatio ?? item.width / item.height;
     const heightPx = widthPx / aspectRatio;
-    const scale = item.scale ?? 1;
-    const scaledWidth = widthPx * scale;
-    const scaledHeight = heightPx * scale;
-    const offsetX = (widthPx - scaledWidth) / 2;
-    const offsetY = (heightPx - scaledHeight) / 2;
+    const scaledWidth = widthPx * scaleOverride;
+    const scaledHeight = heightPx * scaleOverride;
+    const frameOffsetX = (widthPx - scaledWidth) / 2;
+    const frameOffsetY = (heightPx - scaledHeight) / 2;
     return {
-      x: size.w * x + widthPx * alignX + offsetX + (item.offsetX || 0),
-      y: size.h * y + heightPx * alignY + offsetY + (item.offsetY || 0),
+      x: size.w * x + widthPx * alignX + frameOffsetX + itemOffsetX,
+      y: size.h * y + heightPx * alignY + frameOffsetY + itemOffsetY,
       width: scaledWidth,
       height: scaledHeight,
     };

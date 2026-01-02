@@ -1,10 +1,59 @@
 "use client";
 import { motion, useTransform } from "framer-motion";
-import TitlePhoto from "@/components/fx/TitlePhoto.jsx";
-
+import { useEffect, useRef } from "react";
 export default function Page({ backgroundColor, scrollYProgress }) {
   const textOpacity = useTransform(scrollYProgress, [0.45, 0.6], [1, 0]);
   const photoOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+  const videoRef = useRef(null);
+  const rafRef = useRef(null);
+  const lastTsRef = useRef(null);
+  const directionRef = useRef(1);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const tick = (ts) => {
+      if (!lastTsRef.current) lastTsRef.current = ts;
+      const delta = (ts - lastTsRef.current) / 1000;
+      lastTsRef.current = ts;
+
+      const duration = video.duration || 0;
+      if (!duration) {
+        rafRef.current = requestAnimationFrame(tick);
+        return;
+      }
+
+      let next = video.currentTime + delta * directionRef.current;
+      if (next >= duration) {
+        next = duration;
+        directionRef.current = -1;
+      } else if (next <= 0) {
+        next = 0;
+        directionRef.current = 1;
+      }
+
+      video.currentTime = next;
+      rafRef.current = requestAnimationFrame(tick);
+    };
+
+    const start = () => {
+      video
+        .play()
+        .catch(() => {})
+        .finally(() => {
+          video.pause();
+          lastTsRef.current = null;
+          rafRef.current = requestAnimationFrame(tick);
+        });
+    };
+
+    video.addEventListener("loadedmetadata", start);
+    return () => {
+      video.removeEventListener("loadedmetadata", start);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
 
   return (
     <motion.div
@@ -15,11 +64,20 @@ export default function Page({ backgroundColor, scrollYProgress }) {
       {/* <div className="pointer-events-none absolute inset-0 z-20 [backdrop-filter:blur(10px)] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" /> */}
 
       <motion.div
-        className="pointer-events-none fixed left-1/2 top-[10vh] z-10 w-screen -translate-x-1/2"
+        className="pointer-events-none fixed bottom-0 left-1/2 z-10 w-screen -translate-x-1/2"
         style={{ opacity: photoOpacity }}
       >
         <div className="mx-auto flex w-full justify-center overflow-visible">
-          <TitlePhoto className="shrink-0 w-[220vw] sm:w-[160vw] md:w-[120vw] lg:w-[90vw] xl:w-[80vw] 2xl:w-[55vw] max-w-none" />
+          <video
+            ref={videoRef}
+            className="aspect-[3/2] min-h-[125vh] shrink-0 w-[235vw] object-contain object-bottom sm:w-[170vw] md:w-[130vw] lg:w-[100vw] xl:w-[90vw] 2xl:w-[60vw] max-w-none"
+            autoPlay
+            muted
+            playsInline
+            preload="auto"
+          >
+            <source src="/Landing_Page_video.mp4" type="video/mp4" />
+          </video>
         </div>
       </motion.div>
 
