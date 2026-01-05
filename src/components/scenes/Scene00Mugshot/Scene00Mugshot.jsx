@@ -19,6 +19,7 @@ export default function Page({ backgroundColor, scrollYProgress }) {
     video.setAttribute("playsinline", "");
     video.setAttribute("webkit-playsinline", "");
     video.loop = false;
+    const EDGE_EPS = 0.035;
 
     const tick = (ts) => {
       if (!lastTsRef.current) lastTsRef.current = ts;
@@ -31,16 +32,20 @@ export default function Page({ backgroundColor, scrollYProgress }) {
         return;
       }
 
+      const edge = Math.min(EDGE_EPS, duration * 0.01);
+      const minTime = edge;
+      const maxTime = Math.max(edge, duration - edge);
       let next = video.currentTime + delta * directionRef.current;
-      if (next >= duration) {
-        next = duration;
+      if (next >= maxTime) {
+        next = maxTime;
         directionRef.current = -1;
-      } else if (next <= 0) {
-        next = 0;
+      } else if (next <= minTime) {
+        next = minTime;
         directionRef.current = 1;
       }
 
       video.currentTime = next;
+      if (video.paused) video.play().catch(() => {});
       rafRef.current = requestAnimationFrame(tick);
     };
 
@@ -61,15 +66,37 @@ export default function Page({ backgroundColor, scrollYProgress }) {
 
     const ensurePlaying = () => {
       if (video.paused) video.play().catch(() => {});
+      if (!rafRef.current && video.duration) {
+        lastTsRef.current = null;
+        rafRef.current = requestAnimationFrame(tick);
+      }
+      const duration = video.duration || 0;
+      if (duration) {
+        const edge = Math.min(EDGE_EPS, duration * 0.01);
+        if (video.currentTime >= duration - edge) {
+          video.currentTime = duration - edge;
+          directionRef.current = -1;
+        } else if (video.currentTime <= edge) {
+          video.currentTime = edge;
+          directionRef.current = 1;
+        }
+      }
     };
 
     video.addEventListener("loadedmetadata", start);
     video.addEventListener("loadeddata", start);
+    video.addEventListener("ended", ensurePlaying);
+    video.addEventListener("pause", ensurePlaying);
     document.addEventListener("visibilitychange", ensurePlaying);
+    window.addEventListener("focus", ensurePlaying);
+    if (video.readyState >= 1) start();
     return () => {
       video.removeEventListener("loadedmetadata", start);
       video.removeEventListener("loadeddata", start);
+      video.removeEventListener("ended", ensurePlaying);
+      video.removeEventListener("pause", ensurePlaying);
       document.removeEventListener("visibilitychange", ensurePlaying);
+      window.removeEventListener("focus", ensurePlaying);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
   }, []);
