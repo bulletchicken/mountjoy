@@ -20,7 +20,7 @@ export default function CautionTape() {
   });
 
   const tape1Range = isSmallScreen ? [0, 0.9] : [0, 1];
-  const tape2Range = isSmallScreen ? [0, 0.5] : [0, 0.6];
+  const tape2Range = isSmallScreen ? [0, 0.6] : [0, 0.7];
   const tape3Range = isSmallScreen ? [0.3, 1] : [0.3, 0.8];
 
   const tape1X = useTransform(scrollYProgress, tape1Range, ["-100%", "0%"]);
