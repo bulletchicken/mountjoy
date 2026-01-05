@@ -118,5 +118,16 @@
   }
   body {
     @apply bg-background text-foreground;
+    overflow-x: hidden;
   }
+}
+
+.boomerang-video::-webkit-media-controls,
+.boomerang-video::-webkit-media-controls-start-playback-button,
+.boomerang-video::-webkit-media-controls-play-button,
+.boomerang-video::-webkit-media-controls-overlay-play-button,
+.boomerang-video::-webkit-media-controls-panel,
+.boomerang-video::-webkit-media-controls-enclosure {
+  display: none !important;
+  -webkit-appearance: none;
 }

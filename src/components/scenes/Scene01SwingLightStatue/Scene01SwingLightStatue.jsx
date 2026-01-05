@@ -37,6 +37,7 @@ const LAYER_ANCHORS = {
     },
   },
 };
+const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
 export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
   const hostRef = useRef(null);
@@ -121,6 +122,11 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
 
   const swingDeg = 24;
   const swingDur = "2.4s";
+  const layoutScale = useMemo(() => {
+    const ref = { w: 1200, h: 800 };
+    const scale = Math.min(ref.w / size.w, ref.h / size.h);
+    return clamp(scale, 0.72, 1.08);
+  }, [size.h, size.w]);
   const layout = useMemo(() => {
     const vbPad = 0;
     const viewBox = `0 0 ${size.w + vbPad * 2} ${size.h + vbPad * 2}`;
@@ -243,6 +249,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
     const isSm = size.w < 640;
     const scaleOverride =
       isSm && item.scaleSm != null ? item.scaleSm : item.scale ?? 1;
+    const combinedScale = scaleOverride * layoutScale;
     const itemOffsetX =
       isSm && item.offsetXSm != null ? item.offsetXSm : item.offsetX || 0;
     const itemOffsetY =
@@ -251,13 +258,21 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
     const widthPx = Math.min(size.w * width, maxWidth ?? Infinity);
     const aspectRatio = anchor.svg.aspectRatio ?? item.width / item.height;
     const heightPx = widthPx / aspectRatio;
-    const scaledWidth = widthPx * scaleOverride;
-    const scaledHeight = heightPx * scaleOverride;
+    const scaledWidth = widthPx * combinedScale;
+    const scaledHeight = heightPx * combinedScale;
     const frameOffsetX = (widthPx - scaledWidth) / 2;
     const frameOffsetY = (heightPx - scaledHeight) / 2;
     return {
-      x: size.w * x + widthPx * alignX + frameOffsetX + itemOffsetX,
-      y: size.h * y + heightPx * alignY + frameOffsetY + itemOffsetY,
+      x:
+        size.w * x +
+        widthPx * alignX +
+        frameOffsetX +
+        itemOffsetX * layoutScale,
+      y:
+        size.h * y +
+        heightPx * alignY +
+        frameOffsetY +
+        itemOffsetY * layoutScale,
       width: scaledWidth,
       height: scaledHeight,
     };
@@ -439,7 +454,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
           </div>
         ) : null}
         {/* Blur overlays with radial masks: edge vignette + focus around title */}
-        <div className="pointer-events-none absolute inset-0 z-50 [backdrop-filter:blur(10px)] [mask-image:radial-gradient(ellipse_at_center,transparent_18%,black)]" />
+        <div className="pointer-events-none absolute inset-0 z-50 [backdrop-filter:blur(10px)] [mask-image:radial-gradient(ellipse_at_center,transparent_18%,black)] max-sm:[backdrop-filter:none]" />
         <motion.div
           style={{ y: statueY }}
           className="pointer-events-none absolute left-[20%] top-[40%] z-50 max-w-[420px] font-mono mix-blend-difference text-white"

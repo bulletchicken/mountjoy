@@ -13,6 +13,13 @@ export default function Page({ backgroundColor, scrollYProgress }) {
     const video = videoRef.current;
     if (!video) return;
 
+    video.muted = true;
+    video.playsInline = true;
+    video.setAttribute("muted", "");
+    video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "");
+    video.loop = false;
+
     const tick = (ts) => {
       if (!lastTsRef.current) lastTsRef.current = ts;
       const delta = (ts - lastTsRef.current) / 1000;
@@ -38,26 +45,38 @@ export default function Page({ backgroundColor, scrollYProgress }) {
     };
 
     const start = () => {
-      video
-        .play()
-        .catch(() => {})
-        .finally(() => {
-          video.pause();
+      if (rafRef.current) return;
+      video.playbackRate = 0.001;
+      const playPromise = video.play();
+      if (playPromise && typeof playPromise.catch === "function") {
+        playPromise.catch(() => {}).finally(() => {
           lastTsRef.current = null;
           rafRef.current = requestAnimationFrame(tick);
         });
+      } else {
+        lastTsRef.current = null;
+        rafRef.current = requestAnimationFrame(tick);
+      }
+    };
+
+    const ensurePlaying = () => {
+      if (video.paused) video.play().catch(() => {});
     };
 
     video.addEventListener("loadedmetadata", start);
+    video.addEventListener("loadeddata", start);
+    document.addEventListener("visibilitychange", ensurePlaying);
     return () => {
       video.removeEventListener("loadedmetadata", start);
+      video.removeEventListener("loadeddata", start);
+      document.removeEventListener("visibilitychange", ensurePlaying);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
   }, []);
 
   return (
     <motion.div
-      className="relative h-[150vh] w-full"
+      className="relative h-[150vh] w-full overflow-x-hidden"
       style={{ backgroundColor }}
     >
       {/* radial blur effect */}
@@ -70,11 +89,14 @@ export default function Page({ backgroundColor, scrollYProgress }) {
         <div className="mx-auto flex w-full justify-center overflow-visible">
           <video
             ref={videoRef}
-            className="aspect-[3/2] min-h-[125vh] shrink-0 w-[235vw] object-contain object-bottom sm:w-[170vw] md:w-[130vw] lg:w-[100vw] xl:w-[90vw] 2xl:w-[60vw] max-w-none"
+            className="boomerang-video aspect-[3/2] min-h-[125vh] shrink-0 w-[235vw] object-contain object-bottom sm:w-[170vw] md:w-[130vw] lg:w-[100vw] xl:w-[90vw] 2xl:w-[60vw] max-w-none"
             autoPlay
             muted
             playsInline
             preload="auto"
+            controls={false}
+            disablePictureInPicture
+            controlsList="nodownload noplaybackrate noremoteplayback"
           >
             <source src="/Landing_Page_video.mp4" type="video/mp4" />
           </video>
