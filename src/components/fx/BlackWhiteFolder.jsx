@@ -6,6 +6,7 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
   {
     label,
     children,
+    footerLines = [],
     paperRotation = "0deg",
     paperOffsetX = 0,
     folderRotation = "0deg",
@@ -54,6 +55,29 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
   const paperTwoPosition = isFlipped ? "right-10 left-4" : "left-10 right-4";
   const paperOneRotation = isFlipped ? "rotate-[2deg]" : "rotate-[-2deg]";
   const paperTwoRotation = isFlipped ? "rotate-[-1.5deg]" : "rotate-[1.5deg]";
+  const resolvedFooterLines = footerLines.slice(0, 3);
+  while (resolvedFooterLines.length < 3) {
+    resolvedFooterLines.push("");
+  }
+
+  const footerLineMarkup = (
+    <div
+      className="absolute bottom-8 left-8 right-8 text-[0.85rem] tracking-[0.12em] text-black"
+      style={{
+        fontFamily:
+          '"Chalkboard", "Chalkboard SE", "Marker Felt", "Noteworthy", "Segoe Print", "Bradley Hand", "Comic Sans MS", cursive',
+      }}
+    >
+      {resolvedFooterLines.map((line, index) => (
+        <div
+          key={`${line}-${index}`}
+          className={`${index === 0 ? "" : "mt-3"} border-b-2 border-black pb-2`}
+        >
+          {line}
+        </div>
+      ))}
+    </div>
+  );
 
   const tabMarkup = (
     <div
@@ -69,7 +93,7 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
           : "z-10"
       }`}
     >
-      <div className="absolute inset-0 flex items-center justify-center font-mono text-2xl uppercase">
+      <div className="absolute inset-0 flex items-center justify-center font-mono text-2xl font-bold uppercase">
         <span className="[writing-mode:vertical-rl] scale-x-90">{label}</span>
       </div>
     </div>
@@ -138,7 +162,7 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
                       : "-left-full rounded-tl-[16px] rounded-bl-[16px] border-r-0"
                   }`}
                 >
-                  <div className="absolute bottom-8 left-8 right-8 border-t-2 border-black pt-3 font-mono text-xs uppercase tracking-[0.35em] text-black"></div>
+                  {footerLineMarkup}
                 </div>
               ) : null}
               <div
@@ -147,11 +171,11 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
                   isOpen
                     ? isFlipped
                       ? "z-10 rounded-tl-[16px] rounded-bl-[16px] border-r-0"
-                      : "z-10 rounded-tr-[16px] rounded-br-[16px] border-l-0"
-                    : "z-30 rounded-tl-[16px] rounded-tr-[16px] rounded-bl-[16px] rounded-br-[16px]"
+                    : "z-10 rounded-tr-[16px] rounded-br-[16px] border-l-0"
+                  : "z-30 rounded-tl-[16px] rounded-tr-[16px] rounded-bl-[16px] rounded-br-[16px]"
                 }`}
               >
-                <div className="absolute bottom-8 left-8 right-8 border-t-2 border-black pt-3 font-mono text-xs uppercase tracking-[0.35em] text-black"></div>
+                {footerLineMarkup}
               </div>
               {isOpen ? (
                 <div

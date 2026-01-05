@@ -14,6 +14,11 @@ export default function Scene03Files() {
             label: "TED",
             folderRotation: "-2deg",
             paperRotation: "2deg",
+            footerLines: [
+              "AI teddy bear for sweet grandmas",
+              "Healthcare companion teddy bear",
+              "Funding: 6.67k",
+            ],
           }}
           media={
             <div className="rotate-2">
@@ -37,6 +42,11 @@ export default function Scene03Files() {
             tabSide: "left",
             folderRotation: "2deg",
             paperRotation: "-2deg",
+            footerLines: [
+              "Waterloo Hot or Not",
+              "Viral app for UW students",
+              "300k users",
+            ],
           }}
           media={
             <div className="pizza-wrap">
