@@ -454,7 +454,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
           </div>
         ) : null}
         {/* Blur overlays with radial masks: edge vignette + focus around title */}
-        <div className="pointer-events-none absolute inset-0 z-50 [backdrop-filter:blur(10px)] [mask-image:radial-gradient(ellipse_at_center,transparent_18%,black)] max-sm:[backdrop-filter:none]" />
+        {/* <div className="pointer-events-none absolute inset-0 z-50 [backdrop-filter:blur(10px)] [mask-image:radial-gradient(ellipse_at_center,transparent_18%,black)] max-sm:[backdrop-filter:none]" /> */}
         <motion.div
           style={{ y: statueY }}
           className="pointer-events-none absolute left-[20%] top-[40%] z-50 max-w-[420px] font-mono mix-blend-difference text-white"

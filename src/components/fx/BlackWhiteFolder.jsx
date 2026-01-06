@@ -37,9 +37,16 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
       setInternalOpen(false);
     }
   };
+  const handleToggle = () => {
+    if (isOpen) {
+      handleClose();
+    } else {
+      handleOpen();
+    }
+  };
 
   const positionClass = isOpen
-    ? "relative z-40"
+    ? "relative z-40 cursor-pointer"
     : "relative cursor-pointer";
 
   const stackRotation = paperRotation;
@@ -135,11 +142,11 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
       aria-label={`${label || "Case file"} folder`}
       onPointerEnter={() => setIsHovered(true)}
       onPointerLeave={() => setIsHovered(false)}
-      onClick={handleOpen}
+      onClick={handleToggle}
       onKeyDown={(event) => {
         if (event.key === "Enter" || event.key === " ") {
           event.preventDefault();
-          handleOpen();
+          handleToggle();
         }
       }}
     >
@@ -185,19 +192,7 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
                 ></div>
               ) : null}
               {paperStack}
-              {isOpen ? (
-                <button
-                  type="button"
-                  className="absolute bottom-6 left-1/2 z-40 -translate-x-1/2 rounded-full border-2 border-black bg-white px-6 py-2 font-mono text-xs uppercase tracking-[0.25em]"
-                  aria-label="Close folder"
-                  onClick={(event) => {
-                    event.stopPropagation();
-                    handleClose();
-                  }}
-                >
-                  Close
-                </button>
-              ) : null}
+              {isOpen ? null : null}
             </div>
             {tabMarkup}
           </div>
