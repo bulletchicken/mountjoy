@@ -237,7 +237,7 @@ export default function Scene02Corkboard() {
           <div className="relative mx-auto flex w-full max-w-3xl flex-wrap items-center justify-center gap-10 min-h-[320px]">
             <div
               ref={shopifyRef}
-              className="absolute left-[10%] -top-5 w-full max-w-[220px] transition-transform duration-200 hover:scale-[1.02]"
+              className="absolute left-[60%] top-20 z-10 w-full max-w-[220px] transition-transform duration-200 hover:scale-[1.02]"
             >
               <Image
                 src="/shopify_sticky.png"
@@ -246,6 +246,22 @@ export default function Scene02Corkboard() {
                 height={2360}
                 className="h-auto w-full drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
               />
+            </div>
+            <div className="absolute left-[-2%] top-[120px] -rotate-1 z-0">
+              <div className="relative">
+                <Polaroid
+                  src="/title_photo.png"
+                  alt="Polaroid work snapshot"
+                  sizeClass="w-44 sm:w-52"
+                  imageClass="w-32 h-40 sm:w-40 sm:h-48"
+                  className="drop-shadow-[0_2px_6px_rgba(0,0,0,0.25)]"
+                />
+                <div className="absolute top-4 left-1/2 z-10 -translate-x-1/2">
+                  <div className="relative h-4 w-4 rounded-full border border-neutral-500 bg-neutral-300">
+                    <div className="absolute left-[3px] top-[3px] h-2 w-2 rounded-full bg-neutral-100" />
+                  </div>
+                </div>
+              </div>
             </div>
             <div className="absolute left-[30%] -top-5 w-[280px] shrink-0 -rotate-3">
               <Image
@@ -258,7 +274,7 @@ export default function Scene02Corkboard() {
             </div>
             <div
               ref={quantoRef}
-              className="absolute left-[60%] top-20 w-[200px] shrink-0 -rotate-10 scale-[1.1] transition-transform duration-200 hover:scale-[1.13]"
+              className="absolute left-[10%] -top-5 z-10 w-[200px] shrink-0 -rotate-10 scale-[1.1] transition-transform duration-200 hover:scale-[1.13]"
             >
               <Image
                 src="/quanto_sticky.png"
