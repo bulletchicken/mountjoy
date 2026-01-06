@@ -234,7 +234,7 @@ export default function Scene02Corkboard() {
           </div>
         </div>
         <div className="relative w-full min-h-[320px] overflow-visible">
-          <div className="relative mx-auto flex w-full max-w-3xl flex-wrap items-center justify-center gap-10 min-h-[520px] overflow-visible translate-y-[80px]">
+          <div className="relative mx-auto flex w-full max-w-3xl flex-wrap items-center justify-center gap-10 min-h-[520px] overflow-visible">
             <div
               ref={shopifyRef}
               className="absolute left-[60%] top-[300px] z-10 w-full max-w-[220px] transition-transform duration-200 hover:scale-[1.02]"
@@ -263,7 +263,7 @@ export default function Scene02Corkboard() {
                 </div>
               </div>
             </div>
-            <div className="absolute left-[30%] top-[-140px] w-[280px] shrink-0 -rotate-3">
+            <div className="absolute left-[78%] top-[300px] w-[280px] shrink-0 -rotate-3 z-10">
               <Image
                 src="/shopee_sticker.png"
                 alt="Shopee sticker"
