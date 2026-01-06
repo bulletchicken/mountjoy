@@ -51,7 +51,7 @@ export default function Page({ backgroundColor, scrollYProgress }) {
 
     const start = () => {
       if (rafRef.current) return;
-      video.playbackRate = 0.001;
+      video.playbackRate = 0.5;
       const playPromise = video.play();
       if (playPromise && typeof playPromise.catch === "function") {
         playPromise.catch(() => {}).finally(() => {

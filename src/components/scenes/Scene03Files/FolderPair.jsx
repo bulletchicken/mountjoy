@@ -6,6 +6,7 @@ import BlackWhiteFolder from "@/components/fx/BlackWhiteFolder.jsx";
 export default function FolderPair({
   folderProps,
   media,
+  folderContent,
   reverse = false,
   centerOffsetX = 0,
   spineSide = "left",
@@ -77,7 +78,9 @@ export default function FolderPair({
           setOffset({ x: 0, y: 0 });
         }}
         {...folderProps}
-      />
+      >
+        {folderContent}
+      </BlackWhiteFolder>
     </div>
   );
 

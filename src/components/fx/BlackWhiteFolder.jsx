@@ -67,6 +67,42 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
     resolvedFooterLines.push("");
   }
 
+  const defaultReport = (
+    <div className="h-full w-full border-2 border-black bg-white text-[0.58rem] uppercase tracking-[0.18em] text-black">
+      <div className="grid h-full grid-rows-[auto_auto_auto_1fr_auto_auto]">
+        <div className="grid grid-cols-2 border-b-2 border-black">
+          <div className="border-r-2 border-black p-2">Name:</div>
+          <div className="p-2">Age:</div>
+        </div>
+        <div className="grid grid-cols-2 border-b-2 border-black">
+          <div className="border-r-2 border-black p-2">Birthplace:</div>
+          <div className="p-2">Current residence:</div>
+        </div>
+        <div className="grid grid-cols-2 border-b-2 border-black">
+          <div className="border-r-2 border-black p-2">Hair color:</div>
+          <div className="p-2">Eye color:</div>
+        </div>
+        <div className="grid min-h-0 grid-cols-[0.38fr_0.62fr] border-b-2 border-black">
+          <div className="grid grid-rows-[auto_auto_auto_1fr] border-r-2 border-black">
+            <div className="grid grid-cols-2 gap-2 border-b-2 border-black p-2">
+              <div className="h-16 w-full border-2 border-black" />
+              <div className="h-16 w-full border-2 border-black" />
+            </div>
+            <div className="border-b-2 border-black p-2">Height:</div>
+            <div className="border-b-2 border-black p-2">Weight:</div>
+            <div className="p-2">What it does:</div>
+          </div>
+          <div className="grid grid-rows-[auto_1fr] p-2">
+            <div className="mb-2 h-24 w-full border-2 border-black" />
+            <div>Skills / abilities:</div>
+          </div>
+        </div>
+        <div className="border-b-2 border-black p-2">Biography:</div>
+        <div className="p-2">Notes:</div>
+      </div>
+    </div>
+  );
+
   const footerLineMarkup = (
     <div
       className="absolute bottom-8 left-8 right-8 text-[0.85rem] tracking-[0.12em] text-black"
@@ -124,7 +160,9 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
             className={`absolute top-0 h-[98%] rounded-[10px] border-2 border-black bg-white ${paperTwoPosition} ${paperTwoRotation}`}
           >
             {isOpen ? (
-              <div className="report h-full w-full p-4">{children}</div>
+              <div className="report h-full w-full p-4">
+                {children || defaultReport}
+              </div>
             ) : null}
           </div>
         </div>

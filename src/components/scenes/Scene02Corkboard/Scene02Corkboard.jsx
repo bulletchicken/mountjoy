@@ -247,7 +247,7 @@ export default function Scene02Corkboard() {
                 className="h-auto w-full drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
               />
             </div>
-            <div className="absolute left-[-2%] top-0 -rotate-1 z-0">
+            <div className="absolute left-[-2%] top-0 -rotate-1 z-0 transition-transform duration-200 hover:scale-[1.02]">
               <div className="relative">
                 <Polaroid
                   src="/title_photo.png"
