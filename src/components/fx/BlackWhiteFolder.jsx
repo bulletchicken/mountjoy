@@ -169,7 +169,7 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
                       : "-left-full rounded-tl-[16px] rounded-bl-[16px] border-r-0"
                   }`}
                 >
-                  {footerLineMarkup}
+                  {!isOpen ? footerLineMarkup : null}
                 </div>
               ) : null}
               <div
@@ -182,7 +182,7 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
                   : "z-30 rounded-tl-[16px] rounded-tr-[16px] rounded-bl-[16px] rounded-br-[16px]"
                 }`}
               >
-                {footerLineMarkup}
+                {!isOpen ? footerLineMarkup : null}
               </div>
               {isOpen ? (
                 <div

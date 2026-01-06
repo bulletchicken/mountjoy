@@ -29,8 +29,8 @@ export default function Scene02Corkboard() {
       { from: "waterloo-news", to: "waterloo-sticky", sag: 56 },
       { from: "waterloo-sticky", to: "waterloo-syde", sag: 56 },
       { from: "waterloo-syde", to: "waterloo-polaroids", sag: 56 },
-      { from: "waterloo-polaroids", to: "shopify-top", sag: 56 },
-      { from: "shopify-top", to: "quanto-top", sag: 40 },
+      { from: "waterloo-polaroids", to: "quanto-top", sag: 56 },
+      { from: "quanto-top", to: "shopify-top", sag: 40 },
     ],
     [],
   );
@@ -281,6 +281,15 @@ export default function Scene02Corkboard() {
                 alt="Quanto Sticky"
                 width={1000}
                 height={1000}
+                className="h-auto w-full drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
+              />
+            </div>
+            <div className="absolute left-[28%] top-[90px] -rotate-2 w-[min(80vw,700px)] max-w-none z-0 transition-transform duration-200 hover:scale-[1.02]">
+              <Image
+                src="/quanto_news.png"
+                alt="Quanto news"
+                width={2048}
+                height={2048}
                 className="h-auto w-full drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
               />
             </div>
