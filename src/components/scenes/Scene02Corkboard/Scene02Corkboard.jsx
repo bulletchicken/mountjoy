@@ -202,7 +202,7 @@ export default function Scene02Corkboard() {
           </div>
           <div
             ref={waterlooPolaroidsRef}
-            className="absolute left-[65%] top-60 w-[min(70vw,420px)] max-w-none z-10 transition-transform duration-200 hover:scale-[1.02]"
+            className="absolute left-[65%] top-48 w-[min(70vw,420px)] max-w-none z-10 transition-transform duration-200 hover:scale-[1.02]"
           >
             <div className="relative w-full">
               <div className="absolute left-2 top-16 -rotate-8 z-0">
@@ -233,11 +233,11 @@ export default function Scene02Corkboard() {
             </div>
           </div>
         </div>
-        <div className="relative w-full min-h-[320px]">
-          <div className="relative mx-auto flex w-full max-w-3xl flex-wrap items-center justify-center gap-10 min-h-[320px]">
+        <div className="relative w-full min-h-[320px] overflow-visible">
+          <div className="relative mx-auto flex w-full max-w-3xl flex-wrap items-center justify-center gap-10 min-h-[520px] overflow-visible translate-y-[80px]">
             <div
               ref={shopifyRef}
-              className="absolute left-[60%] top-20 z-10 w-full max-w-[220px] transition-transform duration-200 hover:scale-[1.02]"
+              className="absolute left-[60%] top-[300px] z-10 w-full max-w-[220px] transition-transform duration-200 hover:scale-[1.02]"
             >
               <Image
                 src="/shopify_sticky.png"
@@ -247,7 +247,7 @@ export default function Scene02Corkboard() {
                 className="h-auto w-full drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
               />
             </div>
-            <div className="absolute left-[-2%] top-[120px] -rotate-1 z-0">
+            <div className="absolute left-[-2%] top-0 -rotate-1 z-0">
               <div className="relative">
                 <Polaroid
                   src="/title_photo.png"
@@ -263,7 +263,7 @@ export default function Scene02Corkboard() {
                 </div>
               </div>
             </div>
-            <div className="absolute left-[30%] -top-5 w-[280px] shrink-0 -rotate-3">
+            <div className="absolute left-[30%] top-[-140px] w-[280px] shrink-0 -rotate-3">
               <Image
                 src="/shopee_sticker.png"
                 alt="Shopee sticker"
@@ -274,7 +274,7 @@ export default function Scene02Corkboard() {
             </div>
             <div
               ref={quantoRef}
-              className="absolute left-[10%] -top-5 z-10 w-[200px] shrink-0 -rotate-10 scale-[1.1] transition-transform duration-200 hover:scale-[1.13]"
+              className="absolute left-[10%] top-[-80px] z-10 w-[200px] shrink-0 -rotate-10 scale-[1.1] transition-transform duration-200 hover:scale-[1.13]"
             >
               <Image
                 src="/quanto_sticky.png"
@@ -284,7 +284,7 @@ export default function Scene02Corkboard() {
                 className="h-auto w-full drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
               />
             </div>
-            <div className="absolute left-[28%] top-[90px] -rotate-2 w-[min(80vw,700px)] max-w-none z-0 transition-transform duration-200 hover:scale-[1.02]">
+            <div className="absolute left-[28%] top-[40px] -rotate-2 w-[min(80vw,700px)] max-w-none z-0 transition-transform duration-200 hover:scale-[1.02]">
               <Image
                 src="/quanto_news.png"
                 alt="Quanto news"
