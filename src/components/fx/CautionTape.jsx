@@ -40,7 +40,7 @@ export default function CautionTape() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full h-[60vh] overflow-hidden pointer-events-none -mt-25"
+      className="relative w-full h-[60vh] overflow-hidden pointer-events-none -mt-25 mb-12"
     >
       {/* Clip layer so huge/rotated absolute elements never create horizontal scroll */}
       <div className="inset-0 overflow-hidden">
