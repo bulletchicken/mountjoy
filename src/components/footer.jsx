@@ -1,6 +1,7 @@
 "use client";
 
 import { Linkedin, Github, Mail, CodeXml } from "lucide-react";
+import { DitherShader } from "@/components/ui/dither-shader";
 
 export default function Footer() {
   const links = [
@@ -27,7 +28,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="w-full pt-20 pb-10 text-center font-mono text-xs uppercase tracking-[0.3em] text-black">
+    <footer className="w-full pt-20 pb-0 text-center font-mono text-xs uppercase tracking-[0.3em] text-black">
       <div className="flex flex-col items-center justify-center gap-10">
         <span>Designed and executed by Jeremy Su</span>
         <div className="flex items-center gap-6">
@@ -44,6 +45,16 @@ export default function Footer() {
             </a>
           ))}
         </div>
+      </div>
+      <div className="mt-12 w-full -translate-y-4">
+        <DitherShader
+          src="/toronto-skyline.webp"
+          colorMode="grayscale"
+          gridSize={1}
+          threshold={0.55}
+          objectFit="cover"
+          className="h-[140px] w-full sm:h-[180px] md:h-[220px]"
+        />
       </div>
     </footer>
   );

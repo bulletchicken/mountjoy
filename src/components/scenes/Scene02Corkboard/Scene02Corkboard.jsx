@@ -202,7 +202,7 @@ export default function Scene02Corkboard() {
           </div>
           <div
             ref={waterlooPolaroidsRef}
-            className="absolute left-[65%] top-48 w-[min(70vw,420px)] max-w-none z-10 transition-transform duration-200 hover:scale-[1.02]"
+            className="absolute left-[68%] top-48 w-[min(70vw,420px)] max-w-none z-10 transition-transform duration-200 hover:scale-[1.02]"
           >
             <div className="relative w-full">
               <div className="absolute left-2 top-16 -rotate-8 z-0">
@@ -234,64 +234,70 @@ export default function Scene02Corkboard() {
           </div>
         </div>
         <div className="relative w-full min-h-[320px] overflow-visible">
-          <div className="relative mx-auto flex w-full max-w-3xl flex-wrap items-center justify-center gap-10 min-h-[520px] overflow-visible">
-            <div
-              ref={shopifyRef}
-              className="absolute left-[60%] top-[300px] z-10 w-full max-w-[220px] transition-transform duration-200 hover:scale-[1.02]"
-            >
-              <Image
-                src="/shopify_sticky.png"
-                alt="Shopify sticker"
-                width={1640}
-                height={2360}
-                className="h-auto w-full drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
-              />
-            </div>
-            <div className="absolute left-[-8%] top-0 -rotate-1 z-0 transition-transform duration-200 hover:scale-[1.02]">
-              <div className="relative">
-                <Polaroid
-                  src="/title_photo.png"
-                  alt="Polaroid work snapshot"
-                  sizeClass="w-44 sm:w-52"
-                  imageClass="w-32 h-40 sm:w-40 sm:h-48"
-                  className="drop-shadow-[0_2px_6px_rgba(0,0,0,0.25)]"
-                />
-                <div className="absolute top-4 left-1/2 z-10 -translate-x-1/2">
-                  <div className="relative h-4 w-4 rounded-full border border-neutral-500 bg-neutral-300">
-                    <div className="absolute left-[3px] top-[3px] h-2 w-2 rounded-full bg-neutral-100" />
+          <div className="relative mx-auto flex w-full max-w-3xl flex-col items-center gap-28 min-h-[720px] overflow-visible -translate-y-[160px]">
+            <div className="relative w-full min-h-[420px] overflow-visible">
+              <div className="absolute left-[-12%] top-[40px] w-[min(70vw,620px)] max-w-none">
+                <div className="relative w-full">
+                  <Image
+                    src="/quanto_news.png"
+                    alt="Quanto news"
+                    width={2048}
+                    height={2048}
+                    className="h-auto w-full drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
+                  />
+                  <div className="absolute -left-6 bottom-[-50%] z-10 -rotate-1 transition-transform duration-200 hover:scale-[1.02]">
+                    <div className="relative">
+                      <Polaroid
+                        src="/quanto_selfie.jpeg"
+                        alt="Polaroid work snapshot"
+                        sizeClass="w-44 sm:w-52"
+                        imageClass="w-32 h-40 sm:w-40 sm:h-48"
+                        className="drop-shadow-[0_2px_6px_rgba(0,0,0,0.25)]"
+                      />
+                      <div className="absolute top-4 left-1/2 z-10 -translate-x-1/2">
+                        <div className="relative h-4 w-4 rounded-full border border-neutral-500 bg-neutral-300">
+                          <div className="absolute left-[3px] top-[3px] h-2 w-2 rounded-full bg-neutral-100" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    ref={quantoRef}
+                    className="absolute right-6 bottom-[-6%] z-10 w-[200px] -rotate-10 scale-[1.1] transition-transform duration-200 hover:scale-[1.13]"
+                  >
+                    <Image
+                      src="/quanto_sticky.png"
+                      alt="Quanto Sticky"
+                      width={1000}
+                      height={1000}
+                      className="h-auto w-full drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
+                    />
                   </div>
                 </div>
               </div>
             </div>
-            <div className="absolute left-[78%] top-[300px] w-[280px] shrink-0 -rotate-3 z-10">
-              <Image
-                src="/shopee_sticker.png"
-                alt="Shopee sticker"
-                width={2048}
-                height={2048}
-                className="h-auto w-full drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
-              />
-            </div>
-            <div
-              ref={quantoRef}
-              className="absolute left-[10%] top-[-80px] z-10 w-[200px] shrink-0 -rotate-10 scale-[1.1] transition-transform duration-200 hover:scale-[1.13]"
-            >
-              <Image
-                src="/quanto_sticky.png"
-                alt="Quanto Sticky"
-                width={1000}
-                height={1000}
-                className="h-auto w-full drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
-              />
-            </div>
-            <div className="absolute left-[28%] top-[40px] -rotate-2 w-[min(80vw,700px)] max-w-none z-0 transition-transform duration-200 hover:scale-[1.02]">
-              <Image
-                src="/quanto_news.png"
-                alt="Quanto news"
-                width={2048}
-                height={2048}
-                className="h-auto w-full drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
-              />
+            <div className="relative w-full min-h-[220px] overflow-visible">
+              <div
+                ref={shopifyRef}
+                className="absolute left-[70%] top-[60px] z-10 w-full max-w-[220px] transition-transform duration-200 hover:scale-[1.02]"
+              >
+                <Image
+                  src="/shopify_sticky.png"
+                  alt="Shopify sticker"
+                  width={1640}
+                  height={2360}
+                  className="h-auto w-full drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
+                />
+              </div>
+              <div className="absolute left-[84%] top-[60px] w-[260px] shrink-0 -rotate-3 z-10">
+                <Image
+                  src="/shopee_sticker.png"
+                  alt="Shopee sticker"
+                  width={2048}
+                  height={2048}
+                  className="h-auto w-full drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
+                />
+              </div>
             </div>
           </div>
         </div>
