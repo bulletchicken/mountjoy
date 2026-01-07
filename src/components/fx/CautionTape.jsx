@@ -67,7 +67,7 @@ export default function CautionTape() {
         {/* Third Caution Tape */}
         <motion.div
           style={{ x: tape3X, willChange: "transform" }}
-          className="absolute top-[30%] xl:top-[5%] 2xl:top-[-40%] left-0 w-[350vw] bg-white min-h-[5vh] py-8 flex items-center justify-start text-center overflow-hidden text-3xl 2xl:min-h-[9vh] 2xl:py-12 2xl:text-5xl border-4 border-black rotate-[-2deg] xl:rotate-[-8deg] 2xl:rotate-[-10deg] z-0"
+          className="absolute top-[46%] xl:top-[22%] 2xl:top-[-12%] left-0 w-[350vw] bg-white min-h-[5vh] py-8 flex items-center justify-start text-center overflow-hidden text-3xl 2xl:min-h-[9vh] 2xl:py-12 2xl:text-5xl border-4 border-black rotate-[-0.5deg] xl:rotate-[-2deg] 2xl:rotate-[-3deg] z-0"
         >
           <div className="flex">
             <TapeContent count={48} />
