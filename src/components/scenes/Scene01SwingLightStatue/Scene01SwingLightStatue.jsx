@@ -1,7 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
+import {
+  motion,
+  useAnimationFrame,
+  useMotionValue,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import { useLayoutEffect, useMemo, useRef, useState } from "react";
 
 const serifTypeStyles = {
@@ -42,6 +48,8 @@ const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
   const hostRef = useRef(null);
   const containerRef = useRef(null);
+  const swingMaskRef = useRef(null);
+  const swingGroupRef = useRef(null);
   const [size, setSize] = useState({ w: 1200, h: 800 });
 
   useLayoutEffect(() => {
@@ -122,6 +130,20 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
 
   const swingDeg = 24;
   const swingDur = "2.4s";
+  const swing = useMotionValue(0);
+  useAnimationFrame((time) => {
+    const period = 2.4;
+    const angle =
+      Math.sin((time / 1000) * ((2 * Math.PI) / period)) * swingDeg;
+    swing.set(angle);
+    const transform = `rotate(${angle} ${beam.pivotX} ${beam.pivotY})`;
+    if (swingMaskRef.current) {
+      swingMaskRef.current.setAttribute("transform", transform);
+    }
+    if (swingGroupRef.current) {
+      swingGroupRef.current.setAttribute("transform", transform);
+    }
+  });
   const layoutScale = useMemo(() => {
     const ref = { w: 1200, h: 800 };
     const scale = Math.min(ref.w / size.w, ref.h / size.h);
@@ -350,34 +372,14 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
         >
           <defs>
             <mask id="beamMask" maskUnits="userSpaceOnUse">
-              <g>
-                <animateTransform
-                  attributeName="transform"
-                  type="rotate"
-                  dur={swingDur}
-                  repeatCount="indefinite"
-                  values={layout.rotValues}
-                  keyTimes="0; 0.5; 1"
-                  calcMode="spline"
-                  keySplines="0.42 0 0.58 1; 0.42 0 0.58 1"
-                />
+              <g ref={swingMaskRef}>
                 <path d={beam.overlayD} fill="white" fillRule="evenodd" />
               </g>
             </mask>
           </defs>
 
           {/* Swinging overlay with hole */}
-          <g>
-            <animateTransform
-              attributeName="transform"
-              type="rotate"
-              dur={swingDur}
-              repeatCount="indefinite"
-              values={layout.rotValues}
-              keyTimes="0; 0.5; 1"
-              calcMode="spline"
-              keySplines="0.42 0 0.58 1; 0.42 0 0.58 1"
-            />
+          <g ref={swingGroupRef}>
             <motion.path
               d={beam.overlayD}
               fillRule="evenodd"

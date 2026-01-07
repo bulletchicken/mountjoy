@@ -334,7 +334,7 @@ export default function Scene02Corkboard() {
                   className="h-auto w-[220px]"
                 />
               </div>
-              <div className="absolute left-[6%] top-[420px] z-10 -rotate-3 w-[140px] transition-transform duration-200 hover:scale-[1.02]">
+              <div className="absolute left-[54%] top-[360px] z-10 -rotate-3 w-[140px] transition-transform duration-200 hover:scale-[1.02]">
                 <Image
                   src="/alicehacks_sticker.png"
                   alt="AliceHacks sticker"
