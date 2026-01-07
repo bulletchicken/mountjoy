@@ -46,14 +46,14 @@ export default function Footer() {
           ))}
         </div>
       </div>
-      <div className="mt-12 w-full -translate-y-4">
+      <div className="mt-12 w-full">
         <DitherShader
           src="/toronto-skyline.webp"
           colorMode="grayscale"
           gridSize={1}
           threshold={0.55}
           objectFit="cover"
-          className="h-[140px] w-full sm:h-[180px] md:h-[220px]"
+          className="h-[320px] w-full sm:h-[360px] md:h-[420px]"
         />
       </div>
     </footer>
