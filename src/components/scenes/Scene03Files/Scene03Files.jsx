@@ -9,106 +9,47 @@ function FolderReport({
   age,
   birthplace,
   residence,
-  hair,
-  eye,
-  height,
-  weight,
   notesSmall,
-  notesLarge,
-  bio,
   skills,
 }) {
   return (
     <div className="h-full w-full border-2 border-black bg-white text-[0.58rem] uppercase tracking-[0.18em] text-black">
-      <div className="grid h-full grid-rows-[auto_auto_auto_1fr_auto_auto]">
-        <div className="grid grid-cols-2 border-b-2 border-black">
-          <div className="border-r-2 border-black p-2">
+      <div className="grid h-full grid-rows-[0.4fr_0.6fr]">
+        <div className="grid min-h-0 grid-cols-[0.4fr_0.6fr] grid-rows-2 border-b-2 border-black">
+          <div className="border-b-2 border-r-2 border-black p-2">
             Name:
             <div className="mt-1 text-[0.6rem] normal-case tracking-[0.08em]">
               {name}
             </div>
           </div>
-          <div className="p-2">
+          <div className="row-span-2 p-2">
+            What it does:
+            <div className="mt-1 text-[0.6rem] normal-case tracking-[0.08em]">
+              {notesSmall}
+            </div>
+            <div className="mt-3">
+              Skills / abilities:
+              <div className="mt-1 text-[0.6rem] normal-case tracking-[0.08em]">
+                {skills}
+              </div>
+            </div>
+            <div className="mt-3">
+              Base:
+              <div className="mt-1 text-[0.6rem] normal-case tracking-[0.08em]">
+                {birthplace} · {residence}
+              </div>
+            </div>
+          </div>
+          <div className="border-r-2 border-black p-2">
             Age:
             <div className="mt-1 text-[0.6rem] normal-case tracking-[0.08em]">
               {age}
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-2 border-b-2 border-black">
-          <div className="border-r-2 border-black p-2">
-            Birthplace:
-            <div className="mt-1 text-[0.6rem] normal-case tracking-[0.08em]">
-              {birthplace}
-            </div>
-          </div>
-          <div className="p-2">
-            Current residence:
-            <div className="mt-1 text-[0.6rem] normal-case tracking-[0.08em]">
-              {residence}
-            </div>
-          </div>
-        </div>
-        <div className="grid grid-cols-2 border-b-2 border-black">
-          <div className="border-r-2 border-black p-2">
-            Hair color:
-            <div className="mt-1 text-[0.6rem] normal-case tracking-[0.08em]">
-              {hair}
-            </div>
-          </div>
-          <div className="p-2">
-            Eye color:
-            <div className="mt-1 text-[0.6rem] normal-case tracking-[0.08em]">
-              {eye}
-            </div>
-          </div>
-        </div>
-        <div className="grid min-h-0 grid-cols-[0.38fr_0.62fr] border-b-2 border-black">
-          <div className="grid grid-rows-[auto_auto_auto_1fr] border-r-2 border-black">
-            <div className="grid grid-cols-2 gap-2 border-b-2 border-black p-2">
-              <div className="h-16 w-full border-2 border-black" />
-              <div className="h-16 w-full border-2 border-black" />
-            </div>
-            <div className="border-b-2 border-black p-2">
-              Height:
-              <div className="mt-1 text-[0.6rem] normal-case tracking-[0.08em]">
-                {height}
-              </div>
-            </div>
-            <div className="border-b-2 border-black p-2">
-              Weight:
-              <div className="mt-1 text-[0.6rem] normal-case tracking-[0.08em]">
-                {weight}
-              </div>
-            </div>
-            <div className="p-2">
-              What it does:
-              <div className="mt-1 text-[0.6rem] normal-case tracking-[0.08em]">
-                {notesSmall}
-              </div>
-            </div>
-          </div>
-          <div className="grid grid-rows-[auto_1fr] p-2">
-            <div className="mb-2 h-24 w-full border-2 border-black" />
-            <div>
-              Skills / abilities:
-              <div className="mt-1 text-[0.6rem] normal-case tracking-[0.08em]">
-                {skills}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="border-b-2 border-black p-2">
-          Biography:
-          <div className="mt-1 text-[0.6rem] normal-case tracking-[0.08em]">
-            {bio}
-          </div>
-        </div>
-        <div className="p-2">
+        <div className="flex h-full flex-col p-2">
           Notes:
-          <div className="mt-1 text-[0.6rem] normal-case tracking-[0.08em]">
-            {notesLarge}
-          </div>
+          <div className="mt-2 flex-1 border-2 border-black" />
         </div>
       </div>
     </div>
@@ -142,8 +83,6 @@ export default function Scene03Files() {
               height="24 in"
               weight="3 lb"
               notesSmall="Grandma-safe"
-              notesLarge="Soft voice, calm prompts"
-              bio="Comfort companion for seniors"
               skills="Check-ins · med reminders"
             />
           }
@@ -186,8 +125,6 @@ export default function Scene03Files() {
               height="App"
               weight="Feather"
               notesSmall="Swipe-based"
-              notesLarge="Anonymous ranking, 300k users"
-              bio="Campus matchmaking experiment"
               skills="Virality · social loops"
             />
           }

@@ -10,6 +10,7 @@ export default function Scene02Corkboard() {
   const waterlooStickyRef = useRef(null);
   const waterlooSydeRef = useRef(null);
   const shopifyRef = useRef(null);
+  const htnRef = useRef(null);
   const quantoRef = useRef(null);
   const alicehacksRef = useRef(null);
   const waterlooNewsRef = useRef(null);
@@ -21,6 +22,7 @@ export default function Scene02Corkboard() {
       { id: "waterloo-polaroids", ref: waterlooPolaroidsRef, x: 0.4, y: 0.3 },
       { id: "shopify-top", ref: shopifyRef, x: 0.5, y: 0.1 },
       { id: "quanto-top", ref: quantoRef, x: 0.6, y: 0.15 },
+      { id: "htn-pin", ref: htnRef, x: 0.5, y: 0.18 },
     ],
     [],
   );
@@ -31,6 +33,7 @@ export default function Scene02Corkboard() {
       { from: "waterloo-syde", to: "waterloo-polaroids", sag: 56 },
       { from: "waterloo-polaroids", to: "quanto-top", sag: 56 },
       { from: "quanto-top", to: "shopify-top", sag: 40 },
+      { from: "shopify-top", to: "htn-pin", sag: 56 },
     ],
     [],
   );
@@ -94,6 +97,7 @@ export default function Scene02Corkboard() {
       waterlooStickyRef,
       waterlooSydeRef,
       shopifyRef,
+      htnRef,
       quantoRef,
       alicehacksRef,
       waterlooNewsRef,
@@ -261,13 +265,13 @@ export default function Scene02Corkboard() {
                       </div>
                     </div>
                   </div>
-                  <div className="absolute left-[35%] bottom-[-60%] z-10 -rotate-2">
+                  <div className="absolute left-[31%] bottom-[-42%] z-10 -rotate-2">
                     <Image
                       src="/quanto_scribble.png"
                       alt="Software engineer scribble"
                       width={884}
                       height={685}
-                      className="h-auto w-[250px]"
+                      className="h-auto w-[220px] opacity-70"
                     />
                   </div>
                   <div
@@ -288,7 +292,7 @@ export default function Scene02Corkboard() {
             <div className="relative w-full min-h-[420px] overflow-visible">
               <div
                 ref={shopifyRef}
-                className="absolute left-[70%] top-[80px] z-10 w-full max-w-[220px] transition-transform duration-200 hover:scale-[1.02]"
+                className="absolute left-[70%] top-[-10%] z-10 w-full max-w-[220px] transition-transform duration-200 hover:scale-[1.02]"
               >
                 <Image
                   src="/shopify_sticky.png"
@@ -298,25 +302,28 @@ export default function Scene02Corkboard() {
                   className="h-auto w-full drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
                 />
               </div>
-              <div className="absolute left-[15%] top-[110px] z-10 -rotate-2">
+              <div className="absolute left-[40%] top-[35%] z-10 rotate-5 w-[520px] origin-top-left scale-[1]">
                 <Image
                   src="/shopify_scribble.png"
                   alt="Engineering intern scribble"
                   width={1661}
                   height={463}
-                  className="h-auto w-[360px]"
+                  className="h-auto w-full opacity-70"
                 />
               </div>
-              <div className="absolute left-[84%] top-[80px] w-[260px] shrink-0 -rotate-3 z-10">
+              <div className="absolute left-[40%] top-[-5%] w-65 shrink-0 -rotate-3 z-10 scale-[1.5]">
                 <Image
                   src="/shopee_sticker.png"
                   alt="Shopee sticker"
                   width={2048}
                   height={2048}
-                  className="h-auto w-full drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
+                  className="h-auto w-full drop-shadow-[0_1px_1px_rgba(0,0,0,1)]"
                 />
               </div>
-              <div className="absolute left-[0%] top-[320px] w-full max-w-[220px] -rotate-2 scale-[1.1] z-10 transition-transform duration-200 hover:scale-[1.12]">
+              <div
+                ref={htnRef}
+                className="absolute left-[0%] top-[360px] w-full max-w-[220px] -rotate-2 scale-[1.1] z-10 transition-transform duration-200 hover:scale-[1.12]"
+              >
                 <Image
                   src="/htn_sticky.png"
                   alt="Hack the North sticky"
@@ -325,16 +332,25 @@ export default function Scene02Corkboard() {
                   className="h-auto w-full drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
                 />
               </div>
-              <div className="absolute left-[28%] top-[340px] z-10 rotate-2">
+              <div className="absolute left-[12%] top-[520px] z-0 -rotate-1">
+                <Image
+                  src="/htn_news.png"
+                  alt="Hack the North news clipping"
+                  width={1249}
+                  height={418}
+                  className="h-auto w-[560px] opacity-90 drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
+                />
+              </div>
+              <div className="absolute left-[28%] top-[380px] z-10 rotate-2">
                 <Image
                   src="/htn_scribble.png"
                   alt="Logistics organizer scribble"
                   width={949}
                   height={661}
-                  className="h-auto w-[220px]"
+                  className="h-auto w-[220px] opacity-70"
                 />
               </div>
-              <div className="absolute left-[54%] top-[360px] z-10 -rotate-3 w-[140px] transition-transform duration-200 hover:scale-[1.02]">
+              <div className="absolute left-[64%] top-[400px] z-10 rotate-8 w-[140px] transition-transform duration-200 hover:scale-[1.02]">
                 <Image
                   src="/alicehacks_sticker.png"
                   alt="AliceHacks sticker"
