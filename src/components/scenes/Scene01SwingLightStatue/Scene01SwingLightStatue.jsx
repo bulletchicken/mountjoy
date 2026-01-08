@@ -133,8 +133,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
   const swing = useMotionValue(0);
   useAnimationFrame((time) => {
     const period = 2.4;
-    const angle =
-      Math.sin((time / 1000) * ((2 * Math.PI) / period)) * swingDeg;
+    const angle = Math.sin((time / 1000) * ((2 * Math.PI) / period)) * swingDeg;
     swing.set(angle);
     const transform = `rotate(${angle} ${beam.pivotX} ${beam.pivotY})`;
     if (swingMaskRef.current) {
@@ -200,7 +199,8 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       motionY: statueY,
       offsetX: -340,
       offsetXSm: -200,
-      scaleSm: 0.9,
+      scale: 1.06,
+      scaleSm: 0.95,
     },
     {
       key: "statue-sketch",
@@ -281,7 +281,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
     }
     const isSm = size.w < 640;
     const scaleOverride =
-      isSm && item.scaleSm != null ? item.scaleSm : item.scale ?? 1;
+      isSm && item.scaleSm != null ? item.scaleSm : (item.scale ?? 1);
     const combinedScale = scaleOverride * layoutScale;
     const itemOffsetX =
       isSm && item.offsetXSm != null ? item.offsetXSm : item.offsetX || 0;
@@ -476,7 +476,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
             MLH&apos;s Top 50 hacker with 25 hackathons and 15 wins.
           </p>
           <p className="mt-3 text-[1.05rem] leading-[1.2] tracking-[0.02em]">
-            Loves teddy bears and my grandma.
+            Loves teddy bears and his grandma.
           </p>
         </motion.div>
       </div>

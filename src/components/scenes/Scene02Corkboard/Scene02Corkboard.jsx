@@ -238,7 +238,7 @@ export default function Scene02Corkboard() {
         <div className="relative w-full min-h-[220px] overflow-visible">
           <div className="relative mx-auto flex w-full max-w-3xl flex-col items-center gap-6 sm:gap-8 overflow-visible -translate-y-[180px]">
             <div className="relative w-full min-h-[480px] overflow-visible">
-              <div className="absolute left-[-12%] top-[40px] w-[min(70vw,620px)] max-w-none">
+              <div className="absolute left-[-12%] top-[40px] w-[min(70vw,620px)] max-w-none transition-transform duration-200 hover:scale-[1.02]">
                 <div className="relative w-full">
                   <Image
                     src="/quanto_news.png"
@@ -357,7 +357,7 @@ export default function Scene02Corkboard() {
                   className="drop-shadow-[0_2px_6px_rgba(0,0,0,0.25)]"
                 />
               </div>
-              <div className="absolute left-[78%] top-[330px] z-10 rotate-8 w-[110px] transition-transform duration-200 hover:scale-[1.02]">
+              <div className="absolute left-[74%] top-[330px] z-10 rotate-8 w-[110px] transition-transform duration-200 hover:scale-[1.02]">
                 <Image
                   src="/alicehacks_sticker.png"
                   alt="AliceHacks sticker"

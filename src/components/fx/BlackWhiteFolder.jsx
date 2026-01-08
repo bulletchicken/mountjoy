@@ -159,11 +159,9 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
           <div
             className={`absolute top-0 h-[98%] rounded-[10px] border-2 border-black bg-white ${paperTwoPosition} ${paperTwoRotation}`}
           >
-            {isOpen ? (
-              <div className="report h-full w-full p-4">
-                {children || defaultReport}
-              </div>
-            ) : null}
+            <div className="report h-full w-full p-4">
+              {children || defaultReport}
+            </div>
           </div>
         </div>
       </div>

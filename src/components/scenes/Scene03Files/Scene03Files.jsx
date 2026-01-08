@@ -11,6 +11,7 @@ function FolderReport({
   residence,
   notesSmall,
   skills,
+  notesContent,
 }) {
   return (
     <div className="h-full w-full border-2 border-black bg-white text-[0.58rem] uppercase tracking-[0.18em] text-black">
@@ -49,10 +50,23 @@ function FolderReport({
         </div>
         <div className="flex h-full flex-col p-2">
           Notes:
-          <div className="mt-2 flex-1 border-2 border-black" />
+          <div className="mt-2 flex-1 border-2 border-black relative overflow-hidden">
+            {notesContent}
+          </div>
         </div>
       </div>
     </div>
+  );
+}
+
+function NotesVideoPreview() {
+  return (
+    <iframe
+      src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7338595986090430464?compact=1"
+      title="Embedded LinkedIn post"
+      allowFullScreen
+      className="absolute inset-0 h-full w-full"
+    />
   );
 }
 
@@ -84,6 +98,7 @@ export default function Scene03Files() {
               weight="3 lb"
               notesSmall="Grandma-safe"
               skills="Check-ins · med reminders"
+              notesContent={<NotesVideoPreview />}
             />
           }
           media={
@@ -126,6 +141,7 @@ export default function Scene03Files() {
               weight="Feather"
               notesSmall="Swipe-based"
               skills="Virality · social loops"
+              notesContent={<NotesVideoPreview />}
             />
           }
           media={
