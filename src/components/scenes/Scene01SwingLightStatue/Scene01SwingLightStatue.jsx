@@ -203,9 +203,9 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       scaleSm: 0.9,
     },
     {
-      key: "statue",
+      key: "statue-sketch",
       src: "/statue.png",
-      alt: "Statue",
+      alt: "Statue sketch",
       width: 1600,
       height: 2400,
       anchor: "statue",
@@ -224,6 +224,17 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       motionY: monaY,
       mask: "beam",
       scale: 0.8,
+    },
+    {
+      key: "statue",
+      src: "/real_statue.png",
+      alt: "Statue",
+      width: 1600,
+      height: 2400,
+      anchor: "statue",
+      motionY: statueY,
+      mask: "beam",
+      scaleSm: 0.9,
     },
   ];
   const renderLayerItems = (items) =>
