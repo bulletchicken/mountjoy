@@ -112,7 +112,14 @@ export default function Scene02Corkboard() {
   }, [pinDefinitions]);
 
   return (
-    <section className="relative w-full bg-white pt-12 pb-24 -mt-20 cursor-default">
+    <section
+      className="relative w-full bg-white pt-12 pb-24 -mt-20 cursor-default"
+      style={{
+        backgroundImage: "url(/cork_texture.png)",
+        backgroundRepeat: "repeat",
+        backgroundSize: "800px 534px",
+      }}
+    >
       <div
         ref={containerRef}
         className="relative mx-auto flex w-full max-w-6xl flex-wrap items-center justify-center gap-12 px-6 overflow-visible"
@@ -152,20 +159,22 @@ export default function Scene02Corkboard() {
             </div>
           </div>
         ))}
+        <div className="pointer-events-none w-full">
+          <div className="mx-auto w-[min(80vw,720px)] rotate-10 pt-40 pb-4 -mb-16">
+            <Image
+              src="/where_is_he.png"
+              alt="Where is he note"
+              width={1355}
+              height={1029}
+              className="h-auto w-full"
+            />
+          </div>
+        </div>
         <div
           ref={waterlooRef}
           className="relative w-full"
           style={waterlooHeight ? { height: `${waterlooHeight}px` } : undefined}
         >
-          <div className="pointer-events-none absolute left-[12%] top-[-78%] z-0 w-[min(75vw,700px)] rotate-10">
-            <Image
-              src="/where_is_he.png"
-              alt="Where is he note"
-              width={2388}
-              height={1668}
-              className="h-auto w-full"
-            />
-          </div>
           <div
             ref={waterlooStickyRef}
             className="absolute left-[15%] top-[25%] rotate-3 mx-auto w-full max-w-[220px] z-20 transition-transform duration-200 hover:scale-[1.02]"

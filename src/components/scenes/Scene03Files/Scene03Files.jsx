@@ -105,7 +105,7 @@ function NotesLinkedInPost({ src }) {
 export default function Scene03Files() {
   const secretRef = useRef(null);
   const retreatStart = 0.6;
-  const retreatPause = 0.08;
+  const retreatPause = 0.05;
   const retreatDistance = 90;
   const handRetreatDistance = retreatDistance;
   const handStartX = 30;
@@ -133,7 +133,7 @@ export default function Scene03Files() {
   });
 
   return (
-    <section className="relative flex w-full items-center justify-center bg-white overflow-hidden py-40">
+    <section className="relative z-20 flex w-full items-center justify-center bg-white overflow-hidden pt-10 pb-40">
       <div className="flex flex-col items-center gap-24 sm:gap-36 lg:gap-48 xl:gap-60">
         <FolderPair
           centerOffsetX={-400}
