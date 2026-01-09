@@ -176,8 +176,8 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
     target: containerRef,
     offset: ["start end", "end start"],
   });
-  const statueY = useTransform(scrollYProgress, [0, 1], ["15%", "-15%"]);
-  const monaY = useTransform(scrollYProgress, [0, 1], ["-30%", "30%"]);
+  const statueY = useTransform(scrollYProgress, [0, 1], ["25%", "-25%"]);
+  const monaY = useTransform(scrollYProgress, [0, 1], ["-45%", "45%"]);
   const underLayerItems = [
     {
       key: "mona-sketch",
@@ -197,10 +197,10 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       height: 1796,
       anchor: "statue",
       motionY: statueY,
-      offsetX: -340,
-      offsetXSm: -200,
-      scale: 1.06,
-      scaleSm: 0.95,
+      offsetX: -360,
+      offsetXSm: -235,
+      scale: 1.12,
+      scaleSm: 1.02,
     },
     {
       key: "statue-sketch",
@@ -210,7 +210,10 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       height: 2400,
       anchor: "statue",
       motionY: statueY,
-      scaleSm: 0.9,
+      offsetX: -40,
+      offsetXSm: -25,
+      scale: 1.04,
+      scaleSm: 0.96,
     },
   ];
   const topLayerItems = [
@@ -234,7 +237,10 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       anchor: "statue",
       motionY: statueY,
       mask: "beam",
-      scaleSm: 0.9,
+      offsetX: -40,
+      offsetXSm: -25,
+      scale: 1.03,
+      scaleSm: 0.95,
     },
   ];
   const renderLayerItems = (items) =>
@@ -470,7 +476,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
         {/* <div className="pointer-events-none absolute inset-0 z-50 [backdrop-filter:blur(10px)] [mask-image:radial-gradient(ellipse_at_center,transparent_18%,black)] max-sm:[backdrop-filter:none]" /> */}
         <motion.div
           style={{ y: statueY }}
-          className="pointer-events-none absolute left-[20%] top-[40%] z-50 max-w-[420px] font-mono mix-blend-difference text-white"
+          className="pointer-events-none absolute left-[20%] top-[34%] z-50 max-w-[420px] font-mono mix-blend-difference text-white"
         >
           <p className="text-[1.05rem] leading-[1.2] tracking-[0.02em]">
             MLH&apos;s Top 50 hacker with 25 hackathons and 15 wins.

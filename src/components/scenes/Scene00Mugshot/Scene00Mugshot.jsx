@@ -1,105 +1,10 @@
 "use client";
 import { motion, useTransform } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 export default function Page({ backgroundColor, scrollYProgress }) {
   const textOpacity = useTransform(scrollYProgress, [0.45, 0.6], [1, 0]);
   const photoOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
   const videoRef = useRef(null);
-  const rafRef = useRef(null);
-  const lastTsRef = useRef(null);
-  const directionRef = useRef(1);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    video.muted = true;
-    video.playsInline = true;
-    video.setAttribute("muted", "");
-    video.setAttribute("playsinline", "");
-    video.setAttribute("webkit-playsinline", "");
-    video.loop = false;
-    const EDGE_EPS = 0.035;
-
-    const tick = (ts) => {
-      if (!lastTsRef.current) lastTsRef.current = ts;
-      const delta = (ts - lastTsRef.current) / 1000;
-      lastTsRef.current = ts;
-
-      const duration = video.duration || 0;
-      if (!duration) {
-        rafRef.current = requestAnimationFrame(tick);
-        return;
-      }
-
-      const edge = Math.min(EDGE_EPS, duration * 0.01);
-      const minTime = edge;
-      const maxTime = Math.max(edge, duration - edge);
-      let next = video.currentTime + delta * directionRef.current;
-      if (next >= maxTime) {
-        next = maxTime;
-        directionRef.current = -1;
-      } else if (next <= minTime) {
-        next = minTime;
-        directionRef.current = 1;
-      }
-
-      video.currentTime = next;
-      if (video.paused) video.play().catch(() => {});
-      rafRef.current = requestAnimationFrame(tick);
-    };
-
-    const start = () => {
-      if (rafRef.current) return;
-      video.playbackRate = 0.5;
-      const playPromise = video.play();
-      if (playPromise && typeof playPromise.catch === "function") {
-        playPromise.catch(() => {}).finally(() => {
-          lastTsRef.current = null;
-          rafRef.current = requestAnimationFrame(tick);
-        });
-      } else {
-        lastTsRef.current = null;
-        rafRef.current = requestAnimationFrame(tick);
-      }
-    };
-
-    const ensurePlaying = () => {
-      if (video.paused) video.play().catch(() => {});
-      if (!rafRef.current && video.duration) {
-        lastTsRef.current = null;
-        rafRef.current = requestAnimationFrame(tick);
-      }
-      const duration = video.duration || 0;
-      if (duration) {
-        const edge = Math.min(EDGE_EPS, duration * 0.01);
-        if (video.currentTime >= duration - edge) {
-          video.currentTime = duration - edge;
-          directionRef.current = -1;
-        } else if (video.currentTime <= edge) {
-          video.currentTime = edge;
-          directionRef.current = 1;
-        }
-      }
-    };
-
-    video.addEventListener("loadedmetadata", start);
-    video.addEventListener("loadeddata", start);
-    video.addEventListener("ended", ensurePlaying);
-    video.addEventListener("pause", ensurePlaying);
-    document.addEventListener("visibilitychange", ensurePlaying);
-    window.addEventListener("focus", ensurePlaying);
-    if (video.readyState >= 1) start();
-    return () => {
-      video.removeEventListener("loadedmetadata", start);
-      video.removeEventListener("loadeddata", start);
-      video.removeEventListener("ended", ensurePlaying);
-      video.removeEventListener("pause", ensurePlaying);
-      document.removeEventListener("visibilitychange", ensurePlaying);
-      window.removeEventListener("focus", ensurePlaying);
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    };
-  }, []);
 
   return (
     <motion.div
@@ -121,6 +26,7 @@ export default function Page({ backgroundColor, scrollYProgress }) {
             muted
             playsInline
             preload="auto"
+            loop
             controls={false}
             disablePictureInPicture
             controlsList="nodownload noplaybackrate noremoteplayback"

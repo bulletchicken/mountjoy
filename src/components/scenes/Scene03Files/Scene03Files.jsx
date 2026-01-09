@@ -59,12 +59,11 @@ function FolderReport({
   );
 }
 
-function NotesVideoPreview() {
+function NotesLinkedInPost({ src }) {
   return (
     <iframe
-      src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7338595986090430464?compact=1"
+      src={src}
       title="Embedded LinkedIn post"
-      allowFullScreen
       className="absolute inset-0 h-full w-full"
     />
   );
@@ -98,7 +97,11 @@ export default function Scene03Files() {
               weight="3 lb"
               notesSmall="Grandma-safe"
               skills="Check-ins · med reminders"
-              notesContent={<NotesVideoPreview />}
+              notesContent={
+                <NotesLinkedInPost
+                  src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7338595986090430464?compact=1"
+                />
+              }
             />
           }
           media={
@@ -141,7 +144,11 @@ export default function Scene03Files() {
               weight="Feather"
               notesSmall="Swipe-based"
               skills="Virality · social loops"
-              notesContent={<NotesVideoPreview />}
+              notesContent={
+                <NotesLinkedInPost
+                  src="https://www.linkedin.com/embed/feed/update/urn:li:activity:7307781039693668352?compact=0"
+                />
+              }
             />
           }
           media={
