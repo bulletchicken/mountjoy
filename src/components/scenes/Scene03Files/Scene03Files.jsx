@@ -105,9 +105,10 @@ function NotesLinkedInPost({ src }) {
 export default function Scene03Files() {
   const secretRef = useRef(null);
   const retreatStart = 0.6;
+  const retreatPause = 0.08;
   const retreatDistance = 90;
   const handRetreatDistance = retreatDistance;
-  const handStartX = 18;
+  const handStartX = 30;
   const handMidX = -38;
   const handRightOffset = -20;
   const { scrollYProgress: secretScrollY } = useScroll({
@@ -117,18 +118,18 @@ export default function Scene03Files() {
   const [showClosedHand, setShowClosedHand] = useState(false);
   const handX = useTransform(
     secretScrollY,
-    [0, retreatStart, 1],
-    [handStartX, handMidX, handMidX + handRetreatDistance],
+    [0, retreatStart, retreatStart + retreatPause, 1],
+    [handStartX, handMidX, handMidX, handMidX + handRetreatDistance],
   );
   const handXValue = useMotionTemplate`${handX}vw`;
   const retreatX = useTransform(
     secretScrollY,
-    [retreatStart, 1],
+    [retreatStart + retreatPause, 1],
     [0, retreatDistance],
   );
   const secretX = useMotionTemplate`${retreatX}vw`;
   useMotionValueEvent(secretScrollY, "change", (value) => {
-    setShowClosedHand(value >= retreatStart);
+    setShowClosedHand(value >= retreatStart + retreatPause);
   });
 
   return (
