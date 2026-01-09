@@ -320,7 +320,7 @@ export default function Scene02Corkboard() {
               </div>
               <div
                 ref={htnRef}
-                className="absolute left-[-10%] top-[320px] w-full max-w-[220px] -rotate-2 scale-[1.1] z-10 transition-transform duration-200 hover:scale-[1.12]"
+                className="absolute left-[-10%] top-[280px] w-full max-w-[220px] -rotate-2 scale-[1.1] z-10 transition-transform duration-200 hover:scale-[1.12]"
               >
                 <Image
                   src="/htn_sticky.png"
@@ -330,7 +330,7 @@ export default function Scene02Corkboard() {
                   className="h-auto w-full drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
                 />
               </div>
-              <div className="absolute left-[-6%] top-[490px] z-0 -rotate-1">
+              <div className="absolute left-[-6%] top-[450px] z-0 -rotate-1">
                 <Image
                   src="/htn_news.png"
                   alt="Hack the North news clipping"
@@ -339,7 +339,7 @@ export default function Scene02Corkboard() {
                   className="h-auto w-[560px] opacity-90 drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
                 />
               </div>
-              <div className="absolute left-[20%] top-[340px] z-10 rotate-2">
+              <div className="absolute left-[20%] top-[300px] z-10 rotate-2">
                 <Image
                   src="/htn_scribble.png"
                   alt="Logistics organizer scribble"
@@ -348,7 +348,7 @@ export default function Scene02Corkboard() {
                   className="h-auto w-[220px] opacity-80"
                 />
               </div>
-              <div className="relative z-10 mt-[520px] ml-[58%] w-fit -rotate-4 transition-transform duration-200 hover:scale-[1.02]">
+              <div className="relative z-10 mt-[480px] ml-[58%] w-fit -rotate-4 transition-transform duration-200 hover:scale-[1.02]">
                 <Polaroid
                   src="/the_cat.jpg"
                   alt="HTN polaroid snapshot"
@@ -357,7 +357,7 @@ export default function Scene02Corkboard() {
                   className="drop-shadow-[0_2px_6px_rgba(0,0,0,0.25)]"
                 />
               </div>
-              <div className="absolute left-[74%] top-[330px] z-10 rotate-8 w-[110px] transition-transform duration-200 hover:scale-[1.02]">
+              <div className="absolute left-[74%] top-[300px] z-10 rotate-8 w-[110px] transition-transform duration-200 hover:scale-[1.02]">
                 <Image
                   src="/alicehacks_sticker.png"
                   alt="AliceHacks sticker"

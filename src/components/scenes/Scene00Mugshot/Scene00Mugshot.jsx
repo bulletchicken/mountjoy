@@ -21,7 +21,7 @@ export default function Page({ backgroundColor, scrollYProgress }) {
         <div className="mx-auto flex w-full justify-center overflow-visible">
           <video
             ref={videoRef}
-            className="boomerang-video aspect-[3/2] min-h-[125vh] shrink-0 w-[235vw] object-contain object-bottom sm:w-[170vw] md:w-[130vw] lg:w-[100vw] xl:w-[90vw] 2xl:w-[60vw] max-w-none"
+            className="boomerang-video aspect-[3/2] min-h-[80vh] shrink-0 w-[150vw] object-contain object-bottom sm:w-[120vw] md:w-[100vw] lg:w-[80vw] xl:w-[72vw] 2xl:w-[50vw] max-w-none"
             autoPlay
             muted
             playsInline

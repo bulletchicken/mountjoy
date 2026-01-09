@@ -47,7 +47,9 @@ export default function Home() {
         />
         <SwingLight backgroundColor={backgroundColor} />
       </div>
-      <CautionTape backgroundColor={backgroundColor} />
+      <div className="mb-24">
+        <CautionTape backgroundColor={backgroundColor} />
+      </div>
 
       <Corkboard />
       <Files />
