@@ -45,7 +45,7 @@ const LAYER_ANCHORS = {
 };
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
-export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
+export default function Scene01TriangleRevealSwingFast() {
   const hostRef = useRef(null);
   const containerRef = useRef(null);
   const swingMaskRef = useRef(null);
@@ -346,10 +346,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       ref={containerRef}
       className="relative w-full min-h-screen overflow-hidden z-20"
     >
-      <motion.div
-        className="absolute inset-0 -z-10"
-        style={{ backgroundColor }}
-      />
+      <motion.div className="absolute inset-0 -z-10 bg-white" />
       <div
         ref={hostRef}
         className="sticky top-0 h-screen w-full overflow-hidden bg-white"
@@ -400,7 +397,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
             <motion.path
               d={beam.overlayD}
               fillRule="evenodd"
-              style={{ fill: backgroundColor }}
+              style={{ fill: "#000" }}
             />
             <line
               x1={beam.pivotX}

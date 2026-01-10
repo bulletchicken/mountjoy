@@ -25,8 +25,7 @@ export default function Home() {
   });
 
   const switchFlipPoint = 0.54;
-
-  // keep white until the switch flips, then go black
+  const [showHandDown, setShowHandDown] = useState(false);
   const backgroundColor = useTransform(
     scrollYProgress,
     [0, switchFlipPoint, switchFlipPoint + 0.03, 1],
@@ -47,7 +46,6 @@ export default function Home() {
   );
   const handX = useTransform(scrollYProgress, [0.22, 0.52], [-85, 2]);
   const handXValue = useMotionTemplate`${handX}vw`;
-  const [showHandDown, setShowHandDown] = useState(false);
   useMotionValueEvent(scrollYProgress, "change", (value) => {
     setShowHandDown(value >= switchFlipPoint);
   });
@@ -61,23 +59,49 @@ export default function Home() {
     >
       <Navbar />
       <div ref={containerRef} className="relative">
-        <motion.img
-          className="pointer-events-none absolute left-[30%] top-[190vh] z-60 w-[80px] -translate-x-1/2 sm:w-[100px] md:w-[120px]"
+        <motion.div
+          className="pointer-events-none absolute left-[30%] top-[190vh] z-60 w-[80px] -translate-x-1/2 sm:w-[100px] md:w-[120px] aspect-[431/683] relative"
           style={{ opacity: lightSwitchOpacity }}
-          src={showHandDown ? "/lightswitch_off.png" : "/lightswitch_on.png"}
-          alt="Light switch"
-        />
-        <motion.img
-          className="pointer-events-none absolute left-[30%] top-[203vh] z-60 w-[44vw] max-w-[680px] -translate-x-full -translate-y-1/2 rotate-[-25deg] origin-right"
+        >
+          <img
+            className={`absolute inset-0 h-full w-full object-contain ${showHandDown ? "opacity-0" : "opacity-100"}`}
+            src="/lightswitch_on.png"
+            alt="Light switch on"
+            aria-hidden={showHandDown}
+            loading="eager"
+          />
+          <img
+            className={`absolute inset-0 h-full w-full object-contain ${showHandDown ? "opacity-100" : "opacity-0"}`}
+            src="/lightswitch_off.png"
+            alt="Light switch off"
+            aria-hidden={!showHandDown}
+            loading="eager"
+          />
+        </motion.div>
+        <motion.div
+          className="pointer-events-none absolute left-[30%] top-[182vh] z-60 w-[44vw] max-w-[680px] -translate-x-full -translate-y-1/2 rotate-[-25deg] origin-right aspect-[5051/1655] relative"
           style={{ x: handXValue }}
-          src={showHandDown ? "/finger_down.png" : "/finger_up.png"}
-          alt="Pointing hand"
-        />
+        >
+          <img
+            className={`absolute inset-0 h-full w-full object-contain ${showHandDown ? "opacity-0" : "opacity-100"}`}
+            src="/finger_up.png"
+            alt="Pointing hand"
+            aria-hidden={showHandDown}
+            loading="eager"
+          />
+          <img
+            className={`absolute inset-0 h-full w-full object-contain ${showHandDown ? "opacity-100" : "opacity-0"}`}
+            src="/finger_down.png"
+            alt="Pressing hand"
+            aria-hidden={!showHandDown}
+            loading="eager"
+          />
+        </motion.div>
         <Mugshot
           backgroundColor={backgroundColor}
           scrollYProgress={scrollYProgress}
         />
-        <SwingLight backgroundColor={backgroundColor} />
+        <SwingLight />
       </div>
       <div className="mb-0">
         <CautionTape backgroundColor={backgroundColor} />

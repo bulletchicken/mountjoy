@@ -8,7 +8,7 @@ export default function Page({ backgroundColor, scrollYProgress }) {
 
   return (
     <motion.div
-      className="relative h-[250vh] w-full overflow-x-hidden"
+      className="relative h-[200vh] w-full overflow-x-hidden transition-colors duration-500 ease-out"
       style={{ backgroundColor }}
     >
       {/* radial blur effect */}
