@@ -11,6 +11,7 @@ export default function Secret() {
         folderRotation="-2deg"
         paperRotation="2deg"
         footerLines={["Classified dossier", "Redacted summary", ""]}
+        interactive={false}
       />
     </div>
   );

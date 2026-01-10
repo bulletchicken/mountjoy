@@ -113,7 +113,7 @@ export default function Scene02Corkboard() {
 
   return (
     <section
-      className="relative w-full bg-white pt-12 pb-24 -mt-20 cursor-default"
+      className="relative z-0 isolate w-full bg-white pt-6 pb-10 -mt-24 cursor-default"
       style={{
         backgroundImage: "url(/cork_texture.png)",
         backgroundRepeat: "repeat",
@@ -122,7 +122,7 @@ export default function Scene02Corkboard() {
     >
       <div
         ref={containerRef}
-        className="relative mx-auto flex w-full max-w-6xl flex-wrap items-center justify-center gap-12 px-6 overflow-visible"
+        className="relative mx-auto -mt-40 flex w-full max-w-6xl flex-wrap items-center justify-center gap-12 px-6 overflow-visible"
       >
         <svg className="pointer-events-none absolute inset-0 z-30 h-full w-full">
           {connections.map((connection) => {
@@ -160,7 +160,7 @@ export default function Scene02Corkboard() {
           </div>
         ))}
         <div className="pointer-events-none w-full">
-          <div className="mx-auto w-[min(80vw,720px)] rotate-10 pt-40 pb-4 -mb-16">
+          <div className="mx-auto w-[min(80vw,720px)] rotate-10 pt-6 pb-4 -mb-16 translate-y-12">
             <Image
               src="/where_is_he.png"
               alt="Where is he note"
@@ -247,14 +247,14 @@ export default function Scene02Corkboard() {
         <div className="relative w-full min-h-[220px] overflow-visible">
           <div className="relative mx-auto flex w-full max-w-3xl flex-col items-center gap-6 sm:gap-8 overflow-visible -translate-y-[180px]">
             <div className="relative w-full min-h-[480px] overflow-visible">
-              <div className="absolute left-[-12%] top-[40px] w-[min(70vw,620px)] max-w-none transition-transform duration-200 hover:scale-[1.02]">
+              <div className="group absolute left-[-12%] top-[40px] w-[min(70vw,620px)] max-w-none">
                 <div className="relative w-full">
                   <Image
                     src="/quanto_news.png"
                     alt="Quanto news"
                     width={2048}
                     height={2048}
-                    className="h-auto w-full drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
+                    className="h-auto w-full drop-shadow-[0_1px_2px_rgba(0,0,0,1)] transition-transform duration-200 group-hover:scale-[1.02]"
                   />
                   <div className="absolute -left-6 bottom-[-50%] z-10 -rotate-1 transition-transform duration-200 hover:scale-[1.02]">
                     <div className="relative">

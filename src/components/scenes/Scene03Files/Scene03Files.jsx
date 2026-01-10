@@ -133,7 +133,7 @@ export default function Scene03Files() {
   });
 
   return (
-    <section className="relative z-20 flex w-full items-center justify-center bg-white overflow-hidden pt-10 pb-40">
+    <section className="relative z-20 flex w-full items-center justify-center bg-white overflow-hidden pt-24 pb-40">
       <div className="flex flex-col items-center gap-24 sm:gap-36 lg:gap-48 xl:gap-60">
         <FolderPair
           centerOffsetX={-400}

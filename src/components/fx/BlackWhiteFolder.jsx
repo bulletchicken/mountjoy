@@ -12,6 +12,7 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
     folderRotation = "0deg",
     tabSide = "right",
     isOpen: controlledOpen,
+    interactive = true,
     onOpen,
     onClose,
   },
@@ -45,14 +46,18 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
     }
   };
 
-  const positionClass = isOpen
-    ? "relative z-40 cursor-pointer"
-    : "relative cursor-pointer";
+  const positionClass = interactive
+    ? isOpen
+      ? "relative z-40 cursor-pointer"
+      : "relative cursor-pointer"
+    : "relative";
 
   const stackRotation = paperRotation;
-  const hoverLiftClass = isHovered ? "-translate-y-3" : "";
-  const hoverScaleClass = !isOpen && isHovered ? "scale-[1.02]" : "";
-  const hoverPaperTwist = !isOpen && isHovered ? "rotate(2deg)" : "rotate(0deg)";
+  const hoverLiftClass = interactive && isHovered ? "-translate-y-3" : "";
+  const hoverScaleClass =
+    interactive && !isOpen && isHovered ? "scale-[1.02]" : "";
+  const hoverPaperTwist =
+    interactive && !isOpen && isHovered ? "rotate(2deg)" : "rotate(0deg)";
   const paperZClass = "z-20";
   const isFlipped = tabSide === "left";
   const paperStackPosition = isFlipped
@@ -172,19 +177,27 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
     <div
       ref={ref}
       className={`${positionClass} h-[58vmin] min-h-[420px] w-[72vmin] max-w-[560px] sm:h-[60vmin] sm:min-h-[440px] sm:w-[74vmin] sm:max-w-[580px] md:h-[64vmin] md:min-h-[480px] md:w-[78vmin] md:max-w-[610px] lg:h-[66vmin] lg:min-h-[500px] lg:w-[80vmin] lg:max-w-[620px] xl:h-[70vmin] xl:min-h-[520px] xl:w-[82vmin] xl:max-w-[640px] transition-transform duration-300 ease-out ${hoverScaleClass}`}
-      role="button"
-      tabIndex={0}
-      aria-expanded={isOpen}
+      role={interactive ? "button" : undefined}
+      tabIndex={interactive ? 0 : undefined}
+      aria-expanded={interactive ? isOpen : undefined}
       aria-label={`${label || "Case file"} folder`}
-      onPointerEnter={() => setIsHovered(true)}
-      onPointerLeave={() => setIsHovered(false)}
-      onClick={handleToggle}
-      onKeyDown={(event) => {
-        if (event.key === "Enter" || event.key === " ") {
-          event.preventDefault();
-          handleToggle();
-        }
-      }}
+      onPointerEnter={
+        interactive ? () => setIsHovered(true) : undefined
+      }
+      onPointerLeave={
+        interactive ? () => setIsHovered(false) : undefined
+      }
+      onClick={interactive ? handleToggle : undefined}
+      onKeyDown={
+        interactive
+          ? (event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                handleToggle();
+              }
+            }
+          : undefined
+      }
     >
       <div className="relative h-full w-full">
         <div
