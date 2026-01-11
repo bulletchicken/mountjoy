@@ -24,11 +24,14 @@ export default function Home() {
     offset: ["start start", "end end"],
   });
 
-  const switchFlipPoint = 0.54;
+  const handStart = 0.08;
+  const handEnd = 0.42;
+  const handPause = 0.03;
+  const switchFlipPoint = handEnd + handPause;
   const [showHandDown, setShowHandDown] = useState(false);
   const backgroundColor = useTransform(
     scrollYProgress,
-    [0, switchFlipPoint, switchFlipPoint + 0.03, 1],
+    [0, switchFlipPoint, switchFlipPoint + 0.08, 1],
     ["rgb(255,255,255)", "rgb(255,255,255)", "rgb(0,0,0)", "rgb(0,0,0)"],
   );
 
@@ -39,15 +42,10 @@ export default function Home() {
     [0, 1, 1, 0],
   );
 
-  const lightSwitchOpacity = useTransform(
-    scrollYProgress,
-    [0.24, 0.28],
-    [0, 1],
-  );
-  const handX = useTransform(scrollYProgress, [0.22, 0.52], [-85, 2]);
+  const handX = useTransform(scrollYProgress, [handStart, handEnd], [-60, 2]);
   const handXValue = useMotionTemplate`${handX}vw`;
   useMotionValueEvent(scrollYProgress, "change", (value) => {
-    setShowHandDown(value >= switchFlipPoint);
+    setShowHandDown(value >= switchFlipPoint + handPause);
   });
 
   return (
@@ -60,8 +58,7 @@ export default function Home() {
       <Navbar />
       <div ref={containerRef} className="relative">
         <motion.div
-          className="pointer-events-none absolute left-[30%] top-[190vh] z-60 w-[80px] -translate-x-1/2 sm:w-[100px] md:w-[120px] aspect-[431/683] relative"
-          style={{ opacity: lightSwitchOpacity }}
+          className="pointer-events-none absolute left-[30%] top-[150vh] z-60 w-[80px] -translate-x-1/2 sm:w-[100px] md:w-[120px] aspect-[431/683] relative"
         >
           <img
             className={`absolute inset-0 h-full w-full object-contain ${showHandDown ? "opacity-0" : "opacity-100"}`}
@@ -79,7 +76,7 @@ export default function Home() {
           />
         </motion.div>
         <motion.div
-          className="pointer-events-none absolute left-[30%] top-[182vh] z-60 w-[44vw] max-w-[680px] -translate-x-full -translate-y-1/2 rotate-[-25deg] origin-right aspect-[5051/1655] relative"
+          className="pointer-events-none absolute left-[30%] top-[142vh] z-60 w-[44vw] max-w-[680px] -translate-x-full -translate-y-1/2 rotate-[-25deg] origin-right aspect-[5051/1655] relative"
           style={{ x: handXValue }}
         >
           <img
@@ -101,14 +98,18 @@ export default function Home() {
           backgroundColor={backgroundColor}
           scrollYProgress={scrollYProgress}
         />
-        <SwingLight />
+        <SwingLight backgroundColor={backgroundColor} />
       </div>
       <div className="mb-0">
         <CautionTape backgroundColor={backgroundColor} />
       </div>
 
-      <Corkboard />
-      <Files />
+      <div className="relative z-0">
+        <Corkboard />
+      </div>
+      <div className="relative z-50 isolate">
+        <Files />
+      </div>
       <Footer />
     </motion.div>
   );

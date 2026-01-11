@@ -92,12 +92,19 @@ function FolderReport({
   );
 }
 
-function NotesLinkedInPost({ src }) {
+function NotesLinkedInPost({
+  src,
+  isInteractive = true,
+  saturation = 1,
+}) {
   return (
     <iframe
       src={src}
       title="Embedded LinkedIn post"
-      className="absolute inset-0 h-full w-full"
+      className={`absolute inset-0 h-full w-full ${
+        isInteractive ? "" : "pointer-events-none"
+      }`}
+      style={{ filter: `saturate(${saturation})` }}
     />
   );
 }
@@ -133,7 +140,7 @@ export default function Scene03Files() {
   });
 
   return (
-    <section className="relative z-20 flex w-full items-center justify-center bg-white overflow-hidden pt-24 pb-40">
+    <section className="relative z-[200] isolate flex w-full items-center justify-center bg-white pt-0 pb-40">
       <div className="flex flex-col items-center gap-24 sm:gap-36 lg:gap-48 xl:gap-60">
         <FolderPair
           centerOffsetX={-400}
@@ -194,7 +201,7 @@ export default function Scene03Files() {
               "300k users",
             ],
           }}
-          folderContent={
+          folderContent={({ isOpen }) => (
             <FolderReport
               name="Waterloo Hot or Not"
               age="Viral season"
@@ -208,10 +215,14 @@ export default function Scene03Files() {
               skills="Virality · social loops"
               layout="notes-only"
               notesContent={
-                <NotesLinkedInPost src="https://www.linkedin.com/embed/feed/update/urn:li:activity:7307781039693668352?compact=0" />
+                <NotesLinkedInPost
+                  src="https://www.linkedin.com/embed/feed/update/urn:li:activity:7307781039693668352?compact=0"
+                  isInteractive={isOpen}
+                  saturation={0.35}
+                />
               }
             />
-          }
+          )}
           media={
             <div className="pizza-wrap">
               <div className="pizza-spin">

@@ -54,6 +54,11 @@ export default function FolderPair({
     return () => window.removeEventListener("resize", handleResize);
   }, [isOpen]);
 
+  const resolvedFolderContent =
+    typeof folderContent === "function"
+      ? folderContent({ isOpen })
+      : folderContent;
+
   const folderNode = (
     <div
       ref={folderRef}
@@ -79,7 +84,7 @@ export default function FolderPair({
         }}
         {...folderProps}
       >
-        {folderContent}
+        {resolvedFolderContent}
       </BlackWhiteFolder>
     </div>
   );
