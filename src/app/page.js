@@ -31,7 +31,7 @@ export default function Home() {
   const [showHandDown, setShowHandDown] = useState(false);
   const backgroundColor = useTransform(
     scrollYProgress,
-    [0, switchFlipPoint, switchFlipPoint + 0.08, 1],
+    [0, switchFlipPoint, switchFlipPoint + 0.05, 1],
     ["rgb(255,255,255)", "rgb(255,255,255)", "rgb(0,0,0)", "rgb(0,0,0)"],
   );
 
@@ -57,9 +57,7 @@ export default function Home() {
     >
       <Navbar />
       <div ref={containerRef} className="relative">
-        <motion.div
-          className="pointer-events-none absolute left-[30%] top-[150vh] z-60 w-[80px] -translate-x-1/2 sm:w-[100px] md:w-[120px] aspect-[431/683] relative"
-        >
+        <motion.div className="pointer-events-none absolute left-[30%] top-[150vh] z-60 w-[80px] -translate-x-1/2 sm:w-[100px] md:w-[120px] aspect-[431/683] relative">
           <img
             className={`absolute inset-0 h-full w-full object-contain ${showHandDown ? "opacity-0" : "opacity-100"}`}
             src="/lightswitch_on.png"

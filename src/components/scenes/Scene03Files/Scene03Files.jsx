@@ -41,35 +41,51 @@ function FolderReport({
           gridTemplateRows: `${1 - notesRowWeight}fr ${notesRowWeight}fr`,
         }}
       >
-        <div className="grid min-h-0 grid-cols-[0.4fr_0.6fr] grid-rows-2 border-b-2 border-black">
-          <div className="border-b-2 border-r-2 border-black p-2">
-            Name:
-            <div className="mt-1 text-[0.6rem] normal-case tracking-[0.08em]">
-              {name}
-            </div>
-          </div>
-          <div className="row-span-2 p-2">
-            What it does:
-            <div className="mt-1 text-[0.6rem] normal-case tracking-[0.08em]">
-              {notesSmall}
-            </div>
-            <div className="mt-3">
-              Skills / abilities:
+        <div className="flex flex-col border-b-2 border-black">
+          <div className="grid grid-cols-2 border-b-2 border-black">
+            <div className="border-r-2 border-black p-2">
+              Name:
               <div className="mt-1 text-[0.6rem] normal-case tracking-[0.08em]">
-                {skills}
+                {name}
               </div>
             </div>
-            <div className="mt-3">
-              Base:
+            <div className="p-2">
+              Age:
               <div className="mt-1 text-[0.6rem] normal-case tracking-[0.08em]">
-                {birthplace} · {residence}
+                {age}
               </div>
             </div>
           </div>
-          <div className="border-r-2 border-black p-2">
-            Age:
-            <div className="mt-1 text-[0.6rem] normal-case tracking-[0.08em]">
-              {age}
+          <div className="grid min-h-0 flex-1 grid-cols-[0.4fr_0.6fr] grid-rows-2">
+            <div className="border-b-2 border-r-2 border-black p-2 h-full">
+              Name:
+              <div className="mt-1 text-[0.6rem] normal-case tracking-[0.08em]">
+                {name}
+              </div>
+            </div>
+            <div className="row-span-2 p-2 h-full">
+              What it does:
+              <div className="mt-1 text-[0.6rem] normal-case tracking-[0.08em]">
+                {notesSmall}
+              </div>
+              <div className="mt-3">
+                Skills / abilities:
+                <div className="mt-1 text-[0.6rem] normal-case tracking-[0.08em]">
+                  {skills}
+                </div>
+              </div>
+              <div className="mt-3">
+                Base:
+                <div className="mt-1 text-[0.6rem] normal-case tracking-[0.08em]">
+                  {birthplace} · {residence}
+                </div>
+              </div>
+            </div>
+            <div className="border-r-2 border-black p-2 h-full">
+              Age:
+              <div className="mt-1 text-[0.6rem] normal-case tracking-[0.08em]">
+                {age}
+              </div>
             </div>
           </div>
         </div>
