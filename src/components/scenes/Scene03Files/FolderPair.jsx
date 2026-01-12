@@ -15,6 +15,7 @@ export default function FolderPair({
   largeBreakpoint = 1280,
   smallBreakpoint = 640,
   maxOffsetXSmall = 120,
+  folderClosedClassName = "",
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
@@ -63,7 +64,7 @@ export default function FolderPair({
     <div
       ref={folderRef}
       className={`relative z-20 transition-transform duration-700 ease-in-out ${
-        isOpen ? "z-50" : ""
+        isOpen ? "z-50" : folderClosedClassName
       }`}
       style={{
         transform: isOpen

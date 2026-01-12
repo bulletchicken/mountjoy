@@ -275,11 +275,12 @@ export default function Scene03Files() {
         />
         <FolderPair
           centerOffsetX={-360}
+          folderClosedClassName="translate-x-16"
           folderProps={{
-            label: "Placeholder",
-            folderRotation: "-1deg",
+            label: "Flying-v Guitar",
+            folderRotation: "-3deg",
             paperRotation: "1deg",
-            footerLines: ["Placeholder project", "Short description", "TBD"],
+            footerLines: ["Flying-v Guitar", "Short description", "TBD"],
           }}
           folderContent={
             <FolderReport
@@ -297,15 +298,17 @@ export default function Scene03Files() {
             />
           }
           media={
-            <div className="rotate-1">
-              <DitherShader
-                src="/fpv_car.png"
-                colorMode="grayscale"
-                threshold={0.5}
-                gridSize={1}
-                objectFit="contain"
-                className="h-[60vmin] w-[60vmin] sm:h-[66vmin] sm:w-[66vmin] md:h-[70vmin] md:w-[70vmin] lg:h-[74vmin] lg:w-[74vmin] xl:h-[78vmin] xl:w-[78vmin]"
-              />
+            <div className="relative flex-shrink-0 h-[56vmin] w-[56vmin] sm:h-[60vmin] sm:w-[60vmin] md:h-[64vmin] md:w-[64vmin] lg:h-[68vmin] lg:w-[68vmin] xl:h-[72vmin] xl:w-[72vmin] overflow-visible">
+              <div className="absolute inset-0 -translate-x-20 -translate-y-14 -rotate-26 flex items-center justify-center">
+                <DitherShader
+                  src="/guitar.png"
+                  colorMode="grayscale"
+                  threshold={0.25}
+                  gridSize={1}
+                  objectFit="contain"
+                  className="h-[52vmin] w-[52vmin] sm:h-[60vmin] sm:w-[60vmin] md:h-[68vmin] md:w-[68vmin] lg:h-[74vmin] lg:w-[74vmin] xl:h-[82vmin] xl:w-[82vmin]"
+                />
+              </div>
             </div>
           }
         />
@@ -336,17 +339,15 @@ export default function Scene03Files() {
             />
           }
           media={
-            <div className="relative flex-shrink-0 h-[56vmin] w-[56vmin] sm:h-[60vmin] sm:w-[60vmin] md:h-[64vmin] md:w-[64vmin] lg:h-[68vmin] lg:w-[68vmin] xl:h-[72vmin] xl:w-[72vmin] overflow-visible">
-              <div className="absolute inset-0 -translate-y-12 rotate-20 flex items-center justify-center">
-                <DitherShader
-                  src="/guitar.png"
-                  colorMode="grayscale"
-                  threshold={0.25}
-                  gridSize={1}
-                  objectFit="contain"
-                  className="h-[48vmin] w-[48vmin] sm:h-[56vmin] sm:w-[56vmin] md:h-[64vmin] md:w-[64vmin] lg:h-[70vmin] lg:w-[70vmin] xl:h-[78vmin] xl:w-[78vmin]"
-                />
-              </div>
+            <div className="rotate-1">
+              <DitherShader
+                src="/fpv_car.png"
+                colorMode="grayscale"
+                threshold={0.5}
+                gridSize={1}
+                objectFit="contain"
+                className="h-[60vmin] w-[60vmin] sm:h-[66vmin] sm:w-[66vmin] md:h-[70vmin] md:w-[70vmin] lg:h-[74vmin] lg:w-[74vmin] xl:h-[78vmin] xl:w-[78vmin]"
+              />
             </div>
           }
         />
