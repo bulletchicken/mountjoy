@@ -34,7 +34,7 @@ function FolderReport({
   }
 
   return (
-    <div className="h-full w-full border-2 border-black bg-white text-[0.58rem] uppercase tracking-[0.18em] text-black">
+    <div className="h-full w-full border-2 border-black bg-white font-mono text-[0.58rem] uppercase tracking-[0.18em] text-black">
       <div
         className="grid h-full"
         style={{
@@ -164,8 +164,25 @@ export default function Scene03Files() {
   });
 
   return (
-    <section className="relative z-[200] isolate flex w-full items-center justify-center bg-white pt-0 pb-40">
+    <section
+      className="relative z-[200] isolate flex w-full items-center justify-center bg-white pt-0 pb-40"
+      style={{
+        backgroundImage: "url(/cork_texture.png)",
+        backgroundRepeat: "repeat",
+        backgroundSize: "800px 534px",
+      }}
+    >
       <div className="flex flex-col items-center gap-24 sm:gap-36 lg:gap-48 xl:gap-60">
+        <div className="pointer-events-none relative flex w-full justify-center -mb-[12.5rem] -mt-[7.5rem]">
+          <Image
+            src="/evidence_files.png"
+            alt="Evidence files"
+            width={1411}
+            height={1254}
+            className="w-[64vw] max-w-[780px] -rotate-1"
+            priority
+          />
+        </div>
         <FolderPair
           centerOffsetX={-400}
           folderProps={{
@@ -274,7 +291,7 @@ export default function Scene03Files() {
           }
         />
         <FolderPair
-          centerOffsetX={-360}
+          centerOffsetX={-280}
           folderClosedClassName="translate-x-16"
           folderProps={{
             label: "Flying-v Guitar",

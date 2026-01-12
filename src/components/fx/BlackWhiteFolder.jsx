@@ -111,13 +111,7 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
   );
 
   const footerLineMarkup = (
-    <div
-      className="absolute bottom-8 left-8 right-8 text-[0.85rem] font-bold tracking-[0.12em] text-black"
-      style={{
-        fontFamily:
-          '"Chalkboard", "Chalkboard SE", "Marker Felt", "Noteworthy", "Segoe Print", "Bradley Hand", "Comic Sans MS", cursive',
-      }}
-    >
+    <div className="absolute bottom-8 left-8 right-8 text-[0.85rem] font-mono font-bold tracking-[0.12em] text-black">
       {resolvedFooterLines.map((line, index) => (
         <div
           key={`${line}-${index}`}

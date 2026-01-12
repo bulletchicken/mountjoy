@@ -41,6 +41,11 @@ export default function CautionTape() {
     <section
       ref={containerRef}
       className="relative w-full h-[60vh] overflow-hidden pointer-events-none -mt-25"
+      style={{
+        backgroundImage: "url(/cork_texture.png)",
+        backgroundRepeat: "repeat",
+        backgroundSize: "800px 534px",
+      }}
     >
       {/* Clip layer so huge/rotated absolute elements never create horizontal scroll */}
       <div className="inset-0 overflow-hidden">

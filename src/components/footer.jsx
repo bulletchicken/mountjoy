@@ -28,7 +28,14 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="w-full pt-20 pb-0 text-center font-mono text-xs uppercase tracking-[0.3em] text-black">
+    <footer
+      className="w-full pt-20 pb-0 text-center font-mono text-xs uppercase tracking-[0.3em] text-black"
+      style={{
+        backgroundImage: "url(/cork_texture.png)",
+        backgroundRepeat: "repeat",
+        backgroundSize: "800px 534px",
+      }}
+    >
       <div className="flex flex-col items-center justify-center gap-10">
         <span>Designed and executed by Jeremy Su</span>
         <div className="flex items-center gap-6">
