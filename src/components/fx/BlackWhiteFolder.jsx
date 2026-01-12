@@ -15,6 +15,7 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
     interactive = true,
     onOpen,
     onClose,
+    footerRedactions = [],
   },
   ref,
 ) {
@@ -121,7 +122,12 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
           key={`${line}-${index}`}
           className={`${index === 0 ? "" : "mt-3"} border-b-2 border-black pb-2`}
         >
-          {line}
+          <span className="relative inline-block">
+            {line}
+            {footerRedactions[index] ? (
+              <span className="pointer-events-none absolute inset-x-0 top-1/2 h-[0.45em] -translate-y-[35%] bg-black" />
+            ) : null}
+          </span>
         </div>
       ))}
     </div>

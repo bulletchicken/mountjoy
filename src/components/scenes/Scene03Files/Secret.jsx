@@ -11,7 +11,8 @@ export default function Secret() {
           tabSide="right"
           folderRotation="-2deg"
           paperRotation="2deg"
-          footerLines={["Classified dossier", "Redacted summary", ""]}
+          footerLines={["six-seven", "six-seven", ""]}
+          footerRedactions={[true, true, false]}
           interactive={false}
         />
         <img

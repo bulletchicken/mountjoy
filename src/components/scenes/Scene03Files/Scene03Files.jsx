@@ -114,14 +114,22 @@ function NotesLinkedInPost({
   saturation = 1,
 }) {
   return (
-    <iframe
-      src={src}
-      title="Embedded LinkedIn post"
-      className={`absolute inset-0 h-full w-full ${
-        isInteractive ? "" : "pointer-events-none"
-      }`}
-      style={{ filter: `saturate(${saturation})` }}
-    />
+    <div className="absolute inset-0 h-full w-full">
+      <iframe
+        src={src}
+        title="Embedded LinkedIn post"
+        className={`h-full w-full ${
+          isInteractive ? "" : "pointer-events-none"
+        }`}
+        style={{ filter: `saturate(${saturation})` }}
+      />
+      {!isInteractive ? (
+        <div
+          className="absolute inset-0 pointer-events-auto"
+          aria-hidden="true"
+        />
+      ) : null}
+    </div>
   );
 }
 
@@ -250,6 +258,81 @@ export default function Scene03Files() {
                   className="h-[58vmin] w-[58vmin] sm:h-[64vmin] sm:w-[64vmin] md:h-[68vmin] md:w-[68vmin] lg:h-[70vmin] lg:w-[70vmin] xl:h-[74vmin] xl:w-[74vmin]"
                 />
               </div>
+            </div>
+          }
+        />
+        <FolderPair
+          centerOffsetX={-360}
+          folderProps={{
+            label: "Placeholder",
+            folderRotation: "-1deg",
+            paperRotation: "1deg",
+            footerLines: ["Placeholder project", "Short description", "TBD"],
+          }}
+          folderContent={
+            <FolderReport
+              name="Placeholder Name"
+              age="In progress"
+              birthplace="Somewhere"
+              residence="Nowhere"
+              notesSmall="Placeholder summary"
+              skills="Skill A · Skill B"
+              notesContent={
+                <div className="absolute inset-0 flex items-center justify-center text-[0.65rem] tracking-[0.12em]">
+                  Placeholder notes
+                </div>
+              }
+            />
+          }
+          media={
+            <div className="rotate-1">
+              <DitherShader
+                src="/mona_lisa.png"
+                colorMode="grayscale"
+                threshold={0.5}
+                gridSize={1}
+                objectFit="contain"
+                className="h-[52vmin] w-[52vmin] sm:h-[56vmin] sm:w-[56vmin] md:h-[60vmin] md:w-[60vmin] lg:h-[62vmin] lg:w-[62vmin] xl:h-[64vmin] xl:w-[64vmin]"
+              />
+            </div>
+          }
+        />
+        <FolderPair
+          reverse
+          spineSide="right"
+          centerOffsetX={360}
+          folderProps={{
+            label: "Placeholder",
+            tabSide: "left",
+            folderRotation: "1deg",
+            paperRotation: "-1deg",
+            footerLines: ["Placeholder project", "Short description", "TBD"],
+          }}
+          folderContent={
+            <FolderReport
+              name="Placeholder Name"
+              age="Prototype"
+              birthplace="Somewhere"
+              residence="Everywhere"
+              notesSmall="Placeholder summary"
+              skills="Skill C · Skill D"
+              notesContent={
+                <div className="absolute inset-0 flex items-center justify-center text-[0.65rem] tracking-[0.12em]">
+                  Placeholder notes
+                </div>
+              }
+            />
+          }
+          media={
+            <div className="-rotate-2">
+              <DitherShader
+                src="/statue.png"
+                colorMode="grayscale"
+                threshold={0.5}
+                gridSize={1}
+                objectFit="contain"
+                className="h-[52vmin] w-[52vmin] sm:h-[56vmin] sm:w-[56vmin] md:h-[60vmin] md:w-[60vmin] lg:h-[62vmin] lg:w-[62vmin] xl:h-[64vmin] xl:w-[64vmin]"
+              />
             </div>
           }
         />
