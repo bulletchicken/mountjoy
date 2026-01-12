@@ -17,6 +17,9 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
     onClose,
     footerRedactions = [],
     coverStamps = [],
+    coverOverlays = null,
+    footerInlineStamps = [],
+    footerOverlays = [],
   },
   ref,
 ) {
@@ -112,19 +115,38 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
 
   const footerLineMarkup = (
     <div className="absolute bottom-8 left-8 right-8 text-[0.85rem] font-mono font-bold tracking-[0.12em] text-black">
-      {resolvedFooterLines.map((line, index) => (
-        <div
-          key={`${line}-${index}`}
-          className={`${index === 0 ? "" : "mt-3"} border-b-2 border-black pb-2`}
-        >
-          <span className="relative inline-block">
-            {line}
-            {footerRedactions[index] ? (
-              <span className="pointer-events-none absolute inset-x-0 top-1/2 h-[0.45em] -translate-y-[35%] bg-black" />
+      <div className="relative">
+        {resolvedFooterLines.map((line, index) => (
+          <div
+            key={`${line}-${index}`}
+            className={`${index === 0 ? "" : "mt-3"} border-b-2 border-black pb-2`}
+          >
+            <span className="relative inline-block">
+              {line}
+              {footerRedactions[index] ? (
+                <span className="pointer-events-none absolute inset-x-0 top-1/2 h-[0.45em] -translate-y-[35%] bg-black" />
+              ) : null}
+            </span>
+            {footerInlineStamps[index]?.length ? (
+              <span className="ml-2 inline-flex items-center gap-2 align-middle">
+                {footerInlineStamps[index].map((stamp, stampIndex) => (
+                  <img
+                    key={`${stamp.src}-${stampIndex}`}
+                    src={stamp.src}
+                    alt={stamp.alt}
+                    className={stamp.className || ""}
+                  />
+                ))}
+              </span>
             ) : null}
-          </span>
-        </div>
-      ))}
+          </div>
+        ))}
+        {footerOverlays?.length
+          ? footerOverlays.map((overlay, index) => (
+              <span key={`footer-overlay-${index}`}>{overlay}</span>
+            ))
+          : null}
+      </div>
     </div>
   );
 
@@ -142,7 +164,7 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
           : "z-10"
       }`}
     >
-      <div className="absolute inset-0 flex items-center justify-center font-mono text-2xl font-bold uppercase">
+      <div className="absolute inset-0 flex items-center justify-center font-mono text-2xl font-black uppercase">
         <span className="[writing-mode:vertical-rl] scale-x-90">{label}</span>
       </div>
     </div>
@@ -182,6 +204,11 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
       className={`pointer-events-none absolute ${stamp.className || ""}`}
     />
   ));
+  const coverOverlaysMarkup = coverOverlays
+    ? Array.isArray(coverOverlays)
+      ? coverOverlays
+      : [coverOverlays]
+    : [];
 
   return (
     <div
@@ -243,6 +270,11 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
               >
                 {!isOpen ? footerLineMarkup : null}
                 {!isOpen ? coverStampsMarkup : null}
+                {!isOpen
+                  ? coverOverlaysMarkup.map((overlay, index) => (
+                      <span key={`cover-overlay-${index}`}>{overlay}</span>
+                    ))
+                  : null}
               </div>
               {isOpen ? (
                 <div

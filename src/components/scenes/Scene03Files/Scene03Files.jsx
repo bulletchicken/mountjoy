@@ -108,11 +108,7 @@ function FolderReport({
   );
 }
 
-function NotesLinkedInPost({
-  src,
-  isInteractive = true,
-  saturation = 1,
-}) {
+function NotesLinkedInPost({ src, isInteractive = true, saturation = 1 }) {
   return (
     <div className="absolute inset-0 h-full w-full">
       <iframe
@@ -192,19 +188,39 @@ export default function Scene03Files() {
             footerLines: [
               "AI teddy bear for sweet grandmas",
               "Healthcare companion teddy bear",
-              "Funding: 6.67k",
+              "Funded by:",
             ],
-            coverStamps: [
-              {
-                src: "/techyon-logo.png",
-                alt: "Techyon stamp",
-                className: "left-[10%] top-[14%] w-[22%] -rotate-8 opacity-85",
-              },
-              {
-                src: "/1517-logo.png",
-                alt: "1517 stamp",
-                className: "right-[12%] top-[32%] w-[30%] rotate-5 opacity-85",
-              },
+            footerOverlays: [
+              <a
+                key="techyon-footer"
+                href="https://techyon.org/"
+                target="_blank"
+                rel="noreferrer"
+                className="absolute left-[23%] bottom-[-6%] w-[16%] -rotate-6 opacity-85"
+              >
+                <Image
+                  src="/techyon-logo.png"
+                  alt="Techyon"
+                  width={1000}
+                  height={722}
+                  className="block w-full"
+                />
+              </a>,
+              <a
+                key="1517-footer"
+                href="https://www.1517fund.com/"
+                target="_blank"
+                rel="noreferrer"
+                className="absolute left-[40%] bottom-[3%] w-[20%] rotate-4 opacity-85"
+              >
+                <Image
+                  src="/1517-logo.png"
+                  alt="1517"
+                  width={2154}
+                  height={825}
+                  className="block w-full"
+                />
+              </a>,
             ],
           }}
           folderContent={
@@ -298,21 +314,51 @@ export default function Scene03Files() {
             folderRotation: "-3deg",
             paperRotation: "1deg",
             footerLines: ["Flying-v Guitar", "Short description", "TBD"],
+            coverOverlays: (
+              <div className="pointer-events-none absolute right-[10%] top-[0%] w-[32%] rotate-6">
+                <div className="relative">
+                  <Image
+                    src="/costume_guitar.jpg"
+                    alt="Guitar costume"
+                    width={3213}
+                    height={4947}
+                    className="block w-full rounded-[6px] border-2 border-black bg-white"
+                  />
+                  <div className="absolute -top-2 left-4 h-6 w-4 -rotate-12 rounded-[4px] border-2 border-black bg-neutral-200" />
+                </div>
+              </div>
+            ),
           }}
           folderContent={
-            <FolderReport
-              name="Placeholder Name"
-              age="In progress"
-              birthplace="Somewhere"
-              residence="Nowhere"
-              notesSmall="Placeholder summary"
-              skills="Skill A · Skill B"
-              notesContent={
-                <div className="absolute inset-0 flex items-center justify-center text-[0.65rem] tracking-[0.12em]">
-                  Placeholder notes
-                </div>
-              }
-            />
+            <div className="h-full w-full border-2 border-black bg-white">
+              <div className="flex h-[16%] items-center justify-between border-b-2 border-black px-3 py-2 font-mono text-[0.6rem] uppercase tracking-[0.18em]">
+                <span>Flying-V Guitar</span>
+                <span>Build log</span>
+              </div>
+              <div className="relative h-[84%] overflow-hidden p-3">
+                <Image
+                  src="/guitar_paint.JPG"
+                  alt="Guitar paint"
+                  width={3213}
+                  height={5712}
+                  className="absolute left-[4%] top-[2%] w-[58%] rotate-[-2deg] border-2 border-black bg-white object-cover"
+                />
+                <Image
+                  src="/guitar_model.png"
+                  alt="Guitar CAD detail"
+                  width={1889}
+                  height={1560}
+                  className="absolute right-[6%] top-[6%] w-[34%] rotate-[5deg] border-2 border-black bg-white object-cover"
+                />
+                <Image
+                  src="/guitar_final.JPG"
+                  alt="Guitar final build"
+                  width={3213}
+                  height={5712}
+                  className="absolute bottom-[2%] right-[2%] w-[34%] rotate-[1deg] border-2 border-black bg-white object-cover"
+                />
+              </div>
+            </div>
           }
           media={
             <div className="relative flex-shrink-0 h-[56vmin] w-[56vmin] sm:h-[60vmin] sm:w-[60vmin] md:h-[64vmin] md:w-[64vmin] lg:h-[68vmin] lg:w-[68vmin] xl:h-[72vmin] xl:w-[72vmin] overflow-visible">
