@@ -337,7 +337,7 @@ export default function Scene03Files() {
               </div>
               <div className="relative h-[84%] overflow-hidden p-3">
                 <Image
-                  src="/guitar_paint.JPG"
+                  src="/guitar_paint.jpg"
                   alt="Guitar paint"
                   width={3213}
                   height={5712}
@@ -351,7 +351,7 @@ export default function Scene03Files() {
                   className="absolute right-[6%] top-[6%] w-[34%] rotate-[5deg] border-2 border-black bg-white object-cover"
                 />
                 <Image
-                  src="/guitar_final.JPG"
+                  src="/guitar_final.jpg"
                   alt="Guitar final build"
                   width={3213}
                   height={5712}
