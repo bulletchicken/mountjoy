@@ -118,6 +118,8 @@ function NotesLinkedInPost({ src, isInteractive = true, saturation = 1 }) {
           isInteractive ? "" : "pointer-events-none"
         }`}
         style={{ filter: `saturate(${saturation})` }}
+        allow="fullscreen; clipboard-write; camera; microphone"
+        allowFullScreen
       />
       {!isInteractive ? (
         <div
@@ -335,7 +337,7 @@ export default function Scene03Files() {
                 <span>Flying-V Guitar</span>
                 <span>Build log</span>
               </div>
-              <div className="relative h-[84%] overflow-hidden p-3">
+              <div className="relative h-[80%] overflow-hidden p-3 pt-5">
                 <Image
                   src="/guitar_paint.jpg"
                   alt="Guitar paint"
