@@ -16,6 +16,7 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
     onOpen,
     onClose,
     footerRedactions = [],
+    coverStamps = [],
   },
   ref,
 ) {
@@ -179,6 +180,15 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
     </div>
   );
 
+  const coverStampsMarkup = coverStamps.map((stamp, index) => (
+    <img
+      key={`${stamp.src}-${index}`}
+      src={stamp.src}
+      alt={stamp.alt}
+      className={`pointer-events-none absolute ${stamp.className || ""}`}
+    />
+  ));
+
   return (
     <div
       ref={ref}
@@ -238,6 +248,7 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
                 }`}
               >
                 {!isOpen ? footerLineMarkup : null}
+                {!isOpen ? coverStampsMarkup : null}
               </div>
               {isOpen ? (
                 <div

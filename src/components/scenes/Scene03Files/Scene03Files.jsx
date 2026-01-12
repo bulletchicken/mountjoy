@@ -177,6 +177,18 @@ export default function Scene03Files() {
               "Healthcare companion teddy bear",
               "Funding: 6.67k",
             ],
+            coverStamps: [
+              {
+                src: "/techyon-logo.png",
+                alt: "Techyon stamp",
+                className: "left-[10%] top-[14%] w-[22%] -rotate-8 opacity-85",
+              },
+              {
+                src: "/1517-logo.png",
+                alt: "1517 stamp",
+                className: "right-[12%] top-[32%] w-[30%] rotate-5 opacity-85",
+              },
+            ],
           }}
           folderContent={
             <FolderReport
@@ -287,12 +299,12 @@ export default function Scene03Files() {
           media={
             <div className="rotate-1">
               <DitherShader
-                src="/mona_lisa.png"
+                src="/fpv_car.png"
                 colorMode="grayscale"
                 threshold={0.5}
                 gridSize={1}
                 objectFit="contain"
-                className="h-[52vmin] w-[52vmin] sm:h-[56vmin] sm:w-[56vmin] md:h-[60vmin] md:w-[60vmin] lg:h-[62vmin] lg:w-[62vmin] xl:h-[64vmin] xl:w-[64vmin]"
+                className="h-[60vmin] w-[60vmin] sm:h-[66vmin] sm:w-[66vmin] md:h-[70vmin] md:w-[70vmin] lg:h-[74vmin] lg:w-[74vmin] xl:h-[78vmin] xl:w-[78vmin]"
               />
             </div>
           }
@@ -324,15 +336,17 @@ export default function Scene03Files() {
             />
           }
           media={
-            <div className="-rotate-2">
-              <DitherShader
-                src="/statue.png"
-                colorMode="grayscale"
-                threshold={0.5}
-                gridSize={1}
-                objectFit="contain"
-                className="h-[52vmin] w-[52vmin] sm:h-[56vmin] sm:w-[56vmin] md:h-[60vmin] md:w-[60vmin] lg:h-[62vmin] lg:w-[62vmin] xl:h-[64vmin] xl:w-[64vmin]"
-              />
+            <div className="relative flex-shrink-0 h-[56vmin] w-[56vmin] sm:h-[60vmin] sm:w-[60vmin] md:h-[64vmin] md:w-[64vmin] lg:h-[68vmin] lg:w-[68vmin] xl:h-[72vmin] xl:w-[72vmin] overflow-visible">
+              <div className="absolute inset-0 -translate-y-12 rotate-20 flex items-center justify-center">
+                <DitherShader
+                  src="/guitar.png"
+                  colorMode="grayscale"
+                  threshold={0.25}
+                  gridSize={1}
+                  objectFit="contain"
+                  className="h-[48vmin] w-[48vmin] sm:h-[56vmin] sm:w-[56vmin] md:h-[64vmin] md:w-[64vmin] lg:h-[70vmin] lg:w-[70vmin] xl:h-[78vmin] xl:w-[78vmin]"
+                />
+              </div>
             </div>
           }
         />
