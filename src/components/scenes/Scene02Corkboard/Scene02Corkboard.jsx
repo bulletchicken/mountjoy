@@ -220,16 +220,16 @@ export default function Scene02Corkboard() {
                 <Polaroid
                   src="/the_cat.jpg"
                   alt="Polaroid cat"
-                  sizeClass="w-44 sm:w-52"
-                  imageClass="w-32 h-40 sm:w-40 sm:h-48"
+                  sizeClass="w-40 sm:w-48"
+                  imageClass="w-32 h-44 sm:w-40 sm:h-52"
                 />
               </div>
               <div className="absolute left-12 top-14 rotate-5 z-10">
                 <Polaroid
                   src="/the_cat.jpg"
                   alt="Polaroid cat"
-                  sizeClass="w-44 sm:w-52"
-                  imageClass="w-32 h-40 sm:w-40 sm:h-48"
+                  sizeClass="w-40 sm:w-48"
+                  imageClass="w-32 h-44 sm:w-40 sm:h-52"
                   className="drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]"
                 />
               </div>
@@ -237,8 +237,8 @@ export default function Scene02Corkboard() {
                 <Polaroid
                   src="/the_cat.jpg"
                   alt=""
-                  sizeClass="w-44 sm:w-52"
-                  imageClass="w-32 h-40 sm:w-40 sm:h-48"
+                  sizeClass="w-40 sm:w-48"
+                  imageClass="w-32 h-44 sm:w-40 sm:h-52"
                 />
               </div>
             </div>
@@ -261,8 +261,8 @@ export default function Scene02Corkboard() {
                       <Polaroid
                         src="/quanto_selfie.jpeg"
                         alt="Polaroid work snapshot"
-                        sizeClass="w-44 sm:w-52"
-                        imageClass="w-32 h-40 sm:w-40 sm:h-48"
+                        sizeClass="w-40 sm:w-48"
+                        imageClass="w-32 h-44 sm:w-40 sm:h-52"
                         className="drop-shadow-[0_2px_6px_rgba(0,0,0,0.25)]"
                       />
                       <div className="absolute top-4 left-1/2 z-10 -translate-x-1/2">
@@ -361,8 +361,8 @@ export default function Scene02Corkboard() {
                 <Polaroid
                   src="/the_cat.jpg"
                   alt="HTN polaroid snapshot"
-                  sizeClass="w-44 sm:w-52"
-                  imageClass="w-32 h-40 sm:w-40 sm:h-48"
+                  sizeClass="w-40 sm:w-48"
+                  imageClass="w-32 h-44 sm:w-40 sm:h-52"
                   className="drop-shadow-[0_2px_6px_rgba(0,0,0,0.25)]"
                 />
               </div>

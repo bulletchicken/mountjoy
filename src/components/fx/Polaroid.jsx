@@ -14,8 +14,8 @@ export default function Polaroid({
     <figure
       className={[
         "relative isolate select-none",
-        "border border-black bg-white",
-        "px-4 pt-4 pb-14",
+        "rounded-[0.4rem] bg-white",
+        "px-1 pt-6 pb-14",
         sizeClass,
         className,
       ].join(" ")}
@@ -24,11 +24,11 @@ export default function Polaroid({
       <div
         className={[
           "relative mx-auto overflow-hidden",
-          "border border-black bg-white",
+          "border border-black/20 bg-white",
           imageClass,
         ].join(" ")}
       >
-        <div className="relative h-full w-full overflow-hidden border border-black bg-white">
+        <div className="relative h-full w-full overflow-hidden bg-white">
           {src ? (
             <Image
               src={src}

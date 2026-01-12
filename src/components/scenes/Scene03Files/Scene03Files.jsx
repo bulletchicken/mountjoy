@@ -23,6 +23,7 @@ function FolderReport({
   notesContent,
   layout = "default",
   notesVariant = "default",
+  showHeaderDetails = true,
   headerRightMedia,
 }) {
   if (layout === "notes-only") {
@@ -35,8 +36,8 @@ function FolderReport({
 
   return (
     <div className="h-full w-full border-2 border-black bg-white font-mono text-[0.58rem] uppercase tracking-[0.18em] text-black">
-      <div className="grid h-full grid-rows-[auto_1fr]">
-        <div className="flex flex-col border-b-2 border-black">
+      <div className="grid h-full grid-rows-[220px_1fr]">
+        <div className="flex h-[220px] flex-col border-b-2 border-black">
           <div className="grid grid-cols-2 border-b-2 border-black">
             <div className="border-r-2 border-black p-1.5">
               Name:
@@ -59,24 +60,34 @@ function FolderReport({
               </div>
             </div>
             <div className="row-span-2 p-1.5 h-full">
-              What it does:
-              <div className="mt-0.5 text-[0.6rem] normal-case tracking-[0.08em]">
-                {notesSmall}
-              </div>
-              <div className="mt-2">
-                Skills / abilities:
-                <div className="mt-0.5 text-[0.6rem] normal-case tracking-[0.08em]">
-                  {skills}
-                </div>
-              </div>
-              <div className="mt-2">
-                Base:
-                <div className="mt-0.5 text-[0.6rem] normal-case tracking-[0.08em]">
-                  {birthplace} · {residence}
-                </div>
-              </div>
+              {showHeaderDetails ? (
+                <>
+                  What it does:
+                  <div className="mt-0.5 text-[0.6rem] normal-case tracking-[0.08em]">
+                    {notesSmall}
+                  </div>
+                  <div className="mt-2">
+                    Skills / abilities:
+                    <div className="mt-0.5 text-[0.6rem] normal-case tracking-[0.08em]">
+                      {skills}
+                    </div>
+                  </div>
+                  <div className="mt-2">
+                    Base:
+                    <div className="mt-0.5 text-[0.6rem] normal-case tracking-[0.08em]">
+                      {birthplace} · {residence}
+                    </div>
+                  </div>
+                </>
+              ) : null}
               {headerRightMedia ? (
-                <div className="mt-2 h-20 w-full border-2 border-black relative overflow-hidden">
+                <div
+                  className={`w-full relative overflow-hidden ${
+                    showHeaderDetails
+                      ? "mt-2 h-20 border-2 border-black"
+                      : "h-full"
+                  }`}
+                >
                   {headerRightMedia}
                 </div>
               ) : null}
@@ -198,7 +209,7 @@ export default function Scene03Files() {
                 href="https://techyon.org/"
                 target="_blank"
                 rel="noreferrer"
-                className="absolute left-[23%] bottom-[-6%] w-[16%] -rotate-6 opacity-85"
+                className="absolute left-[23%] bottom-[-6%] w-[16%] -rotate-6"
               >
                 <Image
                   src="/techyon-logo.png"
@@ -213,7 +224,7 @@ export default function Scene03Files() {
                 href="https://www.1517fund.com/"
                 target="_blank"
                 rel="noreferrer"
-                className="absolute left-[40%] bottom-[3%] w-[20%] rotate-4 opacity-85"
+                className="absolute left-[40%] bottom-[3%] w-[20%] rotate-4"
               >
                 <Image
                   src="/1517-logo.png"
@@ -225,16 +236,16 @@ export default function Scene03Files() {
               </a>,
             ],
             coverOverlays: (
-              <div className="pointer-events-none absolute left-[6%] top-[-6%] w-[48%] rotate-5">
+              <div className="pointer-events-none absolute left-[26%] top-[-2%] w-[58%] rotate-5">
                 <div className="relative">
                   <Image
                     src="/ted_model.png"
                     alt="TED model"
                     width={1564}
                     height={1562}
-                    className="block w-full rounded-[6px] border-2 border-black bg-white"
+                    className="block w-full rounded-[6px] drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]"
                   />
-                  <div className="absolute -top-2 left-4 h-6 w-4 -rotate-12 rounded-[4px] border-2 border-black bg-neutral-200" />
+                  <div className="absolute -top-2 left-20 h-6 w-4 -rotate-12 rounded-[4px] border-2 border-black bg-neutral-200" />
                 </div>
               </div>
             ),
@@ -251,6 +262,7 @@ export default function Scene03Files() {
               weight="3 lb"
               notesSmall="Grandma-safe"
               skills="Check-ins · med reminders"
+              showHeaderDetails={false}
               notesVariant="full"
               headerRightMedia={
                 <Image
@@ -258,7 +270,7 @@ export default function Scene03Files() {
                   alt="TED army"
                   fill
                   sizes="(max-width: 768px) 40vw, 30vw"
-                  className="object-cover"
+                  className="absolute inset-0 h-full w-full object-cover"
                 />
               }
               notesContent={
@@ -293,6 +305,21 @@ export default function Scene03Files() {
               "Viral app for UW students",
               "300k users",
             ],
+            coverOverlays: (
+              <div className="pointer-events-none absolute left-[8%] top-[0%] w-[84%] rotate-1">
+                <div className="relative">
+                  <Image
+                    src="/UWS_photo.png"
+                    alt="UWSummit landing"
+                    width={3024}
+                    height={1456}
+                    className="block w-full drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]"
+                  />
+                  <div className="absolute -top-2 left-10 h-6 w-4 -rotate-12 rounded-[4px] border-2 border-black bg-neutral-200" />
+                  <div className="absolute -top-2 right-10 h-6 w-4 rotate-12 rounded-[4px] border-2 border-black bg-neutral-200" />
+                </div>
+              </div>
+            ),
           }}
           folderContent={({ isOpen }) => (
             <FolderReport
@@ -339,14 +366,21 @@ export default function Scene03Files() {
             paperRotation: "1deg",
             footerLines: ["Flying-v Guitar", "Short description", "TBD"],
             coverOverlays: (
-              <div className="pointer-events-none absolute right-[10%] top-[0%] w-[32%] rotate-6">
+              <div className="pointer-events-none absolute right-[14%] top-[-4%] w-[32%] rotate-6">
                 <div className="relative">
                   <Image
-                    src="/costume_guitar.jpg"
+                    src="/guitar_ref.png"
+                    alt="Guitar reference"
+                    width={1740}
+                    height={1043}
+                    className="absolute -left-[24%] top-[58%] w-[150%] rotate-[-6deg] drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)]"
+                  />
+                  <Image
+                    src="/polaroid_costume_guitar.png"
                     alt="Guitar costume"
-                    width={3213}
-                    height={4947}
-                    className="block w-full rounded-[6px] border-2 border-black bg-white"
+                    width={2688}
+                    height={4032}
+                    className="block w-full rounded-[6px] drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
                   />
                   <div className="absolute -top-2 left-4 h-6 w-4 -rotate-12 rounded-[4px] border-2 border-black bg-neutral-200" />
                 </div>
@@ -359,27 +393,27 @@ export default function Scene03Files() {
                 <span>Flying-V Guitar</span>
                 <span>Build log</span>
               </div>
-              <div className="relative h-[80%] overflow-hidden p-3 pt-5">
+              <div className="relative h-[80%] overflow-visible p-3 pt-5">
                 <Image
                   src="/guitar_paint.jpg"
                   alt="Guitar paint"
                   width={3213}
                   height={5712}
-                  className="absolute left-[4%] top-[2%] w-[58%] rotate-[-2deg] border-2 border-black bg-white object-cover"
+                  className="absolute left-[4%] top-[2%] w-[58%] rotate-[-2deg] border-[8px] border-white bg-white object-cover drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]"
                 />
                 <Image
                   src="/guitar_model.png"
                   alt="Guitar CAD detail"
                   width={1889}
                   height={1560}
-                  className="absolute right-[6%] top-[6%] w-[34%] rotate-[5deg] border-2 border-black bg-white object-cover"
+                  className="absolute right-[3%] top-[4%] w-[42%] rotate-[5deg] border-[8px] border-white bg-white object-cover drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]"
                 />
                 <Image
                   src="/guitar_final.jpg"
                   alt="Guitar final build"
                   width={3213}
                   height={5712}
-                  className="absolute bottom-[2%] right-[2%] w-[34%] rotate-[1deg] border-2 border-black bg-white object-cover"
+                  className="absolute bottom-[2%] right-[2%] w-[34%] rotate-[1deg] border-[8px] border-white bg-white object-cover drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]"
                 />
               </div>
             </div>

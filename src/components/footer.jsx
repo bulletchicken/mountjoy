@@ -37,7 +37,17 @@ export default function Footer() {
       }}
     >
       <div className="flex flex-col items-center justify-center gap-10">
-        <span>Designed and executed by Jeremy Su</span>
+        <span>
+          Designed and executed by{" "}
+          <a
+            href="https://en.wikipedia.org/wiki/Jeremy_Lin"
+            target="_blank"
+            rel="noreferrer"
+            className="underline underline-offset-4"
+          >
+            Jeremy Su
+          </a>
+        </span>
         <div className="flex items-center gap-6">
           {links.map(({ name, href, icon: Icon }) => (
             <a
