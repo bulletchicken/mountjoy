@@ -23,7 +23,7 @@ function FolderReport({
   notesContent,
   layout = "default",
   notesVariant = "default",
-  notesRowWeight = 0.6,
+  headerRightMedia,
 }) {
   if (layout === "notes-only") {
     return (
@@ -35,55 +35,55 @@ function FolderReport({
 
   return (
     <div className="h-full w-full border-2 border-black bg-white font-mono text-[0.58rem] uppercase tracking-[0.18em] text-black">
-      <div
-        className="grid h-full"
-        style={{
-          gridTemplateRows: `${1 - notesRowWeight}fr ${notesRowWeight}fr`,
-        }}
-      >
+      <div className="grid h-full grid-rows-[auto_1fr]">
         <div className="flex flex-col border-b-2 border-black">
           <div className="grid grid-cols-2 border-b-2 border-black">
-            <div className="border-r-2 border-black p-2">
+            <div className="border-r-2 border-black p-1.5">
               Name:
-              <div className="mt-1 text-[0.6rem] normal-case tracking-[0.08em]">
+              <div className="mt-0.5 text-[0.6rem] normal-case tracking-[0.08em]">
                 {name}
               </div>
             </div>
-            <div className="p-2">
+            <div className="p-1.5">
               Age:
-              <div className="mt-1 text-[0.6rem] normal-case tracking-[0.08em]">
+              <div className="mt-0.5 text-[0.6rem] normal-case tracking-[0.08em]">
                 {age}
               </div>
             </div>
           </div>
           <div className="grid min-h-0 flex-1 grid-cols-[0.4fr_0.6fr] grid-rows-2">
-            <div className="border-b-2 border-r-2 border-black p-2 h-full">
+            <div className="border-b-2 border-r-2 border-black p-1.5 h-full">
               Name:
-              <div className="mt-1 text-[0.6rem] normal-case tracking-[0.08em]">
+              <div className="mt-0.5 text-[0.6rem] normal-case tracking-[0.08em]">
                 {name}
               </div>
             </div>
-            <div className="row-span-2 p-2 h-full">
+            <div className="row-span-2 p-1.5 h-full">
               What it does:
-              <div className="mt-1 text-[0.6rem] normal-case tracking-[0.08em]">
+              <div className="mt-0.5 text-[0.6rem] normal-case tracking-[0.08em]">
                 {notesSmall}
               </div>
-              <div className="mt-3">
+              <div className="mt-2">
                 Skills / abilities:
-                <div className="mt-1 text-[0.6rem] normal-case tracking-[0.08em]">
+                <div className="mt-0.5 text-[0.6rem] normal-case tracking-[0.08em]">
                   {skills}
                 </div>
               </div>
-              <div className="mt-3">
+              <div className="mt-2">
                 Base:
-                <div className="mt-1 text-[0.6rem] normal-case tracking-[0.08em]">
+                <div className="mt-0.5 text-[0.6rem] normal-case tracking-[0.08em]">
                   {birthplace} · {residence}
                 </div>
               </div>
+              {headerRightMedia ? (
+                <div className="mt-2 h-20 w-full border-2 border-black relative overflow-hidden">
+                  {headerRightMedia}
+                </div>
+              ) : null}
             </div>
-            <div className="border-r-2 border-black p-2 h-full">
+            <div className="border-r-2 border-black p-1.5 h-full">
               Age:
-              <div className="mt-1 text-[0.6rem] normal-case tracking-[0.08em]">
+              <div className="mt-0.5 text-[0.6rem] normal-case tracking-[0.08em]">
                 {age}
               </div>
             </div>
@@ -224,6 +224,20 @@ export default function Scene03Files() {
                 />
               </a>,
             ],
+            coverOverlays: (
+              <div className="pointer-events-none absolute left-[6%] top-[-6%] w-[48%] rotate-5">
+                <div className="relative">
+                  <Image
+                    src="/ted_model.png"
+                    alt="TED model"
+                    width={1564}
+                    height={1562}
+                    className="block w-full rounded-[6px] border-2 border-black bg-white"
+                  />
+                  <div className="absolute -top-2 left-4 h-6 w-4 -rotate-12 rounded-[4px] border-2 border-black bg-neutral-200" />
+                </div>
+              </div>
+            ),
           }}
           folderContent={
             <FolderReport
@@ -238,7 +252,15 @@ export default function Scene03Files() {
               notesSmall="Grandma-safe"
               skills="Check-ins · med reminders"
               notesVariant="full"
-              notesRowWeight={0.5}
+              headerRightMedia={
+                <Image
+                  src="/ted_army.JPG"
+                  alt="TED army"
+                  fill
+                  sizes="(max-width: 768px) 40vw, 30vw"
+                  className="object-cover"
+                />
+              }
               notesContent={
                 <NotesLinkedInPost src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7338595986090430464?compact=1" />
               }
