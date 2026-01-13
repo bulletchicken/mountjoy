@@ -143,11 +143,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       swingGroupRef.current.setAttribute("transform", transform);
     }
   });
-  const layoutScale = useMemo(() => {
-    const ref = { w: 1200, h: 800 };
-    const scale = Math.min(ref.w / size.w, ref.h / size.h);
-    return clamp(scale, 0.72, 1.08);
-  }, [size.h, size.w]);
+  const layoutScale = 1;
   const layout = useMemo(() => {
     const vbPad = 0;
     const viewBox = `0 0 ${size.w + vbPad * 2} ${size.h + vbPad * 2}`;
@@ -204,13 +200,15 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       motionY: statueY,
       offsetX: -360,
       offsetXSm: -160,
-      offsetXMd: -10,
+      offsetXMd: -210,
       offsetYSm: -40,
       offsetYMd: -30,
-      offsetXLg: -160,
+      offsetXLg: -235,
       scale: 1.12,
-      scaleSm: 1.3,
-      scaleMd: 1.2,
+      scaleSm: 1.2,
+      scaleMd: 1.12,
+      scaleLg: 1.12,
+      scaleXl: 1.25,
     },
     {
       key: "statue-sketch",
@@ -220,15 +218,17 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       height: 2400,
       anchor: "statue",
       motionY: statueY,
-      offsetX: -40,
+      offsetX: 20,
       offsetXSm: 40,
       offsetXMd: 140,
       offsetYSm: -40,
       offsetYMd: -30,
-      offsetXLg: 80,
+      offsetXLg: 70,
       scale: 1.04,
-      scaleSm: 1.2,
-      scaleMd: 1.12,
+      scaleSm: 1.1,
+      scaleMd: 1.04,
+      scaleLg: 1.04,
+      scaleXl: 1.15,
     },
   ];
   const topLayerItems = [
@@ -258,15 +258,17 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       anchor: "statue",
       motionY: statueY,
       mask: "beam",
-      offsetX: -40,
+      offsetX: 20,
       offsetXSm: 40,
       offsetXMd: 140,
       offsetYSm: -40,
       offsetYMd: -30,
-      offsetXLg: 80,
+      offsetXLg: 70,
       scale: 1.03,
-      scaleSm: 1.18,
-      scaleMd: 1.08,
+      scaleSm: 1.1,
+      scaleMd: 1.03,
+      scaleLg: 1.0,
+      scaleXl: 1.12,
     },
   ];
   const renderLayerItems = (items) =>
@@ -312,14 +314,18 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       return null;
     }
     const isSm = size.w < 640;
-    const isMd = size.w < 768;
+    const isMd = size.w < 1024;
     const isLg = size.w >= 1024 && size.w < 1280;
     const scaleOverride =
       isSm && item.scaleSm != null
         ? item.scaleSm
         : isMd && item.scaleMd != null
           ? item.scaleMd
-          : (item.scale ?? 1);
+          : isLg && item.scaleLg != null
+            ? item.scaleLg
+            : size.w >= 1280 && item.scaleXl != null
+              ? item.scaleXl
+              : (item.scale ?? 1);
     const combinedScale = scaleOverride * layoutScale;
     const itemOffsetX =
       isSm && item.offsetXSm != null
@@ -515,12 +521,12 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
         {/* <div className="pointer-events-none absolute inset-0 z-50 [backdrop-filter:blur(10px)] [mask-image:radial-gradient(ellipse_at_center,transparent_18%,black)] max-sm:[backdrop-filter:none]" /> */}
         <motion.div
           style={{ y: statueY }}
-          className="pointer-events-none absolute left-1/2 top-[24%] z-50 max-w-[420px] -translate-x-1/2 text-center font-mono text-lg mix-blend-difference text-white sm:text-xl lg:left-[20%] lg:translate-x-0 lg:text-left lg:top-[34%] lg:text-base"
+          className="pointer-events-none absolute left-1/2 top-[18%] z-50 max-w-[420px] -translate-x-1/2 text-center font-mono text-base mix-blend-difference text-white sm:text-lg md:left-[20%] md:top-[22%] md:translate-x-0 md:text-left lg:left-[24%] lg:top-[26%] lg:text-base"
         >
-          <p className="text-xl leading-[1.15] tracking-[0.02em] sm:text-2xl lg:text-[1.05rem]">
+          <p className="text-lg leading-[1.15] tracking-[0.02em] sm:text-xl lg:text-xl xl:text-xl">
             MLH&apos;s Top 50 hacker with 25 hackathons and 15 wins.
           </p>
-          <p className="mt-3 text-xl leading-[1.15] tracking-[0.02em] sm:text-2xl lg:text-[1.05rem]">
+          <p className="mt-3 text-lg leading-[1.15] tracking-[0.02em] sm:text-xl lg:text-xl xl:text-xl">
             Loves teddy bears and his grandma.
           </p>
         </motion.div>

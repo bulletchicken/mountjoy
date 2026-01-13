@@ -1,10 +1,34 @@
 "use client";
 
 import Image from "next/image";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import Polaroid from "@/components/fx/Polaroid";
 
+function AnimatedString({ d, start, end, progress }) {
+  const duration = Math.max(0.001, end - start);
+  const draw = useTransform(progress, [start, end], [0, 1]);
+  const opacity = useTransform(
+    progress,
+    [start, start + duration * 0.2],
+    [0, 1],
+  );
+
+  return (
+    <motion.path
+      d={d}
+      stroke="#b91c1c"
+      strokeWidth="5"
+      strokeLinecap="round"
+      fill="none"
+      pathLength={draw}
+      style={{ opacity }}
+    />
+  );
+}
+
 export default function Scene02Corkboard() {
+  const sectionRef = useRef(null);
   const waterlooRef = useRef(null);
   const waterlooPolaroidsRef = useRef(null);
   const waterlooStickyRef = useRef(null);
@@ -28,8 +52,7 @@ export default function Scene02Corkboard() {
   const connections = useMemo(
     () => [
       { from: "waterloo-sticky", to: "waterloo-syde", sag: 56 },
-      { from: "waterloo-syde", to: "waterloo-polaroids", sag: 56 },
-      { from: "waterloo-polaroids", to: "quanto-top", sag: 56 },
+      { from: "waterloo-syde", to: "quanto-top", sag: 56 },
       { from: "quanto-top", to: "shopify-top", sag: 40 },
       { from: "shopify-top", to: "htn-pin", sag: 56 },
     ],
@@ -38,6 +61,51 @@ export default function Scene02Corkboard() {
   const containerRef = useRef(null);
   const [pinPositions, setPinPositions] = useState({});
   const [waterlooHeight, setWaterlooHeight] = useState(0);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start 40%", "end 20%"],
+  });
+
+  const resolvedConnections = useMemo(() => {
+    const items = connections
+      .map((connection) => {
+        const from = pinPositions[connection.from];
+        const to = pinPositions[connection.to];
+        if (!from || !to) {
+          return null;
+        }
+        const midX = (from.x + to.x) / 2;
+        const sag =
+          connection.sag ??
+          Math.max(24, Math.min(80, Math.abs(to.x - from.x) * 0.18));
+        const midY = Math.max(from.y, to.y) + sag;
+        const d = `M ${from.x} ${from.y} Q ${midX} ${midY} ${to.x} ${to.y}`;
+        const yTravel = Math.abs(to.y - from.y);
+        const weight = Math.max(20, yTravel);
+        return { key: `${connection.from}-${connection.to}`, d, weight };
+      })
+      .filter(Boolean);
+
+    if (!items.length) {
+      return [];
+    }
+    const totalWeight = items.reduce((sum, item) => sum + item.weight, 0);
+    if (!totalWeight) {
+      const segment = 1 / items.length;
+      return items.map((item, index) => ({
+        ...item,
+        start: index * segment,
+        end: (index + 1) * segment,
+      }));
+    }
+    let cursor = 0;
+    return items.map((item) => {
+      const start = cursor / totalWeight;
+      cursor += item.weight;
+      const end = cursor / totalWeight;
+      return { ...item, start, end };
+    });
+  }, [connections, pinPositions]);
 
   useLayoutEffect(() => {
     if (!containerRef.current) {
@@ -113,6 +181,7 @@ export default function Scene02Corkboard() {
 
   return (
     <section
+      ref={sectionRef}
       className="relative z-0 isolate w-full bg-white pt-6 pb-10 -mt-24 cursor-default translate-x-8 overflow-visible"
       style={{
         backgroundImage: "url(/cork_texture.png)",
@@ -125,28 +194,15 @@ export default function Scene02Corkboard() {
         className="relative mx-auto -mt-40 flex w-full max-w-6xl flex-wrap items-center justify-center gap-12 px-6 overflow-visible"
       >
         <svg className="pointer-events-none absolute inset-0 z-30 h-full w-full">
-          {connections.map((connection) => {
-            const from = pinPositions[connection.from];
-            const to = pinPositions[connection.to];
-            if (!from || !to) {
-              return null;
-            }
-            const midX = (from.x + to.x) / 2;
-            const sag =
-              connection.sag ??
-              Math.max(24, Math.min(80, Math.abs(to.x - from.x) * 0.18));
-            const midY = Math.max(from.y, to.y) + sag;
-            return (
-              <path
-                key={`${connection.from}-${connection.to}`}
-                d={`M ${from.x} ${from.y} Q ${midX} ${midY} ${to.x} ${to.y}`}
-                stroke="#b91c1c"
-                strokeWidth="4"
-                strokeLinecap="round"
-                fill="none"
-              />
-            );
-          })}
+          {resolvedConnections.map((connection) => (
+            <AnimatedString
+              key={connection.key}
+              d={connection.d}
+              start={connection.start}
+              end={connection.end}
+              progress={scrollYProgress}
+            />
+          ))}
         </svg>
         {Object.entries(pinPositions).map(([pinId, pos]) => (
           <div
