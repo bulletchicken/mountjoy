@@ -105,7 +105,7 @@ export default function Home() {
       <div className="relative z-0">
         <Corkboard />
       </div>
-      <div className="relative z-50 isolate">
+      <div className="relative z-0">
         <Files />
       </div>
       <Footer />

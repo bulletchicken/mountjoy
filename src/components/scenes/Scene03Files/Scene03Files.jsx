@@ -198,7 +198,7 @@ export default function Scene03Files() {
 
   return (
     <section
-      className="relative z-[200] isolate flex w-full items-center justify-center bg-white pt-0 pb-40"
+      className="relative z-0 flex w-full items-center justify-center bg-white pt-0 pb-40"
       style={{
         backgroundImage: "url(/cork_texture.png)",
         backgroundRepeat: "repeat",
@@ -229,25 +229,25 @@ export default function Scene03Files() {
             ],
             coverOverlays: (
               <>
-                <div className="pointer-events-none absolute left-[14%] top-[-2%] w-[52%] rotate-5">
+                <div className="pointer-events-none absolute left-[14%] top-[-2%] z-10 w-[34%] rotate-5">
                   <div className="relative">
                     <Image
-                      src="/ted_model.png"
-                      alt="TED model"
-                      width={1564}
-                      height={1562}
-                      className="block w-full rounded-[6px] drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]"
+                      src="/ted_polaroid.png"
+                      alt="TED polaroid"
+                      width={1179}
+                      height={1769}
+                      className="block w-full drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
                     />
-                    <div className="absolute -top-2 left-20 h-6 w-4 -rotate-12 rounded-[4px] border-2 border-black bg-neutral-200" />
+                    <div className="absolute -top-2 left-16 h-6 w-4 -rotate-12 rounded-[4px] border-2 border-black bg-neutral-200" />
                   </div>
                 </div>
-                <div className="pointer-events-none absolute right-[4%] top-[4%] w-[34%] -rotate-3">
+                <div className="pointer-events-none absolute right-[8%] top-[14%] w-[52%] -rotate-3">
                   <Image
-                    src="/ted_polaroid.png"
-                    alt="TED polaroid"
-                    width={1179}
-                    height={1769}
-                    className="block w-full drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
+                    src="/ted_model.png"
+                    alt="TED model"
+                    width={1564}
+                    height={1562}
+                    className="block w-full rounded-[6px] drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]"
                   />
                 </div>
               </>
@@ -374,7 +374,7 @@ export default function Scene03Files() {
           centerOffsetX={-280}
           folderClosedClassName="translate-x-16"
           folderProps={{
-            label: "Flying-v Guitar",
+            label: "A guitar",
             folderRotation: "-3deg",
             paperRotation: "1deg",
             footerLines: ["Flying-v Guitar", "Short description", "TBD"],
@@ -415,21 +415,21 @@ export default function Scene03Files() {
                   alt="Guitar paint"
                   width={3213}
                   height={5712}
-                  className="absolute left-[4%] top-[2%] w-[58%] rotate-[-2deg] border-[8px] border-white bg-white object-cover drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]"
+                  className="absolute left-[4%] top-[2%] w-[58%] rotate-[-2deg] border-[8px] border-[#f5f1e6] bg-[#f5f1e6] object-cover drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]"
                 />
                 <Image
                   src="/guitar_model.png"
                   alt="Guitar CAD detail"
                   width={1889}
                   height={1560}
-                  className="absolute right-[3%] top-[4%] w-[42%] rotate-[5deg] border-[8px] border-white bg-white object-cover drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]"
+                  className="absolute right-[3%] top-[4%] w-[42%] rotate-[5deg] border-[8px] border-[#f5f1e6] bg-[#f5f1e6] object-cover drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]"
                 />
                 <Image
                   src="/guitar_final.jpg"
                   alt="Guitar final build"
                   width={3213}
                   height={5712}
-                  className="absolute bottom-[2%] right-[2%] w-[34%] rotate-[1deg] border-[8px] border-white bg-white object-cover drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]"
+                  className="absolute bottom-[2%] right-[2%] w-[34%] rotate-[1deg] border-[8px] border-[#f5f1e6] bg-[#f5f1e6] object-cover drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]"
                 />
               </div>
             </div>
@@ -459,9 +459,21 @@ export default function Scene03Files() {
             folderRotation: "1deg",
             paperRotation: "-1deg",
             footerLines: [
-              "FPV RC car with loud annoying duck",
-              "Built for Hack the North 2025 organizer project",
+              "FPV RC minecart w/ a loud annoying duck",
+              "HTN Organizer Project",
             ],
+            paperContent: (
+              <div className="absolute left-1/2 top-0 h-[94%] w-[92%] -translate-x-1/2 overflow-hidden rounded-[10px] border-4 border-black bg-black">
+                <iframe
+                  src="https://www.youtube.com/embed/kwYwyRSzLE8"
+                  title="FPV RC minecart short"
+                  className="h-full w-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  style={{ filter: "saturate(0.5)" }}
+                  allowFullScreen
+                />
+              </div>
+            ),
             coverOverlays: (
               <div className="pointer-events-none absolute inset-0 overflow-hidden">
                 <Image
@@ -473,27 +485,13 @@ export default function Scene03Files() {
               </div>
             ),
           }}
-          folderContent={
-            <FolderReport
-              name="Placeholder Name"
-              age="Prototype"
-              birthplace="Somewhere"
-              residence="Everywhere"
-              notesSmall="Placeholder summary"
-              skills="Skill C · Skill D"
-              notesContent={
-                <div className="absolute inset-0 flex items-center justify-center text-[0.65rem] tracking-[0.12em]">
-                  Placeholder notes
-                </div>
-              }
-            />
-          }
+          folderContent={null}
           media={
             <div className="rotate-1">
               <DitherShader
-                src="/fpv_car.png"
+                src="/fpv_goose.png"
                 colorMode="grayscale"
-                threshold={0.5}
+                threshold={0.1}
                 gridSize={1}
                 objectFit="contain"
                 className="h-[60vmin] w-[60vmin] sm:h-[66vmin] sm:w-[66vmin] md:h-[70vmin] md:w-[70vmin] lg:h-[74vmin] lg:w-[74vmin] xl:h-[78vmin] xl:w-[78vmin]"

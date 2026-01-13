@@ -11,6 +11,7 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
     paperOffsetX = 0,
     folderRotation = "0deg",
     tabSide = "right",
+    hidePaperStack = false,
     isOpen: controlledOpen,
     interactive = true,
     onOpen,
@@ -20,6 +21,7 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
     coverOverlays = null,
     footerInlineStamps = [],
     footerOverlays = [],
+    paperContent = null,
   },
   ref,
 ) {
@@ -181,16 +183,22 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
         <div
           className={`relative h-full transition-transform duration-200 ease-out ${hoverLiftClass}`}
         >
-          <div
-            className={`absolute top-2 h-[98%] rounded-[10px] border-2 border-black bg-neutral-100 ${paperOnePosition} ${paperOneRotation}`}
-          ></div>
-          <div
-            className={`absolute top-0 h-[98%] rounded-[10px] border-2 border-black bg-white ${paperTwoPosition} ${paperTwoRotation}`}
-          >
-            <div className="report h-full w-full p-4">
-              {children || defaultReport}
-            </div>
-          </div>
+          {paperContent ? (
+            paperContent
+          ) : (
+            <>
+              <div
+                className={`absolute top-2 h-[98%] rounded-[10px] border-2 border-black bg-neutral-100 ${paperOnePosition} ${paperOneRotation}`}
+              ></div>
+              <div
+                className={`absolute top-0 h-[98%] rounded-[10px] border-2 border-black bg-white ${paperTwoPosition} ${paperTwoRotation}`}
+              >
+                <div className="report h-full w-full p-4">
+                  {children || defaultReport}
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
@@ -283,7 +291,7 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
                   }`}
                 ></div>
               ) : null}
-              {paperStack}
+              {hidePaperStack ? null : paperStack}
               {isOpen ? null : null}
             </div>
             {tabMarkup}
