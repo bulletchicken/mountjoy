@@ -315,9 +315,8 @@ export default function Scene03Files() {
             folderRotation: "2deg",
             paperRotation: "-2deg",
             footerLines: [
-              "Waterloo Hot or Not",
-              "Viral app for UW students",
-              "300k users",
+              "Viral Waterloo's Hot or Not",
+              "500 users",
             ],
             coverOverlays: (
               <div className="pointer-events-none absolute left-[8%] top-[0%] w-[84%] rotate-1">
@@ -459,14 +458,17 @@ export default function Scene03Files() {
             tabSide: "left",
             folderRotation: "1deg",
             paperRotation: "-1deg",
-            footerLines: ["Placeholder project", "Short description", "TBD"],
+            footerLines: [
+              "FPV RC car with loud annoying duck",
+              "Built for Hack the North 2025 organizer project",
+            ],
             coverOverlays: (
-              <div className="pointer-events-none absolute inset-0 -translate-y-10">
+              <div className="pointer-events-none absolute inset-0 overflow-hidden">
                 <Image
                   src="/duck_feet.png"
                   alt="Duck footprints"
                   fill
-                  className="object-cover"
+                  className="object-cover -translate-y-30"
                 />
               </div>
             ),
