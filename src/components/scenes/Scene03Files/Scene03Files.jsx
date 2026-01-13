@@ -7,11 +7,10 @@ import Image from "next/image";
 import {
   motion,
   useMotionTemplate,
-  useMotionValueEvent,
   useScroll,
   useTransform,
 } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
 function FolderReport({
   name,
@@ -169,7 +168,7 @@ function NotesLinkedInPost({ src, isInteractive = true, saturation = 1 }) {
 export default function Scene03Files() {
   const secretRef = useRef(null);
   const retreatStart = 0.6;
-  const retreatPause = 0.05;
+  const retreatPause = 0.1;
   const retreatDistance = 90;
   const handRetreatDistance = retreatDistance;
   const handStartX = 30;
@@ -179,7 +178,6 @@ export default function Scene03Files() {
     target: secretRef,
     offset: ["start 100%", "center start"],
   });
-  const [showClosedHand, setShowClosedHand] = useState(false);
   const handX = useTransform(
     secretScrollY,
     [0, retreatStart, retreatStart + retreatPause, 1],
@@ -192,9 +190,12 @@ export default function Scene03Files() {
     [0, retreatDistance],
   );
   const secretX = useMotionTemplate`${retreatX}vw`;
-  useMotionValueEvent(secretScrollY, "change", (value) => {
-    setShowClosedHand(value >= retreatStart + retreatPause);
-  });
+  const handClosedOpacity = useTransform(secretScrollY, (value) =>
+    value >= retreatStart + retreatPause ? 1 : 0,
+  );
+  const handOpenOpacity = useTransform(secretScrollY, (value) =>
+    value >= retreatStart + retreatPause ? 0 : 1,
+  );
 
   return (
     <section
@@ -507,11 +508,16 @@ export default function Scene03Files() {
             <Secret />
           </motion.div>
           <motion.div
-            style={{ x: handXValue, right: `${handRightOffset}vw` }}
+            style={{
+              x: handXValue,
+              right: `${handRightOffset}vw`,
+              willChange: "transform",
+            }}
             className="pointer-events-none absolute top-[92%] z-50 w-[105vw] max-w-[1500px] -translate-y-1/2 translate-y-[14vh] aspect-[3/1] relative overflow-hidden"
           >
             <motion.div
-              className={`absolute inset-0 ${showClosedHand ? "hidden" : ""}`}
+              className="absolute inset-0"
+              style={{ opacity: handOpenOpacity, willChange: "opacity" }}
             >
               <Image
                 src="/hand_open.png"
@@ -523,7 +529,8 @@ export default function Scene03Files() {
               />
             </motion.div>
             <motion.div
-              className={`absolute inset-0 ${showClosedHand ? "" : "hidden"}`}
+              className="absolute inset-0"
+              style={{ opacity: handClosedOpacity, willChange: "opacity" }}
             >
               <Image
                 src="/hand_close.png"
