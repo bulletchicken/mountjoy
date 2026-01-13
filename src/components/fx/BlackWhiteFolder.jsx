@@ -74,8 +74,8 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
   const paperTwoPosition = isFlipped ? "right-10 left-4" : "left-10 right-4";
   const paperOneRotation = isFlipped ? "rotate-[2deg]" : "rotate-[-2deg]";
   const paperTwoRotation = isFlipped ? "rotate-[-1.5deg]" : "rotate-[1.5deg]";
-  const resolvedFooterLines = footerLines.slice(0, 2);
-  while (resolvedFooterLines.length < 2) {
+  const resolvedFooterLines = ["", ...footerLines.slice(-2)];
+  while (resolvedFooterLines.length < 3) {
     resolvedFooterLines.push("");
   }
 
@@ -116,7 +116,7 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
   );
 
   const footerLineMarkup = (
-    <div className="absolute bottom-16 left-8 right-8 text-[0.85rem] font-mono font-bold tracking-[0.12em] text-black">
+    <div className="absolute bottom-12 left-8 right-8 text-[0.85rem] font-mono font-bold tracking-[0.12em] text-black">
       <div className="relative">
         {resolvedFooterLines.map((line, index) => (
           <div

@@ -288,6 +288,18 @@ export default function Scene03Files() {
               skills="Check-ins · med reminders"
               showHeaderDetails={false}
               notesVariant="full"
+              headerRightMedia={
+                <div className="h-full w-full p-2 text-[0.6rem] normal-case tracking-[0.08em]">
+                  <span className="block text-[0.58rem] uppercase tracking-[0.18em]">
+                    Notes:
+                  </span>
+                  <span className="mt-1 block">
+                    Ted is a AI robot who cares about your health (mental and
+                    physical). Kinda like Baymax, or Ted... from Ted... the
+                    movie... smth like that
+                  </span>
+                </div>
+              }
               notesContent={
                 <NotesLinkedInPost src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7338595986090430464?compact=1" />
               }
@@ -320,19 +332,30 @@ export default function Scene03Files() {
               "500 users",
             ],
             coverOverlays: (
-              <div className="pointer-events-none absolute left-[8%] top-[0%] w-[84%] rotate-1">
-                <div className="relative">
+              <>
+                <div className="pointer-events-none absolute left-[8%] top-[0%] w-[84%] rotate-1">
+                  <div className="relative">
+                    <Image
+                      src="/UWS_photo.png"
+                      alt="UWSummit landing"
+                      width={3024}
+                      height={1456}
+                      className="block w-full drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]"
+                    />
+                    <div className="absolute -top-2 left-10 h-6 w-4 -rotate-12 rounded-[4px] border-2 border-black bg-neutral-200" />
+                    <div className="absolute -top-2 right-10 h-6 w-4 rotate-12 rounded-[4px] border-2 border-black bg-neutral-200" />
+                  </div>
+                </div>
+                <div className="pointer-events-none absolute left-[10%] top-[34%] w-[86%] -rotate-2">
                   <Image
-                    src="/UWS_photo.png"
-                    alt="UWSummit landing"
-                    width={3024}
-                    height={1456}
+                    src="/UWS_email.png"
+                    alt="UWSummit email"
+                    width={1643}
+                    height={748}
                     className="block w-full drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]"
                   />
-                  <div className="absolute -top-2 left-10 h-6 w-4 -rotate-12 rounded-[4px] border-2 border-black bg-neutral-200" />
-                  <div className="absolute -top-2 right-10 h-6 w-4 rotate-12 rounded-[4px] border-2 border-black bg-neutral-200" />
                 </div>
-              </div>
+              </>
             ),
           }}
           folderContent={({ isOpen }) => (
@@ -388,7 +411,7 @@ export default function Scene03Files() {
                     width={1740}
                     height={1043}
                     className="absolute left-1/2 top-[14%] w-[260%] max-w-none drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)]"
-                    style={{ transform: "translate(-74%, 10%) rotate(-6deg)" }}
+                    style={{ transform: "translate(-74%, 18%) rotate(-6deg)" }}
                   />
                   <div className="relative translate-y-3">
                     <Image
@@ -464,16 +487,19 @@ export default function Scene03Files() {
               "HTN Organizer Project",
             ],
             paperContent: (
-              <div className="absolute left-1/2 top-0 h-[94%] w-[92%] -translate-x-1/2 overflow-hidden rounded-[10px] border-2 border-black bg-black">
-                <iframe
-                  src="https://www.youtube.com/embed/kwYwyRSzLE8"
-                  title="FPV RC minecart short"
-                  className="h-full w-full"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  style={{ filter: "saturate(0.5)" }}
-                  allowFullScreen
-                />
-              </div>
+              <>
+                <div className="absolute top-[-3%] h-[98%] rounded-[10px] border-2 border-black bg-neutral-100 right-2 left-14 rotate-[3deg]" />
+                <div className="absolute left-1/2 top-0 h-[94%] w-[92%] -translate-x-1/2 overflow-hidden rounded-[10px] border-2 border-black bg-black">
+                  <iframe
+                    src="https://www.youtube.com/embed/kwYwyRSzLE8"
+                    title="FPV RC minecart short"
+                    className="h-full w-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    style={{ filter: "saturate(0.5)" }}
+                    allowFullScreen
+                  />
+                </div>
+              </>
             ),
             coverOverlays: (
               <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -547,12 +573,16 @@ export default function Scene03Files() {
           href="https://devpost.com/"
           target="_blank"
           rel="noreferrer"
-          className="group relative inline-flex items-center gap-3 rounded-full border-2 border-black bg-white px-8 py-4 font-mono text-sm uppercase tracking-[0.28em] text-black transition-transform duration-200 hover:-translate-y-1 hover:shadow-[6px_6px_0_0_rgba(0,0,0,1)]"
+          className="group inline-flex items-center justify-center transition-transform duration-200 hover:-translate-y-1"
+          aria-label="More projects on Devpost"
         >
-          Too lazy to add more... here's 20 more projects on Devpost
-          <span className="text-base leading-none transition-transform duration-200 group-hover:translate-x-1">
-            →
-          </span>
+          <Image
+            src="/ball_button.PNG"
+            alt="More projects on Devpost"
+            width={980}
+            height={980}
+            className="h-[180px] w-[180px] object-contain transition-transform duration-200 group-hover:rotate-[-4deg] group-hover:scale-[1.06] group-hover:drop-shadow-[0_6px_12px_rgba(0,0,0,0.35)]"
+          />
         </a>
       </div>
       <style jsx>{`
