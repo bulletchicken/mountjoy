@@ -113,7 +113,7 @@ export default function Scene02Corkboard() {
 
   return (
     <section
-      className="relative z-0 isolate w-full bg-white pt-6 pb-10 -mt-24 cursor-default"
+      className="relative z-0 isolate w-full bg-white pt-6 pb-10 -mt-24 cursor-default translate-x-8"
       style={{
         backgroundImage: "url(/cork_texture.png)",
         backgroundRepeat: "repeat",

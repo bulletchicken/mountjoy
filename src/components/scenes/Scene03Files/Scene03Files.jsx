@@ -205,7 +205,7 @@ export default function Scene03Files() {
         backgroundSize: "800px 534px",
       }}
     >
-      <div className="flex flex-col items-center gap-24 sm:gap-36 lg:gap-48 xl:gap-60">
+      <div className="flex flex-col items-center gap-16 pt-12 sm:gap-24 lg:gap-32 xl:gap-40">
         <div className="pointer-events-none relative flex w-full justify-center -mb-[12.5rem] -mt-[7.5rem]">
           <Image
             src="/evidence_files.png"
@@ -415,21 +415,21 @@ export default function Scene03Files() {
                   alt="Guitar paint"
                   width={3213}
                   height={5712}
-                  className="absolute left-[4%] top-[2%] w-[58%] rotate-[-2deg] border-[8px] border-[#f5f1e6] bg-[#f5f1e6] object-cover drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]"
+                  className="absolute left-[4%] top-[2%] w-[58%] rotate-[-2deg] border-[8px] border-[#fdfbf6] bg-[#fdfbf6] object-cover drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]"
                 />
                 <Image
                   src="/guitar_model.png"
                   alt="Guitar CAD detail"
                   width={1889}
                   height={1560}
-                  className="absolute right-[3%] top-[4%] w-[42%] rotate-[5deg] border-[8px] border-[#f5f1e6] bg-[#f5f1e6] object-cover drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]"
+                  className="absolute right-[3%] top-[4%] w-[42%] rotate-[5deg] border-[8px] border-[#fdfbf6] bg-[#fdfbf6] object-cover drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]"
                 />
                 <Image
                   src="/guitar_final.jpg"
                   alt="Guitar final build"
                   width={3213}
                   height={5712}
-                  className="absolute bottom-[2%] right-[2%] w-[34%] rotate-[1deg] border-[8px] border-[#f5f1e6] bg-[#f5f1e6] object-cover drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]"
+                  className="absolute bottom-[2%] right-[2%] w-[34%] rotate-[1deg] border-[8px] border-[#fdfbf6] bg-[#fdfbf6] object-cover drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]"
                 />
               </div>
             </div>
@@ -454,7 +454,7 @@ export default function Scene03Files() {
           spineSide="right"
           centerOffsetX={360}
           folderProps={{
-            label: "Placeholder",
+            label: "Goose Cart",
             tabSide: "left",
             folderRotation: "1deg",
             paperRotation: "-1deg",
