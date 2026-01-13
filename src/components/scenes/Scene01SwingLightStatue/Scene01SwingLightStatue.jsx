@@ -188,6 +188,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       anchor: "mona",
       motionY: monaY,
       scaleSm: 1.4,
+      scaleMd: 1.25,
     },
     {
       key: "spray-paint",
@@ -199,9 +200,11 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       motionY: statueY,
       offsetX: -360,
       offsetXSm: -235,
-      offsetXMd: -160,
+      offsetXMd: -80,
+      offsetXLg: -160,
       scale: 1.12,
-      scaleSm: 1.02,
+      scaleSm: 1.15,
+      scaleMd: 1.1,
     },
     {
       key: "statue-sketch",
@@ -213,9 +216,11 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       motionY: statueY,
       offsetX: -40,
       offsetXSm: -25,
-      offsetXMd: 20,
+      offsetXMd: 80,
+      offsetXLg: 80,
       scale: 1.04,
-      scaleSm: 0.96,
+      scaleSm: 1.05,
+      scaleMd: 1.02,
     },
   ];
   const topLayerItems = [
@@ -229,6 +234,8 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       motionY: monaY,
       mask: "beam",
       scale: 0.8,
+      scaleSm: 0.9,
+      scaleMd: 0.85,
     },
     {
       key: "statue",
@@ -241,9 +248,11 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       mask: "beam",
       offsetX: -40,
       offsetXSm: -25,
-      offsetXMd: 20,
+      offsetXMd: 80,
+      offsetXLg: 80,
       scale: 1.03,
-      scaleSm: 0.95,
+      scaleSm: 1.02,
+      scaleMd: 1.01,
     },
   ];
   const renderLayerItems = (items) =>
@@ -290,14 +299,21 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
     }
     const isSm = size.w < 640;
     const isMd = size.w < 768;
+    const isLg = size.w >= 1024 && size.w < 1280;
     const scaleOverride =
-      isSm && item.scaleSm != null ? item.scaleSm : (item.scale ?? 1);
+      isSm && item.scaleSm != null
+        ? item.scaleSm
+        : isMd && item.scaleMd != null
+          ? item.scaleMd
+          : (item.scale ?? 1);
     const combinedScale = scaleOverride * layoutScale;
     const itemOffsetX =
       isSm && item.offsetXSm != null
         ? item.offsetXSm
         : isMd && item.offsetXMd != null
           ? item.offsetXMd
+          : isLg && item.offsetXLg != null
+            ? item.offsetXLg
           : item.offsetX || 0;
     const itemOffsetY =
       isSm && item.offsetYSm != null ? item.offsetYSm : item.offsetY || 0;
