@@ -199,6 +199,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       motionY: statueY,
       offsetX: -360,
       offsetXSm: -235,
+      offsetXMd: -160,
       scale: 1.12,
       scaleSm: 1.02,
     },
@@ -212,6 +213,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       motionY: statueY,
       offsetX: -40,
       offsetXSm: -25,
+      offsetXMd: 20,
       scale: 1.04,
       scaleSm: 0.96,
     },
@@ -239,6 +241,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       mask: "beam",
       offsetX: -40,
       offsetXSm: -25,
+      offsetXMd: 20,
       scale: 1.03,
       scaleSm: 0.95,
     },
@@ -286,11 +289,16 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       return null;
     }
     const isSm = size.w < 640;
+    const isMd = size.w < 768;
     const scaleOverride =
       isSm && item.scaleSm != null ? item.scaleSm : (item.scale ?? 1);
     const combinedScale = scaleOverride * layoutScale;
     const itemOffsetX =
-      isSm && item.offsetXSm != null ? item.offsetXSm : item.offsetX || 0;
+      isSm && item.offsetXSm != null
+        ? item.offsetXSm
+        : isMd && item.offsetXMd != null
+          ? item.offsetXMd
+          : item.offsetX || 0;
     const itemOffsetY =
       isSm && item.offsetYSm != null ? item.offsetYSm : item.offsetY || 0;
     const { x, y, width, maxWidth, alignX = 0, alignY = 0 } = anchor.svg;
@@ -473,7 +481,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
         {/* <div className="pointer-events-none absolute inset-0 z-50 [backdrop-filter:blur(10px)] [mask-image:radial-gradient(ellipse_at_center,transparent_18%,black)] max-sm:[backdrop-filter:none]" /> */}
         <motion.div
           style={{ y: statueY }}
-          className="pointer-events-none absolute left-[20%] top-[34%] z-50 max-w-[420px] font-mono mix-blend-difference text-white"
+          className="pointer-events-none absolute left-1/2 top-[34%] z-50 max-w-[420px] -translate-x-1/2 text-center font-mono mix-blend-difference text-white lg:left-[20%] lg:translate-x-0 lg:text-left"
         >
           <p className="text-[1.05rem] leading-[1.2] tracking-[0.02em]">
             MLH&apos;s Top 50 hacker with 25 hackathons and 15 wins.

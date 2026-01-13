@@ -59,7 +59,7 @@ export default function Home() {
       <Navbar />
       <div ref={containerRef} className="relative">
         <motion.div
-          className="pointer-events-none absolute left-[30%] top-[150vh] z-60 w-[80px] -translate-x-1/2 sm:w-[100px] md:w-[120px] aspect-[431/683] relative"
+          className="pointer-events-none absolute left-1/2 top-[150vh] z-60 w-[120px] -translate-x-1/2 md:left-[50%] md:w-[120px] lg:left-[30%] aspect-[431/683] relative"
           style={{ willChange: "opacity, transform" }}
         >
           <motion.img
@@ -78,7 +78,7 @@ export default function Home() {
           />
         </motion.div>
         <motion.div
-          className="pointer-events-none absolute left-[30%] top-[142vh] z-60 w-[44vw] max-w-[680px] -translate-x-full -translate-y-1/2 rotate-[-25deg] origin-right aspect-[5051/1655] relative"
+          className="pointer-events-none absolute left-[52%] top-[140vh] z-60 w-[640px] -translate-x-full -translate-y-1/2 rotate-[-25deg] origin-right aspect-[5051/1655] relative sm:left-[52%] md:left-[51%] lg:left-[30.5%] lg:top-[141vh] xl:left-[30%]"
           style={{ x: handXValue }}
         >
           <motion.img
