@@ -463,7 +463,7 @@ export default function Scene03Files() {
               "HTN Organizer Project",
             ],
             paperContent: (
-              <div className="absolute left-1/2 top-0 h-[94%] w-[92%] -translate-x-1/2 overflow-hidden rounded-[10px] border-4 border-black bg-black">
+              <div className="absolute left-1/2 top-0 h-[94%] w-[92%] -translate-x-1/2 overflow-hidden rounded-[10px] border-2 border-black bg-black">
                 <iframe
                   src="https://www.youtube.com/embed/kwYwyRSzLE8"
                   title="FPV RC minecart short"
