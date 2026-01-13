@@ -113,7 +113,7 @@ export default function Scene02Corkboard() {
 
   return (
     <section
-      className="relative z-0 isolate w-full bg-white pt-6 pb-10 -mt-24 cursor-default translate-x-8"
+      className="relative z-0 isolate w-full bg-white pt-6 pb-10 -mt-24 cursor-default translate-x-8 overflow-visible"
       style={{
         backgroundImage: "url(/cork_texture.png)",
         backgroundRepeat: "repeat",
@@ -160,7 +160,7 @@ export default function Scene02Corkboard() {
           </div>
         ))}
         <div className="pointer-events-none w-full">
-          <div className="mx-auto w-[min(80vw,720px)] rotate-10 pt-6 pb-4 -mb-16 translate-y-12">
+          <div className="mx-auto w-[min(80vw,720px)] rotate-10 pt-6 pb-4 -mb-16 translate-y-12 -translate-x-6">
             <Image
               src="/where_is_he.png"
               alt="Where is he note"
@@ -359,8 +359,8 @@ export default function Scene02Corkboard() {
               </div>
               <div className="relative z-10 mt-[480px] ml-[58%] w-fit -rotate-4 transition-transform duration-200 hover:scale-[1.02]">
                 <Polaroid
-                  src="/the_cat.jpg"
-                  alt="HTN polaroid snapshot"
+                  src="/htn_obama.jpg"
+                  alt="HTN Obama snapshot"
                   sizeClass="w-40 sm:w-48"
                   imageClass="w-32 h-44 sm:w-40 sm:h-52"
                   className="drop-shadow-[0_2px_6px_rgba(0,0,0,0.25)]"
