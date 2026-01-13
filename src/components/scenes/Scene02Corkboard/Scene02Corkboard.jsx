@@ -230,7 +230,6 @@ export default function Scene02Corkboard() {
                   alt="Polaroid cat"
                   sizeClass="w-40 sm:w-48"
                   imageClass="w-32 h-44 sm:w-40 sm:h-52"
-                  className="drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]"
                 />
               </div>
               <div className="invisible">
@@ -263,7 +262,6 @@ export default function Scene02Corkboard() {
                         alt="Polaroid work snapshot"
                         sizeClass="w-40 sm:w-48"
                         imageClass="w-32 h-44 sm:w-40 sm:h-52"
-                        className="drop-shadow-[0_2px_6px_rgba(0,0,0,0.25)]"
                       />
                       <div className="absolute top-4 left-1/2 z-10 -translate-x-1/2">
                         <div className="relative h-4 w-4 rounded-full border border-neutral-500 bg-neutral-300">
@@ -363,7 +361,6 @@ export default function Scene02Corkboard() {
                   alt="HTN Obama snapshot"
                   sizeClass="w-40 sm:w-48"
                   imageClass="w-32 h-44 sm:w-40 sm:h-52"
-                  className="drop-shadow-[0_2px_6px_rgba(0,0,0,0.25)]"
                 />
               </div>
               <div className="absolute left-[74%] top-[300px] z-10 rotate-8 w-[110px] transition-transform duration-200 hover:scale-[1.02]">

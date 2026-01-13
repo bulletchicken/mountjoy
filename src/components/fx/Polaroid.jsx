@@ -13,7 +13,7 @@ export default function Polaroid({
   return (
     <figure
       className={[
-        "relative isolate select-none",
+        "relative isolate select-none drop-shadow-[0_1px_2px_rgba(0,0,0,1)]",
         "rounded-[0.4rem] bg-white",
         "px-1 pt-6 pb-14",
         sizeClass,
