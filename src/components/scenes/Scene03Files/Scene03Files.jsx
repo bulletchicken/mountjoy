@@ -16,6 +16,10 @@ import { useRef, useState } from "react";
 function FolderReport({
   name,
   age,
+  ageLabel = "Age",
+  ageContent,
+  showAgeTop = true,
+  showAgeBottom = true,
   birthplace,
   residence,
   notesSmall,
@@ -46,10 +50,20 @@ function FolderReport({
               </div>
             </div>
             <div className="p-1.5">
-              Age:
-              <div className="mt-0.5 text-[0.6rem] normal-case tracking-[0.08em]">
-                {age}
-              </div>
+              {showAgeTop ? (
+                ageLabel ? (
+                  <>
+                    {ageLabel}:
+                    <div className="mt-0.5 text-[0.6rem] normal-case tracking-[0.08em]">
+                      {ageContent ?? age}
+                    </div>
+                  </>
+                ) : (
+                  <div className="mt-0.5 text-[0.6rem] normal-case tracking-[0.08em]">
+                    {ageContent ?? age}
+                  </div>
+                )
+              ) : null}
             </div>
           </div>
           <div className="grid min-h-0 flex-1 grid-cols-[0.4fr_0.6fr] grid-rows-2">
@@ -85,7 +99,7 @@ function FolderReport({
                   className={`w-full relative overflow-hidden ${
                     showHeaderDetails
                       ? "mt-2 h-20 border-2 border-black"
-                      : "h-full"
+                      : "h-full overflow-visible"
                   }`}
                 >
                   {headerRightMedia}
@@ -93,10 +107,20 @@ function FolderReport({
               ) : null}
             </div>
             <div className="border-r-2 border-black p-1.5 h-full">
-              Age:
-              <div className="mt-0.5 text-[0.6rem] normal-case tracking-[0.08em]">
-                {age}
-              </div>
+              {showAgeBottom ? (
+                ageLabel ? (
+                  <>
+                    {ageLabel}:
+                    <div className="mt-0.5 text-[0.6rem] normal-case tracking-[0.08em]">
+                      {ageContent ?? age}
+                    </div>
+                  </>
+                ) : (
+                  <div className="mt-0.5 text-[0.6rem] normal-case tracking-[0.08em]">
+                    {ageContent ?? age}
+                  </div>
+                )
+              ) : null}
             </div>
           </div>
         </div>
@@ -203,57 +227,56 @@ export default function Scene03Files() {
               "Healthcare companion teddy bear",
               "Funded by:",
             ],
-            footerOverlays: [
-              <a
-                key="techyon-footer"
-                href="https://techyon.org/"
-                target="_blank"
-                rel="noreferrer"
-                className="absolute left-[23%] bottom-[-6%] w-[16%] -rotate-6"
-              >
-                <Image
-                  src="/techyon-logo.png"
-                  alt="Techyon"
-                  width={1000}
-                  height={722}
-                  className="block w-full"
-                />
-              </a>,
-              <a
-                key="1517-footer"
-                href="https://www.1517fund.com/"
-                target="_blank"
-                rel="noreferrer"
-                className="absolute left-[40%] bottom-[3%] w-[20%] rotate-4"
-              >
-                <Image
-                  src="/1517-logo.png"
-                  alt="1517"
-                  width={2154}
-                  height={825}
-                  className="block w-full"
-                />
-              </a>,
-            ],
             coverOverlays: (
-              <div className="pointer-events-none absolute left-[26%] top-[-2%] w-[58%] rotate-5">
-                <div className="relative">
-                  <Image
-                    src="/ted_model.png"
-                    alt="TED model"
-                    width={1564}
-                    height={1562}
-                    className="block w-full rounded-[6px] drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]"
-                  />
-                  <div className="absolute -top-2 left-20 h-6 w-4 -rotate-12 rounded-[4px] border-2 border-black bg-neutral-200" />
+              <>
+                <div className="pointer-events-none absolute left-[14%] top-[-2%] w-[52%] rotate-5">
+                  <div className="relative">
+                    <Image
+                      src="/ted_model.png"
+                      alt="TED model"
+                      width={1564}
+                      height={1562}
+                      className="block w-full rounded-[6px] drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]"
+                    />
+                    <div className="absolute -top-2 left-20 h-6 w-4 -rotate-12 rounded-[4px] border-2 border-black bg-neutral-200" />
+                  </div>
                 </div>
-              </div>
+                <div className="pointer-events-none absolute right-[4%] top-[4%] w-[34%] -rotate-3">
+                  <Image
+                    src="/ted_polaroid.png"
+                    alt="TED polaroid"
+                    width={1179}
+                    height={1769}
+                    className="block w-full drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
+                  />
+                </div>
+              </>
             ),
           }}
           folderContent={
             <FolderReport
               name="AI Teddy Bear"
               age="Prototype"
+              ageLabel="Funded by"
+              ageContent={
+                <span className="relative mt-1 block h-8">
+                  <Image
+                    src="/techyon-logo.png"
+                    alt="Techyon"
+                    width={1000}
+                    height={722}
+                    className="absolute left-[40%] top-2 h-8 w-auto -translate-x-full -rotate-6"
+                  />
+                  <Image
+                    src="/1517-logo.png"
+                    alt="1517"
+                    width={2154}
+                    height={825}
+                    className="absolute left-[60%] top-4 h-8 w-auto -translate-x-1/2 rotate-3"
+                  />
+                </span>
+              }
+              showAgeTop={false}
               birthplace="Waterloo"
               residence="Care homes"
               hair="Plush"
@@ -264,15 +287,6 @@ export default function Scene03Files() {
               skills="Check-ins · med reminders"
               showHeaderDetails={false}
               notesVariant="full"
-              headerRightMedia={
-                <Image
-                  src="/ted_army.JPG"
-                  alt="TED army"
-                  fill
-                  sizes="(max-width: 768px) 40vw, 30vw"
-                  className="absolute inset-0 h-full w-full object-cover"
-                />
-              }
               notesContent={
                 <NotesLinkedInPost src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7338595986090430464?compact=1" />
               }
@@ -373,16 +387,19 @@ export default function Scene03Files() {
                     alt="Guitar reference"
                     width={1740}
                     height={1043}
-                    className="absolute -left-[24%] top-[58%] w-[150%] rotate-[-6deg] drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)]"
+                    className="absolute left-1/2 top-[14%] w-[260%] max-w-none drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)]"
+                    style={{ transform: "translate(-74%, 10%) rotate(-6deg)" }}
                   />
-                  <Image
-                    src="/polaroid_costume_guitar.png"
-                    alt="Guitar costume"
-                    width={2688}
-                    height={4032}
-                    className="block w-full rounded-[6px] drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
-                  />
-                  <div className="absolute -top-2 left-4 h-6 w-4 -rotate-12 rounded-[4px] border-2 border-black bg-neutral-200" />
+                  <div className="relative translate-y-3">
+                    <Image
+                      src="/polaroid_costume_guitar.png"
+                      alt="Guitar costume"
+                      width={2688}
+                      height={4032}
+                      className="block w-full rounded-[6px] drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
+                    />
+                    <div className="absolute -top-2 left-4 h-6 w-4 -rotate-12 rounded-[4px] border-2 border-black bg-neutral-200" />
+                  </div>
                 </div>
               </div>
             ),
@@ -443,6 +460,16 @@ export default function Scene03Files() {
             folderRotation: "1deg",
             paperRotation: "-1deg",
             footerLines: ["Placeholder project", "Short description", "TBD"],
+            coverOverlays: (
+              <div className="pointer-events-none absolute inset-0 -translate-y-10">
+                <Image
+                  src="/duck_feet.png"
+                  alt="Duck footprints"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            ),
           }}
           folderContent={
             <FolderReport
