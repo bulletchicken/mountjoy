@@ -172,12 +172,12 @@ export default function Scene02Corkboard() {
         </div>
         <div
           ref={waterlooRef}
-          className="relative w-full"
+          className="relative w-full sm:-translate-x-10 md:-translate-x-8 lg:translate-x-0"
           style={waterlooHeight ? { height: `${waterlooHeight}px` } : undefined}
         >
           <div
             ref={waterlooStickyRef}
-            className="absolute left-[15%] top-[25%] rotate-3 mx-auto w-full max-w-[220px] z-20 transition-transform duration-200 hover:scale-[1.02]"
+            className="absolute left-[15%] top-[25%] rotate-3 mx-auto w-full max-w-[220px] z-20 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[4deg]"
           >
             <Image
               src="/waterloo_sticky.png"
@@ -189,7 +189,7 @@ export default function Scene02Corkboard() {
           </div>
           <div
             ref={waterlooNewsRef}
-            className="absolute left-[5%] top-[-52%] -rotate-2 w-[min(80vw,700px)] max-w-none z-0 transition-transform duration-200 hover:scale-[1.02]"
+            className="absolute left-[5%] top-[-52%] -rotate-2 w-[min(80vw,700px)] max-w-none z-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-1deg]"
           >
             <Image
               src="/waterloo_news.png"
@@ -201,7 +201,7 @@ export default function Scene02Corkboard() {
           </div>
           <div
             ref={waterlooSydeRef}
-            className="absolute left-[50%] top-[-30%] rotate-1 w-[min(80vw,680px)] max-w-none z-0 transition-transform duration-200 hover:scale-[1.02]"
+            className="absolute left-[50%] top-[-30%] rotate-1 w-[min(80vw,680px)] max-w-none z-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[2deg]"
           >
             <Image
               src="/waterloo_syde.png"
@@ -213,7 +213,7 @@ export default function Scene02Corkboard() {
           </div>
           <div
             ref={waterlooPolaroidsRef}
-            className="absolute left-[68%] top-48 w-[min(70vw,420px)] max-w-none z-10 transition-transform duration-200 hover:scale-[1.02]"
+            className="absolute left-[68%] top-48 w-[min(70vw,420px)] max-w-none z-10 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[1deg]"
           >
             <div className="relative w-full">
               <div className="absolute left-2 top-16 -rotate-8 z-0">
@@ -253,9 +253,9 @@ export default function Scene02Corkboard() {
                     alt="Quanto news"
                     width={2048}
                     height={2048}
-                    className="h-auto w-full drop-shadow-[0_1px_2px_rgba(0,0,0,1)] transition-transform duration-200 group-hover:scale-[1.02]"
+                    className="h-auto w-full drop-shadow-[0_1px_2px_rgba(0,0,0,1)] transition-transform duration-200 group-hover:-translate-y-1 group-hover:rotate-[1deg]"
                   />
-                  <div className="absolute -left-6 bottom-[-50%] z-10 -rotate-1 transition-transform duration-200 hover:scale-[1.02]">
+                  <div className="absolute -left-6 bottom-[-50%] z-10 -rotate-1 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-2deg]">
                     <div className="relative">
                       <Polaroid
                         src="/quanto_selfie.jpeg"
@@ -281,7 +281,7 @@ export default function Scene02Corkboard() {
                   </div>
                   <div
                     ref={quantoRef}
-                    className="absolute right-6 bottom-[-6%] z-10 w-[200px] -rotate-10 scale-[1.1] transition-transform duration-200 hover:scale-[1.13]"
+                    className="absolute right-6 bottom-[-6%] z-10 w-[200px] -rotate-10 scale-[1.1] transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-8deg]"
                   >
                     <Image
                       src="/quanto_sticky.png"
@@ -297,7 +297,7 @@ export default function Scene02Corkboard() {
             <div className="relative w-full overflow-visible -mt-10 translate-x-6">
               <div
                 ref={shopifyRef}
-                className="absolute left-[70%] top-[-10%] z-10 w-full max-w-[220px] transition-transform duration-200 hover:scale-[1.02]"
+                className="absolute left-[70%] top-[-10%] z-10 w-full max-w-[220px] transition-transform duration-200 hover:-translate-y-1 hover:rotate-[1deg]"
               >
                 <Image
                   src="/shopify_sticky.png"
@@ -327,7 +327,7 @@ export default function Scene02Corkboard() {
               </div>
               <div
                 ref={htnRef}
-                className="absolute left-[-10%] top-[280px] w-full max-w-[220px] -rotate-2 scale-[1.1] z-10 transition-transform duration-200 hover:scale-[1.12]"
+                className="absolute left-[-10%] top-[280px] w-full max-w-[220px] -rotate-2 scale-[1.1] z-10 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-1deg]"
               >
                 <Image
                   src="/htn_sticky.png"
@@ -355,7 +355,7 @@ export default function Scene02Corkboard() {
                   className="h-auto w-[220px] opacity-80"
                 />
               </div>
-              <div className="relative z-10 mt-[480px] ml-[58%] w-fit -rotate-4 transition-transform duration-200 hover:scale-[1.02]">
+              <div className="relative z-10 mt-[480px] ml-[58%] w-fit -rotate-4 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-3deg]">
                 <div className="relative">
                   <Polaroid
                     src="/htn_obama.jpg"
@@ -370,7 +370,7 @@ export default function Scene02Corkboard() {
                   </div>
                 </div>
               </div>
-              <div className="absolute left-[74%] top-[300px] z-10 rotate-8 w-[110px] transition-transform duration-200 hover:scale-[1.02]">
+              <div className="absolute left-[74%] top-[300px] z-10 rotate-8 w-[110px] transition-transform duration-200 hover:-translate-y-1 hover:rotate-[9deg]">
                 <Image
                   src="/alicehacks_sticker.png"
                   alt="AliceHacks sticker"

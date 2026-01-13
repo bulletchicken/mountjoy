@@ -187,8 +187,12 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       height: 1390,
       anchor: "mona",
       motionY: monaY,
-      scaleSm: 1.4,
-      scaleMd: 1.25,
+      scaleSm: 1.65,
+      scaleMd: 1.4,
+      offsetYSm: 72,
+      offsetYMd: 48,
+      offsetXSm: 20,
+      offsetXMd: 30,
     },
     {
       key: "spray-paint",
@@ -199,12 +203,14 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       anchor: "statue",
       motionY: statueY,
       offsetX: -360,
-      offsetXSm: -235,
-      offsetXMd: -80,
+      offsetXSm: -160,
+      offsetXMd: -10,
+      offsetYSm: -40,
+      offsetYMd: -30,
       offsetXLg: -160,
       scale: 1.12,
-      scaleSm: 1.15,
-      scaleMd: 1.1,
+      scaleSm: 1.3,
+      scaleMd: 1.2,
     },
     {
       key: "statue-sketch",
@@ -215,12 +221,14 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       anchor: "statue",
       motionY: statueY,
       offsetX: -40,
-      offsetXSm: -25,
-      offsetXMd: 80,
+      offsetXSm: 40,
+      offsetXMd: 140,
+      offsetYSm: -40,
+      offsetYMd: -30,
       offsetXLg: 80,
       scale: 1.04,
-      scaleSm: 1.05,
-      scaleMd: 1.02,
+      scaleSm: 1.2,
+      scaleMd: 1.12,
     },
   ];
   const topLayerItems = [
@@ -234,8 +242,12 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       motionY: monaY,
       mask: "beam",
       scale: 0.8,
-      scaleSm: 0.9,
-      scaleMd: 0.85,
+      scaleSm: 1.4,
+      scaleMd: 1.2,
+      offsetYSm: 72,
+      offsetYMd: 48,
+      offsetXSm: 20,
+      offsetXMd: 30,
     },
     {
       key: "statue",
@@ -247,12 +259,14 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       motionY: statueY,
       mask: "beam",
       offsetX: -40,
-      offsetXSm: -25,
-      offsetXMd: 80,
+      offsetXSm: 40,
+      offsetXMd: 140,
+      offsetYSm: -40,
+      offsetYMd: -30,
       offsetXLg: 80,
       scale: 1.03,
-      scaleSm: 1.02,
-      scaleMd: 1.01,
+      scaleSm: 1.18,
+      scaleMd: 1.08,
     },
   ];
   const renderLayerItems = (items) =>
@@ -316,7 +330,11 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
             ? item.offsetXLg
           : item.offsetX || 0;
     const itemOffsetY =
-      isSm && item.offsetYSm != null ? item.offsetYSm : item.offsetY || 0;
+      isSm && item.offsetYSm != null
+        ? item.offsetYSm
+        : isMd && item.offsetYMd != null
+          ? item.offsetYMd
+          : item.offsetY || 0;
     const { x, y, width, maxWidth, alignX = 0, alignY = 0 } = anchor.svg;
     const widthPx = Math.min(size.w * width, maxWidth ?? Infinity);
     const aspectRatio = anchor.svg.aspectRatio ?? item.width / item.height;
@@ -497,12 +515,12 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
         {/* <div className="pointer-events-none absolute inset-0 z-50 [backdrop-filter:blur(10px)] [mask-image:radial-gradient(ellipse_at_center,transparent_18%,black)] max-sm:[backdrop-filter:none]" /> */}
         <motion.div
           style={{ y: statueY }}
-          className="pointer-events-none absolute left-1/2 top-[34%] z-50 max-w-[420px] -translate-x-1/2 text-center font-mono mix-blend-difference text-white lg:left-[20%] lg:translate-x-0 lg:text-left"
+          className="pointer-events-none absolute left-1/2 top-[24%] z-50 max-w-[420px] -translate-x-1/2 text-center font-mono text-lg mix-blend-difference text-white sm:text-xl lg:left-[20%] lg:translate-x-0 lg:text-left lg:top-[34%] lg:text-base"
         >
-          <p className="text-[1.05rem] leading-[1.2] tracking-[0.02em]">
+          <p className="text-xl leading-[1.15] tracking-[0.02em] sm:text-2xl lg:text-[1.05rem]">
             MLH&apos;s Top 50 hacker with 25 hackathons and 15 wins.
           </p>
-          <p className="mt-3 text-[1.05rem] leading-[1.2] tracking-[0.02em]">
+          <p className="mt-3 text-xl leading-[1.15] tracking-[0.02em] sm:text-2xl lg:text-[1.05rem]">
             Loves teddy bears and his grandma.
           </p>
         </motion.div>

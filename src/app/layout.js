@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 export default function RootLayout({ children }) {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 0.8,
+      duration: 1.3,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
