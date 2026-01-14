@@ -185,17 +185,25 @@ export default function Scene03Files() {
   const retreatStart = 0.6;
   const retreatPause = 0.1;
   const [isBaseScreen, setIsBaseScreen] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [isMdOnly, setIsMdOnly] = useState(false);
   useEffect(() => {
-    const update = () => setIsBaseScreen(window.innerWidth < 640);
+    const update = () => {
+      const width = window.innerWidth;
+      setIsBaseScreen(width < 640);
+      setIsSmallScreen(width < 768);
+      setIsMdOnly(width >= 768 && width < 1024);
+    };
     update();
     window.addEventListener("resize", update);
     return () => window.removeEventListener("resize", update);
   }, []);
-  const retreatDistance = isBaseScreen ? 260 : 90;
+  const isSmOnly = isSmallScreen && !isBaseScreen;
+  const retreatDistance = isBaseScreen ? 260 : isSmOnly ? 260 : isMdOnly ? 320 : 90;
   const handRetreatDistance = retreatDistance;
-  const handStartX = isBaseScreen ? 60 : 30;
-  const handMidX = isBaseScreen ? -90 : -38;
-  const handRightOffset = isBaseScreen ? -52 : -20;
+  const handStartX = isBaseScreen ? 60 : isSmOnly ? 60 : isMdOnly ? 84 : 30;
+  const handMidX = isBaseScreen ? -90 : isSmOnly ? -90 : isMdOnly ? -116 : -38;
+  const handRightOffset = isBaseScreen ? -52 : isSmOnly ? -52 : isMdOnly ? -72 : -20;
   const { scrollYProgress: secretScrollY } = useScroll({
     target: secretRef,
     offset: ["start 100%", "center start"],
@@ -594,7 +602,7 @@ export default function Scene03Files() {
               right: `${handRightOffset}vw`,
               willChange: "transform",
             }}
-            className="pointer-events-none absolute top-[84%] z-50 w-[140vw] max-w-[1900px] -translate-y-1/2 translate-y-[6vh] aspect-[3/1] relative overflow-hidden sm:w-[105vw] sm:max-w-[1500px] sm:top-[92%] sm:translate-y-[14vh]"
+            className="pointer-events-none absolute top-[84%] z-50 w-[140vw] max-w-[1900px] -translate-y-1/2 translate-y-[6vh] aspect-[3/1] relative overflow-hidden sm:w-[140vw] sm:max-w-[1900px] sm:top-[84%] sm:translate-y-[6vh] md:w-[160vw] md:max-w-[2200px]"
           >
             <motion.div
               className="absolute inset-0"
