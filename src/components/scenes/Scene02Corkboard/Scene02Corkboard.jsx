@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import Polaroid from "@/components/fx/Polaroid";
 
-function AnimatedString({ d, start, end, progress }) {
+function AnimatedString({ d, start, end, progress, isSmallScreen }) {
   const duration = Math.max(0.001, end - start);
   const draw = useTransform(progress, [start, end], [0, 1]);
   const opacity = useTransform(
@@ -18,7 +18,7 @@ function AnimatedString({ d, start, end, progress }) {
     <motion.path
       d={d}
       stroke="#b91c1c"
-      strokeWidth="5"
+      strokeWidth={isSmallScreen ? 6 : 5}
       strokeLinecap="round"
       fill="none"
       pathLength={draw}
@@ -215,7 +215,7 @@ export default function Scene02Corkboard() {
   return (
     <section
       ref={sectionRef}
-      className="relative z-0 isolate w-full bg-white pt-4 pb-10 -mt-40 cursor-default translate-x-8 overflow-visible sm:pt-6 sm:-mt-32"
+      className="relative z-0 isolate w-full bg-white pt-4 pb-10 -mt-72 cursor-default translate-x-8 overflow-visible sm:pt-6 sm:-mt-32"
       style={{
         backgroundImage: "url(/cork_texture.png)",
         backgroundRepeat: "repeat",
@@ -224,7 +224,7 @@ export default function Scene02Corkboard() {
     >
       <div
         ref={containerRef}
-        className="relative mx-auto -mt-80 flex w-full max-w-6xl flex-wrap items-center justify-center gap-12 px-6 overflow-visible"
+        className="relative mx-auto -mt-72 sm:-mt-80 flex w-full max-w-6xl flex-wrap items-center justify-center gap-12 px-6 overflow-visible"
       >
         <svg className="pointer-events-none absolute inset-0 z-30 h-full w-full">
           {resolvedConnections.map((connection) => (
@@ -234,6 +234,7 @@ export default function Scene02Corkboard() {
               start={connection.start}
               end={connection.end}
               progress={stringProgress}
+              isSmallScreen={isSmallScreen}
             />
           ))}
         </svg>
@@ -261,12 +262,12 @@ export default function Scene02Corkboard() {
         </div>
         <div
           ref={waterlooRef}
-          className="relative w-full -translate-x-24"
+          className="relative w-full -translate-x-24 md:-translate-x-16"
           style={waterlooHeight ? { height: `${waterlooHeight}px` } : undefined}
         >
           <div
             ref={waterlooStickyRef}
-            className="absolute left-[15%] top-[25%] rotate-3 mx-auto w-[min(42vw,220px)] z-20 scale-[0.75] -translate-y-12 md:scale-100 md:translate-y-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[4deg]"
+            className="absolute left-[15%] top-[25%] rotate-3 mx-auto w-[min(42vw,220px)] z-20 scale-[0.9] -translate-y-6 sm:scale-[0.75] sm:-translate-y-12 md:scale-100 md:translate-y-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[4deg]"
           >
             <Image
               src="/waterloo_sticky.png"
@@ -337,17 +338,17 @@ export default function Scene02Corkboard() {
         </div>
         <div className="relative w-full min-h-[220px] overflow-visible">
           <div className="relative mx-auto flex w-full max-w-3xl flex-col items-center gap-6 md:gap-8 overflow-visible -translate-y-[180px]">
-            <div className="relative w-full min-h-[480px] overflow-visible">
-              <div className="group absolute left-[-16%] top-[120px] translate-x-6 sm:left-[-12%] sm:top-[90px] sm:translate-x-12 md:top-[40px] md:translate-x-0 w-[min(70vw,620px)] max-w-none">
+            <div className="relative w-full min-h-[560px] sm:min-h-[480px] overflow-visible">
+              <div className="group absolute left-[-16%] top-[160px] translate-x-6 translate-y-12 sm:left-[-12%] sm:top-[90px] sm:translate-x-24 sm:translate-y-0 md:top-[40px] md:translate-x-0 w-[min(70vw,620px)] max-w-none">
                 <div className="relative w-full">
                   <Image
                     src="/quanto_news.png"
                     alt="Quanto news"
                     width={2048}
                     height={2048}
-                    className="h-auto w-full drop-shadow-[0_1px_2px_rgba(0,0,0,1)] transition-transform duration-200 group-hover:-translate-y-1 group-hover:rotate-[1deg]"
+                    className="h-auto w-full translate-x-6 scale-[1.25] sm:translate-x-0 sm:scale-100 drop-shadow-[0_1px_2px_rgba(0,0,0,1)] transition-transform duration-200 group-hover:-translate-y-1 group-hover:rotate-[1deg]"
                   />
-                  <div className="absolute -left-6 bottom-[-50%] z-10 -rotate-1 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-2deg]">
+                  <div className="absolute left-[64%] bottom-[-60%] z-10 -rotate-1 translate-y-32 sm:-left-6 sm:bottom-[-50%] sm:translate-y-0 md:translate-y-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-2deg]">
                     <div className="relative">
                       <Polaroid
                         src="/quanto_selfie.jpeg"
@@ -358,7 +359,7 @@ export default function Scene02Corkboard() {
                       />
                     </div>
                   </div>
-                  <div className="absolute left-[31%] bottom-[-48%] z-10 -rotate-2 scale-[0.8] md:scale-100">
+                  <div className="absolute left-[-6%] bottom-[-45%] z-10 -rotate-2 translate-y-20 sm:left-[31%] sm:bottom-[-48%] sm:translate-y-0 md:translate-y-0 scale-[0.8] sm:scale-[0.95] md:scale-100">
                     <Image
                       src="/quanto_scribble.png"
                       alt="Software engineer scribble"
@@ -369,7 +370,7 @@ export default function Scene02Corkboard() {
                   </div>
                   <div
                     ref={quantoRef}
-                    className="absolute right-6 bottom-[-6%] z-10 w-[200px] -rotate-10 scale-[0.82] translate-x-32 translate-y-4 md:scale-100 md:translate-x-0 md:translate-y-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-8deg]"
+                    className="absolute right-6 bottom-[-6%] z-10 w-[200px] -rotate-10 scale-[0.82] translate-x-32 translate-y-16 sm:translate-y-4 md:scale-100 md:translate-x-0 md:translate-y-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-8deg]"
                   >
                     <Image
                       src="/quanto_sticky.png"
@@ -382,10 +383,10 @@ export default function Scene02Corkboard() {
                 </div>
               </div>
             </div>
-            <div className="relative w-full overflow-visible -mt-10 -translate-x-4 translate-y-8 md:translate-x-6 md:translate-y-0">
+            <div className="relative w-full overflow-visible -mt-10 -translate-x-4 translate-y-16 sm:translate-y-20 md:translate-x-6 md:translate-y-0">
               <div
                 ref={shopifyRef}
-                className="absolute left-[6%] top-[-10%] z-10 w-full max-w-[220px] scale-[0.75] md:left-[70%] md:scale-100 md:translate-x-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[1deg]"
+                className="absolute left-[-2%] top-[-6%] z-10 w-full max-w-[220px] scale-[0.75] sm:left-[6%] sm:top-[-10%] md:left-[70%] md:scale-100 md:translate-x-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[1deg]"
               >
                 <Image
                   src="/shopify_sticky.png"
@@ -395,7 +396,7 @@ export default function Scene02Corkboard() {
                   className="h-auto w-full drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
                 />
               </div>
-              <div className="absolute left-1/2 -translate-x-1/2 md:left-[40%] md:translate-x-0 top-[15%] z-10 rotate-5 w-[520px] origin-top-left scale-[0.7] md:scale-[0.85]">
+              <div className="absolute left-[60%] -translate-x-1/2 sm:left-1/2 md:left-[40%] md:translate-x-0 top-[15%] z-10 rotate-5 w-[520px] origin-top-left scale-[0.7] md:scale-[0.85]">
                 <Image
                   src="/shopify_scribble.png"
                   alt="Engineering intern scribble"
@@ -415,7 +416,7 @@ export default function Scene02Corkboard() {
               </div>
               <div
                 ref={htnRef}
-                className="absolute left-[60%] top-[300px] z-10 w-full max-w-[220px] -rotate-2 scale-[0.75] md:left-[-10%] md:top-[280px] md:scale-[1.1] transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-1deg]"
+                className="absolute left-[50%] top-[300px] z-10 w-full max-w-[220px] -rotate-2 scale-[0.75] sm:left-[60%] sm:translate-x-6 md:left-[-10%] md:top-[280px] md:scale-[1.1] transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-1deg]"
               >
                 <Image
                   src="/htn_sticky.png"
@@ -425,7 +426,7 @@ export default function Scene02Corkboard() {
                   className="h-auto w-full drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
                 />
               </div>
-              <div className="absolute left-[-6%] top-[450px] z-0 -rotate-1">
+              <div className="absolute left-[-6%] top-[450px] z-0 -rotate-1 sm:translate-x-6">
                 <Image
                   src="/htn_news.png"
                   alt="Hack the North news clipping"
@@ -434,7 +435,7 @@ export default function Scene02Corkboard() {
                   className="h-auto w-[560px] opacity-90 drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
                 />
               </div>
-              <div className="absolute left-[28%] top-[300px] z-10 rotate-2 scale-[0.85] md:left-[20%] md:scale-100">
+              <div className="absolute left-[2%] top-[300px] z-10 rotate-2 scale-[0.85] sm:left-[28%] sm:translate-x-6 md:left-[20%] md:scale-100">
                 <Image
                   src="/htn_scribble.png"
                   alt="Logistics organizer scribble"
@@ -443,7 +444,7 @@ export default function Scene02Corkboard() {
                   className="h-auto w-[220px] opacity-80"
                 />
               </div>
-              <div className="relative z-10 mt-[480px] ml-[58%] w-fit -rotate-4 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-3deg]">
+              <div className="relative z-10 mt-[480px] ml-[58%] w-fit -rotate-4 sm:translate-x-6 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-3deg]">
                 <div className="relative">
                   <Polaroid
                     src="/htn_obama.jpg"
@@ -454,7 +455,7 @@ export default function Scene02Corkboard() {
                   />
                 </div>
               </div>
-              <div className="absolute left-[-2%] top-[280px] z-10 rotate-8 w-[110px] md:left-[74%] md:top-[300px] transition-transform duration-200 hover:-translate-y-1 hover:rotate-[9deg]">
+              <div className="absolute left-[-2%] top-[560px] z-10 rotate-8 w-[95px] sm:top-[280px] sm:w-[110px] sm:translate-x-6 md:left-[74%] md:top-[300px] md:w-[110px] transition-transform duration-200 hover:-translate-y-1 hover:rotate-[9deg]">
                 <Image
                   src="/alicehacks_sticker.png"
                   alt="AliceHacks sticker"
