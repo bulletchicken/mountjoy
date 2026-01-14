@@ -6,8 +6,8 @@ export default function Polaroid({
   src,
   alt,
   caption,
-  sizeClass = "w-56",
-  imageClass = "w-36 h-44",
+  sizeClass = "w-36",
+  imageClass = "w-24 h-32",
   className = "",
 }) {
   return (
@@ -35,7 +35,7 @@ export default function Polaroid({
               alt={alt}
               fill
               className="object-cover object-center"
-              sizes="(max-width: 768px) 224px, 256px"
+              sizes="(max-width: 768px) 144px, 176px"
               priority={false}
             />
           ) : (
