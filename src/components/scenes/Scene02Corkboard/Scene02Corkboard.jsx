@@ -587,7 +587,7 @@ export default function Scene02Corkboard() {
         <div className="relative w-full min-h-[220px] overflow-visible">
           <div className="relative mx-auto flex w-full max-w-3xl flex-col items-center gap-6 md:gap-8 overflow-visible -translate-y-[180px]">
             <div className="relative w-full min-h-[560px] sm:min-h-[480px] overflow-visible">
-              <div className="group absolute left-[-16%] top-[160px] translate-x-6 translate-y-12 sm:left-[-12%] sm:top-[90px] sm:translate-x-24 sm:translate-y-0 md:top-[40px] md:translate-x-20 lg:translate-x-0 w-[min(70vw,620px)] max-w-none">
+              <div className="group absolute left-[-16%] top-[160px] translate-x-20 translate-y-6 sm:left-[-12%] sm:top-[90px] sm:translate-x-24 sm:translate-y-0 md:top-[40px] md:translate-x-20 lg:translate-x-0 w-[min(70vw,620px)] max-w-none">
                 <div className="relative w-full">
                   <Image
                     src="/quanto_news.png"
