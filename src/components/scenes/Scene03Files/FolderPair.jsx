@@ -15,6 +15,7 @@ export default function FolderPair({
   largeBreakpoint = 1280,
   smallBreakpoint = 640,
   maxOffsetXSmall = 120,
+  folderBaseShiftClassName,
   folderClosedClassName = "",
 }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -60,7 +61,9 @@ export default function FolderPair({
       ? folderContent({ isOpen })
       : folderContent;
 
-  const folderBaseShift = reverse ? "-translate-x-20" : "translate-x-20";
+  const folderBaseShift =
+    folderBaseShiftClassName ??
+    (reverse ? "-translate-x-20" : "translate-x-20");
   const folderNode = (
     <div
       ref={folderRef}

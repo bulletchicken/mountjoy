@@ -202,7 +202,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       motionY: statueY,
       offsetX: -380,
       scale: 1.12,
-      offsetXSm: -220,
+      offsetXSm: -160,
       offsetXMd: -210,
       offsetYSm: -40,
       offsetYMd: -30,

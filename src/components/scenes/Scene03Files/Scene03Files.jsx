@@ -473,7 +473,8 @@ export default function Scene03Files() {
         <FolderPair
           reverse
           spineSide="right"
-          centerOffsetX={360}
+          centerOffsetX={460}
+          folderBaseShiftClassName="-translate-x-4"
           folderProps={{
             label: "Goose Cart",
             tabSide: "left",
