@@ -60,10 +60,11 @@ export default function FolderPair({
       ? folderContent({ isOpen })
       : folderContent;
 
+  const folderBaseShift = reverse ? "-translate-x-20" : "translate-x-20";
   const folderNode = (
     <div
       ref={folderRef}
-      className={`relative z-20 transition-transform duration-700 ease-in-out ${
+      className={`relative z-20 transition-transform duration-700 ease-in-out ${folderBaseShift} sm:translate-x-0 ${
         isOpen ? "z-50" : folderClosedClassName
       }`}
       style={{
@@ -108,7 +109,7 @@ export default function FolderPair({
   );
 
   return (
-    <div className="flex flex-nowrap items-center justify-center gap-2 sm:gap-4 md:gap-8 lg:gap-16 xl:gap-24">
+    <div className="flex flex-nowrap items-center justify-center gap-1 sm:gap-4 md:gap-8 lg:gap-16 xl:gap-24">
       {reverse ? mediaNode : folderNode}
       {reverse ? folderNode : mediaNode}
     </div>

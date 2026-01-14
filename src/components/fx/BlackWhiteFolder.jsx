@@ -116,7 +116,7 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
   );
 
   const footerLineMarkup = (
-    <div className="absolute bottom-12 left-8 right-8 text-[0.85rem] font-mono font-bold tracking-[0.12em] text-black">
+    <div className="absolute bottom-12 left-8 right-8 px-2 text-[0.85rem] font-mono font-bold tracking-[0.12em] text-black">
       <div className="relative">
         {resolvedFooterLines.map((line, index) => (
           <div
@@ -154,20 +154,12 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
 
   const tabMarkup = (
     <div
-      className={`relative mb-5 h-50 w-15 border-[3px] border-black bg-white ${
-        isFlipped
-          ? "rounded-l-[15px] border-r-0"
-          : "rounded-r-[15px] border-l-0"
-      } ${
-        isOpen
-          ? isFlipped
-            ? "-mr-[2px] border-r-[2px] border-r-white z-10"
-            : "-ml-[2px] border-l-[2px] border-l-white z-10"
-          : "z-10"
+      className={`relative h-14 w-44 border-[3px] border-black bg-white rounded-t-[15px] border-b-0 ${
+        isOpen ? "z-10 -mb-[2px] border-b-[2px] border-b-white" : "z-10"
       }`}
     >
-      <div className="absolute inset-0 flex items-center justify-center font-mono text-2xl font-black uppercase">
-        <span className="[writing-mode:vertical-rl] scale-x-90">{label}</span>
+      <div className="absolute inset-0 flex items-center justify-center font-mono text-lg font-black uppercase tracking-[0.08em]">
+        <span className="scale-x-95">{label}</span>
       </div>
     </div>
   );
@@ -221,7 +213,7 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
   return (
     <div
       ref={ref}
-      className={`${positionClass} h-[58vmin] min-h-[420px] w-[72vmin] max-w-[560px] sm:h-[60vmin] sm:min-h-[440px] sm:w-[74vmin] sm:max-w-[580px] md:h-[64vmin] md:min-h-[480px] md:w-[78vmin] md:max-w-[610px] lg:h-[66vmin] lg:min-h-[500px] lg:w-[80vmin] lg:max-w-[620px] xl:h-[70vmin] xl:min-h-[520px] xl:w-[82vmin] xl:max-w-[640px] transition-transform duration-300 ease-out ${hoverScaleClass}`}
+      className={`${positionClass} h-[54vmin] min-h-[380px] w-[66vmin] max-w-[520px] sm:h-[60vmin] sm:min-h-[440px] sm:w-[74vmin] sm:max-w-[580px] md:h-[64vmin] md:min-h-[480px] md:w-[78vmin] md:max-w-[610px] lg:h-[66vmin] lg:min-h-[500px] lg:w-[80vmin] lg:max-w-[620px] xl:h-[70vmin] xl:min-h-[520px] xl:w-[82vmin] xl:max-w-[640px] transition-transform duration-300 ease-out ${hoverScaleClass}`}
       role={interactive ? "button" : undefined}
       tabIndex={interactive ? 0 : undefined}
       aria-expanded={interactive ? isOpen : undefined}

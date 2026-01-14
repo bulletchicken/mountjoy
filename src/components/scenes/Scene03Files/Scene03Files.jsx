@@ -306,14 +306,14 @@ export default function Scene03Files() {
             />
           }
           media={
-            <div className="rotate-2">
+            <div className="rotate-2 translate-x-12 translate-y-6 sm:translate-x-0 sm:translate-y-0">
               <DitherShader
                 src="/ted.avif"
                 colorMode="grayscale"
                 threshold={0.5}
                 gridSize={1}
                 objectFit="contain"
-                className="h-[42vmin] w-[42vmin] sm:h-[54vmin] sm:w-[54vmin] md:h-[58vmin] md:w-[58vmin] lg:h-[60vmin] lg:w-[60vmin] xl:h-[62vmin] xl:w-[62vmin]"
+                className="h-[70vmin] w-[70vmin] sm:h-[54vmin] sm:w-[54vmin] md:h-[58vmin] md:w-[58vmin] lg:h-[60vmin] lg:w-[60vmin] xl:h-[62vmin] xl:w-[62vmin]"
               />
             </div>
           }
@@ -378,14 +378,14 @@ export default function Scene03Files() {
             />
           )}
           media={
-            <div className="pizza-wrap">
+            <div className="pizza-wrap -translate-x-12 translate-y-8 sm:translate-x-0 sm:translate-y-0">
               <div className="pizza-spin">
                 <DitherShader
                   src="/pizza.png"
                   colorMode="grayscale"
                   gridSize={1}
                   objectFit="contain"
-                  className="h-[50vmin] w-[50vmin] sm:h-[64vmin] sm:w-[64vmin] md:h-[68vmin] md:w-[68vmin] lg:h-[70vmin] lg:w-[70vmin] xl:h-[74vmin] xl:w-[74vmin]"
+                  className="h-[78vmin] w-[78vmin] sm:h-[64vmin] sm:w-[64vmin] md:h-[68vmin] md:w-[68vmin] lg:h-[70vmin] lg:w-[70vmin] xl:h-[74vmin] xl:w-[74vmin]"
                 />
               </div>
             </div>
@@ -456,7 +456,7 @@ export default function Scene03Files() {
             </div>
           }
           media={
-            <div className="relative flex-shrink-0 h-[48vmin] w-[48vmin] sm:h-[60vmin] sm:w-[60vmin] md:h-[64vmin] md:w-[64vmin] lg:h-[68vmin] lg:w-[68vmin] xl:h-[72vmin] xl:w-[72vmin] overflow-visible">
+            <div className="relative flex-shrink-0 h-[72vmin] w-[72vmin] -translate-x-12 translate-y-6 sm:h-[60vmin] sm:w-[60vmin] sm:translate-x-0 sm:translate-y-0 md:h-[64vmin] md:w-[64vmin] lg:h-[68vmin] lg:w-[68vmin] xl:h-[72vmin] xl:w-[72vmin] overflow-visible">
               <div className="absolute inset-0 -translate-x-20 -translate-y-14 -rotate-26 flex items-center justify-center">
                 <DitherShader
                   src="/guitar.png"
@@ -464,7 +464,7 @@ export default function Scene03Files() {
                   threshold={0.25}
                   gridSize={1}
                   objectFit="contain"
-                  className="h-[44vmin] w-[44vmin] sm:h-[60vmin] sm:w-[60vmin] md:h-[68vmin] md:w-[68vmin] lg:h-[74vmin] lg:w-[74vmin] xl:h-[82vmin] xl:w-[82vmin]"
+                  className="h-[66vmin] w-[66vmin] sm:h-[60vmin] sm:w-[60vmin] md:h-[68vmin] md:w-[68vmin] lg:h-[74vmin] lg:w-[74vmin] xl:h-[82vmin] xl:w-[82vmin]"
                 />
               </div>
             </div>
@@ -511,14 +511,14 @@ export default function Scene03Files() {
           }}
           folderContent={null}
           media={
-            <div className="rotate-1">
+            <div className="rotate-1 translate-x-10 translate-y-6 sm:translate-x-0 sm:translate-y-0">
               <DitherShader
                 src="/fpv_goose.png"
                 colorMode="grayscale"
                 threshold={0.1}
                 gridSize={1}
                 objectFit="contain"
-                className="h-[52vmin] w-[52vmin] sm:h-[66vmin] sm:w-[66vmin] md:h-[70vmin] md:w-[70vmin] lg:h-[74vmin] lg:w-[74vmin] xl:h-[78vmin] xl:w-[78vmin]"
+                className="h-[80vmin] w-[80vmin] sm:h-[66vmin] sm:w-[66vmin] md:h-[70vmin] md:w-[70vmin] lg:h-[74vmin] lg:w-[74vmin] xl:h-[78vmin] xl:w-[78vmin]"
               />
             </div>
           }
