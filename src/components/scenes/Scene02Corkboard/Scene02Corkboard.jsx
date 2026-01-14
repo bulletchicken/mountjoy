@@ -2,8 +2,11 @@
 
 import Image from "next/image";
 import {
+  animate,
   motion,
   useAnimationControls,
+  useInView,
+  useMotionValue,
   useMotionValueEvent,
   useScroll,
   useTransform,
@@ -54,6 +57,64 @@ function AnimatedString({ d, start, end, progress, isSmallScreen, isMdUp }) {
   );
 }
 
+function DevelopingPolaroid({
+  src,
+  alt,
+  sizeClass = "w-36",
+  imageClass = "w-24 h-32",
+  className = "",
+  developProgress,
+}) {
+  const overlayOpacity = useTransform(developProgress, [0, 1], [1, 0]);
+  const imageOpacity = useTransform(developProgress, [0, 0.2, 1], [0, 0.45, 1]);
+  const imageFilter = useTransform(
+    developProgress,
+    [0, 0.6, 1],
+    ["saturate(0) brightness(0.65)", "saturate(0.7) brightness(0.85)", "none"],
+  );
+
+  return (
+    <figure
+      className={[
+        "relative isolate select-none drop-shadow-[0_1px_2px_rgba(0,0,0,1)]",
+        "rounded-[0.4rem] bg-white",
+        "px-1 pt-6 pb-14",
+        sizeClass,
+        className,
+      ].join(" ")}
+    >
+      <div
+        className={[
+          "relative mx-auto overflow-hidden",
+          "border border-black/20 bg-white",
+          imageClass,
+        ].join(" ")}
+      >
+        <div className="relative h-full w-full overflow-hidden bg-white">
+          <motion.div
+            className="absolute inset-0 z-10 bg-black"
+            style={{ opacity: overlayOpacity }}
+          />
+          <motion.div
+            className="absolute inset-0"
+            style={{ opacity: imageOpacity, filter: imageFilter }}
+          >
+            <Image
+              src={src}
+              alt={alt}
+              fill
+              className="object-cover object-center"
+              sizes="(max-width: 768px) 144px, 176px"
+              priority={false}
+            />
+          </motion.div>
+        </div>
+      </div>
+      <div className="pointer-events-none absolute inset-0 rounded-[0.45rem] border border-black/10" />
+    </figure>
+  );
+}
+
 export default function Scene02Corkboard() {
   const sectionRef = useRef(null);
   const waterlooRef = useRef(null);
@@ -62,6 +123,7 @@ export default function Scene02Corkboard() {
   const waterlooSydeRef = useRef(null);
   const shopifyRef = useRef(null);
   const htnRef = useRef(null);
+  const htnPolaroidRef = useRef(null);
   const quantoRef = useRef(null);
   const alicehacksRef = useRef(null);
   const waterlooNewsRef = useRef(null);
@@ -90,6 +152,8 @@ export default function Scene02Corkboard() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [isMdUp, setIsMdUp] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
+  const developProgressValue = useMotionValue(0);
+  const developHasRunRef = useRef(false);
   useEffect(() => {
     setIsMounted(true);
     const update = () => {
@@ -106,11 +170,14 @@ export default function Scene02Corkboard() {
   });
   const { scrollYProgress: flashProgress } = useScroll({
     target: waterlooPolaroidsRef,
-    offset: ["start 85%", "start 35%"],
+    offset: ["start 55%", "start 10%"],
   });
+  const htnPolaroidInView = useInView(htnPolaroidRef, { amount: 0.35 });
   const blastControls = useAnimationControls();
   const washControls = useAnimationControls();
   const flareControls = useAnimationControls();
+  const [flashFired, setFlashFired] = useState(false);
+  const developAnimationRef = useRef(null);
   const flashHasFiredRef = useRef(false);
   const flashLastProgress = useRef(0);
   const stringProgress = useTransform(
@@ -119,12 +186,36 @@ export default function Scene02Corkboard() {
     [0, 1],
     { clamp: true },
   );
+  const developProgress = useTransform(
+    developProgressValue,
+    [0, 1],
+    [0, 1],
+  );
+
+  useEffect(() => {
+    if (!flashFired || !htnPolaroidInView) {
+      return;
+    }
+    if (developHasRunRef.current) {
+      return;
+    }
+    developHasRunRef.current = true;
+    if (developAnimationRef.current) {
+      developAnimationRef.current.stop();
+    }
+    developProgressValue.set(0);
+    developAnimationRef.current = animate(developProgressValue, 1, {
+      duration: 2.1,
+      ease: "easeOut",
+    });
+  }, [flashFired, htnPolaroidInView, developProgressValue]);
 
   useMotionValueEvent(flashProgress, "change", (value) => {
     const last = flashLastProgress.current;
     flashLastProgress.current = value;
     if (!flashHasFiredRef.current && value >= FLASH_TRIGGER && last < FLASH_TRIGGER) {
       flashHasFiredRef.current = true;
+      setFlashFired(true);
       void blastControls.start({
         opacity: FLASH_BLAST_OPACITY,
         transition: {
@@ -150,8 +241,15 @@ export default function Scene02Corkboard() {
           times: FLASH_WASH_TIMES,
         },
       });
+      developHasRunRef.current = false;
     } else if (flashHasFiredRef.current && value <= FLASH_RESET && last > FLASH_RESET) {
       flashHasFiredRef.current = false;
+      setFlashFired(false);
+      developHasRunRef.current = false;
+      if (developAnimationRef.current) {
+        developAnimationRef.current.stop();
+      }
+      developProgressValue.set(0);
     }
   });
 
@@ -594,14 +692,18 @@ export default function Scene02Corkboard() {
                   className="h-auto w-[220px] opacity-80"
                 />
               </div>
-              <div className="relative z-10 mt-[480px] ml-[58%] w-fit -rotate-4 sm:mt-[440px] sm:translate-x-6 md:mt-[520px] md:translate-x-12 lg:mt-[280px] lg:translate-x-6 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-3deg]">
+              <div
+                ref={htnPolaroidRef}
+                className="relative z-10 mt-[480px] ml-[58%] w-fit -rotate-4 sm:mt-[440px] sm:translate-x-6 md:mt-[520px] md:translate-x-12 lg:mt-[280px] lg:translate-x-6 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-3deg]"
+              >
                 <div className="relative">
-                  <Polaroid
+                  <DevelopingPolaroid
                     src="/htn_obama.jpg"
                     alt="HTN Obama snapshot"
                     sizeClass="w-40 md:w-48"
                     imageClass="w-32 h-44 md:w-40 md:h-52"
                     className="scale-[0.8] md:scale-100"
+                    developProgress={developProgress}
                   />
                 </div>
               </div>
