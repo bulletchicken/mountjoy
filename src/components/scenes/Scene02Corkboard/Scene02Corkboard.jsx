@@ -51,7 +51,7 @@ export default function Scene02Corkboard() {
   );
   const connections = useMemo(
     () => [
-      { from: "waterloo-sticky", to: "waterloo-syde", sag: 56, weight: 120 },
+      { from: "waterloo-sticky", to: "waterloo-syde", sag: 56, weight: 220 },
       { from: "waterloo-syde", to: "quanto-top", sag: 56 },
       { from: "quanto-top", to: "shopify-top", sag: 40 },
       { from: "shopify-top", to: "htn-pin", sag: 56 },
@@ -239,7 +239,7 @@ export default function Scene02Corkboard() {
         >
           <div
             ref={waterlooStickyRef}
-            className="absolute left-[15%] top-[25%] rotate-3 mx-auto w-full max-w-[220px] z-20 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[4deg]"
+            className="absolute left-[15%] top-[25%] rotate-3 mx-auto w-[min(42vw,220px)] z-20 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[4deg]"
           >
             <Image
               src="/waterloo_sticky.png"

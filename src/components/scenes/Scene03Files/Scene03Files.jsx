@@ -567,18 +567,18 @@ export default function Scene03Files() {
           </motion.div>
         </div>
         <a
-          href="https://devpost.com/"
+          href="https://devpost.com/jeremysu64"
           target="_blank"
           rel="noreferrer"
           className="group inline-flex items-center justify-center transition-transform duration-200 hover:-translate-y-1"
           aria-label="More projects on Devpost"
         >
           <Image
-            src="/ball_button.PNG"
+            src="/ball_button.png"
             alt="More projects on Devpost"
             width={980}
             height={980}
-            className="h-[180px] w-[180px] object-contain transition-transform duration-200 group-hover:rotate-[-4deg] group-hover:scale-[1.06] group-hover:drop-shadow-[0_6px_12px_rgba(0,0,0,0.35)]"
+            className="h-[240px] w-[240px] object-contain transition-transform duration-200 group-hover:rotate-[-4deg] group-hover:scale-[1.06] group-hover:drop-shadow-[0_6px_12px_rgba(0,0,0,0.35)] sm:h-[280px] sm:w-[280px] md:h-[320px] md:w-[320px] lg:h-[360px] lg:w-[360px]"
           />
         </a>
       </div>

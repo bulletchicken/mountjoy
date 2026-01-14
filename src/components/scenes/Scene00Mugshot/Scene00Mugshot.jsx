@@ -44,7 +44,7 @@ export default function Page({ backgroundColor, scrollYProgress }) {
           y: textY,
         }}
       >
-        <div className="mx-auto flex w-full max-w-4xl flex-col gap-2 pr-4 pl-[22px] font-mono text-sm uppercase tracking-wider text-white sm:pr-8 sm:pl-[34px] md:pr-12 md:pl-[50px] 2xl:pr-16 2xl:pl-[66px]">
+        <div className="mx-auto flex w-full max-w-4xl flex-col gap-2 pr-8 pl-[22px] font-mono text-sm uppercase tracking-wide text-white sm:pr-12 sm:pl-[34px] md:pr-16 md:pl-[50px] 2xl:pr-20 2xl:pl-[66px]">
           <div className="type-line">
             <span
               className="type-text"
@@ -52,7 +52,7 @@ export default function Page({ backgroundColor, scrollYProgress }) {
                 animationDelay: "0.6s",
                 clipPath: "inset(0 100% 0 0)",
                 "--type-steps": 22,
-                "--type-duration": "1.2s",
+                "--type-duration": "0.8s",
               }}
             >
               Case Number: 20060621
@@ -65,7 +65,7 @@ export default function Page({ backgroundColor, scrollYProgress }) {
                 animationDelay: "2s",
                 clipPath: "inset(0 100% 0 0)",
                 "--type-steps": 15,
-                "--type-duration": "1s",
+                "--type-duration": "0.7s",
               }}
             >
               Toronto, Canada
@@ -78,7 +78,7 @@ export default function Page({ backgroundColor, scrollYProgress }) {
                 animationDelay: "3.2s",
                 clipPath: "inset(0 100% 0 0)",
                 "--type-steps": 24,
-                "--type-duration": "1.3s",
+                "--type-duration": "0.9s",
               }}
             >
               University of Waterloo
@@ -88,12 +88,12 @@ export default function Page({ backgroundColor, scrollYProgress }) {
       </motion.div>
       <style jsx>{`
         .type-line {
-          overflow: hidden;
           white-space: nowrap;
         }
 
         .type-text {
           display: inline-block;
+          padding-right: 1ch;
           clip-path: inset(0 100% 0 0);
           animation: type-in var(--type-duration, 1.4s)
             steps(var(--type-steps, 28), end) forwards;
@@ -104,7 +104,7 @@ export default function Page({ backgroundColor, scrollYProgress }) {
             clip-path: inset(0 100% 0 0);
           }
           to {
-            clip-path: inset(0 0 0 0);
+            clip-path: inset(0 -1ch 0 0);
           }
         }
       `}</style>

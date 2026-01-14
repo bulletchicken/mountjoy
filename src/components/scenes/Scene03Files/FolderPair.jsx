@@ -109,7 +109,7 @@ export default function FolderPair({
   );
 
   return (
-    <div className="flex flex-nowrap items-center justify-center gap-1 sm:gap-4 md:gap-8 lg:gap-16 xl:gap-24">
+    <div className="flex flex-nowrap items-center justify-center gap-0 sm:gap-2 md:gap-4 lg:gap-8 xl:gap-12">
       {reverse ? mediaNode : folderNode}
       {reverse ? folderNode : mediaNode}
     </div>

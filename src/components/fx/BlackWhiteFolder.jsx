@@ -154,12 +154,20 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
 
   const tabMarkup = (
     <div
-      className={`relative h-14 w-44 border-[3px] border-black bg-white rounded-t-[15px] border-b-0 ${
-        isOpen ? "z-10 -mb-[2px] border-b-[2px] border-b-white" : "z-10"
+      className={`relative mb-5 h-56 w-18 border-[3px] border-black bg-white ${
+        isFlipped
+          ? "rounded-l-[15px] border-r-0"
+          : "rounded-r-[15px] border-l-0"
+      } ${
+        isOpen
+          ? isFlipped
+            ? "-mr-[2px] border-r-[2px] border-r-white z-10"
+            : "-ml-[2px] border-l-[2px] border-l-white z-10"
+          : "z-10"
       }`}
     >
-      <div className="absolute inset-0 flex items-center justify-center font-mono text-lg font-black uppercase tracking-[0.08em]">
-        <span className="scale-x-95">{label}</span>
+      <div className="absolute inset-0 flex items-center justify-center font-mono text-3xl font-black uppercase">
+        <span className="[writing-mode:vertical-rl] scale-x-90">{label}</span>
       </div>
     </div>
   );
