@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import Polaroid from "@/components/fx/Polaroid";
 
 function AnimatedString({ d, start, end, progress }) {
@@ -60,13 +60,23 @@ export default function Scene02Corkboard() {
   const containerRef = useRef(null);
   const [pinPositions, setPinPositions] = useState({});
   const [waterlooHeight, setWaterlooHeight] = useState(0);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  useEffect(() => {
+    const update = () => setIsSmallScreen(window.innerWidth < 640);
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start 40%", "end 20%"],
+    offset: isSmallScreen ? ["start end", "end 20%"] : ["start end", "end 20%"],
   });
-  const stringProgress = useTransform(scrollYProgress, [0.1, 0.55], [0, 1], {
-    clamp: true,
-  });
+  const stringProgress = useTransform(
+    scrollYProgress,
+    isSmallScreen ? [0, 0.55] : [0.1, 0.55],
+    [0, 1],
+    { clamp: true },
+  );
 
   const resolvedConnections = useMemo(() => {
     const items = connections
@@ -233,7 +243,7 @@ export default function Scene02Corkboard() {
         </div>
         <div
           ref={waterlooRef}
-          className="relative w-full -translate-x-20 sm:-translate-x-10 md:-translate-x-8 lg:translate-x-0"
+          className="relative w-full -translate-x-20 sm:-translate-x-20 md:-translate-x-8 lg:translate-x-0"
           style={waterlooHeight ? { height: `${waterlooHeight}px` } : undefined}
         >
           <div

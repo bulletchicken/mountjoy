@@ -585,7 +585,7 @@ export default function Scene03Files() {
             alt=""
             width={526}
             height={323}
-            className="pointer-events-none absolute bottom-0 right-0 h-[84px] w-auto translate-x-[12%] translate-y-[12%] object-contain sm:h-[92px] md:h-[104px] lg:h-[118px]"
+            className="pointer-events-none absolute bottom-0 right-0 h-[84px] w-auto translate-x-[42%] translate-y-[42%] object-contain sm:h-[92px] md:h-[104px] lg:h-[118px]"
           />
         </a>
       </div>
