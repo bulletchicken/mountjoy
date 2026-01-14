@@ -51,7 +51,7 @@ export default function Scene02Corkboard() {
   );
   const connections = useMemo(
     () => [
-      { from: "waterloo-sticky", to: "waterloo-syde", sag: 56 },
+      { from: "waterloo-sticky", to: "waterloo-syde", sag: 56, weight: 120 },
       { from: "waterloo-syde", to: "quanto-top", sag: 56 },
       { from: "quanto-top", to: "shopify-top", sag: 40 },
       { from: "shopify-top", to: "htn-pin", sag: 56 },
@@ -84,7 +84,10 @@ export default function Scene02Corkboard() {
         const midY = Math.max(from.y, to.y) + sag;
         const d = `M ${from.x} ${from.y} Q ${midX} ${midY} ${to.x} ${to.y}`;
         const yTravel = Math.abs(to.y - from.y);
-        const weight = Math.max(20, yTravel);
+        const weight =
+          connection.weight != null
+            ? connection.weight
+            : Math.max(20, yTravel);
         return { key: `${connection.from}-${connection.to}`, d, weight };
       })
       .filter(Boolean);

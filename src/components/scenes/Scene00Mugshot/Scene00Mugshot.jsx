@@ -2,8 +2,8 @@
 import { motion, useTransform } from "framer-motion";
 import { useRef } from "react";
 export default function Page({ backgroundColor, scrollYProgress }) {
-  const textOpacity = useTransform(scrollYProgress, [0.45, 0.6], [1, 0]);
   const photoOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+  const textY = useTransform(scrollYProgress, [0, 0.2], [0, -12]);
   const videoRef = useRef(null);
 
   return (
@@ -21,7 +21,7 @@ export default function Page({ backgroundColor, scrollYProgress }) {
         <div className="mx-auto flex w-full justify-center overflow-visible">
           <video
             ref={videoRef}
-            className="boomerang-video aspect-[3/2] min-h-[80vh] shrink-0 w-[150vw] object-contain object-bottom sm:w-[120vw] md:w-[100vw] lg:w-[80vw] xl:w-[72vw] 2xl:w-[50vw] max-w-none"
+            className="boomerang-video aspect-[3/2] min-h-[80vh] shrink-0 w-[170vw] object-contain object-bottom sm:w-[135vw] md:w-[115vw] lg:w-[90vw] xl:w-[80vw] 2xl:w-[60vw] max-w-none"
             autoPlay
             muted
             playsInline
@@ -38,15 +38,76 @@ export default function Page({ backgroundColor, scrollYProgress }) {
 
       {/* Case number and location */}
       <motion.div
-        className="pointer-events-none fixed bottom-30 left-0 right-0 z-50"
-        style={{ opacity: textOpacity }}
+        className="pointer-events-none fixed bottom-20 left-0 right-0 z-50 hidden md:block mix-blend-difference"
+        style={{
+          opacity: photoOpacity,
+          y: textY,
+        }}
       >
-        {/* <div className="mx-auto flex w-full max-w-5xl flex-col gap-2 px-8 font-mono text-sm uppercase tracking-wider text-black md:px-12 2xl:px-16">
-          <div>Case Number: 20060621</div>
-          <div>Toronto, Canada</div>
-          <div>University of Waterloo</div>
-        </div>*/}
+        <div className="mx-auto flex w-full max-w-4xl flex-col gap-2 pr-4 pl-[22px] font-mono text-sm uppercase tracking-wider text-white sm:pr-8 sm:pl-[34px] md:pr-12 md:pl-[50px] 2xl:pr-16 2xl:pl-[66px]">
+          <div className="type-line">
+            <span
+              className="type-text"
+              style={{
+                animationDelay: "0.6s",
+                clipPath: "inset(0 100% 0 0)",
+                "--type-steps": 22,
+                "--type-duration": "1.2s",
+              }}
+            >
+              Case Number: 20060621
+            </span>
+          </div>
+          <div className="type-line">
+            <span
+              className="type-text"
+              style={{
+                animationDelay: "2s",
+                clipPath: "inset(0 100% 0 0)",
+                "--type-steps": 15,
+                "--type-duration": "1s",
+              }}
+            >
+              Toronto, Canada
+            </span>
+          </div>
+          <div className="type-line">
+            <span
+              className="type-text"
+              style={{
+                animationDelay: "3.2s",
+                clipPath: "inset(0 100% 0 0)",
+                "--type-steps": 24,
+                "--type-duration": "1.3s",
+              }}
+            >
+              University of Waterloo
+            </span>
+          </div>
+        </div>
       </motion.div>
+      <style jsx>{`
+        .type-line {
+          overflow: hidden;
+          white-space: nowrap;
+        }
+
+        .type-text {
+          display: inline-block;
+          clip-path: inset(0 100% 0 0);
+          animation: type-in var(--type-duration, 1.4s)
+            steps(var(--type-steps, 28), end) forwards;
+        }
+
+        @keyframes type-in {
+          from {
+            clip-path: inset(0 100% 0 0);
+          }
+          to {
+            clip-path: inset(0 0 0 0);
+          }
+        }
+      `}</style>
     </motion.div>
   );
 }
