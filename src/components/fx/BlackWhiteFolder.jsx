@@ -1,6 +1,7 @@
 "use client";
 
-import { forwardRef, useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
   {
@@ -14,6 +15,7 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
     hidePaperStack = false,
     isOpen: controlledOpen,
     interactive = true,
+    className = "",
     onOpen,
     onClose,
     footerRedactions = [],
@@ -22,12 +24,27 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
     footerInlineStamps = [],
     footerOverlays = [],
     paperContent = null,
+    paperStackClassName = "",
+    paperSheetClassName = "",
   },
   ref,
 ) {
   const [internalOpen, setInternalOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [isBaseScreen, setIsBaseScreen] = useState(false);
   const isOpen = controlledOpen ?? internalOpen;
+  const visualOpen = isOpen && !isSmallScreen;
+
+  useEffect(() => {
+    const update = () => {
+      setIsSmallScreen(window.innerWidth < 768);
+      setIsBaseScreen(window.innerWidth < 640);
+    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
 
   const handleOpen = () => {
     if (isOpen) {
@@ -54,7 +71,7 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
   };
 
   const positionClass = interactive
-    ? isOpen
+    ? visualOpen
       ? "relative z-40 cursor-pointer"
       : "relative cursor-pointer"
     : "relative";
@@ -62,9 +79,9 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
   const stackRotation = paperRotation;
   const hoverLiftClass = interactive && isHovered ? "-translate-y-3" : "";
   const hoverScaleClass =
-    interactive && !isOpen && isHovered ? "scale-[1.02]" : "";
+    interactive && !visualOpen && isHovered ? "scale-[1.02]" : "";
   const hoverPaperTwist =
-    interactive && !isOpen && isHovered ? "rotate(2deg)" : "rotate(0deg)";
+    interactive && !visualOpen && isHovered ? "rotate(2deg)" : "rotate(0deg)";
   const paperZClass = "z-20";
   const isFlipped = tabSide === "left";
   const paperStackPosition = isFlipped
@@ -172,8 +189,9 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
     </div>
   );
 
+  const reportVisibilityClass = isBaseScreen ? "opacity-0" : "";
   const paperStack = (
-    <div className={`${paperStackPosition} ${paperZClass}`}>
+    <div className={`${paperStackPosition} ${paperZClass} ${paperStackClassName}`}>
       <div
         className="relative h-full transition-transform duration-300 ease-out"
         style={{
@@ -188,12 +206,14 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
           ) : (
             <>
               <div
-                className={`absolute top-2 h-[98%] rounded-[10px] border-2 border-black bg-neutral-100 ${paperOnePosition} ${paperOneRotation}`}
+                className={`absolute top-2 rounded-[10px] border-2 border-black bg-neutral-100 ${paperOnePosition} ${paperOneRotation} ${paperSheetClassName}`}
+                style={{ height: "var(--paper-sheet-height, 98%)" }}
               ></div>
               <div
-                className={`absolute top-0 h-[98%] rounded-[10px] border-2 border-black bg-white ${paperTwoPosition} ${paperTwoRotation}`}
+                className={`absolute top-0 rounded-[10px] border-2 border-black bg-white ${paperTwoPosition} ${paperTwoRotation} ${paperSheetClassName}`}
+                style={{ height: "var(--paper-sheet-height, 98%)" }}
               >
-                <div className="report h-full w-full p-4">
+                <div className={`report h-full w-full p-4 ${reportVisibilityClass}`}>
                   {children || defaultReport}
                 </div>
               </div>
@@ -218,87 +238,128 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
       : [coverOverlays]
     : [];
 
-  return (
-    <div
-      ref={ref}
-      className={`${positionClass} h-[54vmin] min-h-[380px] w-[66vmin] max-w-[520px] sm:h-[60vmin] sm:min-h-[440px] sm:w-[74vmin] sm:max-w-[580px] md:h-[64vmin] md:min-h-[480px] md:w-[78vmin] md:max-w-[610px] lg:h-[66vmin] lg:min-h-[500px] lg:w-[80vmin] lg:max-w-[620px] xl:h-[70vmin] xl:min-h-[520px] xl:w-[82vmin] xl:max-w-[640px] transition-transform duration-300 ease-out ${hoverScaleClass}`}
-      role={interactive ? "button" : undefined}
-      tabIndex={interactive ? 0 : undefined}
-      aria-expanded={interactive ? isOpen : undefined}
-      aria-label={`${label || "Case file"} folder`}
-      onPointerEnter={
-        interactive ? () => setIsHovered(true) : undefined
-      }
-      onPointerLeave={
-        interactive ? () => setIsHovered(false) : undefined
-      }
-      onClick={interactive ? handleToggle : undefined}
-      onKeyDown={
-        interactive
-          ? (event) => {
-              if (event.key === "Enter" || event.key === " ") {
-                event.preventDefault();
-                handleToggle();
-              }
-            }
-          : undefined
-      }
-    >
-      <div className="relative h-full w-full">
-        <div
-          className="relative h-full w-full overflow-visible"
-          style={{ transform: `rotate(${folderRotation})` }}
-        >
+  const modalContent = paperContent ? (
+    <div className="relative h-[60vh] w-full">{paperContent}</div>
+  ) : (
+    children || defaultReport
+  );
+
+  const modalNode =
+    isSmallScreen && isOpen && typeof document !== "undefined"
+      ? createPortal(
           <div
-            className={`relative flex h-full items-end ${
-              isFlipped ? "flex-row-reverse" : ""
-            }`}
+            className="fixed inset-0 z-[120] flex flex-col items-center justify-center bg-black/50 p-4"
+            onClick={handleClose}
           >
-            <div className="relative h-full w-full overflow-visible">
-              {isOpen ? (
+            <div
+              className="relative h-[70vh] w-[94vw] max-w-[640px] overflow-hidden rounded-[18px] border-2 border-black bg-white shadow-[0_16px_50px_rgba(0,0,0,0.4)]"
+              onClick={(event) => event.stopPropagation()}
+            >
+              <div className="h-[70vh] overflow-auto p-4">
+                {modalContent}
+              </div>
+            </div>
+            <button
+              type="button"
+              className="mt-6 inline-flex items-center gap-2 rounded-full border-2 border-black bg-white px-6 py-3 text-base font-black uppercase tracking-[0.12em]"
+              aria-label="Close"
+              onClick={(event) => {
+                event.stopPropagation();
+                handleClose();
+              }}
+            >
+              <span className="text-2xl leading-none">×</span>
+              Close
+            </button>
+          </div>,
+          document.body,
+        )
+      : null;
+
+  return (
+    <>
+      <div
+        ref={ref}
+        className={`${positionClass} h-[54vmin] min-h-[380px] w-[66vmin] max-w-[520px] sm:h-[60vmin] sm:min-h-[440px] sm:w-[74vmin] sm:max-w-[580px] md:h-[64vmin] md:min-h-[480px] md:w-[78vmin] md:max-w-[610px] lg:h-[66vmin] lg:min-h-[500px] lg:w-[80vmin] lg:max-w-[620px] xl:h-[70vmin] xl:min-h-[520px] xl:w-[82vmin] xl:max-w-[640px] transition-transform duration-300 ease-out ${hoverScaleClass} ${className}`}
+        role={interactive ? "button" : undefined}
+        tabIndex={interactive ? 0 : undefined}
+        aria-expanded={interactive ? isOpen : undefined}
+        aria-label={`${label || "Case file"} folder`}
+        onPointerEnter={
+          interactive ? () => setIsHovered(true) : undefined
+        }
+        onPointerLeave={
+          interactive ? () => setIsHovered(false) : undefined
+        }
+        onClick={interactive ? handleToggle : undefined}
+        onKeyDown={
+          interactive
+            ? (event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  handleToggle();
+                }
+              }
+            : undefined
+        }
+      >
+        <div className="relative h-full w-full">
+          <div
+            className="relative h-full w-full overflow-visible"
+            style={{ transform: `rotate(${folderRotation})` }}
+          >
+            <div
+              className={`relative flex h-full items-end ${
+                isFlipped ? "flex-row-reverse" : ""
+              }`}
+            >
+              <div className="relative h-full w-full overflow-visible">
+                {visualOpen ? (
+                  <div
+                    className={`absolute top-0 h-full w-full border-[3px] border-black bg-white ${
+                      isFlipped
+                        ? "left-full rounded-tr-[16px] rounded-br-[16px] border-l-0"
+                        : "-left-full rounded-tl-[16px] rounded-bl-[16px] border-r-0"
+                    }`}
+                  >
+                    {!visualOpen ? footerLineMarkup : null}
+                  </div>
+                ) : null}
                 <div
-                  className={`absolute top-0 h-full w-full border-[3px] border-black bg-white ${
-                    isFlipped
-                      ? "left-full rounded-tr-[16px] rounded-br-[16px] border-l-0"
-                      : "-left-full rounded-tl-[16px] rounded-bl-[16px] border-r-0"
+                  data-folder-panel
+                  className={`relative h-full w-full border-[3px] border-black bg-white ${
+                    visualOpen
+                      ? isFlipped
+                        ? "z-10 rounded-tl-[16px] rounded-bl-[16px] border-r-0"
+                      : "z-10 rounded-tr-[16px] rounded-br-[16px] border-l-0"
+                    : "z-30 rounded-tl-[16px] rounded-tr-[16px] rounded-bl-[16px] rounded-br-[16px]"
                   }`}
                 >
-                  {!isOpen ? footerLineMarkup : null}
+                  {!visualOpen ? footerLineMarkup : null}
+                  {!visualOpen ? coverStampsMarkup : null}
+                  {!visualOpen
+                    ? coverOverlaysMarkup.map((overlay, index) => (
+                        <span key={`cover-overlay-${index}`}>{overlay}</span>
+                      ))
+                    : null}
                 </div>
-              ) : null}
-              <div
-                data-folder-panel
-                className={`relative h-full w-full border-[3px] border-black bg-white ${
-                  isOpen
-                    ? isFlipped
-                      ? "z-10 rounded-tl-[16px] rounded-bl-[16px] border-r-0"
-                    : "z-10 rounded-tr-[16px] rounded-br-[16px] border-l-0"
-                  : "z-30 rounded-tl-[16px] rounded-tr-[16px] rounded-bl-[16px] rounded-br-[16px]"
-                }`}
-              >
-                {!isOpen ? footerLineMarkup : null}
-                {!isOpen ? coverStampsMarkup : null}
-                {!isOpen
-                  ? coverOverlaysMarkup.map((overlay, index) => (
-                      <span key={`cover-overlay-${index}`}>{overlay}</span>
-                    ))
-                  : null}
+                {visualOpen ? (
+                  <div
+                    className={`absolute top-0 h-full w-[3px] bg-black ${
+                      isFlipped ? "right-0" : "left-0"
+                    }`}
+                  ></div>
+                ) : null}
+                {hidePaperStack ? null : paperStack}
+                {visualOpen ? null : null}
               </div>
-              {isOpen ? (
-                <div
-                  className={`absolute top-0 h-full w-[3px] bg-black ${
-                    isFlipped ? "right-0" : "left-0"
-                  }`}
-                ></div>
-              ) : null}
-              {hidePaperStack ? null : paperStack}
-              {isOpen ? null : null}
+              {tabMarkup}
             </div>
-            {tabMarkup}
           </div>
         </div>
       </div>
-    </div>
+      {modalNode}
+    </>
   );
 });
 

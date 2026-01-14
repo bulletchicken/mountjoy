@@ -14,9 +14,15 @@ import { useRef } from "react";
 
 function FolderReport({
   name,
+  nameBottomLabel = "Name",
+  nameBottomValue,
   age,
   ageLabel = "Age",
   ageContent,
+  ageBottomLabel,
+  ageBottomContent,
+  bottomLeftLabel,
+  bottomLeftContent,
   showAgeTop = true,
   showAgeBottom = true,
   birthplace,
@@ -43,7 +49,7 @@ function FolderReport({
         <div className="flex h-[220px] flex-col border-b-2 border-black">
           <div className="grid grid-cols-2 border-b-2 border-black">
             <div className="border-r-2 border-black p-1.5">
-              Name:
+              <span className="font-bold">Name:</span>
               <div className="mt-0.5 text-[0.6rem] normal-case tracking-[0.08em]">
                 {name}
               </div>
@@ -52,7 +58,7 @@ function FolderReport({
               {showAgeTop ? (
                 ageLabel ? (
                   <>
-                    {ageLabel}:
+                    <span className="font-bold">{ageLabel}:</span>
                     <div className="mt-0.5 text-[0.6rem] normal-case tracking-[0.08em]">
                       {ageContent ?? age}
                     </div>
@@ -67,26 +73,26 @@ function FolderReport({
           </div>
           <div className="grid min-h-0 flex-1 grid-cols-[0.4fr_0.6fr] grid-rows-2">
             <div className="border-b-2 border-r-2 border-black p-1.5 h-full">
-              Name:
+              <span className="font-bold">{nameBottomLabel}:</span>
               <div className="mt-0.5 text-[0.6rem] normal-case tracking-[0.08em]">
-                {name}
+                {nameBottomValue ?? name}
               </div>
             </div>
             <div className="row-span-2 p-1.5 h-full">
               {showHeaderDetails ? (
                 <>
-                  What it does:
+                  <span className="font-bold">What it does:</span>
                   <div className="mt-0.5 text-[0.6rem] normal-case tracking-[0.08em]">
                     {notesSmall}
                   </div>
                   <div className="mt-2">
-                    Skills / abilities:
+                    <span className="font-bold">Skills / abilities:</span>
                     <div className="mt-0.5 text-[0.6rem] normal-case tracking-[0.08em]">
                       {skills}
                     </div>
                   </div>
                   <div className="mt-2">
-                    Base:
+                    <span className="font-bold">Base:</span>
                     <div className="mt-0.5 text-[0.6rem] normal-case tracking-[0.08em]">
                       {birthplace} · {residence}
                     </div>
@@ -107,16 +113,25 @@ function FolderReport({
             </div>
             <div className="border-r-2 border-black p-1.5 h-full">
               {showAgeBottom ? (
-                ageLabel ? (
+                bottomLeftLabel ? (
                   <>
-                    {ageLabel}:
+                    <span className="font-bold">{bottomLeftLabel}:</span>
                     <div className="mt-0.5 text-[0.6rem] normal-case tracking-[0.08em]">
-                      {ageContent ?? age}
+                      {bottomLeftContent}
+                    </div>
+                  </>
+                ) : ageBottomLabel ?? ageLabel ? (
+                  <>
+                    <span className="font-bold">
+                      {ageBottomLabel ?? ageLabel}:
+                    </span>
+                    <div className="mt-0.5 text-[0.6rem] normal-case tracking-[0.08em]">
+                      {ageBottomContent ?? ageContent ?? age}
                     </div>
                   </>
                 ) : (
                   <div className="mt-0.5 text-[0.6rem] normal-case tracking-[0.08em]">
-                    {ageContent ?? age}
+                    {ageBottomContent ?? ageContent ?? age}
                   </div>
                 )
               ) : null}
@@ -130,7 +145,7 @@ function FolderReport({
             </div>
           ) : (
             <>
-              Notes:
+              <span className="font-bold">Notes:</span>
               <div className="mt-2 flex-1 border-2 border-black relative overflow-hidden">
                 {notesContent}
               </div>
@@ -223,6 +238,10 @@ export default function Scene03Files() {
             label: "TED",
             folderRotation: "-2deg",
             paperRotation: "2deg",
+            className: "w-[72vmin] max-w-[560px]",
+            paperStackClassName: "top-[2%] h-[84%] sm:-top-12 sm:h-[110%]",
+            paperSheetClassName:
+              "[--paper-sheet-height:84%] sm:[--paper-sheet-height:98%]",
             footerLines: [
               "AI teddy bear for sweet grandmas",
               "Healthcare companion teddy bear",
@@ -256,28 +275,31 @@ export default function Scene03Files() {
           }}
           folderContent={
             <FolderReport
-              name="AI Teddy Bear"
-              age="Prototype"
-              ageLabel="Funded by"
-              ageContent={
-                <span className="relative mt-1 block h-8">
+              name="TED"
+              ageLabel="Age"
+              ageContent="1 year old"
+              showAgeTop={true}
+              bottomLeftLabel="Funded by"
+              bottomLeftContent={
+                <span className="relative mt-0.5 block h-8">
                   <Image
                     src="/techyon-logo.png"
                     alt="Techyon"
                     width={1000}
                     height={722}
-                    className="absolute left-[40%] top-2 h-8 w-auto -translate-x-full -rotate-6"
+                    className="absolute left-[38%] top-1 h-8 w-auto -translate-x-full -rotate-6"
                   />
                   <Image
                     src="/1517-logo.png"
                     alt="1517"
                     width={2154}
                     height={825}
-                    className="absolute left-[60%] top-4 h-8 w-auto -translate-x-1/2 rotate-3"
+                    className="absolute left-[62%] top-2 h-8 w-auto -translate-x-1/2 rotate-3"
                   />
                 </span>
               }
-              showAgeTop={false}
+              nameBottomLabel="Personality"
+              nameBottomValue="Snarky, sassy, way too talkative"
               birthplace="Waterloo"
               residence="Care homes"
               hair="Plush"
@@ -327,6 +349,10 @@ export default function Scene03Files() {
             tabSide: "left",
             folderRotation: "2deg",
             paperRotation: "-2deg",
+            className: "w-[72vmin] max-w-[560px]",
+            paperStackClassName: "top-[2%] h-[84%] sm:-top-12 sm:h-[110%]",
+            paperSheetClassName:
+              "[--paper-sheet-height:84%] sm:[--paper-sheet-height:98%]",
             footerLines: ["Viral Waterloo's Hot or Not", "500 users"],
             coverOverlays: (
               <>
@@ -392,12 +418,16 @@ export default function Scene03Files() {
           }
         />
         <FolderPair
-          centerOffsetX={-280}
+          centerOffsetX={-400}
           folderClosedClassName="translate-x-16"
           folderProps={{
             label: "A guitar",
             folderRotation: "-3deg",
             paperRotation: "1deg",
+            className: "w-[72vmin] max-w-[560px]",
+            paperStackClassName: "top-[2%] h-[84%] sm:-top-12 sm:h-[110%]",
+            paperSheetClassName:
+              "[--paper-sheet-height:84%] sm:[--paper-sheet-height:98%]",
             footerLines: ["Flying-v Guitar", "Short description", "TBD"],
             coverOverlays: (
               <div className="pointer-events-none absolute right-[14%] top-[-4%] w-[32%] rotate-6">
@@ -436,21 +466,21 @@ export default function Scene03Files() {
                   alt="Guitar paint"
                   width={3213}
                   height={5712}
-                  className="absolute left-[4%] top-[2%] w-[58%] rotate-[-2deg] border-[8px] border-[#fdfbf6] bg-[#fdfbf6] object-cover drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]"
+                  className="absolute left-[4%] top-[2%] w-[58%] rotate-[-2deg] border-[8px] border-[#f5f5f5] bg-[#f5f5f5] object-cover drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]"
                 />
                 <Image
                   src="/guitar_model.png"
                   alt="Guitar CAD detail"
                   width={1889}
                   height={1560}
-                  className="absolute right-[3%] top-[4%] w-[42%] rotate-[5deg] border-[8px] border-[#fdfbf6] bg-[#fdfbf6] object-cover drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]"
+                  className="absolute right-[3%] top-[4%] w-[42%] rotate-[5deg] border-[8px] border-[#f5f5f5] bg-[#f5f5f5] object-cover drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]"
                 />
                 <Image
                   src="/guitar_final.jpg"
                   alt="Guitar final build"
                   width={3213}
                   height={5712}
-                  className="absolute bottom-[2%] right-[2%] w-[34%] rotate-[1deg] border-[8px] border-[#fdfbf6] bg-[#fdfbf6] object-cover drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]"
+                  className="absolute bottom-[2%] right-[2%] w-[34%] rotate-[1deg] border-[8px] border-[#f5f5f5] bg-[#f5f5f5] object-cover drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]"
                 />
               </div>
             </div>
@@ -480,6 +510,10 @@ export default function Scene03Files() {
             tabSide: "left",
             folderRotation: "1deg",
             paperRotation: "-1deg",
+            className: "w-[72vmin] max-w-[560px]",
+            paperStackClassName: "top-[2%] h-[84%] sm:-top-12 sm:h-[110%]",
+            paperSheetClassName:
+              "[--paper-sheet-height:84%] sm:[--paper-sheet-height:98%]",
             footerLines: [
               "FPV RC minecart w/ a loud annoying duck",
               "HTN Organizer Project",
@@ -487,7 +521,7 @@ export default function Scene03Files() {
             paperContent: (
               <>
                 <div className="absolute top-[-3%] h-[98%] rounded-[10px] border-2 border-black bg-neutral-100 right-2 left-14 rotate-[3deg]" />
-                <div className="absolute left-1/2 top-0 h-[94%] w-[92%] -translate-x-1/2 overflow-hidden rounded-[10px] border-2 border-black bg-black">
+                <div className="absolute left-1/2 top-0 h-[82%] w-[82%] -translate-x-1/2 overflow-hidden rounded-[10px] border-2 border-black bg-black sm:top-0 sm:h-[94%] sm:w-[92%]">
                   <iframe
                     src="https://www.youtube.com/embed/kwYwyRSzLE8"
                     title="FPV RC minecart short"
