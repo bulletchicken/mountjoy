@@ -65,6 +65,12 @@ export default function Scene02Corkboard() {
     target: sectionRef,
     offset: ["start 40%", "end 20%"],
   });
+  const stringProgress = useTransform(
+    scrollYProgress,
+    [0.25, 0.45],
+    [0, 1],
+    { clamp: true },
+  );
 
   const resolvedConnections = useMemo(() => {
     const items = connections
@@ -200,7 +206,7 @@ export default function Scene02Corkboard() {
               d={connection.d}
               start={connection.start}
               end={connection.end}
-              progress={scrollYProgress}
+              progress={stringProgress}
             />
           ))}
         </svg>

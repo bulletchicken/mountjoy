@@ -183,12 +183,14 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       height: 1390,
       anchor: "mona",
       motionY: monaY,
-      scaleSm: 1.65,
+      scale: 1,
+      scaleSm: 1.85,
       scaleMd: 1.4,
       offsetYSm: 72,
       offsetYMd: 48,
-      offsetXSm: 20,
-      offsetXMd: 30,
+      offsetXSm: -30,
+      offsetXMd: 100,
+      offsetXLg: 40,
     },
     {
       key: "spray-paint",
@@ -198,14 +200,14 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       height: 1796,
       anchor: "statue",
       motionY: statueY,
-      offsetX: -360,
-      offsetXSm: -160,
+      offsetX: -380,
+      scale: 1.12,
+      offsetXSm: -220,
       offsetXMd: -210,
       offsetYSm: -40,
       offsetYMd: -30,
       offsetXLg: -235,
-      scale: 1.12,
-      scaleSm: 1.2,
+      scaleSm: 1.4,
       scaleMd: 1.12,
       scaleLg: 1.12,
       scaleXl: 1.25,
@@ -218,14 +220,14 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       height: 2400,
       anchor: "statue",
       motionY: statueY,
-      offsetX: 20,
-      offsetXSm: 40,
+      offsetX: 60,
+      scale: 1.04,
+      offsetXSm: 60,
       offsetXMd: 140,
       offsetYSm: -40,
       offsetYMd: -30,
       offsetXLg: 70,
-      scale: 1.04,
-      scaleSm: 1.1,
+      scaleSm: 1.25,
       scaleMd: 1.04,
       scaleLg: 1.04,
       scaleXl: 1.15,
@@ -242,12 +244,13 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       motionY: monaY,
       mask: "beam",
       scale: 0.8,
-      scaleSm: 1.4,
+      scaleSm: 1.6,
       scaleMd: 1.2,
       offsetYSm: 72,
       offsetYMd: 48,
-      offsetXSm: 20,
-      offsetXMd: 30,
+      offsetXSm: -30,
+      offsetXMd: 100,
+      offsetXLg: 40,
     },
     {
       key: "statue",
@@ -258,14 +261,14 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       anchor: "statue",
       motionY: statueY,
       mask: "beam",
-      offsetX: 20,
-      offsetXSm: 40,
+      offsetX: 60,
+      scale: 1.03,
+      offsetXSm: 60,
       offsetXMd: 140,
       offsetYSm: -40,
       offsetYMd: -30,
       offsetXLg: 70,
-      scale: 1.03,
-      scaleSm: 1.1,
+      scaleSm: 1.25,
       scaleMd: 1.03,
       scaleLg: 1.0,
       scaleXl: 1.12,
@@ -313,7 +316,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
     if (!anchor?.svg) {
       return null;
     }
-    const isSm = size.w < 640;
+    const isSm = size.w < 768;
     const isMd = size.w < 1024;
     const isLg = size.w >= 1024 && size.w < 1280;
     const scaleOverride =
@@ -521,7 +524,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
         {/* <div className="pointer-events-none absolute inset-0 z-50 [backdrop-filter:blur(10px)] [mask-image:radial-gradient(ellipse_at_center,transparent_18%,black)] max-sm:[backdrop-filter:none]" /> */}
         <motion.div
           style={{ y: statueY }}
-          className="pointer-events-none absolute left-1/2 top-[18%] z-50 max-w-[420px] -translate-x-1/2 text-center font-mono text-base mix-blend-difference text-white sm:text-lg md:left-[20%] md:top-[22%] md:translate-x-0 md:text-left lg:left-[24%] lg:top-[26%] lg:text-base"
+          className="pointer-events-none absolute left-1/2 top-[19%] z-50 max-w-[420px] -translate-x-1/2 text-center font-mono text-base mix-blend-difference text-white sm:text-lg md:left-[20%] md:top-[26%] md:translate-x-0 md:text-left lg:left-[24%] lg:top-[26%] lg:text-base"
         >
           <p className="text-lg leading-[1.15] tracking-[0.02em] sm:text-xl lg:text-xl xl:text-xl">
             MLH&apos;s Top 50 hacker with 25 hackathons and 15 wins.
