@@ -62,7 +62,7 @@ export default function CautionTape() {
         {/* Second Caution Tape */}
         <motion.div
           style={{ x: tape2X, willChange: "transform" }}
-          className="absolute top-[28%] -left-30 w-[200vw] bg-white min-h-[5vh] py-8 flex items-center justify-start text-center overflow-hidden text-3xl 2xl:min-h-[9vh] 2xl:py-12 2xl:text-5xl border-4 border-black rotate-[-6deg] 2xl:-left-60 z-0"
+          className="absolute top-[24%] sm:top-[28%] -left-30 w-[200vw] bg-white min-h-[5vh] py-8 flex items-center justify-start text-center overflow-hidden text-3xl 2xl:min-h-[9vh] 2xl:py-12 2xl:text-5xl border-4 border-black rotate-[-6deg] 2xl:-left-60 z-0"
         >
           <div className="flex">
             <TapeContent />
