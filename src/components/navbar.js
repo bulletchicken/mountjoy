@@ -1,14 +1,61 @@
 "use client";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
 export default function Navbar() {
+  const [isHidden, setIsHidden] = useState(false);
+  const [isCompact, setIsCompact] = useState(false);
+  const lastScrollY = useRef(0);
+  const ticking = useRef(false);
+
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 768px)");
+    const updateLayout = () => {
+      const compact = !media.matches;
+      setIsCompact(compact);
+      if (!compact) {
+        setIsHidden(false);
+      }
+    };
+    updateLayout();
+    media.addEventListener("change", updateLayout);
+    return () => media.removeEventListener("change", updateLayout);
+  }, []);
+
+  useEffect(() => {
+    if (!isCompact) {
+      return;
+    }
+
+    const handleScroll = () => {
+      if (ticking.current) {
+        return;
+      }
+      ticking.current = true;
+      requestAnimationFrame(() => {
+        const currentY = window.scrollY || 0;
+        const delta = currentY - lastScrollY.current;
+        const shouldHide = delta > 2 && currentY > 20;
+        const shouldShow = delta < -2 || currentY <= 10;
+        if (shouldHide !== isHidden && (shouldHide || shouldShow)) {
+          setIsHidden(shouldHide);
+        }
+        lastScrollY.current = currentY;
+        ticking.current = false;
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isCompact, isHidden]);
+
   return (
     <motion.nav
       className="fixed top-0 left-0 right-0 z-50 mix-blend-difference text-white"
       initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 1, duration: 1, ease: "easeOut" }}
+      animate={{ opacity: 1, y: isHidden ? -120 : 0 }}
+      transition={{ delay: 0, duration: 0.2, ease: "easeOut" }}
     >
       <div className="mx-auto flex w-full max-w-4xl flex-wrap items-center justify-center gap-4 px-4 pt-10 pb-6 sm:px-8 sm:py-10 md:justify-between md:px-12 2xl:px-16">
         {/* Left side - Name */}
