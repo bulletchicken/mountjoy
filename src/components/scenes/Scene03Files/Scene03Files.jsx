@@ -570,7 +570,7 @@ export default function Scene03Files() {
           href="https://devpost.com/jeremysu64"
           target="_blank"
           rel="noreferrer"
-          className="group inline-flex items-center justify-center transition-transform duration-200 hover:-translate-y-1"
+          className="group relative inline-flex items-center justify-center transition-transform duration-200 hover:-translate-y-1"
           aria-label="More projects on Devpost"
         >
           <Image
@@ -579,6 +579,13 @@ export default function Scene03Files() {
             width={980}
             height={980}
             className="h-[240px] w-[240px] object-contain transition-transform duration-200 group-hover:rotate-[-4deg] group-hover:scale-[1.06] group-hover:drop-shadow-[0_6px_12px_rgba(0,0,0,0.35)] sm:h-[280px] sm:w-[280px] md:h-[320px] md:w-[320px] lg:h-[360px] lg:w-[360px]"
+          />
+          <Image
+            src="/click_it.png"
+            alt=""
+            width={526}
+            height={323}
+            className="pointer-events-none absolute bottom-0 right-0 h-[84px] w-auto translate-x-[12%] translate-y-[12%] object-contain sm:h-[92px] md:h-[104px] lg:h-[118px]"
           />
         </a>
       </div>

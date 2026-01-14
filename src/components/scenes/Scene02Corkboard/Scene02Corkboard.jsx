@@ -42,7 +42,6 @@ export default function Scene02Corkboard() {
     () => [
       { id: "waterloo-sticky", ref: waterlooStickyRef, x: 0.5, y: 0.15 },
       { id: "waterloo-syde", ref: waterlooSydeRef, x: 0.5, y: 0.3 },
-      { id: "waterloo-polaroids", ref: waterlooPolaroidsRef, x: 0.4, y: 0.3 },
       { id: "shopify-top", ref: shopifyRef, x: 0.5, y: 0.1 },
       { id: "quanto-top", ref: quantoRef, x: 0.6, y: 0.15 },
       { id: "htn-pin", ref: htnRef, x: 0.5, y: 0.18 },
@@ -329,14 +328,9 @@ export default function Scene02Corkboard() {
                         imageClass="w-32 h-44 sm:w-40 sm:h-52"
                         className="scale-[0.8] sm:scale-100"
                       />
-                      <div className="absolute top-4 left-1/2 z-10 -translate-x-1/2">
-                        <div className="relative h-4 w-4 rounded-full border border-neutral-500 bg-neutral-300">
-                          <div className="absolute left-[3px] top-[3px] h-2 w-2 rounded-full bg-neutral-100" />
-                        </div>
-                      </div>
                     </div>
                   </div>
-                  <div className="absolute left-[31%] bottom-[-42%] z-10 -rotate-2">
+                  <div className="absolute left-[31%] bottom-[-48%] z-10 -rotate-2 scale-[0.8] sm:scale-100">
                     <Image
                       src="/quanto_scribble.png"
                       alt="Software engineer scribble"
@@ -347,7 +341,7 @@ export default function Scene02Corkboard() {
                   </div>
                   <div
                     ref={quantoRef}
-                    className="absolute right-6 bottom-[-6%] z-10 w-[200px] -rotate-10 scale-[0.75] translate-x-40 translate-y-12 sm:scale-100 sm:translate-x-0 sm:translate-y-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-8deg]"
+                    className="absolute right-6 bottom-[-6%] z-10 w-[200px] -rotate-10 scale-[0.82] translate-x-32 translate-y-4 sm:scale-100 sm:translate-x-0 sm:translate-y-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-8deg]"
                   >
                     <Image
                       src="/quanto_sticky.png"
@@ -373,7 +367,7 @@ export default function Scene02Corkboard() {
                   className="h-auto w-full drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
                 />
               </div>
-              <div className="absolute left-[5%] sm:left-[40%] top-[15%] z-10 rotate-5 w-[520px] origin-top-left scale-[0.85]">
+              <div className="absolute left-[5%] sm:left-[40%] top-[15%] z-10 rotate-5 w-[520px] origin-top-left scale-[0.7] sm:scale-[0.85]">
                 <Image
                   src="/shopify_scribble.png"
                   alt="Engineering intern scribble"
@@ -393,7 +387,7 @@ export default function Scene02Corkboard() {
               </div>
               <div
                 ref={htnRef}
-                className="absolute left-[60%] top-[300px] z-10 w-full max-w-[220px] -rotate-2 scale-[0.75] sm:scale-[1.1] transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-1deg]"
+                className="absolute left-[60%] top-[300px] z-10 w-full max-w-[220px] -rotate-2 scale-[0.75] sm:left-[-10%] sm:top-[280px] sm:scale-[1.1] transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-1deg]"
               >
                 <Image
                   src="/htn_sticky.png"
@@ -412,7 +406,7 @@ export default function Scene02Corkboard() {
                   className="h-auto w-[560px] opacity-90 drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
                 />
               </div>
-              <div className="absolute left-[20%] top-[300px] z-10 rotate-2">
+              <div className="absolute left-[28%] top-[300px] z-10 rotate-2 scale-[0.85] sm:left-[20%] sm:scale-100">
                 <Image
                   src="/htn_scribble.png"
                   alt="Logistics organizer scribble"
@@ -430,14 +424,9 @@ export default function Scene02Corkboard() {
                     imageClass="w-32 h-44 sm:w-40 sm:h-52"
                     className="scale-[0.8] sm:scale-100"
                   />
-                  <div className="absolute -top-1 left-1/2 z-10 -translate-x-1/2">
-                    <div className="relative h-4 w-4 rounded-full border border-neutral-500 bg-neutral-300">
-                      <div className="absolute left-[3px] top-[3px] h-2 w-2 rounded-full bg-neutral-100" />
-                    </div>
-                  </div>
                 </div>
               </div>
-              <div className="absolute left-[-10%] top-[280px] z-10 rotate-8 w-[110px] transition-transform duration-200 hover:-translate-y-1 hover:rotate-[9deg]">
+              <div className="absolute left-[-2%] top-[280px] z-10 rotate-8 w-[110px] sm:left-[74%] sm:top-[300px] transition-transform duration-200 hover:-translate-y-1 hover:rotate-[9deg]">
                 <Image
                   src="/alicehacks_sticker.png"
                   alt="AliceHacks sticker"
