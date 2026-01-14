@@ -348,7 +348,7 @@ export default function Scene02Corkboard() {
                     height={2048}
                     className="h-auto w-full translate-x-6 scale-[1.25] sm:translate-x-0 sm:scale-100 drop-shadow-[0_1px_2px_rgba(0,0,0,1)] transition-transform duration-200 group-hover:-translate-y-1 group-hover:rotate-[1deg]"
                   />
-                  <div className="absolute left-[64%] bottom-[-60%] z-10 -rotate-1 translate-y-32 sm:-left-6 sm:bottom-[-50%] sm:translate-y-0 md:translate-y-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-2deg]">
+                  <div className="absolute left-[64%] bottom-[-60%] z-10 -rotate-1 translate-y-32 sm:-left-6 sm:bottom-[-50%] sm:translate-y-0 md:translate-y-12 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-2deg]">
                     <div className="relative">
                       <Polaroid
                         src="/quanto_selfie.jpeg"
@@ -416,7 +416,7 @@ export default function Scene02Corkboard() {
               </div>
               <div
                 ref={htnRef}
-                className="absolute left-[50%] top-[300px] z-10 w-full max-w-[220px] -rotate-2 scale-[0.75] sm:left-[60%] sm:top-[260px] sm:translate-x-6 md:left-[-10%] md:top-[280px] md:scale-[1.1] md:translate-x-12 lg:translate-x-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-1deg]"
+                className="absolute left-[50%] top-[260px] z-10 w-full max-w-[220px] -rotate-2 scale-[0.75] sm:left-[60%] sm:top-[220px] sm:translate-x-6 md:left-[-10%] md:top-[240px] md:scale-[1.1] md:translate-x-12 lg:translate-x-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-1deg]"
               >
                 <Image
                   src="/htn_sticky.png"
@@ -455,7 +455,7 @@ export default function Scene02Corkboard() {
                   />
                 </div>
               </div>
-              <div className="absolute left-[-2%] top-[560px] z-10 rotate-8 w-[95px] sm:top-[240px] sm:w-[110px] sm:translate-x-6 md:left-[74%] md:top-[300px] md:w-[110px] md:translate-x-12 lg:top-[680px] lg:translate-x-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[9deg]">
+              <div className="absolute left-[-2%] top-[560px] z-10 rotate-8 w-[95px] sm:top-[240px] sm:w-[110px] sm:translate-x-6 md:left-[74%] md:top-[300px] md:w-[110px] md:translate-x-12 lg:left-[76%] lg:top-[460px] lg:translate-x-6 lg:z-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[9deg]">
                 <Image
                   src="/alicehacks_sticker.png"
                   alt="AliceHacks sticker"
