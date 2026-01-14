@@ -1,11 +1,38 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
+import {
+  motion,
+  useAnimationControls,
+  useMotionValueEvent,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import Polaroid from "@/components/fx/Polaroid";
 
-function AnimatedString({ d, start, end, progress, isSmallScreen }) {
+const FLASH_GRADIENT =
+  "radial-gradient(circle at 108% 138%, rgba(243,248,255,1) 0%, rgba(245,249,255,0.98) 30%, rgba(248,251,255,0.9) 50%, rgba(248,249,252,0.75) 68%, rgba(246,247,250,0.55) 84%, rgba(244,245,248,0.4) 100%)";
+const FLASH_VIGNETTE =
+  "radial-gradient(circle at 0% 0%, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.28) 26%, rgba(0,0,0,0.16) 48%, rgba(0,0,0,0.08) 64%, rgba(0,0,0,0) 82%)";
+const FLASH_FLARE =
+  "linear-gradient(225deg, rgba(236,244,255,0.95) 0%, rgba(240,247,255,0.6) 16%, rgba(245,250,255,0.2) 28%, rgba(255,255,255,0) 45%)";
+const FLASH_BEAM =
+  "linear-gradient(225deg, rgba(232,242,255,0.95) 0%, rgba(236,244,255,0.7) 18%, rgba(242,248,255,0.35) 36%, rgba(255,255,255,0) 62%)";
+const FLASH_FLARE_IMAGE = "/lens_flare.jpg";
+const FLASH_BLAST_DURATION = 0.45;
+const FLASH_BLAST_TIMES = [0, 0.22, 0.55, 1];
+const FLASH_BLAST_OPACITY = [0, 1, 1, 0];
+const FLASH_WASH_DURATION = 1.6;
+const FLASH_WASH_TIMES = [0, 0.06, 0.2, 0.42, 0.7, 1];
+const FLASH_WASH_OPACITY = [0, 0.9, 0.62, 0.36, 0.16, 0];
+const FLASH_WASH_SCALE = [1, 1.08, 1.03, 1.08, 1.12, 1.16];
+const FLARE_OPACITY = [0, 1, 0.85, 0.5, 0.2, 0];
+const FLASH_TRIGGER = 0.18;
+const FLASH_RESET = 0.05;
+
+function AnimatedString({ d, start, end, progress, isSmallScreen, isMdUp }) {
   const duration = Math.max(0.001, end - start);
   const draw = useTransform(progress, [start, end], [0, 1]);
   const opacity = useTransform(
@@ -18,7 +45,7 @@ function AnimatedString({ d, start, end, progress, isSmallScreen }) {
     <motion.path
       d={d}
       stroke="#b91c1c"
-      strokeWidth={isSmallScreen ? 6 : 5}
+      strokeWidth={isSmallScreen ? 6 : isMdUp ? 7 : 5}
       strokeLinecap="round"
       fill="none"
       pathLength={draw}
@@ -61,8 +88,14 @@ export default function Scene02Corkboard() {
   const [pinPositions, setPinPositions] = useState({});
   const [waterlooHeight, setWaterlooHeight] = useState(0);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [isMdUp, setIsMdUp] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   useEffect(() => {
-    const update = () => setIsSmallScreen(window.innerWidth < 640);
+    setIsMounted(true);
+    const update = () => {
+      setIsSmallScreen(window.innerWidth < 640);
+      setIsMdUp(window.innerWidth >= 768);
+    };
     update();
     window.addEventListener("resize", update);
     return () => window.removeEventListener("resize", update);
@@ -71,12 +104,56 @@ export default function Scene02Corkboard() {
     target: sectionRef,
     offset: ["start 80%", "end 25%"],
   });
+  const { scrollYProgress: flashProgress } = useScroll({
+    target: waterlooPolaroidsRef,
+    offset: ["start 85%", "start 35%"],
+  });
+  const blastControls = useAnimationControls();
+  const washControls = useAnimationControls();
+  const flareControls = useAnimationControls();
+  const flashHasFiredRef = useRef(false);
+  const flashLastProgress = useRef(0);
   const stringProgress = useTransform(
     scrollYProgress,
     isSmallScreen ? [0.05, 0.55] : [0.12, 0.55],
     [0, 1],
     { clamp: true },
   );
+
+  useMotionValueEvent(flashProgress, "change", (value) => {
+    const last = flashLastProgress.current;
+    flashLastProgress.current = value;
+    if (!flashHasFiredRef.current && value >= FLASH_TRIGGER && last < FLASH_TRIGGER) {
+      flashHasFiredRef.current = true;
+      void blastControls.start({
+        opacity: FLASH_BLAST_OPACITY,
+        transition: {
+          duration: FLASH_BLAST_DURATION,
+          ease: "easeOut",
+          times: FLASH_BLAST_TIMES,
+        },
+      });
+      void washControls.start({
+        opacity: FLASH_WASH_OPACITY,
+        scale: FLASH_WASH_SCALE,
+        transition: {
+          duration: FLASH_WASH_DURATION,
+          ease: "easeOut",
+          times: FLASH_WASH_TIMES,
+        },
+      });
+      void flareControls.start({
+        opacity: FLARE_OPACITY,
+        transition: {
+          duration: FLASH_WASH_DURATION,
+          ease: "easeOut",
+          times: FLASH_WASH_TIMES,
+        },
+      });
+    } else if (flashHasFiredRef.current && value <= FLASH_RESET && last > FLASH_RESET) {
+      flashHasFiredRef.current = false;
+    }
+  });
 
   const resolvedConnections = useMemo(() => {
     const items = connections
@@ -222,6 +299,78 @@ export default function Scene02Corkboard() {
         backgroundSize: "800px 534px",
       }}
     >
+      {isMounted
+        ? createPortal(
+            <>
+              <motion.div
+                aria-hidden="true"
+                className="pointer-events-none fixed inset-0 z-[140] bg-white"
+                initial={{ opacity: 0 }}
+                animate={blastControls}
+                style={{ willChange: "opacity" }}
+              />
+              <motion.div
+                aria-hidden="true"
+                className="pointer-events-none fixed inset-0 z-[139]"
+                initial={{ opacity: 0, scale: 1 }}
+                animate={washControls}
+                style={{
+                  transformOrigin: "100% 100%",
+                  backgroundColor: "rgba(255,255,255,0.5)",
+                  backgroundImage: FLASH_GRADIENT,
+                  willChange: "opacity, transform",
+                }}
+              />
+              <motion.div
+                aria-hidden="true"
+                className="pointer-events-none fixed inset-0 z-[139]"
+                initial={{ opacity: 0 }}
+                animate={washControls}
+                style={{
+                  backgroundImage: FLASH_BEAM,
+                  transformOrigin: "100% 100%",
+                  willChange: "opacity",
+                }}
+              />
+              <motion.div
+                aria-hidden="true"
+                className="pointer-events-none fixed inset-0 z-[138]"
+                initial={{ opacity: 0 }}
+                animate={washControls}
+                style={{
+                  backgroundImage: FLASH_FLARE,
+                  transformOrigin: "100% 100%",
+                  willChange: "opacity",
+                }}
+              />
+              <motion.div
+                aria-hidden="true"
+                className="pointer-events-none fixed inset-0 z-[138] mix-blend-screen"
+                initial={{ opacity: 0 }}
+                animate={flareControls}
+                style={{
+                  backgroundImage: `url(${FLASH_FLARE_IMAGE})`,
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "100% 100%",
+                  backgroundSize: "100vw auto",
+                  filter: "brightness(2.2) contrast(1.6) saturate(0.85)",
+                  willChange: "opacity, filter",
+                }}
+              />
+              <motion.div
+                aria-hidden="true"
+                className="pointer-events-none fixed inset-0 z-[137]"
+                initial={{ opacity: 0 }}
+                animate={washControls}
+                style={{
+                  backgroundImage: FLASH_VIGNETTE,
+                  willChange: "opacity",
+                }}
+              />
+            </>,
+            document.body,
+          )
+        : null}
       <div
         ref={containerRef}
         className="relative mx-auto -mt-72 sm:-mt-80 flex w-full max-w-6xl flex-wrap items-center justify-center gap-12 px-6 overflow-visible"
@@ -235,6 +384,7 @@ export default function Scene02Corkboard() {
               end={connection.end}
               progress={stringProgress}
               isSmallScreen={isSmallScreen}
+              isMdUp={isMdUp}
             />
           ))}
         </svg>
@@ -396,7 +546,7 @@ export default function Scene02Corkboard() {
                   className="h-auto w-full drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
                 />
               </div>
-              <div className="absolute left-[60%] -translate-x-1/2 sm:left-1/2 md:left-[40%] md:translate-x-0 top-[15%] z-10 rotate-5 w-[520px] origin-top-left scale-[0.7] md:scale-[0.85]">
+              <div className="absolute left-[60%] -translate-x-1/2 sm:left-1/2 md:left-[40%] md:translate-x-0 top-[15%] lg:top-[22%] z-10 rotate-5 w-[520px] origin-top-left scale-[0.7] md:scale-[0.85]">
                 <Image
                   src="/shopify_scribble.png"
                   alt="Engineering intern scribble"
