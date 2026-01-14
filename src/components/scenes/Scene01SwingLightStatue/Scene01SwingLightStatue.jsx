@@ -184,8 +184,10 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       anchor: "mona",
       motionY: monaY,
       scale: 1,
-      scaleSm: 1.85,
+      scaleBase: 2.35,
+      scaleSm: 1.75,
       scaleMd: 1.4,
+      offsetYBase: 0,
       offsetYSm: 72,
       offsetYMd: 48,
       offsetXSm: -30,
@@ -201,13 +203,16 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       anchor: "statue",
       motionY: statueY,
       offsetX: -380,
+      offsetXBase: -140,
       scale: 1.12,
-      offsetXSm: -160,
+      offsetXSm: -230,
       offsetXMd: -210,
+      offsetYBase: -200,
       offsetYSm: -40,
       offsetYMd: -30,
       offsetXLg: -235,
-      scaleSm: 1.4,
+      scaleBase: 1.65,
+      scaleSm: 1.25,
       scaleMd: 1.12,
       scaleLg: 1.12,
       scaleXl: 1.25,
@@ -224,10 +229,12 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       scale: 1.04,
       offsetXSm: 60,
       offsetXMd: 140,
+      offsetYBase: -200,
       offsetYSm: -40,
       offsetYMd: -30,
       offsetXLg: 70,
-      scaleSm: 1.25,
+      scaleBase: 1.55,
+      scaleSm: 1.15,
       scaleMd: 1.04,
       scaleLg: 1.04,
       scaleXl: 1.15,
@@ -244,8 +251,10 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       motionY: monaY,
       mask: "beam",
       scale: 0.8,
-      scaleSm: 1.6,
+      scaleBase: 1.95,
+      scaleSm: 1.4,
       scaleMd: 1.2,
+      offsetYBase: 0,
       offsetYSm: 72,
       offsetYMd: 48,
       offsetXSm: -30,
@@ -265,10 +274,12 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       scale: 1.03,
       offsetXSm: 60,
       offsetXMd: 140,
+      offsetYBase: -200,
       offsetYSm: -40,
       offsetYMd: -30,
       offsetXLg: 70,
-      scaleSm: 1.25,
+      scaleBase: 1.55,
+      scaleSm: 1.15,
       scaleMd: 1.03,
       scaleLg: 1.0,
       scaleXl: 1.12,
@@ -316,11 +327,14 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
     if (!anchor?.svg) {
       return null;
     }
+    const isBase = size.w < 640;
     const isSm = size.w < 768;
     const isMd = size.w < 1024;
     const isLg = size.w >= 1024 && size.w < 1280;
     const scaleOverride =
-      isSm && item.scaleSm != null
+      isBase && item.scaleBase != null
+        ? item.scaleBase
+        : isSm && item.scaleSm != null
         ? item.scaleSm
         : isMd && item.scaleMd != null
           ? item.scaleMd
@@ -331,7 +345,9 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
               : (item.scale ?? 1);
     const combinedScale = scaleOverride * layoutScale;
     const itemOffsetX =
-      isSm && item.offsetXSm != null
+      isBase && item.offsetXBase != null
+        ? item.offsetXBase
+        : isSm && item.offsetXSm != null
         ? item.offsetXSm
         : isMd && item.offsetXMd != null
           ? item.offsetXMd
@@ -339,7 +355,9 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
             ? item.offsetXLg
           : item.offsetX || 0;
     const itemOffsetY =
-      isSm && item.offsetYSm != null
+      isBase && item.offsetYBase != null
+        ? item.offsetYBase
+        : isSm && item.offsetYSm != null
         ? item.offsetYSm
         : isMd && item.offsetYMd != null
           ? item.offsetYMd

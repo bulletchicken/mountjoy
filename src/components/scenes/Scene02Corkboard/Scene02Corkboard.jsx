@@ -215,7 +215,7 @@ export default function Scene02Corkboard() {
   return (
     <section
       ref={sectionRef}
-      className="relative z-0 isolate w-full bg-white pt-6 pb-10 -mt-24 cursor-default translate-x-8 overflow-visible"
+      className="relative z-0 isolate w-full bg-white pt-4 pb-10 -mt-40 cursor-default translate-x-8 overflow-visible sm:pt-6 sm:-mt-32"
       style={{
         backgroundImage: "url(/cork_texture.png)",
         backgroundRepeat: "repeat",
@@ -249,7 +249,7 @@ export default function Scene02Corkboard() {
           </div>
         ))}
         <div className="pointer-events-none w-full">
-          <div className="mx-auto w-[min(80vw,720px)] rotate-10 pt-6 pb-4 -mb-16 translate-y-12 -translate-x-6">
+          <div className="mx-auto w-[min(80vw,720px)] rotate-10 pt-6 pb-4 -mb-16 -translate-y-2 -translate-x-6 sm:translate-y-12">
             <Image
               src="/where_is_he.png"
               alt="Where is he note"
