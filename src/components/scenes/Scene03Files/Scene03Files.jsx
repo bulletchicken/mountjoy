@@ -206,14 +206,14 @@ export default function Scene03Files() {
         backgroundSize: "800px 534px",
       }}
     >
-      <div className="flex flex-col items-center gap-16 sm:gap-24 lg:gap-32 xl:gap-40">
-        <div className="pointer-events-none relative flex w-full justify-center -mb-32 -mt-40">
+      <div className="flex flex-col items-center gap-28 sm:gap-24 lg:gap-32 xl:gap-40">
+        <div className="pointer-events-none relative flex w-full justify-center -mb-16 -mt-40 sm:-mb-32">
           <Image
             src="/evidence_files.png"
             alt="Evidence files"
             width={1411}
             height={1254}
-            className="w-[64vw] max-w-[780px] -rotate-1"
+            className="w-[80vw] -rotate-1 sm:w-[80vw] md:w-[65vw] lg:w-[50vw]"
             priority
           />
         </div>
@@ -313,7 +313,7 @@ export default function Scene03Files() {
                 threshold={0.5}
                 gridSize={1}
                 objectFit="contain"
-                className="h-[50vmin] w-[50vmin] sm:h-[54vmin] sm:w-[54vmin] md:h-[58vmin] md:w-[58vmin] lg:h-[60vmin] lg:w-[60vmin] xl:h-[62vmin] xl:w-[62vmin]"
+                className="h-[42vmin] w-[42vmin] sm:h-[54vmin] sm:w-[54vmin] md:h-[58vmin] md:w-[58vmin] lg:h-[60vmin] lg:w-[60vmin] xl:h-[62vmin] xl:w-[62vmin]"
               />
             </div>
           }
@@ -385,7 +385,7 @@ export default function Scene03Files() {
                   colorMode="grayscale"
                   gridSize={1}
                   objectFit="contain"
-                  className="h-[58vmin] w-[58vmin] sm:h-[64vmin] sm:w-[64vmin] md:h-[68vmin] md:w-[68vmin] lg:h-[70vmin] lg:w-[70vmin] xl:h-[74vmin] xl:w-[74vmin]"
+                  className="h-[50vmin] w-[50vmin] sm:h-[64vmin] sm:w-[64vmin] md:h-[68vmin] md:w-[68vmin] lg:h-[70vmin] lg:w-[70vmin] xl:h-[74vmin] xl:w-[74vmin]"
                 />
               </div>
             </div>
@@ -456,7 +456,7 @@ export default function Scene03Files() {
             </div>
           }
           media={
-            <div className="relative flex-shrink-0 h-[56vmin] w-[56vmin] sm:h-[60vmin] sm:w-[60vmin] md:h-[64vmin] md:w-[64vmin] lg:h-[68vmin] lg:w-[68vmin] xl:h-[72vmin] xl:w-[72vmin] overflow-visible">
+            <div className="relative flex-shrink-0 h-[48vmin] w-[48vmin] sm:h-[60vmin] sm:w-[60vmin] md:h-[64vmin] md:w-[64vmin] lg:h-[68vmin] lg:w-[68vmin] xl:h-[72vmin] xl:w-[72vmin] overflow-visible">
               <div className="absolute inset-0 -translate-x-20 -translate-y-14 -rotate-26 flex items-center justify-center">
                 <DitherShader
                   src="/guitar.png"
@@ -464,7 +464,7 @@ export default function Scene03Files() {
                   threshold={0.25}
                   gridSize={1}
                   objectFit="contain"
-                  className="h-[52vmin] w-[52vmin] sm:h-[60vmin] sm:w-[60vmin] md:h-[68vmin] md:w-[68vmin] lg:h-[74vmin] lg:w-[74vmin] xl:h-[82vmin] xl:w-[82vmin]"
+                  className="h-[44vmin] w-[44vmin] sm:h-[60vmin] sm:w-[60vmin] md:h-[68vmin] md:w-[68vmin] lg:h-[74vmin] lg:w-[74vmin] xl:h-[82vmin] xl:w-[82vmin]"
                 />
               </div>
             </div>
@@ -518,7 +518,7 @@ export default function Scene03Files() {
                 threshold={0.1}
                 gridSize={1}
                 objectFit="contain"
-                className="h-[60vmin] w-[60vmin] sm:h-[66vmin] sm:w-[66vmin] md:h-[70vmin] md:w-[70vmin] lg:h-[74vmin] lg:w-[74vmin] xl:h-[78vmin] xl:w-[78vmin]"
+                className="h-[52vmin] w-[52vmin] sm:h-[66vmin] sm:w-[66vmin] md:h-[70vmin] md:w-[70vmin] lg:h-[74vmin] lg:w-[74vmin] xl:h-[78vmin] xl:w-[78vmin]"
               />
             </div>
           }
