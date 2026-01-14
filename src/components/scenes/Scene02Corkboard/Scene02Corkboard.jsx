@@ -249,7 +249,7 @@ export default function Scene02Corkboard() {
           </div>
         ))}
         <div className="pointer-events-none w-full">
-          <div className="mx-auto w-[min(80vw,720px)] rotate-10 pt-6 pb-4 -mb-16 -translate-y-2 -translate-x-6 sm:translate-y-12">
+          <div className="mx-auto w-[min(88vw,720px)] rotate-10 pt-6 pb-4 -mb-16 -translate-y-2 -translate-x-6 sm:w-[min(80vw,720px)] sm:translate-y-12">
             <Image
               src="/where_is_he.png"
               alt="Where is he note"
@@ -261,7 +261,7 @@ export default function Scene02Corkboard() {
         </div>
         <div
           ref={waterlooRef}
-          className="relative w-full -translate-x-20"
+          className="relative w-full -translate-x-24"
           style={waterlooHeight ? { height: `${waterlooHeight}px` } : undefined}
         >
           <div
@@ -278,7 +278,7 @@ export default function Scene02Corkboard() {
           </div>
           <div
             ref={waterlooNewsRef}
-            className="absolute left-[5%] top-[-52%] -rotate-2 w-[min(80vw,700px)] max-w-none z-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-1deg]"
+            className="absolute left-[5%] top-[-52%] -rotate-2 w-[min(96vw,820px)] sm:w-[min(80vw,700px)] max-w-none z-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-1deg]"
           >
             <Image
               src="/waterloo_news.png"
@@ -290,7 +290,7 @@ export default function Scene02Corkboard() {
           </div>
           <div
             ref={waterlooSydeRef}
-            className="absolute left-[50%] top-[-30%] rotate-1 w-[min(80vw,680px)] max-w-none z-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[2deg]"
+            className="absolute left-[50%] top-[-30%] rotate-1 w-[min(92vw,720px)] translate-y-10 sm:w-[min(80vw,680px)] sm:translate-y-0 max-w-none z-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[2deg]"
           >
             <Image
               src="/waterloo_syde.png"
@@ -338,7 +338,7 @@ export default function Scene02Corkboard() {
         <div className="relative w-full min-h-[220px] overflow-visible">
           <div className="relative mx-auto flex w-full max-w-3xl flex-col items-center gap-6 md:gap-8 overflow-visible -translate-y-[180px]">
             <div className="relative w-full min-h-[480px] overflow-visible">
-              <div className="group absolute left-[-12%] top-[90px] translate-x-12 md:top-[40px] md:translate-x-0 w-[min(70vw,620px)] max-w-none">
+              <div className="group absolute left-[-16%] top-[120px] translate-x-6 sm:left-[-12%] sm:top-[90px] sm:translate-x-12 md:top-[40px] md:translate-x-0 w-[min(70vw,620px)] max-w-none">
                 <div className="relative w-full">
                   <Image
                     src="/quanto_news.png"
