@@ -456,8 +456,8 @@ export default function Scene03Files() {
             </div>
           }
           media={
-            <div className="relative flex-shrink-0 h-[72vmin] w-[72vmin] -translate-x-12 translate-y-6 sm:h-[60vmin] sm:w-[60vmin] sm:translate-x-0 sm:translate-y-0 md:h-[64vmin] md:w-[64vmin] lg:h-[68vmin] lg:w-[68vmin] xl:h-[72vmin] xl:w-[72vmin] overflow-visible">
-              <div className="absolute inset-0 -translate-x-20 -translate-y-14 -rotate-26 flex items-center justify-center">
+            <div className="relative flex-shrink-0 h-[72vmin] w-[72vmin] translate-x-6 translate-y-6 sm:h-[60vmin] sm:w-[60vmin] sm:translate-x-0 sm:translate-y-0 md:h-[64vmin] md:w-[64vmin] lg:h-[68vmin] lg:w-[68vmin] xl:h-[72vmin] xl:w-[72vmin] overflow-visible">
+              <div className="absolute inset-0 -translate-x-12 -translate-y-14 -rotate-26 flex items-center justify-center sm:-translate-x-20">
                 <DitherShader
                   src="/guitar.png"
                   colorMode="grayscale"
@@ -518,7 +518,7 @@ export default function Scene03Files() {
                 threshold={0.1}
                 gridSize={1}
                 objectFit="contain"
-                className="h-[80vmin] w-[80vmin] sm:h-[66vmin] sm:w-[66vmin] md:h-[70vmin] md:w-[70vmin] lg:h-[74vmin] lg:w-[74vmin] xl:h-[78vmin] xl:w-[78vmin]"
+                className="h-[60vmin] w-[60vmin] sm:h-[66vmin] sm:w-[66vmin] md:h-[70vmin] md:w-[70vmin] lg:h-[74vmin] lg:w-[74vmin] xl:h-[78vmin] xl:w-[78vmin]"
               />
             </div>
           }

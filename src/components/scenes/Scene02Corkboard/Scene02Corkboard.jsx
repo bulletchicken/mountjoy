@@ -69,7 +69,7 @@ export default function Scene02Corkboard() {
   }, []);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start 90%", "end 25%"],
+    offset: ["start 80%", "end 25%"],
   });
   const stringProgress = useTransform(
     scrollYProgress,
@@ -165,13 +165,27 @@ export default function Scene02Corkboard() {
     };
 
     const updateLayout = () => {
-      updatePins();
-      updateWaterlooHeight();
+      requestAnimationFrame(() => {
+        updatePins();
+        updateWaterlooHeight();
+      });
     };
 
     updateLayout();
     const ro = new ResizeObserver(updateLayout);
     ro.observe(containerRef.current);
+    const imageNodes = Array.from(
+      containerRef.current.querySelectorAll("img"),
+    );
+    const handleImageLoad = () => {
+      updateLayout();
+    };
+    imageNodes.forEach((img) => {
+      if (!img.complete) {
+        img.addEventListener("load", handleImageLoad);
+        img.addEventListener("error", handleImageLoad);
+      }
+    });
     [
       waterlooRef,
       waterlooPolaroidsRef,
@@ -191,6 +205,10 @@ export default function Scene02Corkboard() {
     return () => {
       ro.disconnect();
       window.removeEventListener("resize", updateLayout);
+      imageNodes.forEach((img) => {
+        img.removeEventListener("load", handleImageLoad);
+        img.removeEventListener("error", handleImageLoad);
+      });
     };
   }, [pinDefinitions]);
 
@@ -243,7 +261,7 @@ export default function Scene02Corkboard() {
         </div>
         <div
           ref={waterlooRef}
-          className="relative w-full -translate-x-20 md:-translate-x-8 lg:translate-x-0"
+          className="relative w-full -translate-x-20"
           style={waterlooHeight ? { height: `${waterlooHeight}px` } : undefined}
         >
           <div
@@ -320,7 +338,7 @@ export default function Scene02Corkboard() {
         <div className="relative w-full min-h-[220px] overflow-visible">
           <div className="relative mx-auto flex w-full max-w-3xl flex-col items-center gap-6 md:gap-8 overflow-visible -translate-y-[180px]">
             <div className="relative w-full min-h-[480px] overflow-visible">
-              <div className="group absolute left-[-12%] top-[90px] md:top-[40px] w-[min(70vw,620px)] max-w-none">
+              <div className="group absolute left-[-12%] top-[90px] translate-x-12 md:top-[40px] md:translate-x-0 w-[min(70vw,620px)] max-w-none">
                 <div className="relative w-full">
                   <Image
                     src="/quanto_news.png"
@@ -364,10 +382,10 @@ export default function Scene02Corkboard() {
                 </div>
               </div>
             </div>
-            <div className="relative w-full overflow-visible -mt-10 translate-x-6">
+            <div className="relative w-full overflow-visible -mt-10 -translate-x-4 translate-y-8 md:translate-x-6 md:translate-y-0">
               <div
                 ref={shopifyRef}
-                className="absolute left-[30%] top-[-10%] z-10 w-full max-w-[220px] -translate-x-1/2 scale-[0.75] md:left-[70%] md:scale-100 md:translate-x-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[1deg]"
+                className="absolute left-[6%] top-[-10%] z-10 w-full max-w-[220px] scale-[0.75] md:left-[70%] md:scale-100 md:translate-x-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[1deg]"
               >
                 <Image
                   src="/shopify_sticky.png"
@@ -377,7 +395,7 @@ export default function Scene02Corkboard() {
                   className="h-auto w-full drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
                 />
               </div>
-              <div className="absolute left-[5%] md:left-[40%] top-[15%] z-10 rotate-5 w-[520px] origin-top-left scale-[0.7] md:scale-[0.85]">
+              <div className="absolute left-1/2 -translate-x-1/2 md:left-[40%] md:translate-x-0 top-[15%] z-10 rotate-5 w-[520px] origin-top-left scale-[0.7] md:scale-[0.85]">
                 <Image
                   src="/shopify_scribble.png"
                   alt="Engineering intern scribble"

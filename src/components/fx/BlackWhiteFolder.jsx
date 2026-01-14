@@ -116,7 +116,7 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
   );
 
   const footerLineMarkup = (
-    <div className="absolute bottom-12 left-8 right-8 px-2 text-[0.85rem] font-mono font-bold tracking-[0.12em] text-black">
+    <div className="absolute bottom-12 left-8 right-8 px-2 text-[0.85rem] font-mono font-bold tracking-[0.12em] text-black sm:left-10 sm:right-10 sm:px-3">
       <div className="relative">
         {resolvedFooterLines.map((line, index) => (
           <div
