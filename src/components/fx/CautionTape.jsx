@@ -19,9 +19,9 @@ export default function CautionTape() {
     offset: ["start end", "end start"],
   });
 
-  const tape1Range = isSmallScreen ? [-0.2, 0.85] : [-0.05, 1];
-  const tape2Range = isSmallScreen ? [-0.2, 0.9] : [-0.05, 1];
-  const tape3Range = isSmallScreen ? [0, 0.9] : [0.1, 0.8];
+  const tape1Range = isSmallScreen ? [-0.35, 0.85] : [-0.05, 1];
+  const tape2Range = isSmallScreen ? [-0.35, 0.9] : [-0.05, 1];
+  const tape3Range = isSmallScreen ? [-0.15, 0.9] : [0.1, 0.8];
 
   const tape1X = useTransform(scrollYProgress, tape1Range, ["-100%", "0%"]);
   const tape2X = useTransform(scrollYProgress, tape2Range, ["100%", "-30%"]);
