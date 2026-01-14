@@ -65,12 +65,9 @@ export default function Scene02Corkboard() {
     target: sectionRef,
     offset: ["start 40%", "end 20%"],
   });
-  const stringProgress = useTransform(
-    scrollYProgress,
-    [0.25, 0.45],
-    [0, 1],
-    { clamp: true },
-  );
+  const stringProgress = useTransform(scrollYProgress, [0.1, 0.55], [0, 1], {
+    clamp: true,
+  });
 
   const resolvedConnections = useMemo(() => {
     const items = connections
@@ -197,7 +194,7 @@ export default function Scene02Corkboard() {
     >
       <div
         ref={containerRef}
-        className="relative mx-auto -mt-40 flex w-full max-w-6xl flex-wrap items-center justify-center gap-12 px-6 overflow-visible"
+        className="relative mx-auto -mt-80 flex w-full max-w-6xl flex-wrap items-center justify-center gap-12 px-6 overflow-visible"
       >
         <svg className="pointer-events-none absolute inset-0 z-30 h-full w-full">
           {resolvedConnections.map((connection) => (

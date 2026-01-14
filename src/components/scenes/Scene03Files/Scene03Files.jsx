@@ -206,8 +206,8 @@ export default function Scene03Files() {
         backgroundSize: "800px 534px",
       }}
     >
-      <div className="flex flex-col items-center gap-16 pt-12 sm:gap-24 lg:gap-32 xl:gap-40">
-        <div className="pointer-events-none relative flex w-full justify-center -mb-[12.5rem] -mt-[7.5rem]">
+      <div className="flex flex-col items-center gap-16 sm:gap-24 lg:gap-32 xl:gap-40">
+        <div className="pointer-events-none relative flex w-full justify-center -mb-32 -mt-40">
           <Image
             src="/evidence_files.png"
             alt="Evidence files"
@@ -327,10 +327,7 @@ export default function Scene03Files() {
             tabSide: "left",
             folderRotation: "2deg",
             paperRotation: "-2deg",
-            footerLines: [
-              "Viral Waterloo's Hot or Not",
-              "500 users",
-            ],
+            footerLines: ["Viral Waterloo's Hot or Not", "500 users"],
             coverOverlays: (
               <>
                 <div className="pointer-events-none absolute left-[8%] top-[0%] w-[84%] rotate-1">
