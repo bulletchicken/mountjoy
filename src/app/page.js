@@ -78,7 +78,7 @@ export default function Home() {
           />
         </motion.div>
         <motion.div
-          className="pointer-events-none absolute left-[52.5%] top-[142.25vh] z-60 w-[360px] -translate-x-full -translate-y-1/2 rotate-[-25deg] origin-right aspect-[5051/1655] relative sm:left-[52.5%] sm:w-[480px] md:left-[51.5%] md:w-[560px] lg:left-[31%] lg:top-[143.25vh] lg:w-[640px] xl:left-[31%]"
+          className="pointer-events-none absolute left-[51.5%] top-[141vh] z-60 w-[420px] -translate-x-full -translate-y-1/2 rotate-[-25deg] origin-right aspect-[5051/1655] relative sm:left-[51.5%] sm:top-[141vh] sm:w-[480px] md:left-[50.5%] md:top-[141vh] md:w-[620px] lg:left-[30%] lg:top-[142vh] lg:w-[640px] xl:left-[30%]"
           style={{ x: handXValue }}
         >
           <motion.img
