@@ -10,7 +10,7 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function FolderReport({
   name,
@@ -184,11 +184,18 @@ export default function Scene03Files() {
   const secretRef = useRef(null);
   const retreatStart = 0.6;
   const retreatPause = 0.1;
-  const retreatDistance = 90;
+  const [isBaseScreen, setIsBaseScreen] = useState(false);
+  useEffect(() => {
+    const update = () => setIsBaseScreen(window.innerWidth < 640);
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+  const retreatDistance = isBaseScreen ? 260 : 90;
   const handRetreatDistance = retreatDistance;
-  const handStartX = 30;
-  const handMidX = -38;
-  const handRightOffset = -20;
+  const handStartX = isBaseScreen ? 60 : 30;
+  const handMidX = isBaseScreen ? -90 : -38;
+  const handRightOffset = isBaseScreen ? -52 : -20;
   const { scrollYProgress: secretScrollY } = useScroll({
     target: secretRef,
     offset: ["start 100%", "center start"],
@@ -239,9 +246,9 @@ export default function Scene03Files() {
             folderRotation: "-2deg",
             paperRotation: "2deg",
             className: "w-[72vmin] max-w-[560px]",
-            paperStackClassName: "top-[2%] h-[84%] sm:-top-12 sm:h-[110%]",
+            paperStackClassName: "top-[6%] h-[80%] sm:-top-12 sm:h-[110%]",
             paperSheetClassName:
-              "[--paper-sheet-height:84%] sm:[--paper-sheet-height:98%]",
+              "[--paper-sheet-height:84%] sm:[--paper-sheet-height:98%] max-sm:left-8 max-sm:right-8",
             footerLines: [
               "AI teddy bear for sweet grandmas",
               "Healthcare companion teddy bear",
@@ -350,9 +357,9 @@ export default function Scene03Files() {
             folderRotation: "2deg",
             paperRotation: "-2deg",
             className: "w-[72vmin] max-w-[560px]",
-            paperStackClassName: "top-[2%] h-[84%] sm:-top-12 sm:h-[110%]",
+            paperStackClassName: "top-[6%] h-[80%] sm:-top-12 sm:h-[110%]",
             paperSheetClassName:
-              "[--paper-sheet-height:84%] sm:[--paper-sheet-height:98%]",
+              "[--paper-sheet-height:84%] sm:[--paper-sheet-height:98%] max-sm:left-8 max-sm:right-8",
             footerLines: ["Viral Waterloo's Hot or Not", "500 users"],
             coverOverlays: (
               <>
@@ -425,9 +432,9 @@ export default function Scene03Files() {
             folderRotation: "-3deg",
             paperRotation: "1deg",
             className: "w-[72vmin] max-w-[560px]",
-            paperStackClassName: "top-[2%] h-[84%] sm:-top-12 sm:h-[110%]",
+            paperStackClassName: "top-[6%] h-[80%] sm:-top-12 sm:h-[110%]",
             paperSheetClassName:
-              "[--paper-sheet-height:84%] sm:[--paper-sheet-height:98%]",
+              "[--paper-sheet-height:84%] sm:[--paper-sheet-height:98%] max-sm:left-8 max-sm:right-8",
             footerLines: ["Flying-v Guitar", "Short description", "TBD"],
             coverOverlays: (
               <div className="pointer-events-none absolute right-[14%] top-[-4%] w-[32%] rotate-6">
@@ -456,9 +463,16 @@ export default function Scene03Files() {
           }}
           folderContent={
             <div className="h-full w-full border-2 border-black bg-white">
-              <div className="flex h-[16%] items-center justify-between border-b-2 border-black px-3 py-2 font-mono text-[0.6rem] uppercase tracking-[0.18em]">
-                <span>Flying-V Guitar</span>
-                <span>Build log</span>
+              <div className="border-b-2 border-black px-3 py-3 font-mono text-[0.58rem] uppercase tracking-[0.18em] text-black">
+                <div className="text-[0.62rem] font-semibold tracking-[0.22em]">
+                  Story:
+                </div>
+                <div className="mt-2 normal-case tracking-[0.08em] leading-relaxed">
+                  I had 2 weeks to build my guitar for a Onceler costume for
+                  Halloween. Coming to the day, I didn&apos;t have enough
+                  filament so I had to redesign the guitar to be some hollow
+                  futuristic version which IMO looks even better.
+                </div>
               </div>
               <div className="relative h-[80%] overflow-visible p-3 pt-5">
                 <Image
@@ -511,9 +525,18 @@ export default function Scene03Files() {
             folderRotation: "1deg",
             paperRotation: "-1deg",
             className: "w-[72vmin] max-w-[560px]",
-            paperStackClassName: "top-[2%] h-[84%] sm:-top-12 sm:h-[110%]",
+            paperStackClassName: "top-[6%] h-[80%] sm:-top-12 sm:h-[110%]",
             paperSheetClassName:
-              "[--paper-sheet-height:84%] sm:[--paper-sheet-height:98%]",
+              "[--paper-sheet-height:84%] sm:[--paper-sheet-height:98%] max-sm:left-8 max-sm:right-8",
+            modalContent: (
+              <iframe
+                src="https://www.youtube.com/embed/kwYwyRSzLE8"
+                title="FPV RC minecart short"
+                className="h-[70vh] w-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            ),
             footerLines: [
               "FPV RC minecart w/ a loud annoying duck",
               "HTN Organizer Project",
@@ -521,11 +544,11 @@ export default function Scene03Files() {
             paperContent: (
               <>
                 <div className="absolute top-[-3%] h-[98%] rounded-[10px] border-2 border-black bg-neutral-100 right-2 left-14 rotate-[3deg]" />
-                <div className="absolute left-1/2 top-0 h-[82%] w-[82%] -translate-x-1/2 overflow-hidden rounded-[10px] border-2 border-black bg-black sm:top-0 sm:h-[94%] sm:w-[92%]">
+                <div className="absolute left-1/2 top-0 h-[82%] w-[82%] -translate-x-1/2 overflow-hidden rounded-[10px] border-2 border-black bg-black sm:top-0 sm:h-[94%] sm:w-[92%] pointer-events-none sm:pointer-events-none">
                   <iframe
                     src="https://www.youtube.com/embed/kwYwyRSzLE8"
                     title="FPV RC minecart short"
-                    className="h-full w-full"
+                    className="h-full w-full pointer-events-none"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     style={{ filter: "saturate(0.5)" }}
                     allowFullScreen
@@ -561,7 +584,7 @@ export default function Scene03Files() {
         <div ref={secretRef} className="relative w-full flex justify-center">
           <motion.div
             style={{ x: secretX }}
-            className="w-full flex justify-center"
+            className="w-full flex justify-center translate-x-8 sm:translate-x-0"
           >
             <Secret />
           </motion.div>
@@ -571,7 +594,7 @@ export default function Scene03Files() {
               right: `${handRightOffset}vw`,
               willChange: "transform",
             }}
-            className="pointer-events-none absolute top-[92%] z-50 w-[105vw] max-w-[1500px] -translate-y-1/2 translate-y-[14vh] aspect-[3/1] relative overflow-hidden"
+            className="pointer-events-none absolute top-[84%] z-50 w-[140vw] max-w-[1900px] -translate-y-1/2 translate-y-[6vh] aspect-[3/1] relative overflow-hidden sm:w-[105vw] sm:max-w-[1500px] sm:top-[92%] sm:translate-y-[14vh]"
           >
             <motion.div
               className="absolute inset-0"
@@ -613,7 +636,7 @@ export default function Scene03Files() {
             alt="More projects on Devpost"
             width={980}
             height={980}
-            className="h-[240px] w-[240px] object-contain transition-transform duration-200 group-hover:rotate-[-4deg] group-hover:scale-[1.06] group-hover:drop-shadow-[0_6px_12px_rgba(0,0,0,0.35)] sm:h-[280px] sm:w-[280px] md:h-[320px] md:w-[320px] lg:h-[360px] lg:w-[360px]"
+            className="h-[240px] w-[240px] object-contain drop-shadow-[0_10px_18px_rgba(0,0,0,0.35)] transition-transform duration-200 group-hover:rotate-[-4deg] group-hover:scale-[1.06] group-hover:drop-shadow-[0_14px_24px_rgba(0,0,0,0.4)] sm:h-[280px] sm:w-[280px] md:h-[320px] md:w-[320px] lg:h-[360px] lg:w-[360px]"
           />
           <Image
             src="/click_it.png"

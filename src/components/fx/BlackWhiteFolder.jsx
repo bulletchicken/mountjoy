@@ -26,6 +26,7 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
     paperContent = null,
     paperStackClassName = "",
     paperSheetClassName = "",
+    modalContent = null,
   },
   ref,
 ) {
@@ -238,11 +239,11 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
       : [coverOverlays]
     : [];
 
-  const modalContent = paperContent ? (
-    <div className="relative h-[60vh] w-full">{paperContent}</div>
-  ) : (
-    children || defaultReport
-  );
+  const resolvedModalContent =
+    modalContent ?? paperContent ?? children ?? defaultReport;
+  const modalContentClass = (modalContent ?? paperContent)
+    ? "h-[70vh] overflow-auto"
+    : "h-[70vh] overflow-auto p-4 text-base sm:text-sm";
 
   const modalNode =
     isSmallScreen && isOpen && typeof document !== "undefined"
@@ -255,8 +256,8 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
               className="relative h-[70vh] w-[94vw] max-w-[640px] overflow-hidden rounded-[18px] border-2 border-black bg-white shadow-[0_16px_50px_rgba(0,0,0,0.4)]"
               onClick={(event) => event.stopPropagation()}
             >
-              <div className="h-[70vh] overflow-auto p-4">
-                {modalContent}
+              <div className={modalContentClass}>
+                {resolvedModalContent}
               </div>
             </div>
             <button
