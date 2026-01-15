@@ -144,7 +144,7 @@ export default function Home() {
       <Navbar />
       <div ref={containerRef} className="relative">
         <motion.div
-          className="pointer-events-none absolute left-1/2 top-[150vh] z-60 w-[90px] -translate-x-1/2 sm:w-[105px] md:left-[50%] md:w-[120px] lg:left-[30%] aspect-[431/683] relative"
+          className="pointer-events-none absolute left-1/2 top-[150vh] z-60 w-[90px] -translate-x-1/2 sm:w-[105px] md:left-[50%] md:w-[120px] lg:left-[30%] aspect-[431/683] relative 2xl:w-[8vw]"
           style={{ willChange: "opacity, transform" }}
         >
           <motion.img
@@ -163,7 +163,7 @@ export default function Home() {
           />
         </motion.div>
         <motion.div
-          className="pointer-events-none absolute left-[52%] top-[142.8vh] z-60 w-[420px] -translate-x-full -translate-y-1/2 rotate-[-25deg] origin-right aspect-[5051/1655] relative sm:left-[51.5%] sm:top-[141vh] sm:w-[480px] md:left-[50.5%] md:top-[141vh] md:w-[620px] lg:left-[30%] lg:top-[142vh] lg:w-[640px] xl:left-[30%]"
+          className="pointer-events-none absolute left-[52.5%] top-[calc(150vh-50px)] z-60 w-[420px] -translate-x-full -translate-y-1/2 rotate-[-25deg] origin-right aspect-[5051/1655] relative sm:left-[51.5%] sm:top-[141vh] sm:w-[480px] md:left-[50.5%] md:top-[141vh] md:w-[620px] lg:left-[30%] lg:top-[142vh] lg:w-[640px] xl:left-[30%] 2xl:w-[40vw]"
           style={{ x: handXValue }}
         >
           <motion.img
