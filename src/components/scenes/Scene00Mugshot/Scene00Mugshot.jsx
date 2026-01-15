@@ -21,7 +21,7 @@ export default function Page({ backgroundColor, scrollYProgress }) {
         <div className="mx-auto flex w-full justify-center overflow-visible">
           <video
             ref={videoRef}
-            className="boomerang-video aspect-[3/2] min-h-[80vh] shrink-0 w-[250vw] object-contain object-bottom sm:w-[155vw] md:w-[115vw] lg:w-[100vw] xl:w-[80vw] 2xl:w-[60vw] max-w-none"
+            className="boomerang-video aspect-[3/2] min-h-[80vh] shrink-0 w-[250vw] object-contain object-bottom sm:w-[155vw] md:w-[115vw] lg:w-[100vw] xl:w-[80vw] max-w-none"
             autoPlay
             muted
             playsInline
@@ -44,7 +44,7 @@ export default function Page({ backgroundColor, scrollYProgress }) {
           y: textY,
         }}
       >
-        <div className="mx-auto flex w-full max-w-4xl flex-col gap-2 pr-8 pl-[22px] font-mono text-sm uppercase tracking-wide text-white sm:pr-12 sm:pl-[34px] md:pr-16 md:pl-[50px] 2xl:pr-20 2xl:pl-[66px]">
+        <div className="mx-auto flex w-full max-w-4xl flex-col gap-2 pr-8 pl-[22px] font-mono text-sm uppercase tracking-wide text-white sm:pr-12 sm:pl-[34px] md:pr-16 md:pl-[50px]">
           <div className="type-line">
             <span
               className="type-text"

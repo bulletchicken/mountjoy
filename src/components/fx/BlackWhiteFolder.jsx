@@ -281,7 +281,7 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
     <>
       <div
         ref={ref}
-        className={`${positionClass} h-[54vmin] min-h-[380px] w-[66vmin] max-w-[520px] sm:h-[60vmin] sm:min-h-[440px] sm:w-[74vmin] sm:max-w-[580px] md:h-[64vmin] md:min-h-[480px] md:w-[78vmin] md:max-w-[610px] lg:h-[66vmin] lg:min-h-[500px] lg:w-[80vmin] lg:max-w-[620px] xl:h-[70vmin] xl:min-h-[520px] xl:w-[82vmin] xl:max-w-[640px] 2xl:h-[74vmin] 2xl:w-[88vmin] 2xl:max-w-[88vmin] transition-transform duration-300 ease-out ${hoverScaleClass} ${className}`}
+        className={`${positionClass} h-[54vmin] min-h-[380px] w-[66vmin] max-w-[520px] sm:h-[60vmin] sm:min-h-[440px] sm:w-[74vmin] sm:max-w-[580px] md:h-[64vmin] md:min-h-[480px] md:w-[78vmin] md:max-w-[610px] lg:h-[66vmin] lg:min-h-[500px] lg:w-[80vmin] lg:max-w-[620px] xl:h-[70vmin] xl:min-h-[520px] xl:w-[82vmin] xl:max-w-[640px] transition-transform duration-300 ease-out ${hoverScaleClass} ${className}`}
         role={interactive ? "button" : undefined}
         tabIndex={interactive ? 0 : undefined}
         aria-expanded={interactive ? isOpen : undefined}
