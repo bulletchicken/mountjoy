@@ -182,6 +182,7 @@ function NotesLinkedInPost({ src, isInteractive = true, saturation = 1 }) {
 
 export default function Scene03Files() {
   const secretRef = useRef(null);
+  const cipherRef = useRef(null);
   const retreatStart = 0.6;
   const retreatPause = 0.1;
   const [isBaseScreen, setIsBaseScreen] = useState(false);
@@ -227,6 +228,21 @@ export default function Scene03Files() {
     value >= retreatStart + retreatPause ? 0 : 1,
   );
 
+  const selectCipher = () => {
+    const node = cipherRef.current;
+    if (!node || typeof window === "undefined") {
+      return;
+    }
+    const selection = window.getSelection();
+    if (!selection) {
+      return;
+    }
+    selection.removeAllRanges();
+    const range = document.createRange();
+    range.selectNodeContents(node);
+    selection.addRange(range);
+  };
+
   return (
     <section
       className="relative z-0 flex w-full items-center justify-center bg-white pt-0 pb-40"
@@ -237,7 +253,7 @@ export default function Scene03Files() {
       }}
     >
       <div className="flex flex-col items-center gap-28 sm:gap-24 lg:gap-32 xl:gap-40">
-        <div className="pointer-events-none relative flex w-full justify-center -mb-16 -mt-40 sm:-mb-32">
+        <div className="pointer-events-none relative flex w-full justify-center -mb-16 -mt-40 sm:-mb-16 sm:pb-8">
           <Image
             src="/evidence_files.png"
             alt="Evidence files"
@@ -589,7 +605,22 @@ export default function Scene03Files() {
             </div>
           }
         />
-        <div ref={secretRef} className="relative w-full flex justify-center">
+        <div
+          ref={secretRef}
+          className="relative w-full flex justify-center"
+          onClick={selectCipher}
+        >
+          <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
+            <div className="w-full flex justify-center">
+              <p
+                ref={cipherRef}
+                className="w-[min(50vw,360px)] translate-y-24 -translate-x-52 max-sm:w-[min(44vw,320px)] max-sm:-translate-x-16 max-sm:translate-y-16 select-text text-left text-[1.2rem] font-mono font-bold uppercase leading-[1.4] tracking-[0.45em] text-black/15 [text-shadow:0_1px_0_rgba(0,0,0,0.2)] max-sm:text-[0.75rem] sm:text-[1.05rem] sm:-translate-x-6 sm:translate-y-20 md:text-[1.45rem] md:translate-y-20"
+              >
+                WINSU NBYA RWIZS GAFDH, RGGT EKNRHCYUBV. ECYOJZ QIWVA NOBPTLVV
+                GLV YBZC1 QRZKWP. SB1 RFAW8 IECPAEU JCZVUE
+              </p>
+            </div>
+          </div>
           <motion.div
             style={{ x: secretX }}
             className="w-full flex justify-center translate-x-8 sm:translate-x-0"
