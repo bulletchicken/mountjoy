@@ -252,14 +252,14 @@ export default function Scene03Files() {
         backgroundSize: "800px 534px",
       }}
     >
-      <div className="flex flex-col items-center gap-28 sm:gap-24 lg:gap-32 xl:gap-40">
+      <div className="flex flex-col items-center gap-28 sm:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[12vh] 2xl:w-[90%]">
         <div className="pointer-events-none relative flex w-full justify-center -mb-16 -mt-40 sm:-mb-16 sm:pb-8">
           <Image
             src="/evidence_files.png"
             alt="Evidence files"
             width={1411}
             height={1254}
-            className="w-[80vw] -rotate-1 sm:w-[80vw] md:w-[65vw] lg:w-[50vw]"
+            className="w-[80vw] -rotate-1 sm:w-[80vw] md:w-[65vw] lg:w-[50vw] 2xl:w-[60vw]"
             priority
           />
         </div>
@@ -614,7 +614,7 @@ export default function Scene03Files() {
             <div className="w-full flex justify-center">
               <p
                 ref={cipherRef}
-                className="w-[min(50vw,360px)] translate-y-24 -translate-x-60 max-sm:w-[min(44vw,320px)] max-sm:-translate-x-20 max-sm:translate-y-16 select-text text-left text-[1.2rem] font-mono font-bold uppercase leading-[1.4] tracking-[0.45em] text-black/15 [text-shadow:0_1px_0_rgba(0,0,0,0.2)] max-sm:text-[0.75rem] sm:text-[1.05rem] sm:-translate-x-12 sm:translate-y-20 md:text-[1.45rem] md:translate-y-20 lg:-translate-x-64"
+                className="w-[min(50vw,360px)] translate-y-24 -translate-x-60 max-sm:w-[min(44vw,320px)] max-sm:-translate-x-20 max-sm:translate-y-16 select-text text-left text-[1.2rem] font-mono font-bold uppercase leading-[1.4] tracking-[0.45em] text-black/15 [text-shadow:0_1px_0_rgba(0,0,0,0.2)] max-sm:text-[0.75rem] sm:text-[1.05rem] sm:-translate-x-12 sm:translate-y-20 md:text-[1.45rem] md:translate-y-20 lg:-translate-x-64 2xl:w-[56vw] 2xl:text-[1.65rem] 2xl:tracking-[0.5em]"
               >
                 WINSU NBYA RWIZS GAFDH, RGGT EKNRHCYUBV. ECYOJZ QIWVA NOBPTLVV
                 GLV YBZC1 QRZKWP. SB1 RFAW8 IECPAEU JCZVUE
