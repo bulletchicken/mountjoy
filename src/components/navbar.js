@@ -57,7 +57,7 @@ export default function Navbar() {
       animate={{ opacity: 1, y: isHidden ? -120 : 0 }}
       transition={{ delay: 0, duration: 0.2, ease: "easeOut" }}
     >
-      <div className="mx-auto flex w-full max-w-4xl flex-wrap items-center justify-center gap-4 px-4 pt-10 pb-6 sm:px-8 sm:py-10 md:justify-between md:px-12 2xl:max-w-[min(70%,1200px)] 2xl:px-[3%]">
+      <div className="mx-auto flex w-full max-w-4xl flex-wrap items-center justify-center gap-4 px-4 pt-10 pb-6 sm:px-8 sm:py-10 md:justify-between md:px-12">
         {/* Left side - Name */}
         <Link href="/">
           <motion.div className="font-mono text-4xl font-semibold uppercase tracking-wide transition-opacity hover:opacity-70 sm:text-3xl md:text-lg">
