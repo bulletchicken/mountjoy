@@ -565,8 +565,8 @@ export default function Scene02Corkboard() {
               </div>
               <div className="absolute left-12 top-14 rotate-5 z-10">
                   <Polaroid
-                    src="/the_cat.jpg"
-                    alt="Polaroid cat"
+                    src="/waterloo_chef.jpg"
+                    alt="Polaroid chef"
                     sizeClass="w-40 md:w-48"
                     imageClass="w-32 h-44 md:w-40 md:h-52"
                     className="scale-[0.8] md:scale-100"

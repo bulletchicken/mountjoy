@@ -614,7 +614,7 @@ export default function Scene03Files() {
             <div className="w-full flex justify-center">
               <p
                 ref={cipherRef}
-                className="w-[min(50vw,360px)] translate-y-24 -translate-x-52 max-sm:w-[min(44vw,320px)] max-sm:-translate-x-16 max-sm:translate-y-16 select-text text-left text-[1.2rem] font-mono font-bold uppercase leading-[1.4] tracking-[0.45em] text-black/15 [text-shadow:0_1px_0_rgba(0,0,0,0.2)] max-sm:text-[0.75rem] sm:text-[1.05rem] sm:-translate-x-6 sm:translate-y-20 md:text-[1.45rem] md:translate-y-20"
+                className="w-[min(50vw,360px)] translate-y-24 -translate-x-60 max-sm:w-[min(44vw,320px)] max-sm:-translate-x-20 max-sm:translate-y-16 select-text text-left text-[1.2rem] font-mono font-bold uppercase leading-[1.4] tracking-[0.45em] text-black/15 [text-shadow:0_1px_0_rgba(0,0,0,0.2)] max-sm:text-[0.75rem] sm:text-[1.05rem] sm:-translate-x-12 sm:translate-y-20 md:text-[1.45rem] md:translate-y-20 lg:-translate-x-64"
               >
                 WINSU NBYA RWIZS GAFDH, RGGT EKNRHCYUBV. ECYOJZ QIWVA NOBPTLVV
                 GLV YBZC1 QRZKWP. SB1 RFAW8 IECPAEU JCZVUE
