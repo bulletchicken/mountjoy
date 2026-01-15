@@ -1,6 +1,6 @@
 "use client";
 
-import { Linkedin, Github, Mail, CodeXml } from "lucide-react";
+import { Linkedin, Github, Mail, Clock } from "lucide-react";
 import { DitherShader } from "@/components/ui/dither-shader";
 
 export default function Footer() {
@@ -21,9 +21,9 @@ export default function Footer() {
       icon: Mail,
     },
     {
-      name: "repo",
-      href: "https://github.com/bulletchicken/mountjoy",
-      icon: CodeXml,
+      name: "fantaisie-impromptu",
+      href: "https://en.wikipedia.org/wiki/Fantaisie-Impromptu",
+      icon: Clock,
     },
   ];
 

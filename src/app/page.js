@@ -7,7 +7,7 @@ import SwingLight from "@/components/scenes/Scene01SwingLightStatue/Scene01Swing
 import CautionTape from "@/components/fx/CautionTape.jsx";
 import Corkboard from "@/components/scenes/Scene02Corkboard/Scene02Corkboard.jsx";
 import Files from "@/components/scenes/Scene03Files/Scene03Files.jsx";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import {
   motion,
   useMotionTemplate,
@@ -17,6 +17,91 @@ import {
 
 export default function Home() {
   const containerRef = useRef(null);
+
+  useEffect(() => {
+    console.log("pigscanfly");
+  }, []);
+
+  useEffect(() => {
+    const loggedSizes = new Set();
+    const sizeMessages = [
+      {
+        width: 80,
+        height: 16,
+        message:
+          "waIt...no Way...mqgkTgBEEx4 | timecode 03:17 | only polyrhythm Is difficult; Listen Better.",
+      },
+      {
+        width: 31,
+        height: 48,
+        message:
+          "wHat...How...cQJx8LwH2mE | teMpo 120bpm | only polYrhythm is diffIcult; liSten Better.",
+      },
+      {
+        width: 44,
+        height: 19,
+        message:
+          "yoU're kidding...L9mV7nQ4pV0 | bAr 7 of 12 | only polYrHyThm is difficult; liSten betTer.",
+      },
+      {
+        width: 52,
+        height: 88,
+        message:
+          "nO shot...u6tRzF2H1sC | tiMe 00:42 | only polyRhythm is diFficult; lisTen better.",
+      },
+      {
+        width: 63,
+        height: 37,
+        message:
+          "seRiously?!...b3Kp9zN6wQh | 4/4 drIft | only polYrhythm is diFficult; lisTen beTter.",
+      },
+      {
+        width: 71,
+        height: 102,
+        message:
+          "caN't be...nV2tR0mQ8yS | tiMe 02:09 | only polYrhythm is dIfficult; lIsten better.",
+      },
+      {
+        width: 89,
+        height: 24,
+        message:
+          "hOld up...h7Wk1pZ4aJd | teMpo 88bpm | only polYrhyThm is difficult; Listen betTer.",
+      },
+      {
+        width: 96,
+        height: 57,
+        message:
+          "aRe you for real...x2Nf8rC5mTa | tiMe 01:33 | only polyrHyThm is difficult; lIsten better.",
+      },
+      {
+        width: 127,
+        height: 33,
+        message:
+          "weLl I'll be...p9Tq3vL2sHk | bArline 16 | only poLyrhythm is dIfficult; liSten better.",
+      },
+    ];
+
+    const checkExactSize = () => {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+
+      sizeMessages.forEach(({ width: targetW, height: targetH, message }) => {
+        const key = `${targetW}x${targetH}`;
+        if (loggedSizes.has(key)) return;
+        if (width === targetW && height === targetH) {
+          console.log(message);
+          loggedSizes.add(key);
+        }
+      });
+    };
+
+    checkExactSize();
+    window.addEventListener("resize", checkExactSize);
+
+    return () => {
+      window.removeEventListener("resize", checkExactSize);
+    };
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
