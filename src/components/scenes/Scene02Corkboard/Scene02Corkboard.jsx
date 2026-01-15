@@ -8,6 +8,7 @@ import {
   useInView,
   useMotionValue,
   useMotionValueEvent,
+  useMotionTemplate,
   useScroll,
   useTransform,
 } from "framer-motion";
@@ -170,9 +171,9 @@ export default function Scene02Corkboard() {
   });
   const { scrollYProgress: flashProgress } = useScroll({
     target: waterlooPolaroidsRef,
-    offset: ["start 55%", "start 10%"],
+    offset: ["start 35%", "start 0%"],
   });
-  const htnPolaroidInView = useInView(htnPolaroidRef, { amount: 0.35 });
+  const htnPolaroidInView = useInView(htnPolaroidRef, { amount: 0.08 });
   const blastControls = useAnimationControls();
   const washControls = useAnimationControls();
   const flareControls = useAnimationControls();
@@ -186,6 +187,39 @@ export default function Scene02Corkboard() {
     [0, 1],
     { clamp: true },
   );
+  const handScrollStart = 0.42;
+  const handScrollPeak = 0.76;
+  const handScrollHoldEnd = 0.82;
+  const handScrollEnd = 0.92;
+  const handHiddenOffset = 160;
+  const handPeakOffset = 55;
+  const handRiseOffset = useTransform(scrollYProgress, (value) => {
+    if (value <= handScrollStart || value >= handScrollEnd) {
+      return handHiddenOffset;
+    }
+    if (value <= handScrollPeak) {
+      const t = (value - handScrollStart) / (handScrollPeak - handScrollStart);
+      const eased = t * t * (3 - 2 * t);
+      return handHiddenOffset - (handHiddenOffset - handPeakOffset) * eased;
+    }
+    if (value <= handScrollHoldEnd) {
+      return handPeakOffset;
+    }
+    const t = (value - handScrollHoldEnd) / (handScrollEnd - handScrollHoldEnd);
+    const eased = t * t * (3 - 2 * t);
+    return handPeakOffset + (handHiddenOffset - handPeakOffset) * eased;
+  });
+  const handRise = useMotionTemplate`${handRiseOffset}vh`;
+  const handTilt = useTransform(scrollYProgress, (value) => {
+    if (value <= handScrollStart || value >= handScrollEnd) {
+      return -6;
+    }
+    const t = (value - handScrollStart) / (handScrollEnd - handScrollStart);
+    const oscillations = 3;
+    const base = -15;
+    const amplitude = 9;
+    return base + Math.cos(t * Math.PI * 2 * oscillations) * amplitude;
+  });
   const developProgress = useTransform(
     developProgressValue,
     [0, 1],
@@ -205,7 +239,7 @@ export default function Scene02Corkboard() {
     }
     developProgressValue.set(0);
     developAnimationRef.current = animate(developProgressValue, 1, {
-      duration: 2.1,
+      duration: 3.2,
       ease: "easeOut",
     });
   }, [flashFired, htnPolaroidInView, developProgressValue]);
@@ -465,6 +499,40 @@ export default function Scene02Corkboard() {
                   willChange: "opacity",
                 }}
               />
+              <motion.div
+                className="pointer-events-none fixed bottom-0 left-[80%] z-[120] w-[150px] -translate-x-1/2 origin-bottom sm:w-[180px] md:w-[210px] lg:w-[240px]"
+                style={{
+                  y: handRise,
+                  willChange: "transform",
+                }}
+              >
+                <motion.div
+                  className="flex flex-col items-center origin-bottom"
+                  style={{
+                    rotate: handTilt,
+                    transformOrigin: "50% 100%",
+                    willChange: "transform",
+                  }}
+                >
+                  <div className="flex w-full justify-center translate-y-6">
+                    <DevelopingPolaroid
+                      src="/htn_obama.jpg"
+                      alt="HTN Obama snapshot"
+                      sizeClass="w-40 md:w-48"
+                      imageClass="w-32 h-44 md:w-40 md:h-52"
+                      className="scale-[0.8] md:scale-100"
+                      developProgress={developProgress}
+                    />
+                  </div>
+                  <Image
+                    src="/hand_hold.png"
+                    alt="Hand reaching"
+                    width={2002}
+                    height={5640}
+                    className="-mt-2 h-auto w-full object-contain drop-shadow-[0_2px_4px_rgba(0,0,0,0.75)]"
+                  />
+                </motion.div>
+              </motion.div>
             </>,
             document.body,
           )
@@ -694,18 +762,17 @@ export default function Scene02Corkboard() {
               </div>
               <div
                 ref={htnPolaroidRef}
-                className="relative z-10 mt-[480px] ml-[58%] w-fit -rotate-4 sm:mt-[440px] sm:translate-x-6 md:mt-[520px] md:translate-x-12 lg:mt-[280px] lg:translate-x-6 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-3deg]"
+                aria-hidden="true"
+                className="pointer-events-none invisible relative z-10 mt-[480px] ml-[58%] w-fit -rotate-4 sm:mt-[440px] sm:translate-x-6 md:mt-[520px] md:translate-x-12 lg:mt-[280px] lg:translate-x-6"
               >
-                <div className="relative">
-                  <DevelopingPolaroid
-                    src="/htn_obama.jpg"
-                    alt="HTN Obama snapshot"
-                    sizeClass="w-40 md:w-48"
-                    imageClass="w-32 h-44 md:w-40 md:h-52"
-                    className="scale-[0.8] md:scale-100"
-                    developProgress={developProgress}
-                  />
-                </div>
+                <DevelopingPolaroid
+                  src="/htn_obama.jpg"
+                  alt=""
+                  sizeClass="w-40 md:w-48"
+                  imageClass="w-32 h-44 md:w-40 md:h-52"
+                  className="scale-[0.8] md:scale-100"
+                  developProgress={developProgress}
+                />
               </div>
               <div className="absolute left-[-2%] top-[560px] z-10 rotate-8 w-[95px] sm:top-[240px] sm:w-[110px] sm:translate-x-6 md:left-[74%] md:top-[300px] md:w-[110px] md:translate-x-12 lg:left-[76%] lg:top-[460px] lg:translate-x-6 lg:z-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[9deg]">
                 <Image
