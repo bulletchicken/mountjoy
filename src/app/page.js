@@ -206,7 +206,7 @@ export default function Home() {
         />
         <SwingLight backgroundColor={backgroundColor} />
       </div>
-      <div className="mb-0">
+      <div className="mb-40 sm:mb-0">
         <CautionTape backgroundColor={backgroundColor} />
       </div>
 
