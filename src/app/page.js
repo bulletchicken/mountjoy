@@ -7,7 +7,7 @@ import SwingLight from "@/components/scenes/Scene01SwingLightStatue/Scene01Swing
 import CautionTape from "@/components/fx/CautionTape.jsx";
 import Corkboard from "@/components/scenes/Scene02Corkboard/Scene02Corkboard.jsx";
 import Files from "@/components/scenes/Scene03Files/Scene03Files.jsx";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   motion,
   useMotionTemplate,
@@ -17,9 +17,22 @@ import {
 
 export default function Home() {
   const containerRef = useRef(null);
+  const [isSmUp, setIsSmUp] = useState(false);
 
   useEffect(() => {
     console.log("pigscanfly");
+  }, []);
+
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 640px)");
+    const handleChange = (event) => setIsSmUp(event.matches);
+    handleChange(media);
+    if (media.addEventListener) {
+      media.addEventListener("change", handleChange);
+      return () => media.removeEventListener("change", handleChange);
+    }
+    media.addListener(handleChange);
+    return () => media.removeListener(handleChange);
   }, []);
 
   useEffect(() => {
@@ -125,8 +138,14 @@ export default function Home() {
     [0, 1, 1, 0],
   );
 
-  const handX = useTransform(scrollYProgress, [handStart, handEnd], [-60, 2]);
-  const handXValue = useMotionTemplate`${handX}vw`;
+  const handXVw = useTransform(scrollYProgress, [handStart, handEnd], [-60, 2]);
+  const handXPx = useTransform(scrollYProgress, [handStart, handEnd], [
+    -234,
+    8,
+  ]);
+  const handXValueVw = useMotionTemplate`${handXVw}vw`;
+  const handXValuePx = useMotionTemplate`${handXPx}px`;
+  const handXValue = isSmUp ? handXValueVw : handXValuePx;
   const handDownOpacity = useTransform(scrollYProgress, (value) =>
     value >= switchFlipPoint + handPause ? 1 : 0,
   );
@@ -163,7 +182,7 @@ export default function Home() {
           />
         </motion.div>
         <motion.div
-          className="pointer-events-none absolute left-[52.5%] top-[calc(150vh-50px)] z-60 w-[420px] -translate-x-full -translate-y-1/2 rotate-[-25deg] origin-right aspect-[5051/1655] relative sm:left-[51.5%] sm:top-[141vh] sm:w-[480px] md:left-[50.5%] md:top-[141vh] md:w-[620px] lg:left-[30%] lg:top-[142vh] lg:w-[640px] xl:left-[30%] 2xl:w-[40vw]"
+          className="pointer-events-none absolute left-[52.5%] top-[calc(150vh-58px)] z-60 w-[420px] -translate-x-full -translate-y-1/2 rotate-[-25deg] origin-right aspect-[5051/1655] relative sm:left-[51.5%] sm:top-[141vh] sm:w-[480px] md:left-[50.5%] md:top-[141vh] md:w-[620px] lg:left-[30%] lg:top-[142vh] lg:w-[640px] xl:left-[30%] 2xl:w-[40vw]"
           style={{ x: handXValue }}
         >
           <motion.img

@@ -16,6 +16,7 @@ const serifTypeStyles = {
 };
 
 const MONA_ASPECT = 725 / 980;
+const BASE_LAYOUT_WIDTH = 390;
 const LAYER_ANCHORS = {
   mona: {
     className:
@@ -203,7 +204,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       anchor: "statue",
       motionY: statueY,
       offsetX: -380,
-      offsetXBase: -140,
+      offsetXBase: -180,
       scale: 1.12,
       offsetXSm: -230,
       offsetXMd: -210,
@@ -211,7 +212,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       offsetYSm: -40,
       offsetYMd: -30,
       offsetXLg: -235,
-      scaleBase: 1.85,
+      scaleBase: 2.05,
       scaleSm: 1.25,
       scaleMd: 1.12,
       scaleLg: 1.12,
@@ -233,7 +234,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       offsetYSm: -40,
       offsetYMd: -30,
       offsetXLg: 70,
-      scaleBase: 1.75,
+      scaleBase: 1.95,
       scaleSm: 1.15,
       scaleMd: 1.04,
       scaleLg: 1.04,
@@ -278,7 +279,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
       offsetYSm: -40,
       offsetYMd: -30,
       offsetXLg: 70,
-      scaleBase: 1.75,
+      scaleBase: 1.95,
       scaleSm: 1.15,
       scaleMd: 1.03,
       scaleLg: 1.0,
@@ -331,6 +332,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
     const isSm = size.w < 768;
     const isMd = size.w < 1024;
     const isLg = size.w >= 1024 && size.w < 1280;
+    const layoutWidth = isBase ? BASE_LAYOUT_WIDTH : size.w;
     const scaleOverride =
       isBase && item.scaleBase != null
         ? item.scaleBase
@@ -363,7 +365,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
           ? item.offsetYMd
           : item.offsetY || 0;
     const { x, y, width, maxWidth, alignX = 0, alignY = 0 } = anchor.svg;
-    const widthPx = Math.min(size.w * width, maxWidth ?? Infinity);
+    const widthPx = Math.min(layoutWidth * width, maxWidth ?? Infinity);
     const aspectRatio = anchor.svg.aspectRatio ?? item.width / item.height;
     const heightPx = widthPx / aspectRatio;
     const scaledWidth = widthPx * combinedScale;
