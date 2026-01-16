@@ -1,9 +1,14 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { Linkedin, Github, Mail, Clock } from "lucide-react";
 import { DitherShader } from "@/components/ui/dither-shader";
 
 export default function Footer() {
+  const [showEmailTooltip, setShowEmailTooltip] = useState(false);
+  const hideEmailTooltipTimeout = useRef(null);
+  const emailAddress = "nwjeremysu@gmail.com";
+
   const links = [
     {
       name: "linkedin",
@@ -16,16 +21,34 @@ export default function Footer() {
       icon: Github,
     },
     {
-      name: "email",
-      href: "mailto:nwjeremysu@gmail.com",
-      icon: Mail,
-    },
-    {
       name: "fantaisie-impromptu",
       href: "https://en.wikipedia.org/wiki/Fantaisie-Impromptu",
       icon: Clock,
     },
   ];
+
+  const handleEmailClick = async () => {
+    try {
+      await navigator.clipboard.writeText(emailAddress);
+      setShowEmailTooltip(true);
+      if (hideEmailTooltipTimeout.current) {
+        clearTimeout(hideEmailTooltipTimeout.current);
+      }
+      hideEmailTooltipTimeout.current = setTimeout(() => {
+        setShowEmailTooltip(false);
+      }, 1600);
+    } catch (error) {
+      console.error("Failed to copy email address:", error);
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      if (hideEmailTooltipTimeout.current) {
+        clearTimeout(hideEmailTooltipTimeout.current);
+      }
+    };
+  }, []);
 
   return (
     <footer
@@ -61,6 +84,23 @@ export default function Footer() {
               <Icon className="h-5 w-5" />
             </a>
           ))}
+          <button
+            type="button"
+            onClick={handleEmailClick}
+            aria-label="email"
+            className="relative flex cursor-pointer flex-col items-center gap-2 transition-opacity hover:opacity-70"
+          >
+            <span
+              className={`pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 rounded bg-black px-2 py-1 text-[10px] uppercase tracking-[0.2em] text-white transition-opacity ${
+                showEmailTooltip ? "opacity-100" : "opacity-0"
+              }`}
+              role="status"
+              aria-live="polite"
+            >
+              Email copied
+            </span>
+            <Mail className="h-5 w-5" />
+          </button>
         </div>
       </div>
       <div className="mt-12 w-full">
