@@ -247,7 +247,7 @@ export default function Scene03Files() {
     <section
       className="relative z-0 flex w-full items-center justify-center bg-white pt-0 pb-40"
       style={{
-        backgroundImage: "url(/cork_texture.png)",
+        backgroundImage: "url(/cork_texture.webp)",
         backgroundRepeat: "repeat",
         backgroundSize: "800px 534px",
       }}
@@ -255,7 +255,7 @@ export default function Scene03Files() {
       <div className="flex flex-col items-center gap-28 sm:gap-24 lg:gap-32 xl:gap-40">
         <div className="pointer-events-none relative flex w-full justify-center -mb-16 -mt-40 sm:-mb-16 sm:pb-8">
           <Image
-            src="/evidence_files.png"
+            src="/evidence_files.webp"
             alt="Evidence files"
             width={1411}
             height={1254}
@@ -283,7 +283,7 @@ export default function Scene03Files() {
                 <div className="pointer-events-none absolute left-[14%] top-[-2%] z-10 w-[34%] rotate-5">
                   <div className="relative">
                     <Image
-                      src="/ted_polaroid.png"
+                      src="/ted_polaroid.webp"
                       alt="TED polaroid"
                       width={1179}
                       height={1769}
@@ -294,7 +294,7 @@ export default function Scene03Files() {
                 </div>
                 <div className="pointer-events-none absolute right-[8%] top-[14%] w-[52%] -rotate-3">
                   <Image
-                    src="/ted_model.png"
+                    src="/ted_model.webp"
                     alt="TED model"
                     width={1564}
                     height={1562}
@@ -314,14 +314,14 @@ export default function Scene03Files() {
               bottomLeftContent={
                 <span className="relative mt-0.5 block h-8">
                   <Image
-                    src="/techyon-logo.png"
+                    src="/techyon-logo.webp"
                     alt="Techyon"
                     width={1000}
                     height={722}
                     className="absolute left-[38%] top-1 h-8 w-auto -translate-x-full -rotate-6"
                   />
                   <Image
-                    src="/1517-logo.png"
+                    src="/1517-logo.webp"
                     alt="1517"
                     width={2154}
                     height={825}
@@ -361,7 +361,7 @@ export default function Scene03Files() {
           media={
             <div className="rotate-2 translate-x-12 translate-y-6 sm:translate-x-0 sm:translate-y-0">
               <DitherShader
-                src="/ted.avif"
+                src="/ted.webp"
                 colorMode="grayscale"
                 threshold={0.5}
                 gridSize={1}
@@ -390,7 +390,7 @@ export default function Scene03Files() {
                 <div className="pointer-events-none absolute left-[8%] top-[0%] w-[84%] rotate-1">
                   <div className="relative">
                     <Image
-                      src="/UWS_photo.png"
+                      src="/UWS_photo.webp"
                       alt="UWSummit landing"
                       width={3024}
                       height={1456}
@@ -402,7 +402,7 @@ export default function Scene03Files() {
                 </div>
                 <div className="pointer-events-none absolute left-[10%] top-[34%] w-[86%] -rotate-2">
                   <Image
-                    src="/UWS_email.png"
+                    src="/UWS_email.webp"
                     alt="UWSummit email"
                     width={1643}
                     height={748}
@@ -438,7 +438,7 @@ export default function Scene03Files() {
             <div className="pizza-wrap -translate-x-12 translate-y-8 sm:translate-x-0 sm:translate-y-0">
               <div className="pizza-spin">
                 <DitherShader
-                  src="/pizza.png"
+                  src="/pizza.webp"
                   colorMode="grayscale"
                   gridSize={1}
                   objectFit="contain"
@@ -464,7 +464,7 @@ export default function Scene03Files() {
               <div className="pointer-events-none absolute right-[14%] top-[-4%] w-[32%] rotate-6">
                 <div className="relative">
                   <Image
-                    src="/guitar_ref.png"
+                    src="/guitar_ref.webp"
                     alt="Guitar reference"
                     width={1740}
                     height={1043}
@@ -473,7 +473,7 @@ export default function Scene03Files() {
                   />
                   <div className="relative translate-y-3">
                     <Image
-                      src="/polaroid_costume_guitar.png"
+                      src="/polaroid_costume_guitar.webp"
                       alt="Guitar costume"
                       width={2688}
                       height={4032}
@@ -500,21 +500,21 @@ export default function Scene03Files() {
               </div>
               <div className="relative h-[80%] overflow-visible p-3 pt-5">
                 <Image
-                  src="/guitar_paint.jpg"
+                  src="/guitar_paint.webp"
                   alt="Guitar paint"
                   width={3213}
                   height={5712}
                   className="absolute left-[4%] top-[2%] w-[58%] rotate-[-2deg] border-[8px] border-[#f5f5f5] bg-[#f5f5f5] object-cover drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]"
                 />
                 <Image
-                  src="/guitar_model.png"
+                  src="/guitar_model.webp"
                   alt="Guitar CAD detail"
                   width={1889}
                   height={1560}
                   className="absolute right-[3%] top-[4%] w-[42%] rotate-[5deg] border-[8px] border-[#f5f5f5] bg-[#f5f5f5] object-cover drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]"
                 />
                 <Image
-                  src="/guitar_final.jpg"
+                  src="/guitar_final.webp"
                   alt="Guitar final build"
                   width={3213}
                   height={5712}
@@ -527,7 +527,7 @@ export default function Scene03Files() {
             <div className="relative flex-shrink-0 h-[72vmin] w-[72vmin] translate-x-6 translate-y-6 sm:h-[60vmin] sm:w-[60vmin] sm:translate-x-0 sm:translate-y-0 md:h-[64vmin] md:w-[64vmin] lg:h-[68vmin] lg:w-[68vmin] xl:h-[72vmin] xl:w-[72vmin] overflow-visible">
               <div className="absolute inset-0 -translate-x-12 -translate-y-14 -rotate-26 flex items-center justify-center sm:-translate-x-20">
                 <DitherShader
-                  src="/guitar.png"
+                  src="/guitar.webp"
                   colorMode="grayscale"
                   threshold={0.25}
                   gridSize={1}
@@ -583,7 +583,7 @@ export default function Scene03Files() {
             coverOverlays: (
               <div className="pointer-events-none absolute inset-0 overflow-hidden">
                 <Image
-                  src="/duck_feet.png"
+                  src="/duck_feet.webp"
                   alt="Duck footprints"
                   fill
                   className="object-cover -translate-y-30"
@@ -595,7 +595,7 @@ export default function Scene03Files() {
           media={
             <div className="rotate-1 translate-x-10 translate-y-6 sm:translate-x-0 sm:translate-y-0">
               <DitherShader
-                src="/fpv_goose.png"
+                src="/fpv_goose.webp"
                 colorMode="grayscale"
                 threshold={0.1}
                 gridSize={1}
@@ -640,7 +640,7 @@ export default function Scene03Files() {
               style={{ opacity: handOpenOpacity, willChange: "opacity" }}
             >
               <Image
-                src="/hand_open.png"
+                src="/hand_open.webp"
                 alt="Reaching hand"
                 width={5914}
                 height={1952}
@@ -653,7 +653,7 @@ export default function Scene03Files() {
               style={{ opacity: handClosedOpacity, willChange: "opacity" }}
             >
               <Image
-                src="/hand_close.png"
+                src="/hand_close.webp"
                 alt="Closing hand"
                 width={6024}
                 height={2034}
@@ -671,14 +671,14 @@ export default function Scene03Files() {
           aria-label="More projects on Devpost"
         >
           <Image
-            src="/ball_button.png"
+            src="/ball_button.webp"
             alt="More projects on Devpost"
             width={980}
             height={980}
             className="h-[240px] w-[240px] object-contain drop-shadow-[0_10px_18px_rgba(0,0,0,0.35)] transition-transform duration-200 group-hover:rotate-[-4deg] group-hover:scale-[1.06] group-hover:drop-shadow-[0_14px_24px_rgba(0,0,0,0.4)] sm:h-[280px] sm:w-[280px] md:h-[320px] md:w-[320px] lg:h-[360px] lg:w-[360px]"
           />
           <Image
-            src="/click_it.png"
+            src="/click_it.webp"
             alt=""
             width={526}
             height={323}

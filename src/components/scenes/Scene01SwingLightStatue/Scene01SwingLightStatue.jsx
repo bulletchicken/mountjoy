@@ -178,7 +178,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
   const underLayerItems = [
     {
       key: "mona-sketch",
-      src: "/mona_lisa.png",
+      src: "/mona_lisa.webp",
       alt: "Mona Lisa sketch",
       width: 1275,
       height: 1390,
@@ -197,7 +197,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
     },
     {
       key: "spray-paint",
-      src: "/spray_paint.png",
+      src: "/spray_paint.webp",
       alt: "Spray paint",
       width: 1462,
       height: 1796,
@@ -220,7 +220,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
     },
     {
       key: "statue-sketch",
-      src: "/statue.png",
+      src: "/statue.webp",
       alt: "Statue sketch",
       width: 1600,
       height: 2400,
@@ -244,7 +244,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
   const topLayerItems = [
     {
       key: "mona-real",
-      src: "/real_mona_lisa.jpg",
+      src: "/real_mona_lisa.webp",
       alt: "Mona Lisa",
       width: 600,
       height: 780,
@@ -264,7 +264,7 @@ export default function Scene01TriangleRevealSwingFast({ backgroundColor }) {
     },
     {
       key: "statue",
-      src: "/real_statue.png",
+      src: "/real_statue.webp",
       alt: "Statue",
       width: 1600,
       height: 2400,
