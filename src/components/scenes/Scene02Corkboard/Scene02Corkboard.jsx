@@ -24,7 +24,7 @@ const FLASH_FLARE =
   "linear-gradient(225deg, rgba(236,244,255,0.95) 0%, rgba(240,247,255,0.6) 16%, rgba(245,250,255,0.2) 28%, rgba(255,255,255,0) 45%)";
 const FLASH_BEAM =
   "linear-gradient(225deg, rgba(232,242,255,0.95) 0%, rgba(236,244,255,0.7) 18%, rgba(242,248,255,0.35) 36%, rgba(255,255,255,0) 62%)";
-const FLASH_FLARE_IMAGE = "/lens_flare.jpg";
+const FLASH_FLARE_IMAGE = "/lens_flare.webp";
 const FLASH_BLAST_DURATION = 0.45;
 const FLASH_BLAST_TIMES = [0, 0.22, 0.55, 1];
 const FLASH_BLAST_OPACITY = [0, 1, 1, 0];
@@ -467,7 +467,7 @@ export default function Scene02Corkboard() {
       ref={sectionRef}
       className="relative z-0 isolate w-full bg-white pt-4 pb-10 -mt-72 cursor-default translate-x-8 max-sm:translate-x-[clamp(20px,7.5vw,32px)] overflow-visible sm:pt-6 sm:-mt-32 md:-mt-72 lg:-mt-32"
       style={{
-        backgroundImage: "url(/cork_texture.png)",
+        backgroundImage: "url(/cork_texture.webp)",
         backgroundRepeat: "repeat",
         backgroundSize: "800px 534px",
       }}
@@ -559,7 +559,7 @@ export default function Scene02Corkboard() {
                 >
                   <div className="flex w-full justify-center translate-y-2 -translate-x-3 transition-transform duration-200 hover:scale-[1.08]">
                     <DevelopingPolaroid
-                      src="/htn_obama.jpg"
+                      src="/htn_obama.webp"
                       alt="HTN Obama snapshot"
                       sizeClass="w-40 md:w-48"
                       imageClass="w-32 h-44 md:w-40 md:h-52"
@@ -568,7 +568,7 @@ export default function Scene02Corkboard() {
                     />
                   </div>
                   <Image
-                    src="/hand_hold.png"
+                    src="/hand_hold.webp"
                     alt="Hand reaching"
                     width={2002}
                     height={5640}
@@ -611,7 +611,7 @@ export default function Scene02Corkboard() {
         <div className="pointer-events-none w-full">
           <div className="mx-auto w-[min(88vw,720px)] max-sm:w-full max-sm:max-w-full rotate-10 pt-6 pb-4 -mb-16 -translate-y-2 -translate-x-6 max-sm:-translate-x-[clamp(12px,5.6vw,24px)] sm:w-[min(80vw,720px)] sm:translate-y-12">
             <Image
-              src="/where_is_he.png"
+              src="/where_is_he.webp"
               alt="Where is he note"
               width={1355}
               height={1029}
@@ -630,7 +630,7 @@ export default function Scene02Corkboard() {
             className="absolute left-[15%] top-[25%] rotate-3 mx-auto w-[min(42vw,220px)] max-sm:w-[clamp(150px,42vw,220px)] z-20 scale-[0.9] -translate-y-6 sm:scale-[0.75] sm:-translate-y-12 md:scale-100 md:translate-y-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[4deg] max-sm:hover:scale-[1.05] sm:hover:scale-[1.05] cursor-pointer"
           >
             <Image
-              src="/waterloo_sticky.png"
+              src="/waterloo_sticky.webp"
               alt="Waterloo crest sticky"
               width={2048}
               height={2048}
@@ -643,7 +643,7 @@ export default function Scene02Corkboard() {
             className="absolute left-[5%] top-[-52%] -rotate-2 w-[min(96vw,820px)] sm:w-[min(80vw,700px)] max-w-none z-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-1deg] hover:scale-[1.05] cursor-pointer"
           >
             <Image
-              src="/waterloo_news.png"
+              src="/waterloo_news.webp"
               alt="Waterloo engineering news"
               width={2048}
               height={2048}
@@ -656,7 +656,7 @@ export default function Scene02Corkboard() {
             className="absolute left-[50%] top-[-30%] rotate-1 w-[min(92vw,720px)] translate-y-10 sm:w-[min(80vw,680px)] sm:translate-y-0 max-w-none z-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[2deg] hover:scale-[1.05] cursor-pointer"
           >
             <Image
-              src="/waterloo_syde.png"
+              src="/waterloo_syde.webp"
               alt="Waterloo SYDE note"
               width={2048}
               height={2048}
@@ -671,7 +671,7 @@ export default function Scene02Corkboard() {
             <div className="relative w-full">
               <div className="absolute left-2 top-16 -rotate-8 z-0">
                   <Polaroid
-                    src="/the_cat.jpg"
+                    src="/the_cat.webp"
                     alt="Polaroid cat"
                     sizeClass="w-40 md:w-48"
                     imageClass="w-32 h-44 md:w-40 md:h-52"
@@ -680,7 +680,7 @@ export default function Scene02Corkboard() {
               </div>
               <div className="absolute left-12 top-14 rotate-5 z-10">
                   <Polaroid
-                    src="/waterloo_chef.jpg"
+                    src="/waterloo_chef.webp"
                     alt="Polaroid chef"
                     sizeClass="w-40 md:w-48"
                     imageClass="w-32 h-44 md:w-40 md:h-52"
@@ -689,7 +689,7 @@ export default function Scene02Corkboard() {
               </div>
               <div className="invisible">
                   <Polaroid
-                    src="/the_cat.jpg"
+                    src="/the_cat.webp"
                     alt=""
                     sizeClass="w-40 md:w-48"
                     imageClass="w-32 h-44 md:w-40 md:h-52"
@@ -708,7 +708,7 @@ export default function Scene02Corkboard() {
               >
                 <div className="relative w-full">
                   <Image
-                    src="/quanto_news.png"
+                    src="/quanto_news.webp"
                     alt="Quanto news"
                     width={2048}
                     height={2048}
@@ -717,7 +717,7 @@ export default function Scene02Corkboard() {
                   <div className="absolute left-[64%] bottom-[-60%] z-10 -rotate-1 translate-y-32 sm:-left-6 sm:bottom-[-50%] sm:translate-y-0 md:translate-y-12 transition-transform duration-200 hover:rotate-[-2deg] hover:scale-[1.1] hover:z-20">
                     <div className="relative">
                       <Polaroid
-                        src="/quanto_selfie.jpeg"
+                        src="/quanto_selfie.webp"
                         alt="Polaroid work snapshot"
                         sizeClass="w-40 md:w-48"
                         imageClass="w-32 h-44 md:w-40 md:h-52"
@@ -727,7 +727,7 @@ export default function Scene02Corkboard() {
                   </div>
                   <div className="absolute left-[-6%] bottom-[-45%] z-10 -rotate-2 translate-y-20 sm:left-[31%] sm:bottom-[-48%] sm:translate-y-0 md:translate-y-0 scale-[0.8] sm:scale-[0.95] md:scale-100">
                     <Image
-                      src="/quanto_scribble.png"
+                      src="/quanto_scribble.webp"
                       alt="Software engineer scribble"
                       width={884}
                       height={685}
@@ -739,7 +739,7 @@ export default function Scene02Corkboard() {
                     className="absolute right-6 bottom-[-6%] z-10 w-[200px] -rotate-10 scale-[0.82] translate-x-32 max-sm:translate-x-[clamp(64px,29.8vw,128px)] translate-y-16 sm:translate-y-4 md:scale-100 md:translate-x-0 md:translate-y-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-8deg] max-sm:hover:scale-[1.05] sm:hover:scale-[1.05] hover:z-20"
                   >
                     <Image
-                      src="/quanto_sticky.png"
+                      src="/quanto_sticky.webp"
                       alt="Quanto Sticky"
                       width={1000}
                       height={1000}
@@ -756,7 +756,7 @@ export default function Scene02Corkboard() {
                 className="absolute left-[-2%] top-[-6%] z-10 w-full max-w-[220px] scale-[0.75] sm:left-[6%] sm:top-[-10%] md:left-[70%] md:scale-100 md:translate-x-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[1deg] max-sm:hover:scale-[1.05] sm:hover:scale-[1.05] cursor-pointer"
               >
                 <Image
-                  src="/shopify_sticky.png"
+                  src="/shopify_sticky.webp"
                   alt="Shopify sticker"
                   width={1640}
                   height={2360}
@@ -768,7 +768,7 @@ export default function Scene02Corkboard() {
                 className="absolute left-[60%] -translate-x-1/2 sm:left-1/2 md:left-[40%] md:translate-x-0 top-[15%] lg:top-[22%] z-10 rotate-5 w-[520px] max-sm:w-[min(121vw,520px)] origin-top-left scale-[0.7] md:scale-[0.85] cursor-pointer"
               >
                 <Image
-                  src="/shopify_scribble.png"
+                  src="/shopify_scribble.webp"
                   alt="Engineering intern scribble"
                   width={1661}
                   height={463}
@@ -780,7 +780,7 @@ export default function Scene02Corkboard() {
                 className="absolute left-[40%] top-[-5%] w-65 max-sm:w-[min(60vw,16.25rem)] shrink-0 -rotate-3 z-10 scale-[1.5] transition-transform duration-200 hover:scale-[1.7] cursor-pointer"
               >
                 <Image
-                  src="/shopee_sticker.png"
+                  src="/shopee_sticker.webp"
                   alt="Shopee sticker"
                   width={2048}
                   height={2048}
@@ -793,7 +793,7 @@ export default function Scene02Corkboard() {
                 className="absolute left-[50%] top-[260px] z-10 w-full max-w-[220px] -rotate-2 scale-[0.75] sm:left-[60%] sm:top-[220px] sm:translate-x-6 md:left-[-10%] md:top-[240px] md:scale-[1.1] md:translate-x-12 lg:translate-x-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-1deg] max-sm:hover:scale-[1.05] sm:hover:scale-[1.05] cursor-pointer"
               >
                 <Image
-                  src="/htn_sticky.png"
+                  src="/htn_sticky.webp"
                   alt="Hack the North sticky"
                   width={2048}
                   height={2048}
@@ -805,7 +805,7 @@ export default function Scene02Corkboard() {
                 className="absolute left-[-6%] top-[450px] z-0 -rotate-1 sm:top-[410px] sm:translate-x-6 md:translate-x-12 lg:translate-x-0 transition-transform duration-200 hover:-translate-y-1 hover:scale-[1.05] cursor-pointer"
               >
                 <Image
-                  src="/htn_news.png"
+                  src="/htn_news.webp"
                   alt="Hack the North news clipping"
                   width={1249}
                   height={418}
@@ -817,7 +817,7 @@ export default function Scene02Corkboard() {
                 className="absolute left-[2%] top-[300px] z-10 rotate-2 scale-[0.85] sm:left-[28%] sm:top-[260px] sm:translate-x-6 sm:scale-[0.95] md:left-[20%] md:scale-100 md:translate-x-12 lg:translate-x-0 cursor-pointer"
               >
                 <Image
-                  src="/htn_scribble.png"
+                  src="/htn_scribble.webp"
                   alt="Logistics organizer scribble"
                   width={949}
                   height={661}
@@ -831,7 +831,7 @@ export default function Scene02Corkboard() {
                   className="pointer-events-none invisible relative z-10 mt-[480px] ml-[58%] w-fit -rotate-4 sm:mt-[440px] sm:translate-x-6 md:mt-[520px] md:translate-x-12 lg:mt-[280px] lg:translate-x-6"
                 >
                   <DevelopingPolaroid
-                    src="/htn_obama.jpg"
+                    src="/htn_obama.webp"
                     alt=""
                     sizeClass="w-40 md:w-48"
                     imageClass="w-32 h-44 md:w-40 md:h-52"
@@ -846,7 +846,7 @@ export default function Scene02Corkboard() {
                   className="relative z-10 mt-[480px] ml-[58%] w-fit -rotate-4 sm:mt-[440px] sm:translate-x-6 md:mt-[520px] md:translate-x-12 lg:mt-[280px] lg:translate-x-6 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-3deg] cursor-pointer"
                 >
                   <DevelopingPolaroid
-                    src="/htn_obama.jpg"
+                    src="/htn_obama.webp"
                     alt="HTN Obama snapshot"
                     sizeClass="w-40 md:w-48"
                     imageClass="w-32 h-44 md:w-40 md:h-52"
@@ -860,7 +860,7 @@ export default function Scene02Corkboard() {
                 className="absolute left-[-2%] top-[560px] z-10 rotate-8 w-[80px] sm:top-[240px] sm:w-[96px] sm:translate-x-6 md:left-[74%] md:top-[300px] md:w-[96px] md:translate-x-12 lg:left-[76%] lg:top-[460px] lg:translate-x-6 lg:z-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[9deg] hover:scale-[1.1] cursor-pointer"
               >
                 <Image
-                  src="/alicehacks_sticker.png"
+                  src="/alicehacks_sticker.webp"
                   alt="AliceHacks sticker"
                   width={1640}
                   height={2360}

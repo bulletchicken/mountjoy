@@ -42,7 +42,7 @@ export default function CautionTape() {
       ref={containerRef}
       className="relative w-full h-[640px] sm:h-[700px] lg:h-[760px] overflow-hidden pointer-events-none -mt-25 -mb-20"
       style={{
-        backgroundImage: "url(/cork_texture.png)",
+        backgroundImage: "url(/cork_texture.webp)",
         backgroundRepeat: "repeat",
         backgroundSize: "800px 534px",
       }}

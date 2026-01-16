@@ -31,7 +31,7 @@ export default function Page({ backgroundColor, scrollYProgress }) {
             disablePictureInPicture
             controlsList="nodownload noplaybackrate noremoteplayback"
           >
-            <source src="/Landing_Page_video.mp4" type="video/mp4" />
+            <source src="/Landing_page_video.webm" type="video/webm" />
           </video>
         </div>
       </motion.div>

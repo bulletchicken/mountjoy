@@ -168,14 +168,14 @@ export default function Home() {
         >
           <motion.img
             className="absolute inset-0 h-full w-full object-contain"
-            src="/lightswitch_on.png"
+            src="/lightswitch_on.webp"
             alt="Light switch on"
             loading="eager"
             style={{ opacity: handUpOpacity }}
           />
           <motion.img
             className="absolute inset-0 h-full w-full object-contain"
-            src="/lightswitch_off.png"
+            src="/lightswitch_off.webp"
             alt="Light switch off"
             loading="eager"
             style={{ opacity: handDownOpacity }}
@@ -187,14 +187,14 @@ export default function Home() {
         >
           <motion.img
             className="absolute inset-0 h-full w-full object-contain"
-            src="/finger_up.png"
+            src="/finger_up.webp"
             alt="Pointing hand"
             loading="eager"
             style={{ opacity: handUpOpacity }}
           />
           <motion.img
             className="absolute inset-0 h-full w-full object-contain"
-            src="/finger_down.png"
+            src="/finger_down.webp"
             alt="Pressing hand"
             loading="eager"
             style={{ opacity: handDownOpacity }}

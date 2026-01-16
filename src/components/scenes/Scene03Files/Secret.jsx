@@ -114,7 +114,7 @@ export default function Secret() {
         </BlackWhiteFolder>
         <img
           className="pointer-events-none absolute left-[24%] top-[22%] z-40 w-[38%] rotate-[-12deg] opacity-80"
-          src="/secret_stamp.png"
+          src="/secret_stamp.webp"
           alt="Top Secret stamp"
         />
       </div>
