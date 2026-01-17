@@ -26,7 +26,8 @@ const percentClassName = "h-[clamp(24px,6vw,90px)] w-auto select-none";
 
 export default function LoadingScreen({ progress, isVisible }) {
   const [percentFrame, setPercentFrame] = useState(0);
-  const digits = String(progress).split("");
+  const displayValue = Math.max(0, Math.min(100, Math.round(progress)));
+  const digits = String(displayValue).split("");
 
   useEffect(() => {
     if (!isVisible) return;
@@ -36,6 +37,14 @@ export default function LoadingScreen({ progress, isVisible }) {
     }, 220);
     return () => clearInterval(id);
   }, [isVisible]);
+
+  useEffect(() => {
+    const sources = [...Object.values(DIGIT_SOURCES), ...PERCENT_FRAMES];
+    sources.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
 
   return (
     <div
@@ -52,11 +61,13 @@ export default function LoadingScreen({ progress, isVisible }) {
       >
         {digits.map((digit, index) => (
           <img
-            key={`${digit}-${index}`}
+            key={index}
             src={DIGIT_SOURCES[digit]}
             alt=""
             className={digitClassName}
             draggable="false"
+            loading="eager"
+            decoding="async"
           />
         ))}
         <img
@@ -64,6 +75,8 @@ export default function LoadingScreen({ progress, isVisible }) {
           alt=""
           className={percentClassName}
           draggable="false"
+          loading="eager"
+          decoding="async"
         />
       </div>
     </div>

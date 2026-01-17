@@ -133,8 +133,13 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
     </div>
   );
 
+  const mdShiftClass = isFlipped
+    ? "md:-translate-x-[6vw] lg:translate-x-0"
+    : "md:translate-x-[6vw] lg:translate-x-0";
   const footerLineMarkup = (
-    <div className="absolute bottom-12 left-8 right-8 px-2 text-[0.85rem] font-mono font-bold tracking-[0.12em] text-black sm:left-10 sm:right-10 sm:px-3">
+    <div
+      className={`absolute bottom-12 left-8 right-8 px-2 text-[0.85rem] font-mono font-bold tracking-[0.12em] text-black max-sm:text-[0.78rem] sm:left-10 sm:right-10 sm:px-3 md:left-[8vw] md:right-[8vw] md:text-[0.78rem] lg:left-10 lg:right-10 ${mdShiftClass}`}
+    >
       <div className="relative">
         {resolvedFooterLines.map((line, index) => (
           <div
