@@ -52,7 +52,7 @@ export default function Footer() {
 
   return (
     <footer
-      className="w-full pt-20 pb-0 text-center font-mono text-xs uppercase tracking-[0.3em] text-black"
+      className="w-full px-8 sm:px-0 pt-20 pb-0 text-center font-mono text-xs uppercase tracking-[0.3em] text-black"
       style={{
         backgroundImage: "url(/cork_texture.webp)",
         backgroundRepeat: "repeat",
