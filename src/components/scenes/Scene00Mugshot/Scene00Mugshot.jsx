@@ -69,9 +69,9 @@ export default function Page({
             onCanPlayThrough={notifyVideoReady}
             onPlaying={notifyVideoReady}
             onError={notifyVideoReady}
-          >
-            <source src="/Landing_page_video.webm" type="video/webm" />
-          </video>
+            >
+              <source src="/Landing_page_video.mp4" type="video/mp4" />
+            </video>
         </div>
       </motion.div>
 
