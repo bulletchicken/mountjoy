@@ -21,8 +21,8 @@ const PERCENT_FRAMES = [
   "/loader/percent3.svg",
 ];
 
-const digitClassName = "h-[clamp(36px,8vw,120px)] w-auto select-none";
-const percentClassName = "h-[clamp(24px,6vw,90px)] w-auto select-none";
+const digitClassName = "h-[clamp(64px,8vw,120px)] w-auto select-none";
+const percentClassName = "h-[clamp(48px,6vw,90px)] w-auto select-none";
 
 export default function LoadingScreen({ progress, isVisible }) {
   const [percentFrame, setPercentFrame] = useState(0);
