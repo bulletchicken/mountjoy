@@ -120,7 +120,7 @@ function FolderReport({
                       {bottomLeftContent}
                     </div>
                   </>
-                ) : ageBottomLabel ?? ageLabel ? (
+                ) : (ageBottomLabel ?? ageLabel) ? (
                   <>
                     <span className="font-bold">
                       {ageBottomLabel ?? ageLabel}:
@@ -200,11 +200,23 @@ export default function Scene03Files() {
     return () => window.removeEventListener("resize", update);
   }, []);
   const isSmOnly = isSmallScreen && !isBaseScreen;
-  const retreatDistance = isBaseScreen ? 260 : isSmOnly ? 260 : isMdOnly ? 320 : 90;
+  const retreatDistance = isBaseScreen
+    ? 260
+    : isSmOnly
+      ? 260
+      : isMdOnly
+        ? 320
+        : 90;
   const handRetreatDistance = retreatDistance;
   const handStartX = isBaseScreen ? 60 : isSmOnly ? 60 : isMdOnly ? 84 : 30;
   const handMidX = isBaseScreen ? -90 : isSmOnly ? -90 : isMdOnly ? -116 : -38;
-  const handRightOffset = isBaseScreen ? -52 : isSmOnly ? -52 : isMdOnly ? -72 : -20;
+  const handRightOffset = isBaseScreen
+    ? -52
+    : isSmOnly
+      ? -52
+      : isMdOnly
+        ? -72
+        : -20;
   const { scrollYProgress: secretScrollY } = useScroll({
     target: secretRef,
     offset: ["start 100%", "center start"],
@@ -275,8 +287,7 @@ export default function Scene03Files() {
               "[--paper-sheet-height:84%] sm:[--paper-sheet-height:98%] max-sm:left-8 max-sm:right-8",
             footerLines: [
               "AI teddy bear for sweet grandmas",
-              "Healthcare companion teddy bear",
-              "Funded by:",
+              "Funded by Techyon & 1517 Fund",
             ],
             coverOverlays: (
               <>
@@ -343,7 +354,7 @@ export default function Scene03Files() {
               notesVariant="full"
               headerRightMedia={
                 <div className="h-full w-full p-2 text-[0.6rem] normal-case tracking-[0.08em]">
-                  <span className="block text-[0.58rem] uppercase tracking-[0.18em]">
+                  <span className="block text-[0.58rem] uppercase tracking-[0.18em] font-bold">
                     Notes:
                   </span>
                   <span className="mt-1 block">
@@ -384,7 +395,10 @@ export default function Scene03Files() {
             paperStackClassName: "top-[6%] h-[80%] sm:-top-12 sm:h-[110%]",
             paperSheetClassName:
               "[--paper-sheet-height:84%] sm:[--paper-sheet-height:98%] max-sm:left-8 max-sm:right-8",
-            footerLines: ["Viral Waterloo's Hot or Not", "500 users"],
+            footerLines: [
+              "Viral Waterloo's Hot or Not",
+              "40k page vists in 2 days",
+            ],
             coverOverlays: (
               <>
                 <div className="pointer-events-none absolute left-[8%] top-[0%] w-[84%] rotate-1">
@@ -459,7 +473,10 @@ export default function Scene03Files() {
             paperStackClassName: "top-[6%] h-[80%] sm:-top-12 sm:h-[110%]",
             paperSheetClassName:
               "[--paper-sheet-height:84%] sm:[--paper-sheet-height:98%] max-sm:left-8 max-sm:right-8",
-            footerLines: ["Flying-v Guitar", "Short description", "TBD"],
+            footerLines: [
+              "Onceler's Flying-v Guitar",
+              "Designed and styled in 2 weeks",
+            ],
             coverOverlays: (
               <div className="pointer-events-none absolute right-[14%] top-[-4%] w-[32%] rotate-6">
                 <div className="relative">

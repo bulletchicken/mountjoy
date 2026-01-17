@@ -3,7 +3,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
-export default function Navbar() {
+export default function Navbar({ isVisible = true }) {
   const [isHidden, setIsHidden] = useState(false);
   const [isCompact, setIsCompact] = useState(false);
   const lastScrollY = useRef(0);
@@ -54,8 +54,12 @@ export default function Navbar() {
     <motion.nav
       className="fixed top-0 left-0 right-0 z-50 mix-blend-difference text-white"
       initial={{ opacity: 0 }}
-      animate={{ opacity: 1, y: isHidden ? -120 : 0 }}
-      transition={{ delay: 0, duration: 0.2, ease: "easeOut" }}
+      animate={{
+        opacity: isVisible ? 1 : 0,
+        y: isVisible ? (isHidden ? -120 : 0) : -20,
+      }}
+      transition={{ delay: 0, duration: 0.35, ease: "easeOut" }}
+      style={{ pointerEvents: isVisible ? "auto" : "none" }}
     >
       <div className="mx-auto flex w-full max-w-4xl flex-wrap items-center justify-center gap-4 px-4 pt-10 pb-6 sm:px-8 sm:py-10 md:justify-between md:px-12">
         {/* Left side - Name */}

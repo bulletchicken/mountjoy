@@ -1,10 +1,44 @@
 "use client";
 import { motion, useTransform } from "framer-motion";
-import { useRef } from "react";
-export default function Page({ backgroundColor, scrollYProgress }) {
+import { useCallback, useEffect, useRef } from "react";
+export default function Page({
+  backgroundColor,
+  scrollYProgress,
+  onVideoReady,
+  shouldPlay = true,
+}) {
   const photoOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
   const textY = useTransform(scrollYProgress, [0, 0.2], [0, -12]);
   const videoRef = useRef(null);
+  const hasNotifiedRef = useRef(false);
+
+  const notifyVideoReady = useCallback(() => {
+    if (hasNotifiedRef.current) return;
+    hasNotifiedRef.current = true;
+    if (onVideoReady) onVideoReady();
+  }, [onVideoReady]);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.readyState >= 3) {
+      notifyVideoReady();
+    }
+  }, [notifyVideoReady]);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (shouldPlay) {
+      const playPromise = video.play();
+      if (playPromise && typeof playPromise.catch === "function") {
+        playPromise.catch(() => {});
+      }
+      return;
+    }
+    video.pause();
+    video.load();
+  }, [shouldPlay]);
 
   return (
     <motion.div
@@ -22,7 +56,7 @@ export default function Page({ backgroundColor, scrollYProgress }) {
           <video
             ref={videoRef}
             className="boomerang-video aspect-[3/2] min-h-[80vh] shrink-0 w-[250vw] object-contain object-bottom sm:w-[155vw] md:w-[115vw] lg:w-[100vw] xl:w-[80vw] max-w-none"
-            autoPlay
+            autoPlay={shouldPlay}
             muted
             playsInline
             preload="auto"
@@ -30,6 +64,10 @@ export default function Page({ backgroundColor, scrollYProgress }) {
             controls={false}
             disablePictureInPicture
             controlsList="nodownload noplaybackrate noremoteplayback"
+            onCanPlay={notifyVideoReady}
+            onCanPlayThrough={notifyVideoReady}
+            onPlaying={notifyVideoReady}
+            onError={notifyVideoReady}
           >
             <source src="/Landing_page_video.webm" type="video/webm" />
           </video>
