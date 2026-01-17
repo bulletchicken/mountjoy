@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Jeremy's Personal Website
 
-## Getting Started
+# Dear ~~Diary~~
 
-First, run the development server:
+## This is a journal, not a diary
+
+<table>
+  <tr>
+    <td width="70%">
+      <p>
+        Dear Internet Diary, today I finally stuffed my whole personality into a
+        single website. It has projects I worked on, things I like, and probably
+        a few easter eggs because I can't help myself. The vibe is corkboard-meets-
+        art-museum-meets-chaotic-notes-from-my-brain. If you get lost, just follow
+        the doodles. If you see a goose, it is probably my fault.
+      </p>
+    </td>
+    <td width="30%" align="right">
+      <img src="./public/mona_lisa.webp" alt="Mona Lisa graphic" width="240" />
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td width="30%" align="left">
+      <img src="./public/statue.webp" alt="Statue graphic" width="240" />
+    </td>
+    <td width="70%">
+      <p>
+        The website is built to feel like flipping through a sketchy, messy,
+        and slightly dramatic notebook. It is a living page, so I keep adding
+        new projects, updates, and tiny visual surprises. If you are here to
+        peek at my work, welcome. If you are here to judge my taste in fonts,
+        please be gentle.
+      </p>
+    </td>
+  </tr>
+</table>
+
+## Run It Locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to see it in action.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Built With
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Next.js
+- React
+- CSS (for the weird fun stuff)
