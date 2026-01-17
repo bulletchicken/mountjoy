@@ -1,22 +1,38 @@
-# Jeremy's Personal Website
-
-# Dear ~~Diary~~
-
-## This is a journal, not a diary
+## ~~Dear Diary~~
+# First of all, let me get something straight: This is a README, not a diary
 
 <table>
   <tr>
     <td width="70%">
       <p>
-        Dear Internet Diary, today I finally stuffed my whole personality into a
-        single website. It has projects I worked on, things I like, and probably
-        a few easter eggs because I can't help myself. The vibe is corkboard-meets-
-        art-museum-meets-chaotic-notes-from-my-brain. If you get lost, just follow
-        the doodles. If you see a goose, it is probably my fault.
+        This is my first ever personal portfolio! (Mostly because I get halfway through making one before I start hating it.)
+
+  How I see it, you can do anything with a website—make it super simple and get the content right in front of people's faces, or go all out with animations and design with a crazy   polish. But I decided to do NEITHER and now here we are. The theming is a full investigation case on myself with the crime here being that this website is absolutely buns when resizing. 
       </p>
     </td>
     <td width="30%" align="right">
       <img src="./public/mona_lisa.webp" alt="Mona Lisa graphic" width="240" />
+    </td>
+  </tr>
+</table>
+
+## Website Sketches
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="./public/Website-1.jpg" alt="Website sketch 1" width="260" />
+    </td>
+    <td align="center">
+      <img src="./public/Website-2.jpg" alt="Website sketch 2" width="260" />
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="./public/Website-3.jpg" alt="Website sketch 3" width="260" />
+    </td>
+    <td align="center">
+      <img src="./public/Website-4.jpg" alt="Website sketch 4" width="260" />
     </td>
   </tr>
 </table>
@@ -28,27 +44,8 @@
     </td>
     <td width="70%">
       <p>
-        The website is built to feel like flipping through a sketchy, messy,
-        and slightly dramatic notebook. It is a living page, so I keep adding
-        new projects, updates, and tiny visual surprises. If you are here to
-        peek at my work, welcome. If you are here to judge my taste in fonts,
-        please be gentle.
+        While making this website though.... something was off... almost like the code kept changing itself into these weird cryptic messages. Ever since I made this repo, files have been going missing left and right. I even began to see random comments and console logs appear. I deleted as many as I could to the best of my ability and hopefully thats the end of that. 
       </p>
     </td>
   </tr>
 </table>
-
-## Run It Locally
-
-```bash
-npm install
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) to see it in action.
-
-## Built With
-
-- Next.js
-- React
-- CSS (for the weird fun stuff)
