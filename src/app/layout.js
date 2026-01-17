@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import { Geist, Geist_Mono, Newsreader } from "next/font/google";
 import "./globals.css";
 import LenisProvider from "./lenis-provider";
@@ -22,6 +23,7 @@ export default function RootLayout({ children }) {
         suppressHydrationWarning
       >
         <LenisProvider>{children}</LenisProvider>
+        <Analytics />
       </body>
     </html>
   );
