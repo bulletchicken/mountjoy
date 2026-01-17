@@ -157,20 +157,38 @@ function FolderReport({
   );
 }
 
-function NotesLinkedInPost({ src, isInteractive = true, saturation = 1 }) {
+const YOUTUBE_FALLBACK =
+  "https://www.youtube.com/embed/Qu0fmnFuss0?si=teCCc9aGo_Ylkdh6";
+
+function NotesLinkedInPost({
+  linkedInSrc,
+  youtubeSrc = YOUTUBE_FALLBACK,
+  showLinkedIn = Boolean(linkedInSrc),
+  title,
+  isInteractive = true,
+  saturation = 1,
+}) {
+  const isLinkedIn = showLinkedIn && linkedInSrc;
+  const iframeSrc = isLinkedIn ? linkedInSrc : youtubeSrc;
+  const iframeTitle =
+    title ||
+    (isLinkedIn ? "LinkedIn post" : "Alternative video");
+
   return (
     <div className="absolute inset-0 h-full w-full">
       <iframe
-        src={src}
-        title="Embedded LinkedIn post"
-        className={`h-full w-full ${
-          isInteractive ? "" : "pointer-events-none"
-        }`}
-        style={{ filter: `saturate(${saturation})` }}
-        allow="fullscreen; clipboard-write; camera; microphone"
+        src={iframeSrc}
+        title={iframeTitle}
+        className={`h-full w-full ${isLinkedIn && !isInteractive ? "pointer-events-none" : ""}`}
+        style={isLinkedIn ? { filter: `saturate(${saturation})` } : undefined}
+        allow={
+          isLinkedIn
+            ? "fullscreen; clipboard-write; camera; microphone"
+            : "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        }
         allowFullScreen
       />
-      {!isInteractive ? (
+      {isLinkedIn && !isInteractive ? (
         <div
           className="absolute inset-0 pointer-events-auto"
           aria-hidden="true"
@@ -364,9 +382,7 @@ export default function Scene03Files() {
                   </span>
                 </div>
               }
-              notesContent={
-                <NotesLinkedInPost src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7338595986090430464?compact=1" />
-              }
+              notesContent={<NotesLinkedInPost title="TED video" />}
             />
           }
           media={
@@ -439,13 +455,14 @@ export default function Scene03Files() {
               notesSmall="Swipe-based"
               skills="Virality · social loops"
               layout="notes-only"
-              notesContent={
-                <NotesLinkedInPost
-                  src="https://www.linkedin.com/embed/feed/update/urn:li:activity:7307781039693668352?compact=0"
-                  isInteractive={isOpen}
-                  saturation={0.35}
-                />
-              }
+                  notesContent={
+                    <NotesLinkedInPost
+                      linkedInSrc="https://www.linkedin.com/embed/feed/update/urn:li:activity:7307781039693668352?compact=0"
+                      isInteractive={isOpen}
+                      saturation={0.35}
+                      title="Hot or Not LinkedIn post"
+                    />
+                  }
             />
           )}
           media={
