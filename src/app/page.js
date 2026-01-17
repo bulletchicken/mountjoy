@@ -29,10 +29,13 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [isContentVisible, setIsContentVisible] = useState(false);
+  const [isNavVisible, setIsNavVisible] = useState(false);
+  const [textAnimationKey, setTextAnimationKey] = useState(0);
   const [isVideoReady, setIsVideoReady] = useState(false);
   const [loadedAssets, setLoadedAssets] = useState(0);
   const [fontsReady, setFontsReady] = useState(false);
   const progressRef = useRef(0);
+  const maxTargetRef = useRef(0);
   const LOADER_FADE_MS = 200;
 
   const handleVideoReady = useCallback(() => {
@@ -91,21 +94,26 @@ export default function Home() {
   const targetProgress = isVideoReady ? 100 : assetProgress;
 
   useEffect(() => {
+    maxTargetRef.current = Math.max(maxTargetRef.current, targetProgress);
+  }, [targetProgress]);
+
+  useEffect(() => {
     if (!isLoading) return;
     let rafId;
 
     const tick = () => {
       const current = progressRef.current;
-      if (current >= targetProgress) {
-        if (targetProgress === 100 && current === 100) {
+      const effectiveTarget = maxTargetRef.current;
+      if (current >= effectiveTarget) {
+        if (effectiveTarget === 100 && current === 100) {
           setIsLoading(false);
         }
         return;
       }
 
-      const gap = targetProgress - current;
+      const gap = effectiveTarget - current;
       const increment = Math.max(1, Math.ceil(gap / 6));
-      const next = Math.min(targetProgress, current + increment);
+      const next = Math.min(effectiveTarget, current + increment);
       progressRef.current = next;
       setLoadingProgress(next);
 
@@ -118,10 +126,33 @@ export default function Home() {
 
   useEffect(() => {
     if (!isLoading) return;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    const body = document.body;
+    const html = document.documentElement;
+    const scrollY = window.scrollY || 0;
+    const previousBodyOverflow = body.style.overflow;
+    const previousBodyPosition = body.style.position;
+    const previousBodyTop = body.style.top;
+    const previousBodyWidth = body.style.width;
+    const previousBodyOverscroll = body.style.overscrollBehavior;
+    const previousHtmlOverflow = html.style.overflow;
+    const previousHtmlOverscroll = html.style.overscrollBehavior;
+
+    body.style.overflow = "hidden";
+    body.style.position = "fixed";
+    body.style.top = `-${scrollY}px`;
+    body.style.width = "100%";
+    body.style.overscrollBehavior = "none";
+    html.style.overflow = "hidden";
+    html.style.overscrollBehavior = "none";
     return () => {
-      document.body.style.overflow = previousOverflow;
+      body.style.overflow = previousBodyOverflow;
+      body.style.position = previousBodyPosition;
+      body.style.top = previousBodyTop;
+      body.style.width = previousBodyWidth;
+      body.style.overscrollBehavior = previousBodyOverscroll;
+      html.style.overflow = previousHtmlOverflow;
+      html.style.overscrollBehavior = previousHtmlOverscroll;
+      window.scrollTo(0, scrollY);
     };
   }, [isLoading]);
 
@@ -132,6 +163,22 @@ export default function Home() {
     }, LOADER_FADE_MS);
     return () => clearTimeout(id);
   }, [isLoading]);
+
+  useEffect(() => {
+    if (!isContentVisible) {
+      setIsNavVisible(false);
+      return;
+    }
+    const id = setTimeout(() => {
+      setIsNavVisible(true);
+    }, 1500);
+    return () => clearTimeout(id);
+  }, [isContentVisible]);
+
+  useEffect(() => {
+    if (!isContentVisible) return;
+    setTextAnimationKey((prev) => prev + 1);
+  }, [isContentVisible]);
 
   useEffect(() => {
     progressRef.current = loadingProgress;
@@ -278,7 +325,7 @@ export default function Home() {
         style={{ pointerEvents: isContentVisible ? "auto" : "none" }}
         aria-hidden={!isContentVisible}
       >
-        <Navbar isVisible={isContentVisible} />
+        <Navbar isVisible={isNavVisible} />
         <div ref={containerRef} className="relative">
           <motion.div
             className="pointer-events-none absolute left-1/2 top-[150vh] z-60 w-[90px] -translate-x-1/2 sm:w-[105px] md:left-[50%] md:w-[120px] lg:left-[30%] aspect-[431/683] relative 2xl:w-[8vw]"
@@ -323,6 +370,7 @@ export default function Home() {
             scrollYProgress={scrollYProgress}
             onVideoReady={handleVideoReady}
             shouldPlay={isContentVisible}
+            textAnimationKey={textAnimationKey}
           />
           <SwingLight backgroundColor={backgroundColor} />
         </div>

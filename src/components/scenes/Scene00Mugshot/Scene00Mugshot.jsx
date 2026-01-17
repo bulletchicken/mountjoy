@@ -6,6 +6,7 @@ export default function Page({
   scrollYProgress,
   onVideoReady,
   shouldPlay = true,
+  textAnimationKey = 0,
 }) {
   const photoOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
   const textY = useTransform(scrollYProgress, [0, 0.2], [0, -12]);
@@ -76,6 +77,7 @@ export default function Page({
 
       {/* Case number and location */}
       <motion.div
+        key={`case-text-${textAnimationKey}`}
         className="pointer-events-none fixed bottom-20 left-0 right-0 z-50 hidden md:block mix-blend-difference"
         style={{
           opacity: photoOpacity,
@@ -87,7 +89,7 @@ export default function Page({
             <span
               className="type-text"
               style={{
-                animationDelay: "0.6s",
+                animationDelay: "1s",
                 clipPath: "inset(0 100% 0 0)",
                 "--type-steps": 22,
                 "--type-duration": "0.8s",
@@ -100,7 +102,7 @@ export default function Page({
             <span
               className="type-text"
               style={{
-                animationDelay: "2s",
+                animationDelay: "2.4s",
                 clipPath: "inset(0 100% 0 0)",
                 "--type-steps": 15,
                 "--type-duration": "0.7s",
@@ -113,7 +115,7 @@ export default function Page({
             <span
               className="type-text"
               style={{
-                animationDelay: "3.2s",
+                animationDelay: "3.6s",
                 clipPath: "inset(0 100% 0 0)",
                 "--type-steps": 24,
                 "--type-duration": "0.9s",
