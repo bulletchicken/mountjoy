@@ -246,11 +246,7 @@ export default function Scene02Corkboard() {
     return handPeakOffset + (handHiddenOffset - handPeakOffset) * eased;
   });
   const handRise = useMotionTemplate`${handRiseOffset}vh`;
-  const developProgress = useTransform(
-    developProgressValue,
-    [0, 1],
-    [0, 1],
-  );
+  const developProgress = useTransform(developProgressValue, [0, 1], [0, 1]);
 
   const startDevelop = () => {
     if (developHasRunRef.current) {
@@ -322,7 +318,11 @@ export default function Scene02Corkboard() {
   useMotionValueEvent(flashProgress, "change", (value) => {
     const last = flashLastProgress.current;
     flashLastProgress.current = value;
-    if (flashHasFiredRef.current && value <= FLASH_RESET && last > FLASH_RESET) {
+    if (
+      flashHasFiredRef.current &&
+      value <= FLASH_RESET &&
+      last > FLASH_RESET
+    ) {
       flashHasFiredRef.current = false;
       setFlashFired(false);
       developHasRunRef.current = false;
@@ -359,9 +359,7 @@ export default function Scene02Corkboard() {
         const d = `M ${from.x} ${from.y} Q ${midX} ${midY} ${to.x} ${to.y}`;
         const yTravel = Math.abs(to.y - from.y);
         const weight =
-          connection.weight != null
-            ? connection.weight
-            : Math.max(20, yTravel);
+          connection.weight != null ? connection.weight : Math.max(20, yTravel);
         return { key: `${connection.from}-${connection.to}`, d, weight };
       })
       .filter(Boolean);
@@ -439,9 +437,7 @@ export default function Scene02Corkboard() {
     updateLayout();
     const ro = new ResizeObserver(updateLayout);
     ro.observe(containerRef.current);
-    const imageNodes = Array.from(
-      containerRef.current.querySelectorAll("img"),
-    );
+    const imageNodes = Array.from(containerRef.current.querySelectorAll("img"));
     const handleImageLoad = () => {
       updateLayout();
     };
@@ -480,7 +476,7 @@ export default function Scene02Corkboard() {
   return (
     <section
       ref={sectionRef}
-      className="relative z-0 isolate w-full bg-white pt-4 pb-10 -mt-72 cursor-default translate-x-8 max-sm:translate-x-[clamp(20px,7.5vw,32px)] overflow-visible sm:pt-6 sm:-mt-32 md:-mt-72 lg:-mt-32"
+      className="relative z-0 isolate w-full bg-white pt-4 pb-10 -mt-72 translate-x-8 max-sm:translate-x-[clamp(20px,7.5vw,32px)] overflow-visible sm:pt-6 sm:-mt-32 md:-mt-72 lg:-mt-32"
       style={{
         backgroundImage: "url(/cork_texture.webp)",
         backgroundRepeat: "repeat",
@@ -605,8 +601,8 @@ export default function Scene02Corkboard() {
                 "md:block",
               ].join(" ")}
               style={{
-                left: tooltip.x + 14,
-                top: tooltip.y + 16,
+                left: tooltip.x + 28,
+                top: tooltip.y + 24,
                 opacity: tooltip.visible ? 1 : 0,
                 transform: "translate3d(0, 0, 0)",
               }}
@@ -663,7 +659,7 @@ export default function Scene02Corkboard() {
           <div
             ref={waterlooStickyRef}
             {...linkHandlers(WATERLOO_URL)}
-            className="absolute left-[15%] top-[25%] rotate-3 mx-auto w-[min(42vw,220px)] max-sm:w-[clamp(150px,42vw,220px)] z-20 scale-[0.9] -translate-y-6 sm:scale-[0.75] sm:-translate-y-12 md:scale-100 md:translate-y-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[4deg] max-sm:hover:scale-[1.05] sm:hover:scale-[1.05] md:cursor-pointer"
+            className="absolute left-[15%] top-[25%] rotate-3 mx-auto w-[min(42vw,220px)] max-sm:w-[clamp(150px,42vw,220px)] z-20 scale-[0.9] -translate-y-6 sm:scale-[0.75] sm:-translate-y-12 md:scale-100 md:translate-y-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[4deg] max-sm:hover:scale-[1.05] sm:hover:scale-[1.05]"
           >
             <Image
               src="/waterloo_sticky.webp"
@@ -676,7 +672,7 @@ export default function Scene02Corkboard() {
           <div
             ref={waterlooNewsRef}
             {...linkHandlers(WATERLOO_URL)}
-            className="absolute left-[5%] top-[-52%] -rotate-2 w-[min(96vw,820px)] sm:w-[min(80vw,700px)] max-w-none z-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-1deg] hover:scale-[1.05] md:cursor-pointer"
+            className="absolute left-[5%] top-[-52%] -rotate-2 w-[min(96vw,820px)] sm:w-[min(80vw,700px)] max-w-none z-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-1deg] hover:scale-[1.05]"
           >
             <Image
               src="/waterloo_news.webp"
@@ -689,7 +685,7 @@ export default function Scene02Corkboard() {
           <div
             ref={waterlooSydeRef}
             {...linkHandlers(WATERLOO_URL)}
-            className="absolute left-[50%] top-[-30%] rotate-1 w-[min(92vw,720px)] translate-y-10 sm:w-[min(80vw,680px)] sm:translate-y-0 max-w-none z-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[2deg] hover:scale-[1.05] md:cursor-pointer"
+            className="absolute left-[50%] top-[-30%] rotate-1 w-[min(92vw,720px)] translate-y-10 sm:w-[min(80vw,680px)] sm:translate-y-0 max-w-none z-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[2deg] hover:scale-[1.05]"
           >
             <Image
               src="/waterloo_syde.webp"
@@ -702,35 +698,35 @@ export default function Scene02Corkboard() {
           <div
             ref={waterlooPolaroidsRef}
             {...linkHandlers(WATERLOO_URL)}
-            className="absolute left-[68%] top-16 md:top-32 lg:top-48 w-[min(70vw,420px)] max-w-none z-10 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[1deg] hover:scale-[1.08] md:cursor-pointer"
+            className="absolute left-[68%] top-16 md:top-32 lg:top-48 w-[min(70vw,420px)] max-w-none z-10 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[1deg] hover:scale-[1.08]"
           >
             <div className="relative w-full">
               <div className="absolute left-2 top-16 -rotate-8 z-0">
-                  <Polaroid
-                    src="/the_cat.webp"
-                    alt="Polaroid cat"
-                    sizeClass="w-40 md:w-48"
-                    imageClass="w-32 h-44 md:w-40 md:h-52"
-                    className="scale-[0.8] md:scale-100"
-                  />
+                <Polaroid
+                  src="/the_cat.webp"
+                  alt="Polaroid cat"
+                  sizeClass="w-40 md:w-48"
+                  imageClass="w-32 h-44 md:w-40 md:h-52"
+                  className="scale-[0.8] md:scale-100"
+                />
               </div>
               <div className="absolute left-12 top-14 rotate-5 z-10">
-                  <Polaroid
-                    src="/waterloo_chef.webp"
-                    alt="Polaroid chef"
-                    sizeClass="w-40 md:w-48"
-                    imageClass="w-32 h-44 md:w-40 md:h-52"
-                    className="scale-[0.8] md:scale-100"
-                  />
+                <Polaroid
+                  src="/waterloo_chef.webp"
+                  alt="Polaroid chef"
+                  sizeClass="w-40 md:w-48"
+                  imageClass="w-32 h-44 md:w-40 md:h-52"
+                  className="scale-[0.8] md:scale-100"
+                />
               </div>
               <div className="invisible">
-                  <Polaroid
-                    src="/the_cat.webp"
-                    alt=""
-                    sizeClass="w-40 md:w-48"
-                    imageClass="w-32 h-44 md:w-40 md:h-52"
-                    className="scale-[0.8] md:scale-100"
-                  />
+                <Polaroid
+                  src="/the_cat.webp"
+                  alt=""
+                  sizeClass="w-40 md:w-48"
+                  imageClass="w-32 h-44 md:w-40 md:h-52"
+                  className="scale-[0.8] md:scale-100"
+                />
               </div>
             </div>
           </div>
@@ -740,7 +736,7 @@ export default function Scene02Corkboard() {
             <div className="relative w-full min-h-[560px] sm:min-h-[480px] overflow-visible">
               <div
                 {...linkHandlers(QUANTO_URL)}
-                className="absolute left-[-16%] top-[160px] translate-x-20 max-sm:translate-x-[clamp(16px,6vw,28px)] translate-y-6 sm:left-[-12%] sm:top-[90px] sm:translate-x-24 sm:translate-y-0 md:top-[40px] md:translate-x-20 lg:translate-x-0 w-[min(70vw,620px)] max-sm:w-[min(78vw,620px)] max-w-none md:cursor-pointer"
+                className="absolute left-[-16%] top-[160px] translate-x-20 max-sm:translate-x-[clamp(16px,6vw,28px)] translate-y-6 sm:left-[-12%] sm:top-[90px] sm:translate-x-24 sm:translate-y-0 md:top-[40px] md:translate-x-20 lg:translate-x-0 w-[min(70vw,620px)] max-sm:w-[min(78vw,620px)] max-w-none"
               >
                 <div className="relative w-full">
                   <Image
@@ -789,7 +785,7 @@ export default function Scene02Corkboard() {
               <div
                 ref={shopifyRef}
                 {...linkHandlers(SHOPIFY_URL)}
-                className="absolute left-[-2%] top-[-6%] z-10 w-full max-w-[220px] scale-[0.75] sm:left-[6%] sm:top-[-10%] md:left-[70%] md:scale-100 md:translate-x-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[1deg] max-sm:hover:scale-[1.05] sm:hover:scale-[1.05] md:cursor-pointer"
+                className="absolute left-[-2%] top-[-6%] z-10 w-full max-w-[220px] scale-[0.75] sm:left-[6%] sm:top-[-10%] md:left-[70%] md:scale-100 md:translate-x-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[1deg] max-sm:hover:scale-[1.05] sm:hover:scale-[1.05]"
               >
                 <Image
                   src="/shopify_sticky.webp"
@@ -801,7 +797,7 @@ export default function Scene02Corkboard() {
               </div>
               <div
                 {...linkHandlers(SHOPIFY_URL)}
-                className="absolute left-[60%] -translate-x-1/2 sm:left-1/2 md:left-[40%] md:translate-x-0 top-[15%] lg:top-[22%] z-10 rotate-5 w-[520px] max-sm:w-[min(121vw,520px)] origin-top-left scale-[0.7] md:scale-[0.85] md:cursor-pointer"
+                className="absolute left-[60%] -translate-x-1/2 sm:left-1/2 md:left-[40%] md:translate-x-0 top-[15%] lg:top-[22%] z-10 rotate-5 w-[520px] max-sm:w-[min(121vw,520px)] origin-top-left scale-[0.7] md:scale-[0.85]"
               >
                 <Image
                   src="/shopify_scribble.webp"
@@ -813,7 +809,7 @@ export default function Scene02Corkboard() {
               </div>
               <div
                 {...linkHandlers(SHOPIFY_URL)}
-                className="absolute left-[40%] top-[-5%] w-65 max-sm:w-[min(60vw,16.25rem)] shrink-0 -rotate-3 z-10 scale-[1.5] transition-transform duration-200 hover:scale-[1.7] md:cursor-pointer"
+                className="absolute left-[40%] top-[-5%] w-65 max-sm:w-[min(60vw,16.25rem)] shrink-0 -rotate-3 z-10 scale-[1.5] transition-transform duration-200 hover:scale-[1.7]"
               >
                 <Image
                   src="/shopee_sticker.webp"
@@ -826,7 +822,7 @@ export default function Scene02Corkboard() {
               <div
                 ref={htnRef}
                 {...linkHandlers(HTN_URL)}
-                className="absolute left-[50%] top-[260px] z-10 w-full max-w-[220px] -rotate-2 scale-[0.75] sm:left-[60%] sm:top-[220px] sm:translate-x-6 md:left-[-10%] md:top-[240px] md:scale-[1.1] md:translate-x-12 lg:translate-x-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-1deg] max-sm:hover:scale-[1.05] sm:hover:scale-[1.05] md:cursor-pointer"
+                className="absolute left-[50%] top-[260px] z-10 w-full max-w-[220px] -rotate-2 scale-[0.75] sm:left-[60%] sm:top-[220px] sm:translate-x-6 md:left-[-10%] md:top-[240px] md:scale-[1.1] md:translate-x-12 lg:translate-x-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-1deg] max-sm:hover:scale-[1.05] sm:hover:scale-[1.05]"
               >
                 <Image
                   src="/htn_sticky.webp"
@@ -838,7 +834,7 @@ export default function Scene02Corkboard() {
               </div>
               <div
                 {...linkHandlers(HTN_URL)}
-                className="absolute left-[-6%] top-[450px] z-0 -rotate-1 sm:top-[410px] sm:translate-x-6 md:translate-x-12 lg:translate-x-0 transition-transform duration-200 hover:-translate-y-1 hover:scale-[1.05] md:cursor-pointer"
+                className="absolute left-[-6%] top-[450px] z-0 -rotate-1 sm:top-[410px] sm:translate-x-6 md:translate-x-12 lg:translate-x-0 transition-transform duration-200 hover:-translate-y-1 hover:scale-[1.05]"
               >
                 <Image
                   src="/htn_news.webp"
@@ -850,7 +846,7 @@ export default function Scene02Corkboard() {
               </div>
               <div
                 {...linkHandlers(HTN_URL)}
-                className="absolute left-[2%] top-[300px] z-10 rotate-2 scale-[0.85] sm:left-[28%] sm:top-[260px] sm:translate-x-6 sm:scale-[0.95] md:left-[20%] md:scale-100 md:translate-x-12 lg:translate-x-0 md:cursor-pointer"
+                className="absolute left-[2%] top-[300px] z-10 rotate-2 scale-[0.85] sm:left-[28%] sm:top-[260px] sm:translate-x-6 sm:scale-[0.95] md:left-[20%] md:scale-100 md:translate-x-12 lg:translate-x-0"
               >
                 <Image
                   src="/htn_scribble.webp"
@@ -879,7 +875,7 @@ export default function Scene02Corkboard() {
                 <div
                   ref={htnPolaroidRef}
                   {...linkHandlers(HTN_URL)}
-                  className="relative z-10 mt-[480px] ml-[58%] w-fit -rotate-4 sm:mt-[440px] sm:translate-x-6 md:mt-[520px] md:translate-x-12 lg:mt-[280px] lg:translate-x-6 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-3deg] md:cursor-pointer"
+                  className="relative z-10 mt-[480px] ml-[58%] w-fit -rotate-4 sm:mt-[440px] sm:translate-x-6 md:mt-[520px] md:translate-x-12 lg:mt-[280px] lg:translate-x-6 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-3deg]"
                 >
                   <DevelopingPolaroid
                     src="/htn_obama.webp"
@@ -893,7 +889,7 @@ export default function Scene02Corkboard() {
               )}
               <div
                 {...linkHandlers(HTN_URL)}
-                className="absolute left-[-2%] top-[560px] z-10 rotate-8 w-[80px] sm:top-[240px] sm:w-[96px] sm:translate-x-6 md:left-[74%] md:top-[300px] md:w-[96px] md:translate-x-12 lg:left-[76%] lg:top-[460px] lg:translate-x-6 lg:z-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[9deg] hover:scale-[1.1] md:cursor-pointer"
+                className="absolute left-[-2%] top-[560px] z-10 rotate-8 w-[80px] sm:top-[240px] sm:w-[96px] sm:translate-x-6 md:left-[74%] md:top-[300px] md:w-[96px] md:translate-x-12 lg:left-[76%] lg:top-[460px] lg:translate-x-6 lg:z-0 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[9deg] hover:scale-[1.1]"
               >
                 <Image
                   src="/alicehacks_sticker.webp"
