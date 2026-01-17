@@ -388,6 +388,7 @@ export const DitherShader = ({
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
+
     };
   }, [src, dimensions, objectFit, animated, animationSpeed, applyDithering]);
 
