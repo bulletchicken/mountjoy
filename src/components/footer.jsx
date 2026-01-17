@@ -88,7 +88,7 @@ export default function Footer() {
             type="button"
             onClick={handleEmailClick}
             aria-label="email"
-            className="relative flex cursor-pointer flex-col items-center gap-2 transition-opacity hover:opacity-70"
+            className="relative flex flex-col items-center gap-2 transition-opacity hover:opacity-70"
           >
             <span
               className={`pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 rounded bg-black px-2 py-1 text-[10px] uppercase tracking-[0.2em] text-white transition-opacity ${

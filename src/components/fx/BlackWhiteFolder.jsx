@@ -73,8 +73,8 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
 
   const positionClass = interactive
     ? visualOpen
-      ? "relative z-40 cursor-pointer"
-      : "relative cursor-pointer"
+      ? "relative z-40"
+      : "relative"
     : "relative";
 
   const stackRotation = paperRotation;
