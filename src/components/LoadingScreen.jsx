@@ -24,10 +24,10 @@ const PERCENT_FRAMES = [
 const digitClassName = "h-[clamp(64px,8vw,120px)] w-auto select-none";
 const percentClassName = "h-[clamp(48px,6vw,90px)] w-auto select-none";
 
-export default function LoadingScreen({ progress, isVisible }) {
+export default function LoadingScreen({ progress, isVisible, minDigits = 1 }) {
   const [percentFrame, setPercentFrame] = useState(0);
   const displayValue = Math.max(0, Math.min(100, Math.round(progress)));
-  const digits = String(displayValue).split("");
+  const digits = String(displayValue).padStart(minDigits, "0").split("");
 
   useEffect(() => {
     if (!isVisible) return;
