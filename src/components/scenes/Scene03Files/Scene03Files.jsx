@@ -157,6 +157,7 @@ function FolderReport({
   );
 }
 
+const TECHYON_URL = "https://techyon.org/xpeditions/archives";
 const YOUTUBE_FALLBACK =
   "https://www.youtube.com/embed/Qu0fmnFuss0?si=teCCc9aGo_Ylkdh6";
 
@@ -393,7 +394,7 @@ export default function Scene03Files() {
                 threshold={0.5}
                 gridSize={1}
                 objectFit="contain"
-                className="h-[70vmin] w-[70vmin] sm:h-[54vmin] sm:w-[54vmin] md:h-[58vmin] md:w-[58vmin] lg:h-[60vmin] lg:w-[60vmin] xl:h-[62vmin] xl:w-[62vmin]"
+                className="h-[70vmin] w-[70vmin] sm:h-[54vmin] sm:w-[54vmin] md:h-[42vmin] md:w-[42vmin] lg:h-[60vmin] lg:w-[60vmin] xl:h-[62vmin] xl:w-[62vmin]"
               />
             </div>
           }
@@ -473,7 +474,7 @@ export default function Scene03Files() {
                   colorMode="grayscale"
                   gridSize={1}
                   objectFit="contain"
-                  className="h-[78vmin] w-[78vmin] sm:h-[64vmin] sm:w-[64vmin] md:h-[68vmin] md:w-[68vmin] lg:h-[70vmin] lg:w-[70vmin] xl:h-[74vmin] xl:w-[74vmin]"
+                  className="h-[78vmin] w-[78vmin] sm:h-[64vmin] sm:w-[64vmin] md:h-[48vmin] md:w-[48vmin] lg:h-[70vmin] lg:w-[70vmin] xl:h-[74vmin] xl:w-[74vmin]"
                 />
               </div>
             </div>
@@ -520,8 +521,8 @@ export default function Scene03Files() {
             ),
           }}
           folderContent={
-            <div className="h-full w-full border-2 border-black bg-white">
-              <div className="border-b-2 border-black px-3 py-3 font-mono text-[0.58rem] uppercase tracking-[0.18em] text-black">
+            <div className="flex h-full w-full flex-col border-2 border-black bg-white">
+              <div className="shrink-0 border-b-2 border-black px-3 py-3 font-mono text-[0.58rem] uppercase tracking-[0.18em] text-black">
                 <div className="text-[0.62rem] font-semibold tracking-[0.22em]">
                   Story:
                 </div>
@@ -532,7 +533,7 @@ export default function Scene03Files() {
                   futuristic version which IMO looks even better.
                 </div>
               </div>
-              <div className="relative h-[80%] overflow-visible p-3 pt-5">
+              <div className="relative min-h-0 flex-1 overflow-visible p-3 pt-5">
                 <Image
                   src="/guitar_paint.webp"
                   alt="Guitar paint"
@@ -558,7 +559,7 @@ export default function Scene03Files() {
             </div>
           }
           media={
-            <div className="relative flex-shrink-0 h-[72vmin] w-[72vmin] translate-x-6 translate-y-6 sm:h-[60vmin] sm:w-[60vmin] sm:translate-x-0 sm:translate-y-0 md:h-[64vmin] md:w-[64vmin] lg:h-[68vmin] lg:w-[68vmin] xl:h-[72vmin] xl:w-[72vmin] overflow-visible">
+            <div className="relative flex-shrink-0 h-[72vmin] w-[72vmin] translate-x-6 translate-y-6 sm:h-[60vmin] sm:w-[60vmin] sm:translate-x-0 sm:translate-y-0 md:h-[46vmin] md:w-[46vmin] lg:h-[68vmin] lg:w-[68vmin] xl:h-[72vmin] xl:w-[72vmin] overflow-visible">
               <div className="absolute inset-0 -translate-x-12 -translate-y-14 -rotate-26 flex items-center justify-center sm:-translate-x-20">
                 <DitherShader
                   src="/guitar.webp"
@@ -566,7 +567,7 @@ export default function Scene03Files() {
                   threshold={0.25}
                   gridSize={1}
                   objectFit="contain"
-                  className="h-[66vmin] w-[66vmin] sm:h-[60vmin] sm:w-[60vmin] md:h-[68vmin] md:w-[68vmin] lg:h-[74vmin] lg:w-[74vmin] xl:h-[82vmin] xl:w-[82vmin]"
+                  className="h-[66vmin] w-[66vmin] sm:h-[60vmin] sm:w-[60vmin] md:h-[50vmin] md:w-[50vmin] lg:h-[74vmin] lg:w-[74vmin] xl:h-[82vmin] xl:w-[82vmin]"
                 />
               </div>
             </div>
@@ -620,6 +621,7 @@ export default function Scene03Files() {
                   src="/duck_feet.webp"
                   alt="Duck footprints"
                   fill
+                  sizes="(max-width: 768px) 80vw, 640px"
                   className="object-cover -translate-y-30"
                 />
               </div>
@@ -634,11 +636,125 @@ export default function Scene03Files() {
                 threshold={0.1}
                 gridSize={1}
                 objectFit="contain"
-                className="h-[60vmin] w-[60vmin] sm:h-[66vmin] sm:w-[66vmin] md:h-[70vmin] md:w-[70vmin] lg:h-[74vmin] lg:w-[74vmin] xl:h-[78vmin] xl:w-[78vmin]"
+                className="h-[60vmin] w-[60vmin] sm:h-[66vmin] sm:w-[66vmin] md:h-[50vmin] md:w-[50vmin] lg:h-[74vmin] lg:w-[74vmin] xl:h-[78vmin] xl:w-[78vmin]"
               />
             </div>
           }
         />
+        <div className="flex w-full justify-center -translate-x-[3vw] sm:-translate-x-[5vw] lg:-translate-x-[7vw]">
+          <FolderPair
+            centerOffsetX={0}
+            targetXRatio={0.32}
+            targetXRatioLarge={0.5}
+            folderBaseShiftClassName="translate-x-0"
+            folderProps={{
+              label: "XPeditions",
+              folderRotation: "-2deg",
+              paperRotation: "2deg",
+              className: "w-[72vmin] max-w-[560px]",
+              paperStackClassName: "top-[6%] h-[80%] sm:-top-12 sm:h-[110%]",
+              paperSheetClassName:
+                "[--paper-sheet-height:84%] sm:[--paper-sheet-height:98%] max-sm:left-8 max-sm:right-8",
+              footerLines: [
+                "Techyon XPeditions archive site",
+                "Invite-only builder trips, on film",
+              ],
+              coverOverlays: (
+                <>
+                  <div className="pointer-events-none absolute left-[8%] top-[-3%] z-10 w-[30%] -rotate-6">
+                    <div className="relative">
+                      <Image
+                        src="/techyon_picnic.webp"
+                        alt="XPeditions picnic polaroid"
+                        width={900}
+                        height={1351}
+                        sizes="180px"
+                        className="block w-full drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
+                      />
+                      <div className="absolute -top-2 left-10 h-6 w-4 -rotate-12 rounded-[4px] border-2 border-black bg-neutral-200" />
+                    </div>
+                  </div>
+                  <div className="pointer-events-none absolute right-[5%] top-[6%] w-[54%] rotate-2">
+                    <Image
+                      src="/techyon_xpeditions_logo.webp"
+                      alt="Techyon XPeditions logo"
+                      width={888}
+                      height={334}
+                      sizes="320px"
+                      className="block w-full drop-shadow-[0_1px_1px_rgba(0,0,0,0.4)]"
+                    />
+                  </div>
+                  <div className="pointer-events-none absolute right-[4%] top-[28%] w-[52%] -rotate-3">
+                    <div className="relative">
+                      <Image
+                        src="/techyon_pottery.webp"
+                        alt="XPeditions pottery polaroid"
+                        width={1000}
+                        height={640}
+                        sizes="300px"
+                        className="block w-full drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]"
+                      />
+                      <div className="absolute -top-2 right-8 h-6 w-4 rotate-12 rounded-[4px] border-2 border-black bg-neutral-200" />
+                    </div>
+                  </div>
+                </>
+              ),
+            }}
+            folderContent={
+              <div className="flex h-full w-full flex-col border-2 border-black bg-white">
+                <div className="shrink-0 border-b-2 border-black px-3 py-3 font-mono text-[0.58rem] uppercase tracking-[0.18em] text-black">
+                  <div className="text-[0.62rem] font-semibold tracking-[0.22em]">
+                    Story:
+                  </div>
+                  <div className="mt-2 normal-case tracking-[0.08em] leading-relaxed">
+                    Techyon (the nonprofit behind Hack the North) runs
+                    XPeditions: small, invite-only trips where builders tackle
+                    an out-of-the-box challenge together. The archive is an
+                    infinite, wheel-driven filmstrip of every trip so far:
+                    picnics in SF, pottery in Waterloo, pasta in NYC.
+                  </div>
+                  <a
+                    href={TECHYON_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={(event) => event.stopPropagation()}
+                    onKeyDown={(event) => event.stopPropagation()}
+                    className="mt-2 inline-block border-b-2 border-black normal-case tracking-[0.08em]"
+                  >
+                    techyon.org/xpeditions/archives ↗
+                  </a>
+                </div>
+                <div className="relative min-h-0 flex-1 overflow-visible p-3 pt-5">
+                  <Image
+                    src="/techyon_archive.webp"
+                    alt="XPeditions archive page"
+                    width={1200}
+                    height={730}
+                    sizes="420px"
+                    className="absolute left-[3%] top-[3%] w-[76%] rotate-[-2deg] border-[8px] border-[#f5f5f5] bg-[#f5f5f5] object-cover drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]"
+                  />
+                  <Image
+                    src="/techyon_pottery.webp"
+                    alt="Pottery making at an XPedition"
+                    width={1000}
+                    height={640}
+                    sizes="260px"
+                    className="absolute right-[2%] top-[42%] w-[48%] rotate-[4deg] drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]"
+                  />
+                  <Image
+                    src="/techyon_picnic.webp"
+                    alt="Picnic at an XPedition"
+                    width={900}
+                    height={1351}
+                    sizes="160px"
+                    className="absolute left-[6%] bottom-[2%] w-[28%] rotate-[-5deg] drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]"
+                  />
+                </div>
+              </div>
+            }
+            media={null}
+          />
+        </div>
         <div
           ref={secretRef}
           className="relative w-full flex justify-center"
