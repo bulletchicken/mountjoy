@@ -15,6 +15,7 @@ import {
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Polaroid from "@/components/fx/Polaroid";
+import BraidedString from "@/components/fx/BraidedString";
 
 const FLASH_GRADIENT =
   "radial-gradient(circle at 108% 138%, rgba(243,248,255,1) 0%, rgba(245,249,255,0.98) 30%, rgba(248,251,255,0.9) 50%, rgba(248,249,252,0.75) 68%, rgba(246,247,250,0.55) 84%, rgba(244,245,248,0.4) 100%)";
@@ -43,28 +44,8 @@ const QUANTO_URL =
   "https://www.linkedin.com/posts/andersonpetergeorge_weve-had-over-300-applications-in-less-than-activity-7313912075792093184-hN9c/?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAADq9acgBApzHQvqpA0DFd5KttNitU2lVmPo";
 const SHOPIFY_URL = "https://shopify.com/";
 const HTN_URL = "https://hackthenorth.com/";
-
-function AnimatedString({ d, start, end, progress, isSmallScreen, isMdUp }) {
-  const duration = Math.max(0.001, end - start);
-  const draw = useTransform(progress, [start, end], [0, 1]);
-  const opacity = useTransform(
-    progress,
-    [start, start + duration * 0.2],
-    [0, 1],
-  );
-
-  return (
-    <motion.path
-      d={d}
-      stroke="#b91c1c"
-      strokeWidth={isSmallScreen ? 6 : isMdUp ? 7 : 5}
-      strokeLinecap="round"
-      fill="none"
-      pathLength={draw}
-      style={{ opacity }}
-    />
-  );
-}
+const HUMANDELTA_URL = "https://www.humandelta.ai/";
+const OPENAI_URL = "https://openai.com/student-collective/";
 
 function DevelopingPolaroid({
   src,
@@ -136,6 +117,8 @@ export default function Scene02Corkboard() {
   const quantoRef = useRef(null);
   const alicehacksRef = useRef(null);
   const waterlooNewsRef = useRef(null);
+  const humandeltaRef = useRef(null);
+  const openaiRef = useRef(null);
   const pinDefinitions = useMemo(
     () => [
       { id: "waterloo-sticky", ref: waterlooStickyRef, x: 0.5, y: 0.15 },
@@ -143,6 +126,8 @@ export default function Scene02Corkboard() {
       { id: "shopify-top", ref: shopifyRef, x: 0.5, y: 0.1 },
       { id: "quanto-top", ref: quantoRef, x: 0.6, y: 0.15 },
       { id: "htn-pin", ref: htnRef, x: 0.5, y: 0.18 },
+      { id: "humandelta-pin", ref: humandeltaRef, x: 0.5, y: 0.16 },
+      { id: "openai-pin", ref: openaiRef, x: 0.5, y: 0.15 },
     ],
     [],
   );
@@ -152,6 +137,8 @@ export default function Scene02Corkboard() {
       { from: "waterloo-syde", to: "quanto-top", sag: 56 },
       { from: "quanto-top", to: "shopify-top", sag: 40 },
       { from: "shopify-top", to: "htn-pin", sag: 56 },
+      { from: "htn-pin", to: "humandelta-pin", sag: 64 },
+      { from: "humandelta-pin", to: "openai-pin", sag: 64 },
     ],
     [],
   );
@@ -209,6 +196,10 @@ export default function Scene02Corkboard() {
     target: waterlooPolaroidsRef,
     offset: ["start 35%", "start 0%"],
   });
+  const { scrollYProgress: handProgress } = useScroll({
+    target: htnPolaroidRef,
+    offset: ["start 100%", "end 0%"],
+  });
   const htnPolaroidInView = useInView(htnPolaroidRef, { amount: 0.08 });
   const blastControls = useAnimationControls();
   const washControls = useAnimationControls();
@@ -219,17 +210,17 @@ export default function Scene02Corkboard() {
   const flashLastProgress = useRef(0);
   const stringProgress = useTransform(
     scrollYProgress,
-    isSmallScreen ? [0.05, 0.55] : [0.12, 0.55],
+    isSmallScreen ? [0.05, 0.68] : [0.12, 0.68],
     [0, 1],
     { clamp: true },
   );
-  const handScrollStart = 0.36;
-  const handScrollPeak = 0.8;
-  const handScrollHoldEnd = 0.825;
-  const handScrollEnd = 0.92;
+  const handScrollStart = 0.04;
+  const handScrollPeak = 0.3;
+  const handScrollHoldEnd = 0.36;
+  const handScrollEnd = 0.52;
   const handHiddenOffset = 160;
   const handPeakOffset = 40;
-  const handRiseOffset = useTransform(scrollYProgress, (value) => {
+  const handRiseOffset = useTransform(handProgress, (value) => {
     if (value <= handScrollStart || value >= handScrollEnd) {
       return handHiddenOffset;
     }
@@ -332,7 +323,7 @@ export default function Scene02Corkboard() {
       developProgressValue.set(0);
     }
   });
-  const handTilt = useTransform(scrollYProgress, (value) => {
+  const handTilt = useTransform(handProgress, (value) => {
     if (value <= handScrollStart || value >= handScrollEnd) {
       return -6;
     }
@@ -351,16 +342,19 @@ export default function Scene02Corkboard() {
         if (!from || !to) {
           return null;
         }
-        const midX = (from.x + to.x) / 2;
         const sag =
           connection.sag ??
           Math.max(24, Math.min(80, Math.abs(to.x - from.x) * 0.18));
-        const midY = Math.max(from.y, to.y) + sag;
-        const d = `M ${from.x} ${from.y} Q ${midX} ${midY} ${to.x} ${to.y}`;
         const yTravel = Math.abs(to.y - from.y);
         const weight =
           connection.weight != null ? connection.weight : Math.max(20, yTravel);
-        return { key: `${connection.from}-${connection.to}`, d, weight };
+        return {
+          key: `${connection.from}-${connection.to}`,
+          from,
+          to,
+          sag,
+          weight,
+        };
       })
       .filter(Boolean);
 
@@ -457,6 +451,8 @@ export default function Scene02Corkboard() {
       quantoRef,
       alicehacksRef,
       waterlooNewsRef,
+      humandeltaRef,
+      openaiRef,
     ].forEach((ref) => {
       if (ref.current) {
         ro.observe(ref.current);
@@ -476,7 +472,7 @@ export default function Scene02Corkboard() {
   return (
     <section
       ref={sectionRef}
-      className="relative z-0 isolate w-full bg-white pt-4 pb-10 -mt-72 translate-x-8 max-sm:translate-x-[clamp(20px,7.5vw,32px)] overflow-visible sm:pt-6 sm:-mt-32 md:-mt-72 lg:-mt-32"
+      className="relative z-0 isolate w-full bg-white pt-4 pb-10 -mt-72 translate-x-8 max-sm:translate-x-[clamp(20px,7.5vw,32px)] overflow-visible sm:pt-6 sm:-mt-32 md:-mt-40 lg:-mt-32"
       style={{
         backgroundImage: "url(/cork_texture.webp)",
         backgroundRepeat: "repeat",
@@ -617,15 +613,17 @@ export default function Scene02Corkboard() {
         className="relative mx-auto -mt-72 sm:-mt-80 flex w-full max-w-6xl flex-wrap items-center justify-center gap-12 px-6 max-sm:px-[clamp(18px,5.6vw,24px)] overflow-visible"
       >
         <svg className="pointer-events-none absolute inset-0 z-30 h-full w-full">
-          {resolvedConnections.map((connection) => (
-            <AnimatedString
+          {resolvedConnections.map((connection, index) => (
+            <BraidedString
               key={connection.key}
-              d={connection.d}
+              from={connection.from}
+              to={connection.to}
+              sag={connection.sag}
               start={connection.start}
               end={connection.end}
               progress={stringProgress}
-              isSmallScreen={isSmallScreen}
-              isMdUp={isMdUp}
+              width={isSmallScreen ? 6 : isMdUp ? 7 : 5}
+              seed={index + 1}
             />
           ))}
         </svg>
@@ -860,7 +858,7 @@ export default function Scene02Corkboard() {
                 <div
                   ref={htnPolaroidRef}
                   aria-hidden="true"
-                  className="pointer-events-none invisible relative z-10 mt-[480px] ml-[58%] w-fit -rotate-4 sm:mt-[440px] sm:translate-x-6 md:mt-[520px] md:translate-x-12 lg:mt-[280px] lg:translate-x-6"
+                  className="pointer-events-none invisible relative z-10 mt-[480px] ml-[58%] w-fit -rotate-4 sm:mt-[440px] sm:translate-x-6 md:mt-[440px] md:translate-x-12 lg:mt-[280px] lg:translate-x-6"
                 >
                   <DevelopingPolaroid
                     src="/htn_obama.webp"
@@ -875,7 +873,7 @@ export default function Scene02Corkboard() {
                 <div
                   ref={htnPolaroidRef}
                   {...linkHandlers(HTN_URL)}
-                  className="relative z-10 mt-[480px] ml-[58%] w-fit -rotate-4 sm:mt-[440px] sm:translate-x-6 md:mt-[520px] md:translate-x-12 lg:mt-[280px] lg:translate-x-6 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-3deg]"
+                  className="relative z-10 mt-[480px] ml-[58%] w-fit -rotate-4 sm:mt-[440px] sm:translate-x-6 md:mt-[440px] md:translate-x-12 lg:mt-[280px] lg:translate-x-6 transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-3deg]"
                 >
                   <DevelopingPolaroid
                     src="/htn_obama.webp"
@@ -897,6 +895,108 @@ export default function Scene02Corkboard() {
                   width={1640}
                   height={2360}
                   className="h-auto w-full"
+                />
+              </div>
+            </div>
+            <div className="relative w-full min-h-[980px] overflow-visible -translate-x-2 translate-y-16 sm:translate-y-20 md:min-h-[1090px] lg:mt-[100px] md:-translate-x-6 md:translate-y-0 lg:translate-x-2">
+              <div
+                {...linkHandlers(HUMANDELTA_URL)}
+                className="absolute left-[-4%] top-[40px] z-0 -rotate-1 w-[min(78vw,560px)] md:left-[-6%] md:top-[60px] md:w-[min(64vw,560px)] transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-2deg] hover:scale-[1.05]"
+              >
+                <Image
+                  src="/humandelta_news.webp"
+                  alt="ESPN case study clipping about Human Delta"
+                  width={1400}
+                  height={820}
+                  sizes="(max-width: 768px) 78vw, 560px"
+                  className="h-auto w-full drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
+                />
+              </div>
+              <div
+                ref={humandeltaRef}
+                {...linkHandlers(HUMANDELTA_URL)}
+                className="absolute left-[54%] top-[190px] z-10 rotate-3 w-[clamp(120px,32vw,200px)] md:left-[60%] md:top-[10px] md:w-[200px] transition-transform duration-200 hover:-translate-y-1 hover:rotate-[4deg] hover:scale-[1.05] hover:z-20"
+              >
+                <Image
+                  src="/humandelta_sticky.webp"
+                  alt="Human Delta sticky"
+                  width={2048}
+                  height={2048}
+                  sizes="200px"
+                  className="h-auto w-full drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
+                />
+              </div>
+              <div className="pointer-events-none absolute left-[2%] top-[245px] z-10 -rotate-2 w-[clamp(150px,44vw,250px)] md:left-[58%] md:top-[228px] md:w-[250px]">
+                <Image
+                  src="/humandelta_scribble.webp"
+                  alt="Software engineer scribble"
+                  width={1100}
+                  height={585}
+                  sizes="250px"
+                  className="h-auto w-full opacity-80"
+                />
+              </div>
+              <div
+                {...linkHandlers(HUMANDELTA_URL)}
+                className="absolute left-[10%] top-[350px] z-0 rotate-2 w-[min(66vw,330px)] md:left-[40%] md:top-[400px] md:w-[330px] transition-transform duration-200 hover:-translate-y-1 hover:rotate-[3deg] hover:scale-[1.05]"
+              >
+                <Image
+                  src="/humandelta_note.webp"
+                  alt="Torn Human Delta website note"
+                  width={1300}
+                  height={762}
+                  sizes="330px"
+                  className="h-auto w-full drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
+                />
+              </div>
+              <div
+                ref={openaiRef}
+                {...linkHandlers(OPENAI_URL)}
+                className="absolute left-[0%] top-[540px] z-10 -rotate-3 w-[clamp(120px,32vw,200px)] md:left-[2%] md:top-[640px] md:w-[200px] transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-4deg] hover:scale-[1.05] hover:z-20"
+              >
+                <Image
+                  src="/openai_sticky.webp"
+                  alt="OpenAI sticky"
+                  width={2048}
+                  height={2048}
+                  sizes="200px"
+                  className="h-auto w-full drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
+                />
+              </div>
+              <div className="pointer-events-none absolute left-[40%] top-[565px] z-10 -rotate-2 w-[min(52vw,320px)] md:left-[30%] md:top-[650px] md:w-[320px]">
+                <Image
+                  src="/openai_scribble.webp"
+                  alt="Campus lead scribble"
+                  width={1400}
+                  height={359}
+                  sizes="320px"
+                  className="h-auto w-full opacity-80"
+                />
+              </div>
+              <div
+                {...linkHandlers(OPENAI_URL)}
+                className="absolute left-[8%] top-[650px] z-0 rotate-1 w-[min(80vw,560px)] md:left-[30%] md:top-[745px] md:w-[min(64vw,560px)] transition-transform duration-200 hover:-translate-y-1 hover:rotate-[2deg] hover:scale-[1.05]"
+              >
+                <Image
+                  src="/openai_news.webp"
+                  alt="OpenAI Student Collective clipping"
+                  width={1500}
+                  height={860}
+                  sizes="(max-width: 768px) 80vw, 560px"
+                  className="h-auto w-full drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
+                />
+              </div>
+              <div
+                {...linkHandlers(OPENAI_URL)}
+                className="absolute left-[30%] top-[800px] z-10 -rotate-3 w-[min(62vw,300px)] md:left-[-1%] md:top-[900px] md:w-[240px] lg:left-[-8%] lg:w-[300px] transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-4deg] hover:scale-[1.05]"
+              >
+                <Image
+                  src="/openai_note.webp"
+                  alt="Torn OpenAI Student Collective note"
+                  width={1300}
+                  height={538}
+                  sizes="300px"
+                  className="h-auto w-full drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
                 />
               </div>
             </div>
