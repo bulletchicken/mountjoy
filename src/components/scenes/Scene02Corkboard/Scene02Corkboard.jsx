@@ -898,10 +898,10 @@ export default function Scene02Corkboard() {
                 />
               </div>
             </div>
-            <div className="relative w-full min-h-[980px] overflow-visible -translate-x-2 translate-y-16 sm:translate-y-20 md:min-h-[1090px] lg:mt-[100px] md:-translate-x-6 md:translate-y-0 lg:translate-x-2">
+            <div className="relative w-full min-h-[980px] overflow-visible -translate-x-2 translate-y-16 sm:min-h-[1240px] sm:translate-y-20 md:min-h-[1090px] lg:mt-[100px] md:-translate-x-6 md:translate-y-0 lg:translate-x-2">
               <div
                 {...linkHandlers(HUMANDELTA_URL)}
-                className="absolute left-[-4%] top-[40px] z-0 -rotate-1 w-[min(78vw,560px)] md:left-[-6%] md:top-[60px] md:w-[min(64vw,560px)] transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-2deg] hover:scale-[1.05]"
+                className="absolute left-[-4%] top-[40px] z-0 -rotate-1 w-[min(78vw,560px)] sm:w-[min(62vw,560px)] md:left-[-6%] md:top-[60px] md:w-[min(64vw,560px)] transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-2deg] hover:scale-[1.05]"
               >
                 <Image
                   src="/humandelta_news.webp"
@@ -915,7 +915,7 @@ export default function Scene02Corkboard() {
               <div
                 ref={humandeltaRef}
                 {...linkHandlers(HUMANDELTA_URL)}
-                className="absolute left-[54%] top-[190px] z-10 rotate-3 w-[clamp(120px,32vw,200px)] md:left-[60%] md:top-[10px] md:w-[200px] transition-transform duration-200 hover:-translate-y-1 hover:rotate-[4deg] hover:scale-[1.05] hover:z-20"
+                className="absolute left-[54%] top-[190px] z-10 rotate-3 w-[clamp(120px,32vw,200px)] sm:left-[58%] sm:top-[24px] md:left-[60%] md:top-[10px] md:w-[200px] transition-transform duration-200 hover:-translate-y-1 hover:rotate-[4deg] hover:scale-[1.05] hover:z-20"
               >
                 <Image
                   src="/humandelta_sticky.webp"
@@ -926,10 +926,10 @@ export default function Scene02Corkboard() {
                   className="h-auto w-full drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
                 />
               </div>
-              <div className="pointer-events-none absolute left-[2%] top-[245px] z-10 -rotate-2 w-[clamp(150px,44vw,250px)] md:left-[58%] md:top-[228px] md:w-[250px]">
+              <div className="pointer-events-none absolute left-[2%] top-[255px] -z-10 -rotate-2 w-[clamp(150px,44vw,250px)] sm:left-[46%] sm:top-[335px] sm:w-[240px] md:left-[66%] md:top-[240px] md:w-[230px]">
                 <Image
                   src="/humandelta_scribble.webp"
-                  alt="Software engineer scribble"
+                  alt="Human Delta software engineer scribble"
                   width={1100}
                   height={585}
                   sizes="250px"
@@ -938,7 +938,7 @@ export default function Scene02Corkboard() {
               </div>
               <div
                 {...linkHandlers(HUMANDELTA_URL)}
-                className="absolute left-[10%] top-[350px] z-0 rotate-2 w-[min(66vw,330px)] md:left-[40%] md:top-[400px] md:w-[330px] transition-transform duration-200 hover:-translate-y-1 hover:rotate-[3deg] hover:scale-[1.05]"
+                className="absolute left-[10%] top-[370px] z-0 rotate-2 w-[min(66vw,330px)] sm:left-[0%] sm:top-[480px] md:left-[40%] md:top-[400px] md:w-[330px] transition-transform duration-200 hover:-translate-y-1 hover:rotate-[3deg] hover:scale-[1.05]"
               >
                 <Image
                   src="/humandelta_note.webp"
@@ -952,7 +952,7 @@ export default function Scene02Corkboard() {
               <div
                 ref={openaiRef}
                 {...linkHandlers(OPENAI_URL)}
-                className="absolute left-[0%] top-[540px] z-10 -rotate-3 w-[clamp(120px,32vw,200px)] md:left-[2%] md:top-[640px] md:w-[200px] transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-4deg] hover:scale-[1.05] hover:z-20"
+                className="absolute left-[0%] top-[560px] z-10 -rotate-3 w-[clamp(120px,32vw,200px)] sm:left-[58%] sm:top-[470px] md:left-[2%] md:top-[640px] md:w-[200px] transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-4deg] hover:scale-[1.05] hover:z-20"
               >
                 <Image
                   src="/openai_sticky.webp"
@@ -963,7 +963,7 @@ export default function Scene02Corkboard() {
                   className="h-auto w-full drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
                 />
               </div>
-              <div className="pointer-events-none absolute left-[40%] top-[565px] z-10 -rotate-2 w-[min(52vw,320px)] md:left-[30%] md:top-[650px] md:w-[320px]">
+              <div className="pointer-events-none absolute left-[40%] top-[585px] -z-10 -rotate-2 w-[min(52vw,320px)] sm:left-[28%] sm:top-[700px] md:left-[30%] md:top-[650px] md:w-[320px]">
                 <Image
                   src="/openai_scribble.webp"
                   alt="Campus lead scribble"
@@ -975,7 +975,7 @@ export default function Scene02Corkboard() {
               </div>
               <div
                 {...linkHandlers(OPENAI_URL)}
-                className="absolute left-[8%] top-[650px] z-0 rotate-1 w-[min(80vw,560px)] md:left-[30%] md:top-[745px] md:w-[min(64vw,560px)] transition-transform duration-200 hover:-translate-y-1 hover:rotate-[2deg] hover:scale-[1.05]"
+                className="absolute left-[8%] top-[650px] z-0 rotate-1 w-[min(80vw,560px)] sm:left-[4%] sm:top-[800px] md:left-[30%] md:top-[745px] md:w-[min(64vw,560px)] transition-transform duration-200 hover:-translate-y-1 hover:rotate-[2deg] hover:scale-[1.05]"
               >
                 <Image
                   src="/openai_news.webp"
@@ -988,7 +988,7 @@ export default function Scene02Corkboard() {
               </div>
               <div
                 {...linkHandlers(OPENAI_URL)}
-                className="absolute left-[30%] top-[800px] z-10 -rotate-3 w-[min(62vw,300px)] md:left-[-1%] md:top-[900px] md:w-[240px] lg:left-[-8%] lg:w-[300px] transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-4deg] hover:scale-[1.05]"
+                className="absolute left-[30%] top-[800px] z-0 -rotate-3 w-[min(62vw,300px)] sm:left-[38%] sm:top-[1110px] md:left-[-1%] md:top-[900px] md:w-[240px] lg:left-[-8%] lg:w-[300px] transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-4deg] hover:scale-[1.05]"
               >
                 <Image
                   src="/openai_note.webp"
