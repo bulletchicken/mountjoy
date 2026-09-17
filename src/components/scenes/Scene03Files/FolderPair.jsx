@@ -27,7 +27,15 @@ export default function FolderPair({
       return;
     }
     const rect = folderRef.current.getBoundingClientRect();
-    const spineLeft = spineSide === "right" ? rect.right : rect.left;
+    // Measure the untransformed position so a resize while open does not
+    // re-base the offset on the already-shifted folder.
+    const transform = getComputedStyle(folderRef.current).transform;
+    const currentTx =
+      transform && transform !== "none"
+        ? new DOMMatrixReadOnly(transform).m41
+        : 0;
+    const spineLeft =
+      (spineSide === "right" ? rect.right : rect.left) - currentTx;
     const isSmall = window.innerWidth < smallBreakpoint;
     const ratio =
       targetXRatioLarge !== undefined && window.innerWidth >= largeBreakpoint
@@ -67,7 +75,7 @@ export default function FolderPair({
   const folderNode = (
     <div
       ref={folderRef}
-      className={`relative z-20 transition-transform duration-700 ease-in-out ${folderBaseShift} sm:translate-x-0 ${
+      className={`relative z-20 transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] motion-reduce:transition-none ${folderBaseShift} sm:translate-x-0 ${
         isOpen ? "z-50" : folderClosedClassName
       }`}
       style={{
@@ -97,7 +105,7 @@ export default function FolderPair({
   const shiftDirection = reverse ? -1 : 1;
   const mediaNode = (
     <div
-      className="relative z-10 transition-transform duration-700 ease-in-out"
+      className="relative z-10 transition-transform duration-700 delay-75 ease-[cubic-bezier(0.32,0.72,0,1)] motion-reduce:transition-none"
       style={{
         transform: isOpen
           ? `translateX(${shiftDirection * 60}px) rotate(${

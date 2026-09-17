@@ -298,6 +298,7 @@ export default function Scene03Files() {
           centerOffsetX={-400}
           folderProps={{
             label: "TED",
+            caseNumber: "001",
             folderRotation: "-2deg",
             paperRotation: "2deg",
             className: "w-[72vmin] max-w-[560px]",
@@ -405,6 +406,7 @@ export default function Scene03Files() {
           centerOffsetX={400}
           folderProps={{
             label: "UWSummit",
+            caseNumber: "002",
             tabSide: "left",
             folderRotation: "2deg",
             paperRotation: "-2deg",
@@ -485,6 +487,7 @@ export default function Scene03Files() {
           folderClosedClassName="translate-x-16"
           folderProps={{
             label: "A guitar",
+            caseNumber: "003",
             folderRotation: "-3deg",
             paperRotation: "1deg",
             className: "w-[72vmin] max-w-[560px]",
@@ -580,6 +583,7 @@ export default function Scene03Files() {
           folderBaseShiftClassName="-translate-x-4"
           folderProps={{
             label: "Goose Cart",
+            caseNumber: "004",
             tabSide: "left",
             folderRotation: "1deg",
             paperRotation: "-1deg",
@@ -644,11 +648,13 @@ export default function Scene03Files() {
         <div className="flex w-full justify-center -translate-x-[3vw] sm:-translate-x-[5vw] lg:-translate-x-[7vw]">
           <FolderPair
             centerOffsetX={0}
-            targetXRatio={0.32}
-            targetXRatioLarge={0.5}
+            targetXRatio={0.28}
+            targetXRatioLarge={0.32}
+            largeBreakpoint={1536}
             folderBaseShiftClassName="translate-x-0"
             folderProps={{
               label: "XPeditions",
+              caseNumber: "005",
               folderRotation: "-2deg",
               paperRotation: "2deg",
               className: "w-[72vmin] max-w-[560px]",
