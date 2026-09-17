@@ -8,6 +8,7 @@ export default function Secret() {
       <div className="relative">
         <BlackWhiteFolder
           label="Secret"
+          caseNumber="067"
           tabSide="right"
           folderRotation="-2deg"
           paperRotation="2deg"

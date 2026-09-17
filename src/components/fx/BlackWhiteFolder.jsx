@@ -27,6 +27,7 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
     paperStackClassName = "",
     paperSheetClassName = "",
     modalContent = null,
+    caseNumber = null,
   },
   ref,
 ) {
@@ -78,7 +79,8 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
     : "relative";
 
   const stackRotation = paperRotation;
-  const hoverLiftClass = interactive && isHovered ? "-translate-y-3" : "";
+  const hoverLiftClass =
+    interactive && (visualOpen || isHovered) ? "-translate-y-3" : "";
   const hoverScaleClass =
     interactive && !visualOpen && isHovered ? "scale-[1.02]" : "";
   const hoverPaperTwist =
@@ -163,6 +165,16 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
             ) : null}
           </div>
         ))}
+        {caseNumber ? (
+          <span
+            aria-hidden="true"
+            className={`pointer-events-none absolute top-full mt-3 -rotate-1 whitespace-nowrap border-2 border-black bg-white px-1.5 py-0.5 text-[0.58rem] font-bold uppercase leading-none tracking-[0.18em] ${
+              isFlipped ? "left-0" : "right-0"
+            }`}
+          >
+            Case no. {caseNumber}
+          </span>
+        ) : null}
         {footerOverlays?.length
           ? footerOverlays.map((overlay, index) => (
               <span key={`footer-overlay-${index}`}>{overlay}</span>
@@ -209,13 +221,37 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
           ) : (
             <>
               <div
-                className={`absolute top-2 rounded-[10px] border-2 border-black bg-neutral-100 ${paperOnePosition} ${paperOneRotation} ${paperSheetClassName}`}
+                className={`absolute top-2 rounded-[10px] border-2 border-black bg-neutral-100 transition-transform duration-500 ease-out motion-reduce:transition-none ${paperOnePosition} ${paperOneRotation} ${paperSheetClassName} ${
+                  visualOpen ? "-translate-y-1" : ""
+                }`}
                 style={{ height: "var(--paper-sheet-height, 98%)" }}
               ></div>
               <div
-                className={`absolute top-0 rounded-[10px] border-2 border-black bg-white ${paperTwoPosition} ${paperTwoRotation} ${paperSheetClassName}`}
-                style={{ height: "var(--paper-sheet-height, 98%)" }}
+                className={`absolute top-0 rounded-[10px] border-2 border-black bg-white transition-transform duration-500 ease-out motion-reduce:transition-none ${paperTwoPosition} ${paperTwoRotation} ${paperSheetClassName} ${
+                  visualOpen ? "-translate-y-2 delay-100" : ""
+                }`}
+                style={{
+                  height: "var(--paper-sheet-height, 98%)",
+                  clipPath: isFlipped
+                    ? "polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 0 100%)"
+                    : "polygon(22px 0, 100% 0, 100% 100%, 0 100%, 0 22px)",
+                }}
               >
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  className={`pointer-events-none absolute -top-[2px] z-10 h-6 w-6 ${
+                    isFlipped ? "-right-[2px] -scale-x-100" : "-left-[2px]"
+                  }`}
+                >
+                  <path
+                    d="M23 0 L0 23 L23 23 Z"
+                    className="fill-neutral-100"
+                    stroke="black"
+                    strokeWidth="2"
+                    strokeLinejoin="round"
+                  />
+                </svg>
                 <div className={`report h-full w-full p-4 ${reportVisibilityClass}`}>
                   {children || defaultReport}
                 </div>
@@ -317,17 +353,36 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
               }`}
             >
               <div className="relative h-full w-full overflow-visible">
-                {visualOpen ? (
-                  <div
-                    className={`absolute top-0 h-full w-full border-[3px] border-black bg-white ${
-                      isFlipped
-                        ? "left-full rounded-tr-[16px] rounded-br-[16px] border-l-0"
-                        : "-left-full rounded-tl-[16px] rounded-bl-[16px] border-r-0"
+                <div
+                  aria-hidden="true"
+                  className={`absolute top-0 h-full w-full border-[3px] border-black bg-white max-md:hidden transition-[opacity,translate] duration-500 ease-out motion-reduce:transition-none ${
+                    isFlipped
+                      ? "left-full rounded-tr-[16px] rounded-br-[16px] border-l-0"
+                      : "-left-full rounded-tl-[16px] rounded-bl-[16px] border-r-0"
+                  } ${
+                    visualOpen
+                      ? "translate-x-0 opacity-100"
+                      : `pointer-events-none opacity-0 ${
+                          isFlipped ? "-translate-x-6" : "translate-x-6"
+                        }`
+                  }`}
+                >
+                  <svg
+                    aria-hidden="true"
+                    viewBox="0 0 130 100"
+                    className={`pointer-events-none absolute bottom-0 h-[38%] w-auto ${
+                      isFlipped ? "right-0 -scale-x-100" : "left-0"
                     }`}
                   >
-                    {!visualOpen ? footerLineMarkup : null}
-                  </div>
-                ) : null}
+                    <path
+                      d="M0 0 L130 100 M0 11 L116 100"
+                      fill="none"
+                      stroke="black"
+                      strokeWidth="2"
+                      vectorEffect="non-scaling-stroke"
+                    />
+                  </svg>
+                </div>
                 <div
                   data-folder-panel
                   className={`relative h-full w-full border-[3px] border-black bg-white ${
@@ -348,7 +403,7 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
                 </div>
                 {visualOpen ? (
                   <div
-                    className={`absolute top-0 h-full w-[3px] bg-black ${
+                    className={`absolute top-0 z-20 h-full w-[3px] bg-black ${
                       isFlipped ? "right-0" : "left-0"
                     }`}
                   ></div>
