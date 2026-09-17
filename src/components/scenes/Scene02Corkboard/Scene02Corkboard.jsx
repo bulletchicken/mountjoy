@@ -994,7 +994,7 @@ export default function Scene02Corkboard() {
                   src="/openai_note.webp"
                   alt="Torn OpenAI Student Collective note"
                   width={1300}
-                  height={538}
+                  height={628}
                   sizes="300px"
                   className="h-auto w-full drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"
                 />
