@@ -133,12 +133,9 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
     </div>
   );
 
-  const mdShiftClass = isFlipped
-    ? "md:-translate-x-[6vw] lg:translate-x-0"
-    : "md:translate-x-[6vw] lg:translate-x-0";
   const footerLineMarkup = (
     <div
-      className={`absolute bottom-12 left-8 right-8 px-2 text-[0.85rem] font-mono font-bold tracking-[0.12em] text-black max-sm:text-[0.78rem] sm:left-10 sm:right-10 sm:px-3 md:left-[8vw] md:right-[8vw] md:text-[0.78rem] lg:left-10 lg:right-10 ${mdShiftClass}`}
+      className="absolute bottom-12 left-8 right-8 px-2 text-[0.85rem] font-mono font-bold tracking-[0.12em] text-black max-sm:text-[0.78rem] sm:left-10 sm:right-10 sm:px-3 md:left-5 md:right-5 md:px-2 md:text-[0.68rem] lg:left-10 lg:right-10 lg:px-3 lg:text-[0.78rem]"
     >
       <div className="relative">
         {resolvedFooterLines.map((line, index) => (
@@ -286,7 +283,7 @@ const BlackWhiteFolder = forwardRef(function BlackWhiteFolder(
     <>
       <div
         ref={ref}
-        className={`${positionClass} h-[54vmin] min-h-[380px] w-[66vmin] max-w-[520px] sm:h-[60vmin] sm:min-h-[440px] sm:w-[74vmin] sm:max-w-[580px] md:h-[64vmin] md:min-h-[480px] md:w-[78vmin] md:max-w-[610px] lg:h-[66vmin] lg:min-h-[500px] lg:w-[80vmin] lg:max-w-[620px] xl:h-[70vmin] xl:min-h-[520px] xl:w-[82vmin] xl:max-w-[640px] transition-transform duration-300 ease-out ${hoverScaleClass} ${className}`}
+        className={`${positionClass} h-[54vmin] min-h-[380px] w-[66vmin] max-w-[520px] sm:h-[60vmin] sm:min-h-[440px] sm:w-[74vmin] sm:max-w-[580px] md:h-[56vmin] md:min-h-[420px] md:w-[58vmin] md:max-w-[500px] lg:h-[66vmin] lg:min-h-[500px] lg:w-[80vmin] lg:max-w-[620px] xl:h-[70vmin] xl:min-h-[520px] xl:w-[82vmin] xl:max-w-[640px] transition-transform duration-300 ease-out ${hoverScaleClass} ${className}`}
         role={interactive ? "button" : undefined}
         tabIndex={interactive ? 0 : undefined}
         aria-expanded={interactive ? isOpen : undefined}
